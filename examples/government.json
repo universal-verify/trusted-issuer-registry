@@ -1,0 +1,37 @@
+{
+  "issuer_id": "did:web:dmv.ca.gov",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "CA",
+    "government_level": "state",
+    "official_name": "California Department of Motor Vehicles"
+  },
+  "display": {
+    "name": "California DMV",
+    "logo": "https://dmv.ca.gov/assets/logo.png",
+    "description": "Official issuer of mobile driver's licenses and proof of age credentials in California."
+  },
+  "entries": [
+    {
+      "credential_format": "mdoc",
+      "trust_framework": "ISO-18013-5",
+      "document_signing_certificates": [
+        "MIIC2DCCAcCgAwIBAgIBADANBgkqhkiG9w0BAQsFADA..."
+      ],
+      "trusted_root_certificates": [
+        "MIIDdzCCAl+gAwIBAgIEb1a..."
+      ],
+      "status_endpoint": "https://dmv.ca.gov/mDL/status"
+    },
+    {
+      "credential_format": "jwt_vc",
+      "trust_framework": "OpenID4VCI",
+      "credential_issuer_metadata_url": "https://dmv.ca.gov/.well-known/openid-credential-issuer",
+      "jwks_uri": "https://dmv.ca.gov/keys",
+      "credential_types": ["ProofOfAgeCredential"]
+    }
+  ],
+  "expires_at": 4286822400,
+  "signature": "..."
+}

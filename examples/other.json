@@ -1,0 +1,29 @@
+{
+  "issuer_id": "did:web:misc.example.org",
+  "entity_type": "other",
+  "entity_metadata": {
+    "official_name": "Miscellaneous Organization",
+    "description": "An organization that doesn’t fit standard categories.",
+    "public_registry_url": "https://misc.example.org/info"
+  },
+  "display": {
+    "name": "Miscellaneous Org",
+    "description": "Issuer for various specialized credentials."
+  },
+  "entries": [
+    {
+      "credential_format": "mdoc",
+      "trust_framework": "ISO-18013-5",
+      "credential_issuer_metadata_url": "https://misc.example.org/.well-known/mdoc-issuer",
+      "document_signing_certificates": [
+        "-----BEGIN CERTIFICATE-----\nMIIBIjANBgkq...IDAQAB\n-----END CERTIFICATE-----"
+      ],
+      "trusted_root_certificates": [
+        "-----BEGIN CERTIFICATE-----\nMIIDdzCCAl+gAwIBAgI...-----END CERTIFICATE-----"
+      ],
+      "credential_types": ["SpecialAccessCredential"]
+    }
+  ],
+  "expires_at": 4286822400,
+  "signature": "..."
+}

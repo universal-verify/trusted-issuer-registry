@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Issuer Revocation Entry",
+  "type": "object",
+  "required": ["issuer_id", "revoked_at", "signature"],
+  "properties": {
+    "issuer_id": {
+      "type": "string",
+      "description": "DID or unique identifier of the issuer being revoked"
+    },
+    "revoked_at": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unix epoch time in seconds when the issuer was revoked"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Optional human-readable reason for the revocation"
+    },
+    "signature": {
+      "type": "string",
+      "description": "Signature over the canonicalized JSON, excluding this field"
+    }
+  },
+  "additionalProperties": false
+}

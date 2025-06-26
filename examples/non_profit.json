@@ -1,0 +1,25 @@
+{
+  "issuer_id": "did:web:helpinghands.org",
+  "entity_type": "non_profit",
+  "entity_metadata": {
+    "country": "US",
+    "official_name": "Helping Hands Charity",
+    "public_registry_url": "https://nonprofitregistry.gov/helpinghands"
+  },
+  "display": {
+    "name": "Helping Hands",
+    "logo": "https://helpinghands.org/assets/logo.png",
+    "description": "Non-profit organization issuing volunteer and donor credentials."
+  },
+  "entries": [
+    {
+      "credential_format": "jwt_vc",
+      "trust_framework": "OpenID4VCI",
+      "credential_issuer_metadata_url": "https://helpinghands.org/.well-known/openid-credential-issuer",
+      "jwks_uri": "https://helpinghands.org/keys",
+      "credential_types": ["VolunteerCredential", "DonationReceiptCredential"]
+    }
+  ],
+  "expires_at": 4286822400,
+  "signature": "..."
+}

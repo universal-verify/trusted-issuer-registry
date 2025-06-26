@@ -1,0 +1,24 @@
+{
+  "issuer_id": "did:web:federation.example.org",
+  "entity_type": "federated_network",
+  "entity_metadata": {
+    "official_name": "Global Health Federation",
+    "public_registry_url": "https://federation.example.org/about"
+  },
+  "display": {
+    "name": "Global Health Federation",
+    "logo": "https://federation.example.org/assets/logo.png",
+    "description": "A federated network of healthcare providers sharing verified credentials."
+  },
+  "entries": [
+    {
+      "credential_format": "ldp_vc",
+      "trust_framework": "OpenID4VCI",
+      "credential_issuer_metadata_url": "https://federation.example.org/.well-known/openid-credential-issuer",
+      "jwks_uri": "https://federation.example.org/keys",
+      "credential_types": ["HealthcareProviderCredential", "VaccinationCredential"]
+    }
+  ],
+  "expires_at": 4286822400,
+  "signature": "..."
+}

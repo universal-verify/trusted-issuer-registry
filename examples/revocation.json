@@ -1,0 +1,6 @@
+{
+  "issuer_id": "did:example:123",
+  "revoked_at": 4286822400,
+  "reason": "The issuer was found to be non-compliant with verification policies.",
+  "signature": "..."
+}

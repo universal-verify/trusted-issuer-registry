@@ -1,0 +1,30 @@
+{
+  "issuer_id": "did:web:university.example.edu",
+  "entity_type": "educational_institution",
+  "entity_metadata": {
+    "country": "US",
+    "region": "MA",
+    "institution_name": "Massachusetts Institute of Technology",
+    "institution_type": "university",
+    "accreditation_body": "NECHE"
+  },
+  "display": {
+    "name": "MIT",
+    "logo": "https://university.example.edu/assets/logo.svg",
+    "description": "An accredited research university issuing digital diplomas and transcripts."
+  },
+  "entries": [
+    {
+      "credential_format": "jwt_vc",
+      "trust_framework": "OpenID4VCI",
+      "credential_issuer_metadata_url": "https://university.example.edu/.well-known/openid-credential-issuer",
+      "jwks_uri": "https://university.example.edu/keys",
+      "credential_types": [
+        "UniversityDegreeCredential",
+        "TranscriptCredential"
+      ]
+    }
+  ],
+  "expires_at": 4286822400,
+  "signature": "..."
+}

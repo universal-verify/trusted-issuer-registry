@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Trusted Issuer Registry Entry",
+  "type": "object",
+  "required": ["issuer_id", "entity_type", "entity_metadata", "display", "entries", "expires_at", "signature"],
+  "properties": {
+    "issuer_id": {
+      "type": "string",
+      "description": "DID or unique identifier for the issuer"
+    },
+    "entity_type": {
+      "type": "string",
+      "enum": [
+        "government",
+        "educational_institution",
+        "commercial",
+        "non_profit",
+        "international_body",
+        "federated_network",
+        "other"
+      ],
+      "description": "The high-level category of the entity acting as the issuer"
+    },
+    "entity_metadata": {
+      "type": "object",
+      "description": "Metadata specific to the entity_type",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code (e.g., 'US', 'DE')"
+        },
+        "region": {
+          "type": "string",
+          "description": "State/province/region if relevant"
+        },
+        "government_level": {
+          "type": "string",
+          "enum": ["national", "state", "local", "other"],
+          "description": "Applicable for entity_type=government"
+        },
+        "official_name": {
+          "type": "string",
+          "description": "Formal name of the government agency"
+        },
+        "institution_name": {
+          "type": "string",
+          "description": "Name of the educational institution"
+        },
+        "institution_type": {
+          "type": "string",
+          "enum": ["university", "college", "school", "training_provider", "other"],
+          "description": "Applicable for entity_type=educational_institution"
+        },
+        "accreditation_body": {
+          "type": "string",
+          "description": "Name or ID of the accrediting authority"
+        },
+        "public_registry_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to an official public registry or verification page for the entity"
+        }
+      },
+      "additionalProperties": true
+    },
+    "display": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "logo": { "type": "string", "format": "uri" },
+        "description": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["credential_format", "trust_framework"],
+        "properties": {
+          "credential_format": {
+            "type": "string",
+            "enum": ["mdoc", "jwt_vc", "ldp_vc"],
+            "description": "Format of the credentials issued"
+          },
+          "trust_framework": {
+            "type": "string",
+            "description": "Name of the trust framework (e.g., OpenID4VCI, ISO-18013-5)"
+          },
+          "credential_issuer_metadata_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "OID4VCI metadata discovery endpoint"
+          },
+          "jwks_uri": {
+            "type": "string",
+            "format": "uri",
+            "description": "JWK Set URI for public key verification"
+          },
+          "credential_types": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Credential types supported by this entry"
+          },
+          "document_signing_certificates": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "PEM-encoded X.509 certificates used for mDoc signing"
+          },
+          "trusted_root_certificates": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Root certificates trusted for validating mDocs"
+          },
+          "status_endpoint": {
+            "type": "string",
+            "format": "uri",
+            "description": "Optional credential status checking endpoint"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "expires_at": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unix epoch time in seconds indicating when this issuer file expires"
+    },
+    "signature": {
+      "type": "string",
+      "description": "Signature over the canonicalized JSON, excluding this field"
+    }
+  },
+  "additionalProperties": false,
+
+  "allOf": [
+    {
+      "if": {
+        "properties": { "entity_type": { "const": "government" } }
+      },
+      "then": {
+        "properties": {
+          "entity_metadata": {
+            "required": ["country", "official_name", "government_level"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "entity_type": { "const": "educational_institution" } }
+      },
+      "then": {
+        "properties": {
+          "entity_metadata": {
+            "required": ["country", "institution_name", "institution_type"]
+          }
+        }
+      }
+    }
+  ]
+}

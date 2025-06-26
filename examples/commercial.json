@@ -1,0 +1,25 @@
+{
+  "issuer_id": "did:web:acme.corp",
+  "entity_type": "commercial",
+  "entity_metadata": {
+    "country": "US",
+    "official_name": "Acme Corporation",
+    "public_registry_url": "https://us.gov/business-registry/acme-corp"
+  },
+  "display": {
+    "name": "Acme Corp",
+    "logo": "https://acme.corp/assets/logo.png",
+    "description": "Leading provider of digital identity verification solutions."
+  },
+  "entries": [
+    {
+      "credential_format": "jwt_vc",
+      "trust_framework": "OpenID4VCI",
+      "credential_issuer_metadata_url": "https://acme.corp/.well-known/openid-credential-issuer",
+      "jwks_uri": "https://acme.corp/keys",
+      "credential_types": ["EmployeeIDCredential", "AccessPassCredential"]
+    }
+  ],
+  "expires_at": 4286822400,
+  "signature": "..."
+}
