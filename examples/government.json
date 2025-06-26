@@ -12,10 +12,10 @@
     "logo": "https://dmv.ca.gov/assets/logo.png",
     "description": "Official issuer of mobile driver's licenses and proof of age credentials in California."
   },
-  "entries": [
+  "trust_frameworks": ["uv"],
+  "credential_configs": [
     {
       "credential_format": "mdoc",
-      "trust_framework": "ISO-18013-5",
       "document_signing_certificates": [
         "MIIC2DCCAcCgAwIBAgIBADANBgkqhkiG9w0BAQsFADA..."
       ],
@@ -26,7 +26,6 @@
     },
     {
       "credential_format": "jwt_vc",
-      "trust_framework": "OpenID4VCI",
       "credential_issuer_metadata_url": "https://dmv.ca.gov/.well-known/openid-credential-issuer",
       "jwks_uri": "https://dmv.ca.gov/keys",
       "credential_types": ["ProofOfAgeCredential"]

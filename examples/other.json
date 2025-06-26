@@ -10,10 +10,10 @@
     "name": "Miscellaneous Org",
     "description": "Issuer for various specialized credentials."
   },
-  "entries": [
+  "trust_frameworks": ["uv"],
+  "credential_configs": [
     {
       "credential_format": "mdoc",
-      "trust_framework": "ISO-18013-5",
       "credential_issuer_metadata_url": "https://misc.example.org/.well-known/mdoc-issuer",
       "document_signing_certificates": [
         "-----BEGIN CERTIFICATE-----\nMIIBIjANBgkq...IDAQAB\n-----END CERTIFICATE-----"

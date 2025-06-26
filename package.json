@@ -9,7 +9,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "digital-credentials"
+    "digital-credentials",
+    "w3c",
+    "mdoc",
+    "mobile-id",
+    "identity-verification",
+    "digital-id",
+    "id-verification",
+    "credential-management",
+    "credential-issuer"
   ],
   "bugs": {
     "url": "https://github.com/universal-verify/trusted-issuer-registry/issues"

@@ -11,10 +11,10 @@
     "logo": "https://acme.corp/assets/logo.png",
     "description": "Leading provider of digital identity verification solutions."
   },
-  "entries": [
+  "trust_frameworks": ["uv", "eidas"],
+  "credential_configs": [
     {
       "credential_format": "jwt_vc",
-      "trust_framework": "OpenID4VCI",
       "credential_issuer_metadata_url": "https://acme.corp/.well-known/openid-credential-issuer",
       "jwks_uri": "https://acme.corp/keys",
       "credential_types": ["EmployeeIDCredential", "AccessPassCredential"]

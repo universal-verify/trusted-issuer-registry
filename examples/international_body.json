@@ -10,10 +10,10 @@
     "logo": "https://www.un.org/sites/un2.un.org/files/UN-emblem-blue.svg",
     "description": "An international organization founded in 1945 to promote peace and security worldwide."
   },
-  "entries": [
+  "trust_frameworks": ["uv"],
+  "credential_configs": [
     {
       "credential_format": "jwt_vc",
-      "trust_framework": "OpenID4VCI",
       "credential_issuer_metadata_url": "https://un.example.intl/.well-known/openid-credential-issuer",
       "jwks_uri": "https://un.example.intl/keys",
       "credential_types": ["DiplomaticCredential", "PeacekeepingCredential"]

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Trusted Issuer Registry Entry",
   "type": "object",
-  "required": ["issuer_id", "entity_type", "entity_metadata", "display", "entries", "expires_at", "signature"],
+  "required": ["issuer_id", "entity_type", "entity_metadata", "display", "trust_frameworks", "credential_configs", "expires_at", "signature"],
   "properties": {
     "issuer_id": {
       "type": "string",
@@ -73,20 +73,25 @@
       },
       "additionalProperties": false
     },
-    "entries": {
+    "trust_frameworks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["uv", "eidas"]
+      },
+      "uniqueItems": true,
+      "description": "The trust frameworks under which this issuer operates (e.g., UV, eIDAS)"
+    },
+    "credential_configs": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["credential_format", "trust_framework"],
+        "required": ["credential_format"],
         "properties": {
           "credential_format": {
             "type": "string",
             "enum": ["mdoc", "jwt_vc", "ldp_vc"],
             "description": "Format of the credentials issued"
-          },
-          "trust_framework": {
-            "type": "string",
-            "description": "Name of the trust framework (e.g., OpenID4VCI, ISO-18013-5)"
           },
           "credential_issuer_metadata_url": {
             "type": "string",
@@ -133,7 +138,6 @@
     }
   },
   "additionalProperties": false,
-
   "allOf": [
     {
       "if": {
