@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Trusted Issuer Registry Entry",
   "type": "object",
-  "required": ["issuer_id", "entity_type", "entity_metadata", "display", "trust_frameworks", "credential_configs", "expires_at", "signature"],
+  "required": ["issuer_id", "entity_type", "entity_metadata", "display", "trust_frameworks", "expires_at", "signature"],
   "properties": {
     "issuer_id": {
       "type": "string",
@@ -82,50 +82,26 @@
       "uniqueItems": true,
       "description": "The trust frameworks under which this issuer operates (e.g., UV, eIDAS)"
     },
-    "credential_configs": {
+    "certificates": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["credential_format"],
+        "required": ["certificate", "certificate_format"],
         "properties": {
-          "credential_format": {
+          "certificate": {
             "type": "string",
-            "enum": ["mdoc", "jwt_vc", "ldp_vc"],
-            "description": "Format of the credentials issued"
+            "description": "PEM-encoded X.509 certificate used for document signing"
           },
-          "credential_issuer_metadata_url": {
+          "certificate_format": {
             "type": "string",
-            "format": "uri",
-            "description": "OID4VCI metadata discovery endpoint"
-          },
-          "jwks_uri": {
-            "type": "string",
-            "format": "uri",
-            "description": "JWK Set URI for public key verification"
-          },
-          "credential_types": {
-            "type": "array",
-            "items": { "type": "string" },
-            "description": "Credential types supported by this entry"
-          },
-          "document_signing_certificates": {
-            "type": "array",
-            "items": { "type": "string" },
-            "description": "PEM-encoded X.509 certificates used for mDoc signing"
-          },
-          "trusted_root_certificates": {
-            "type": "array",
-            "items": { "type": "string" },
-            "description": "Root certificates trusted for validating mDocs"
-          },
-          "status_endpoint": {
-            "type": "string",
-            "format": "uri",
-            "description": "Optional credential status checking endpoint"
+            "enum": ["pem"],
+            "description": "Format of the certificate (currently only PEM is supported)"
           }
         },
         "additionalProperties": false
-      }
+      },
+      "minItems": 1,
+      "description": "Array of certificates issued with the same subject key identifier with the most recent first. It is expected that only one certificate per subject is present, so if only updating the expiration date, the old certificate should be removed when adding the new one."
     },
     "expires_at": {
       "type": "integer",
@@ -139,6 +115,18 @@
   },
   "additionalProperties": false,
   "allOf": [
+    {
+      "if": {
+        "properties": {
+          "issuer_id": {
+            "pattern": "^x509_aki:"
+          }
+        }
+      },
+      "then": {
+        "required": ["certificates"]
+      }
+    },
     {
       "if": {
         "properties": { "entity_type": { "const": "government" } }

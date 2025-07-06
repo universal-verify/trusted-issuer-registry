@@ -11,19 +11,6 @@
     "description": "Issuer for various specialized credentials."
   },
   "trust_frameworks": ["uv"],
-  "credential_configs": [
-    {
-      "credential_format": "mdoc",
-      "credential_issuer_metadata_url": "https://misc.example.org/.well-known/mdoc-issuer",
-      "document_signing_certificates": [
-        "-----BEGIN CERTIFICATE-----\nMIIBIjANBgkq...IDAQAB\n-----END CERTIFICATE-----"
-      ],
-      "trusted_root_certificates": [
-        "-----BEGIN CERTIFICATE-----\nMIIDdzCCAl+gAwIBAgI...-----END CERTIFICATE-----"
-      ],
-      "credential_types": ["SpecialAccessCredential"]
-    }
-  ],
   "expires_at": 4286822400,
   "signature": "..."
 }

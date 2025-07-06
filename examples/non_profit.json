@@ -12,14 +12,6 @@
     "description": "Non-profit organization issuing volunteer and donor credentials."
   },
   "trust_frameworks": ["uv"],
-  "credential_configs": [
-    {
-      "credential_format": "jwt_vc",
-      "credential_issuer_metadata_url": "https://helpinghands.org/.well-known/openid-credential-issuer",
-      "jwks_uri": "https://helpinghands.org/keys",
-      "credential_types": ["VolunteerCredential", "DonationReceiptCredential"]
-    }
-  ],
   "expires_at": 4286822400,
   "signature": "..."
 }

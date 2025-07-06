@@ -12,14 +12,6 @@
     "description": "Leading provider of digital identity verification solutions."
   },
   "trust_frameworks": ["uv", "eidas"],
-  "credential_configs": [
-    {
-      "credential_format": "jwt_vc",
-      "credential_issuer_metadata_url": "https://acme.corp/.well-known/openid-credential-issuer",
-      "jwks_uri": "https://acme.corp/keys",
-      "credential_types": ["EmployeeIDCredential", "AccessPassCredential"]
-    }
-  ],
   "expires_at": 4286822400,
   "signature": "..."
 }

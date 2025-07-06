@@ -1,12 +1,16 @@
 {
   "name": "trusted-issuer-registry",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Registry of trusted credential issuers",
   "homepage": "https://github.com/universal-verify/trusted-issuer-registry#readme",
   "license": "MPL-2.0",
   "author": "kalegd",
+  "type": "module",
+  "main": "build/trusted-issuer-registry.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c --bundleConfigAsCjs",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sign-issuers": "node scripts/SignIssuers.js"
   },
   "keywords": [
     "digital-credentials",
@@ -25,5 +29,13 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/universal-verify/trusted-issuer-registry.git"
+  },
+  "dependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "asn1js": "^3.0.6",
+    "canonical-json": "^0.2.0",
+    "pkijs": "^3.2.5",
+    "rollup": "^4.44.2"
   }
 }

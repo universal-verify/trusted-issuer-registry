@@ -14,17 +14,6 @@
     "description": "An accredited research university issuing digital diplomas and transcripts."
   },
   "trust_frameworks": ["uv"],
-  "credential_configs": [
-    {
-      "credential_format": "jwt_vc",
-      "credential_issuer_metadata_url": "https://university.example.edu/.well-known/openid-credential-issuer",
-      "jwks_uri": "https://university.example.edu/keys",
-      "credential_types": [
-        "UniversityDegreeCredential",
-        "TranscriptCredential"
-      ]
-    }
-  ],
   "expires_at": 4286822400,
   "signature": "..."
 }

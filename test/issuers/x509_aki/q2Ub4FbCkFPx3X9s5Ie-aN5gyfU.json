@@ -1,0 +1,26 @@
+{
+  "issuer_id": "x509_aki:q2Ub4FbCkFPx3X9s5Ie-aN5gyfU",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "VA",
+    "government_level": "state",
+    "official_name": "Multipaz"
+  },
+  "display": {
+    "name": "Multipaz IACA Test",
+    "logo": "https://avatars.githubusercontent.com/u/131064301",
+    "description": "Official issuer of mobile driver's licenses and proof of age credentials in Multipaz."
+  },
+  "trust_frameworks": [
+    "uv"
+  ],
+  "certificates": [
+    {
+      "certificate": "-----BEGIN CERTIFICATE-----\nMIIB7jCCAXSgAwIBAgIUf63ZHaxAhEpofA7P+0Ir1M8B+S0wCgYIKoZIzj0EAwIw\nLjEfMB0GA1UEAwwWT1dGIE11bHRpcGF6IFRFU1QgSUFDQTELMAkGA1UEBhMCVVMw\nHhcNMjUwNzA0MTE1MTM1WhcNMjYwNzA0MTE1MTM1WjAuMR8wHQYDVQQDDBZPV0Yg\nTXVsdGlwYXogVEVTVCBJQUNBMQswCQYDVQQGEwJVUzB2MBAGByqGSM49AgEGBSuB\nBAAiA2IABPkA8nu9JtjtJZT1zI1Y8VWc95uZOmoE/sIofi+/W+48qlJffbG3lJ6c\nWiw/nJgdxyt7cJAO35lSUqGwXPvQg4ZId5sep/mKB+UbpWklk4VgXzMkY7H1Tg5K\nLBywg52z1aNTMFEwHQYDVR0OBBYEFKtlG+BWwpBT8d1/bOSHvmjeYMn1MB8GA1Ud\nIwQYMBaAFKtlG+BWwpBT8d1/bOSHvmjeYMn1MA8GA1UdEwEB/wQFMAMBAf8wCgYI\nKoZIzj0EAwIDaAAwZQIxAKe2TeFIWJJXXlVALxHPHjuIQNN6EPbmj6SIvQV3dprN\nDIntkl5uT4+RGvI8tHAbSAIwRvD9IBG4uJGFRLjetRU3od7lk+45okVscyha9fbh\nmyoVTy44+EvFo58YIJDD+70h\n-----END CERTIFICATE-----",
+      "certificate_format": "pem"
+    }
+  ],
+  "expires_at": 4286822400,
+  "signature": "MEQCIAlQbTxkJp80r/p5zrY8DaNDCtpwmycDLESdDpigR1GoAiBpKT17XHvEvmncdMtfTh5atPPnLr0vVJvAuhzCnVCJzA=="
+}

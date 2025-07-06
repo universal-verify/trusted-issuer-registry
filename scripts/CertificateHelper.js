@@ -1,0 +1,158 @@
+import * as asn1js from 'asn1js';
+import { Certificate } from 'pkijs';
+
+export const verifySignatureWithPem = async (pemKey, signature, data) => {
+    try {
+        const pemContent = pemKey
+            .replace(/-----BEGIN [^-]+-----/, '')
+            .replace(/-----END [^-]+-----/, '')
+            .replace(/\s+/g, '');
+        
+        // Convert base64 to binary
+        const bytes = base64ToBytes(pemContent);
+        
+        const asn1 = asn1js.fromBER(bytes.buffer);
+        const cert = new Certificate({ schema: asn1.result });
+        let publicKeyInfo = cert.subjectPublicKeyInfo;
+        if (!publicKeyInfo || !publicKeyInfo.algorithm || !publicKeyInfo.algorithm.algorithmId) {
+            console.error('Parsed publicKeyInfo:', publicKeyInfo);
+            throw new Error('Could not extract algorithm information from public key');
+        }
+        
+        const webCryptoAlg = getWebCryptoAlgorithmFromOid(publicKeyInfo);
+        
+        // Convert to SPKI format for Web Crypto
+        const spkiBytes = publicKeyInfo.toSchema().toBER();
+        const spkiKey = await crypto.subtle.importKey(
+            'spki',
+            spkiBytes,
+            webCryptoAlg,
+            false,
+            ['verify']
+        );
+        
+        // Convert signature from base64 to ArrayBuffer
+        let signatureBuffer;
+        if (webCryptoAlg.name === 'ECDSA') {
+            // For ECDSA, convert DER signature to raw format
+            signatureBuffer = convertDerSignatureToRaw(signature);
+        } else {
+            // For RSA, use as-is
+            signatureBuffer = base64ToBytes(signature).buffer;
+        }
+        
+        const dataBuffer = new TextEncoder().encode(data).buffer;
+        
+        const verified = await crypto.subtle.verify(webCryptoAlg, spkiKey, signatureBuffer, dataBuffer);
+        return verified;
+    } catch (error) {
+        console.error('Error converting PEM to SPKI key:', error);
+        throw error;
+    }
+}
+
+function base64ToBytes(base64) {
+    if(typeof Buffer == 'function') {
+        return new Uint8Array(Buffer.from(base64, 'base64'));
+    } else {
+        const raw = atob(base64);
+        const bytes = new Uint8Array(raw.length);
+        for (let i = 0; i < raw.length; i++) {
+            bytes[i] = raw.charCodeAt(i);
+        }
+        return bytes;
+    }
+}
+
+// Helper to pad or trim a Uint8Array to a specific length
+function padOrTrim(buf, length) {
+    if (buf.length === length) return buf;
+    if (buf.length > length) return buf.slice(buf.length - length);
+    // pad with zeros at the start
+    const out = new Uint8Array(length);
+    out.set(buf, length - buf.length);
+    return out;
+}
+
+// Function to convert DER signature to raw format for ECDSA
+function convertDerSignatureToRaw(base64Signature) {
+    try {
+        // Decode base64 to binary
+        const derBytes = base64ToBytes(base64Signature);
+        
+        // Parse DER structure
+        const asn1 = asn1js.fromBER(derBytes.buffer);
+        
+        // DER signature should be SEQUENCE { INTEGER r, INTEGER s }
+        if (asn1.result.valueBlock.value.length !== 2) {
+            throw new Error('Invalid DER signature structure');
+        }
+        
+        const r = asn1.result.valueBlock.value[0];
+        const s = asn1.result.valueBlock.value[1];
+        
+        // Extract r and s values as byte arrays
+        const rBytes = new Uint8Array(r.valueBlock.valueHex);
+        const sBytes = new Uint8Array(s.valueBlock.valueHex);
+        
+        // For P-256, each value should be 32 bytes
+        const rPadded = padOrTrim(rBytes, 32);
+        const sPadded = padOrTrim(sBytes, 32);
+        
+        // Concatenate r and s
+        const rawSignature = new Uint8Array(64);
+        rawSignature.set(rPadded, 0);
+        rawSignature.set(sPadded, 32);
+        
+        return rawSignature.buffer;
+    } catch (error) {
+        console.error('Error converting DER signature to raw:', error);
+        throw error;
+    }
+}
+
+function getWebCryptoAlgorithmFromOid(publicKeyInfo) {
+    const algorithmOid = publicKeyInfo.algorithm.algorithmId;
+    const algorithmParams = publicKeyInfo.algorithm.algorithmParams;
+
+    let oidString;
+    if (algorithmOid && typeof algorithmOid === 'object' && algorithmOid.valueBlock && typeof algorithmOid.valueBlock.toString === 'function') {
+        oidString = algorithmOid.valueBlock.toString();
+    } else if (typeof algorithmOid === 'string') {
+        oidString = algorithmOid;
+    } else {
+        throw new Error('Unsupported algorithmOid format');
+    }
+    
+    switch (oidString) {
+        case '1.2.840.10045.2.1': // ecPublicKey
+            // Parse the curve parameters to determine the specific curve
+            let curveOid;
+            if (algorithmParams && typeof algorithmParams === 'object' && algorithmParams.valueBlock && typeof algorithmParams.valueBlock.toString === 'function') {
+                curveOid = algorithmParams.valueBlock.toString();
+            } else if (typeof algorithmParams === 'string') {
+                curveOid = algorithmParams;
+            } else {
+                curveOid = undefined;
+            }
+            switch (curveOid) {
+                case '1.2.840.10045.3.1.7': // P-256
+                    return { name: 'ECDSA', namedCurve: 'P-256', hash: { name: 'SHA-256' } };
+                case '1.3.132.0.34': // P-384
+                    return { name: 'ECDSA', namedCurve: 'P-384', hash: { name: 'SHA-384' } };
+                case '1.3.132.0.35': // P-521
+                    return { name: 'ECDSA', namedCurve: 'P-521', hash: { name: 'SHA-512' } };
+                case undefined:
+                    // Default to P-256 if no parameters provided
+                    return { name: 'ECDSA', namedCurve: 'P-256', hash: { name: 'SHA-256' } };
+                default:
+                    throw new Error(`Unsupported EC curve: ${curveOid}`);
+            }
+        case '1.2.840.113549.1.1.1': // rsaEncryption
+            return { name: 'RSASSA-PKCS1-v1_5' };
+        case '1.2.840.113549.1.1.10': // rsassaPss
+            return { name: 'RSA-PSS' };
+        default:
+            throw new Error(`Unsupported algorithm OID: ${oidString}`);
+    }
+}

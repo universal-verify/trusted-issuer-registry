@@ -11,14 +11,6 @@
     "description": "A federated network of healthcare providers sharing verified credentials."
   },
   "trust_frameworks": ["uv"],
-  "credential_configs": [
-    {
-      "credential_format": "ldp_vc",
-      "credential_issuer_metadata_url": "https://federation.example.org/.well-known/openid-credential-issuer",
-      "jwks_uri": "https://federation.example.org/keys",
-      "credential_types": ["HealthcareProviderCredential", "VaccinationCredential"]
-    }
-  ],
   "expires_at": 4286822400,
   "signature": "..."
 }

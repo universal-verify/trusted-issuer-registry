@@ -11,14 +11,6 @@
     "description": "An international organization founded in 1945 to promote peace and security worldwide."
   },
   "trust_frameworks": ["uv"],
-  "credential_configs": [
-    {
-      "credential_format": "jwt_vc",
-      "credential_issuer_metadata_url": "https://un.example.intl/.well-known/openid-credential-issuer",
-      "jwks_uri": "https://un.example.intl/keys",
-      "credential_types": ["DiplomaticCredential", "PeacekeepingCredential"]
-    }
-  ],
   "expires_at": 4286822400,
   "signature": "..."
 }
