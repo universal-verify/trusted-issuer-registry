@@ -24607,7 +24607,7 @@ const verifySignatureWithPem = async (pemKey, signature, data) => {
             .replace(/\s+/g, '');
         
         // Convert base64 to binary
-        const bytes = base64ToBytes(pemContent);
+        const bytes = base64ToUint8Array(pemContent);
         
         const asn1 = fromBER(bytes.buffer);
         const cert = new Certificate({ schema: asn1.result });
@@ -24632,16 +24632,17 @@ const verifySignatureWithPem = async (pemKey, signature, data) => {
         // Convert signature from base64 to ArrayBuffer
         let signatureBuffer;
         if (webCryptoAlg.name === 'ECDSA') {
+            let rsLen = 32; // Default P-256
+            if (webCryptoAlg.namedCurve === 'P-384') rsLen = 48;
+            if (webCryptoAlg.namedCurve === 'P-521') rsLen = 66;
             // For ECDSA, convert DER signature to raw format
-            signatureBuffer = convertDerSignatureToRaw(signature);
+            signatureBuffer = convertDerSignatureToRaw(signature, rsLen);
         } else {
             // For RSA, use as-is
-            signatureBuffer = base64ToBytes(signature).buffer;
+            signatureBuffer = base64ToUint8Array(signature).buffer;
         }
         
-        const dataBuffer = new TextEncoder().encode(data).buffer;
-        
-        const verified = await crypto.subtle.verify(webCryptoAlg, spkiKey, signatureBuffer, dataBuffer);
+        const verified = await crypto.subtle.verify(webCryptoAlg, spkiKey, signatureBuffer, data);
         return verified;
     } catch (error) {
         console.error('Error converting PEM to SPKI key:', error);
@@ -24649,7 +24650,7 @@ const verifySignatureWithPem = async (pemKey, signature, data) => {
     }
 };
 
-function base64ToBytes(base64) {
+function base64ToUint8Array(base64) {
     if(typeof Buffer == 'function') {
         return new Uint8Array(Buffer.from(base64, 'base64'));
     } else {
@@ -24663,7 +24664,7 @@ function base64ToBytes(base64) {
 }
 
 // Helper to pad or trim a Uint8Array to a specific length
-function padOrTrim(buf, length) {
+function padOrTrimUint8Array(buf, length) {
     if (buf.length === length) return buf;
     if (buf.length > length) return buf.slice(buf.length - length);
     // pad with zeros at the start
@@ -24673,10 +24674,10 @@ function padOrTrim(buf, length) {
 }
 
 // Function to convert DER signature to raw format for ECDSA
-function convertDerSignatureToRaw(base64Signature) {
+function convertDerSignatureToRaw(base64Signature, rsLen) {
     try {
         // Decode base64 to binary
-        const derBytes = base64ToBytes(base64Signature);
+        const derBytes = base64ToUint8Array(base64Signature);
         
         // Parse DER structure
         const asn1 = fromBER(derBytes.buffer);
@@ -24694,13 +24695,13 @@ function convertDerSignatureToRaw(base64Signature) {
         const sBytes = new Uint8Array(s.valueBlock.valueHex);
         
         // For P-256, each value should be 32 bytes
-        const rPadded = padOrTrim(rBytes, 32);
-        const sPadded = padOrTrim(sBytes, 32);
+        const rPadded = padOrTrimUint8Array(rBytes, rsLen);
+        const sPadded = padOrTrimUint8Array(sBytes, rsLen);
         
         // Concatenate r and s
-        const rawSignature = new Uint8Array(64);
+        const rawSignature = new Uint8Array(rsLen * 2);
         rawSignature.set(rPadded, 0);
-        rawSignature.set(sPadded, 32);
+        rawSignature.set(sPadded, rsLen);
         
         return rawSignature.buffer;
     } catch (error) {
@@ -24868,7 +24869,8 @@ class TrustedIssuerRegistry {
 
         let verified = false;
         try {
-            verified = await verifySignatureWithPem(ROOT_CA_CERTIFICATE, signature, issuerString);
+            let issuerData = new TextEncoder().encode(issuerString).buffer;
+            verified = await verifySignatureWithPem(ROOT_CA_CERTIFICATE, signature, issuerData);
         } catch (e) {
             console.error("Issuer signature verification failed", e);
         }
@@ -24876,4 +24878,7 @@ class TrustedIssuerRegistry {
     }
 }
 
-export { TrustedIssuerRegistry as default };
+//For CommonJS compatibility... boo CommonJS people, get with the times
+TrustedIssuerRegistry.verifySignatureWithPem = verifySignatureWithPem;
+
+export { TrustedIssuerRegistry as default, verifySignatureWithPem };

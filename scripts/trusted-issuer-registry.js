@@ -43,7 +43,8 @@ class TrustedIssuerRegistry {
 
         let verified = false;
         try {
-            verified = await verifySignatureWithPem(ROOT_CA_CERTIFICATE, signature, issuerString);
+            let issuerData = new TextEncoder().encode(issuerString).buffer;
+            verified = await verifySignatureWithPem(ROOT_CA_CERTIFICATE, signature, issuerData);
         } catch (e) {
             console.error("Issuer signature verification failed", e);
         }
@@ -51,4 +52,8 @@ class TrustedIssuerRegistry {
     }
 }
 
+//For CommonJS compatibility... boo CommonJS people, get with the times
+TrustedIssuerRegistry.verifySignatureWithPem = verifySignatureWithPem;
+
+export { verifySignatureWithPem };
 export default TrustedIssuerRegistry;
