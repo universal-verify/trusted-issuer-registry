@@ -9,7 +9,7 @@
   "main": "build/trusted-issuer-registry.js",
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --test",
     "sign-issuers": "node scripts/sign-issuers.js",
     "add-deprecation-warning": "node scripts/add-deprecation-warning.js",
     "validate-json": "node scripts/schema-check.js",

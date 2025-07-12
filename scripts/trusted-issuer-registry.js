@@ -6,7 +6,7 @@ class TrustedIssuerRegistry {
     constructor(options = {}) {
         this._cacheEnabled = options.cacheEnabled ?? true;
         this._cacheTTL = options.cacheTTL ?? 1000 * 60 * 60 * 24; // 24 hours
-        this._urlBase = options.useTestIssuers ? TEST_REGISTRY_URL_BASE : REGISTRY_URL_BASE;
+        this._urlBase = options.useTestData ? TEST_REGISTRY_URL_BASE : REGISTRY_URL_BASE;
         this._cache = {};
     }
 
