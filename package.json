@@ -10,7 +10,9 @@
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sign-issuers": "node scripts/SignIssuers.js"
+    "sign-issuers": "node scripts/sign-issuers.js",
+    "add-deprecation-warning": "node scripts/add-deprecation-warning.js",
+    "prepublishOnly": "node scripts/publish-sanity-checks.js"
   },
   "keywords": [
     "digital-credentials",

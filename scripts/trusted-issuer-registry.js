@@ -1,5 +1,5 @@
 import { REGISTRY_URL_BASE, ROOT_CA_CERTIFICATE, TEST_REGISTRY_URL_BASE } from "./constants.js";
-import { verifySignatureWithPem } from "./CertificateHelper.js";
+import { verifySignatureWithPem } from "./certificate-helper.js";
 import stringify from 'canonical-json';
 
 class TrustedIssuerRegistry {
