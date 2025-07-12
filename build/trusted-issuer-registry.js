@@ -182,6 +182,15 @@ class TrustedIssuerRegistry {
         this._cache = {};
     }
 
+    async getDeprecationDate() {
+        const response = await fetch(`${this._urlBase}/deprecation_notice.json`);
+        if (response.ok) {
+            const deprecationNotice = await response.json();
+            return new Date(deprecationNotice.end_of_life * 1000);
+        }
+        return null;
+    }
+
     async getIssuerFromX509AKI(x509aki) {
         if (this._cacheEnabled && x509aki in this._cache && this._cache[x509aki].expiresAt > Date.now()) return this._cache[x509aki].issuer;
 
