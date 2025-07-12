@@ -69,7 +69,7 @@ function checkVersionConsistency() {
 
     const constantsPath = path.resolve(__dirname, 'constants.js');
     const constantsContent = fs.readFileSync(constantsPath, 'utf8');
-    const minorVersionMatch = constantsContent.match(/const MINOR_VERSION = "([^"]+)"/);
+    const minorVersionMatch = constantsContent.match(/const MINOR_VERSION = '([^']+)'/);
 
     if (!minorVersionMatch) {
         console.error('❌ Could not find MINOR_VERSION in constants.js');
