@@ -50,8 +50,13 @@ function promptForDate() {
             output: process.stdout
         });
 
-        console.log('\nPlease enter a date in YYYY-MM-DD format (e.g., 2024-12-31)');
-        console.log('Note: The date will be interpreted as UTC timezone.');
+        // Calculate 90 days from now for the example
+        const ninetyDaysFromNow = new Date();
+        ninetyDaysFromNow.setDate(ninetyDaysFromNow.getDate() + 90);
+        const exampleDate = ninetyDaysFromNow.toISOString().split('T')[0];
+        
+        console.log('\nPlease enter a date in YYYY-MM-DD format (e.g., ' + exampleDate + ')');
+        console.log('Note: The date will be interpreted as UTC timezone. The example above is 90 days from now.');
 
         rl.question('Date: ', (input) => {
             rl.close();
