@@ -10,7 +10,7 @@
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs",
     "lint": "eslint ./scripts --ext .js",
-    "lint:fix": "eslint ./scripts --ext .js --fix",
+    "lint-fix": "eslint ./scripts --ext .js --fix",
     "test": "node --test",
     "sign-issuers": "node scripts/sign-issuers.js",
     "add-deprecation-warning": "node scripts/add-deprecation-warning.js",
@@ -43,6 +43,7 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^0.4.4",
+    "@stylistic/eslint-plugin": "^5.1.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "eslint": "^9.31.0",

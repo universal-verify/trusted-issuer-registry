@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 function checkExistingDeprecation() {
     const projectRoot = path.resolve(__dirname, '..');
     const deprecationPath = path.join(projectRoot, 'deprecation.json');
-    
+
     if (fs.existsSync(deprecationPath)) {
         console.error('Error: deprecation.json already exists in the root directory.');
         console.error("It's advised against updating the deprecation date within a given minor version.");
@@ -24,7 +24,7 @@ function validateDateFormat(dateString) {
     if (!dateRegex.test(dateString)) {
         return false;
     }
-    
+
     const date = new Date(dateString + 'T00:00:00.000Z');
     return !isNaN(date.getTime()) && date.toISOString().startsWith(dateString);
 }
@@ -49,10 +49,10 @@ function promptForDate() {
             input: process.stdin,
             output: process.stdout
         });
-        
+
         console.log('\nPlease enter a date in YYYY-MM-DD format (e.g., 2024-12-31)');
         console.log('Note: The date will be interpreted as UTC timezone.');
-        
+
         rl.question('Date: ', (input) => {
             rl.close();
             resolve(input.trim());
@@ -65,41 +65,41 @@ async function addDeprecation() {
     try {
         // Check if deprecation.json already exists
         checkExistingDeprecation();
-        
+
         // Prompt user for date
         const dateInput = await promptForDate();
-        
+
         // Validate date format
         if (!validateDateFormat(dateInput)) {
             console.error('Error: Invalid date format. Please use YYYY-MM-DD format (e.g., 2024-12-31)');
             process.exit(1);
         }
-        
+
         // Check if date is in the past
         if (isDateInPast(dateInput)) {
             console.error('Error: The provided date is in the past. Deprecation dates must be in the future.');
             process.exit(1);
         }
-        
+
         // Convert to epoch time
         const epochTime = dateToEpoch(dateInput);
-        
+
         // Create deprecation object
         const deprecation = {
             deprecated_at: epochTime
         };
-        
+
         // Write to file
         const projectRoot = path.resolve(__dirname, '..');
         const deprecationPath = path.join(projectRoot, 'deprecation.json');
-        
+
         fs.writeFileSync(deprecationPath, JSON.stringify(deprecation, null, 2) + '\n');
-        
-        console.log(`\n✓ Deprecation file created successfully!`);
+
+        console.log('\n✓ Deprecation file created successfully!');
         console.log(`File: ${deprecationPath}`);
         console.log(`Date: ${dateInput} (UTC)`);
         console.log(`Epoch time: ${epochTime}`);
-        
+
     } catch (error) {
         console.error('Error during deprecation process:', error.message);
         process.exit(1);
@@ -111,4 +111,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     addDeprecation();
 }
 
-export { addDeprecation }; 
+export { addDeprecation };
