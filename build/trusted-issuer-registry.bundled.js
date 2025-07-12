@@ -1,4 +1,4 @@
-const MINOR_VERSION = "0.0";
+const MINOR_VERSION = '0.0';
 const REGISTRY_URL_BASE = `https://cdn.jsdelivr.net/npm/trusted-issuer-registry@${MINOR_VERSION}`;
 const TEST_REGISTRY_URL_BASE = `${REGISTRY_URL_BASE}/test`;
 const ROOT_CA_CERTIFICATE = `-----BEGIN CERTIFICATE-----
@@ -24605,20 +24605,20 @@ const verifySignatureWithPem = async (pemKey, signature, data) => {
             .replace(/-----BEGIN [^-]+-----/, '')
             .replace(/-----END [^-]+-----/, '')
             .replace(/\s+/g, '');
-        
+
         // Convert base64 to binary
         const bytes = base64ToUint8Array(pemContent);
-        
+
         const asn1 = fromBER(bytes.buffer);
         const cert = new Certificate({ schema: asn1.result });
-        let publicKeyInfo = cert.subjectPublicKeyInfo;
+        const publicKeyInfo = cert.subjectPublicKeyInfo;
         if (!publicKeyInfo || !publicKeyInfo.algorithm || !publicKeyInfo.algorithm.algorithmId) {
             console.error('Parsed publicKeyInfo:', publicKeyInfo);
             throw new Error('Could not extract algorithm information from public key');
         }
-        
+
         const webCryptoAlg = getWebCryptoAlgorithmFromOid(publicKeyInfo);
-        
+
         // Convert to SPKI format for Web Crypto
         const spkiBytes = publicKeyInfo.toSchema().toBER();
         const spkiKey = await crypto.subtle.importKey(
@@ -24628,7 +24628,7 @@ const verifySignatureWithPem = async (pemKey, signature, data) => {
             false,
             ['verify']
         );
-        
+
         // Convert signature from base64 to ArrayBuffer
         let signatureBuffer;
         if (webCryptoAlg.name === 'ECDSA') {
@@ -24641,7 +24641,7 @@ const verifySignatureWithPem = async (pemKey, signature, data) => {
             // For RSA, use as-is
             signatureBuffer = base64ToUint8Array(signature).buffer;
         }
-        
+
         const verified = await crypto.subtle.verify(webCryptoAlg, spkiKey, signatureBuffer, data);
         return verified;
     } catch (error) {
@@ -24678,31 +24678,31 @@ function convertDerSignatureToRaw(base64Signature, rsLen) {
     try {
         // Decode base64 to binary
         const derBytes = base64ToUint8Array(base64Signature);
-        
+
         // Parse DER structure
         const asn1 = fromBER(derBytes.buffer);
-        
+
         // DER signature should be SEQUENCE { INTEGER r, INTEGER s }
         if (asn1.result.valueBlock.value.length !== 2) {
             throw new Error('Invalid DER signature structure');
         }
-        
+
         const r = asn1.result.valueBlock.value[0];
         const s = asn1.result.valueBlock.value[1];
-        
+
         // Extract r and s values as byte arrays
         const rBytes = new Uint8Array(r.valueBlock.valueHex);
         const sBytes = new Uint8Array(s.valueBlock.valueHex);
-        
+
         // For P-256, each value should be 32 bytes
         const rPadded = padOrTrimUint8Array(rBytes, rsLen);
         const sPadded = padOrTrimUint8Array(sBytes, rsLen);
-        
+
         // Concatenate r and s
         const rawSignature = new Uint8Array(rsLen * 2);
         rawSignature.set(rPadded, 0);
         rawSignature.set(sPadded, rsLen);
-        
+
         return rawSignature.buffer;
     } catch (error) {
         console.error('Error converting DER signature to raw:', error);
@@ -24722,7 +24722,7 @@ function getWebCryptoAlgorithmFromOid(publicKeyInfo) {
     } else {
         throw new Error('Unsupported algorithmOid format');
     }
-    
+
     switch (oidString) {
         case '1.2.840.10045.2.1': // ecPublicKey
             // Parse the curve parameters to determine the specific curve
@@ -24832,7 +24832,7 @@ class TrustedIssuerRegistry {
     constructor(options = {}) {
         this._cacheEnabled = options.cacheEnabled ?? true;
         this._cacheTTL = options.cacheTTL ?? 1000 * 60 * 60 * 24; // 24 hours
-        this._urlBase = options.useTestIssuers ? TEST_REGISTRY_URL_BASE : REGISTRY_URL_BASE;
+        this._urlBase = options.useTestData ? TEST_REGISTRY_URL_BASE : REGISTRY_URL_BASE;
         this._cache = {};
     }
 
@@ -24869,10 +24869,10 @@ class TrustedIssuerRegistry {
 
         let verified = false;
         try {
-            let issuerData = new TextEncoder().encode(issuerString).buffer;
+            const issuerData = new TextEncoder().encode(issuerString).buffer;
             verified = await verifySignatureWithPem(ROOT_CA_CERTIFICATE, signature, issuerData);
         } catch (e) {
-            console.error("Issuer signature verification failed", e);
+            console.error('Issuer signature verification failed', e);
         }
         return verified;
     }

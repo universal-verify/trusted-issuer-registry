@@ -18,8 +18,8 @@ function checkWorkingDirectory() {
 
 function checkBranch() {
     const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-    if (branch !== 'main') {
-        console.error(`❌ You are on '${branch}' branch. Switch to 'main' before publishing.`);
+    if (branch !== 'main' && !/^\d+\.\d+\.\d+$/.test(branch)) {
+        console.error(`❌ You are on '${branch}' branch. Switch to 'main' or '#.#.#' before publishing.`);
         process.exit(1);
     }
     console.log(' ✅ Branch check passed');
