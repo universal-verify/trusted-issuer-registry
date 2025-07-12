@@ -12,6 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "sign-issuers": "node scripts/sign-issuers.js",
     "add-deprecation-warning": "node scripts/add-deprecation-warning.js",
+    "validate-json": "node scripts/schema-check.js",
     "prepublishOnly": "node scripts/publish-sanity-checks.js"
   },
   "keywords": [
@@ -33,11 +34,15 @@
     "url": "git+https://github.com/universal-verify/trusted-issuer-registry.git"
   },
   "dependencies": {
-    "@rollup/plugin-node-resolve": "^16.0.1",
-    "@rollup/plugin-terser": "^0.4.4",
     "asn1js": "^3.0.6",
     "canonical-json": "^0.2.0",
-    "pkijs": "^3.2.5",
+    "pkijs": "^3.2.5"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "rollup": "^4.44.2"
   }
 }

@@ -119,6 +119,7 @@
       "if": {
         "properties": {
           "issuer_id": {
+            "type": "string",
             "pattern": "^x509_aki:"
           }
         }
@@ -134,6 +135,7 @@
       "then": {
         "properties": {
           "entity_metadata": {
+            "type": "object",
             "required": ["country", "official_name", "government_level"]
           }
         }
@@ -146,6 +148,7 @@
       "then": {
         "properties": {
           "entity_metadata": {
+            "type": "object",
             "required": ["country", "institution_name", "institution_type"]
           }
         }
