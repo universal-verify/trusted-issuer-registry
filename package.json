@@ -9,6 +9,8 @@
   "main": "build/trusted-issuer-registry.js",
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs",
+    "lint": "eslint ./scripts --ext .js",
+    "lint:fix": "eslint ./scripts --ext .js --fix",
     "test": "node --test",
     "sign-issuers": "node scripts/sign-issuers.js",
     "add-deprecation-warning": "node scripts/add-deprecation-warning.js",
@@ -43,6 +45,8 @@
     "@rollup/plugin-terser": "^0.4.4",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
+    "eslint": "^9.31.0",
+    "globals": "^16.3.0",
     "rollup": "^4.44.2"
   }
 }

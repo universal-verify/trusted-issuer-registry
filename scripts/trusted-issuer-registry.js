@@ -43,7 +43,7 @@ class TrustedIssuerRegistry {
 
         let verified = false;
         try {
-            let issuerData = new TextEncoder().encode(issuerString).buffer;
+            const issuerData = new TextEncoder().encode(issuerString).buffer;
             verified = await verifySignatureWithPem(ROOT_CA_CERTIFICATE, signature, issuerData);
         } catch (e) {
             console.error("Issuer signature verification failed", e);

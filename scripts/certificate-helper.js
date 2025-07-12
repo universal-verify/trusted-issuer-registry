@@ -13,7 +13,7 @@ export const verifySignatureWithPem = async (pemKey, signature, data) => {
         
         const asn1 = asn1js.fromBER(bytes.buffer);
         const cert = new Certificate({ schema: asn1.result });
-        let publicKeyInfo = cert.subjectPublicKeyInfo;
+        const publicKeyInfo = cert.subjectPublicKeyInfo;
         if (!publicKeyInfo || !publicKeyInfo.algorithm || !publicKeyInfo.algorithm.algorithmId) {
             console.error('Parsed publicKeyInfo:', publicKeyInfo);
             throw new Error('Could not extract algorithm information from public key');
@@ -50,7 +50,7 @@ export const verifySignatureWithPem = async (pemKey, signature, data) => {
         console.error('Error converting PEM to SPKI key:', error);
         throw error;
     }
-}
+};
 
 function base64ToUint8Array(base64) {
     if(typeof Buffer == 'function') {

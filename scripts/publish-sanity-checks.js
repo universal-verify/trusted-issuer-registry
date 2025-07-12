@@ -87,7 +87,7 @@ function checkVersionConsistency() {
 }
 
 function checkFilesAgainstSchemas() {
-    let validFiles = validateSchemaFiles();
+    const validFiles = validateSchemaFiles();
     console.log(` ✅ Schema validation passed: ${validFiles} valid files checked.`);
 }
 
