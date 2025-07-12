@@ -105,7 +105,7 @@ function validateSchemaFiles() {
 
 // Run the script if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
-    let validFiles = validateSchemaFiles();
+    const validFiles = validateSchemaFiles();
     console.log(`✅ Schema validation passed: ${validFiles} valid files checked.`);
 }
 
