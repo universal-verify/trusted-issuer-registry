@@ -1,5 +1,5 @@
-import { REGISTRY_URL_BASE, ROOT_CA_CERTIFICATE, TEST_REGISTRY_URL_BASE } from "./constants.js";
-import { verifySignatureWithPem } from "./certificate-helper.js";
+import { REGISTRY_URL_BASE, ROOT_CA_CERTIFICATE, TEST_REGISTRY_URL_BASE } from './constants.js';
+import { verifySignatureWithPem } from './certificate-helper.js';
 import stringify from 'canonical-json';
 
 class TrustedIssuerRegistry {
@@ -46,7 +46,7 @@ class TrustedIssuerRegistry {
             const issuerData = new TextEncoder().encode(issuerString).buffer;
             verified = await verifySignatureWithPem(ROOT_CA_CERTIFICATE, signature, issuerData);
         } catch (e) {
-            console.error("Issuer signature verification failed", e);
+            console.error('Issuer signature verification failed', e);
         }
         return verified;
     }
