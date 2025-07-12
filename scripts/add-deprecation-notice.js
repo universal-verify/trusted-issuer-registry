@@ -6,13 +6,13 @@ import readline from 'readline';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Function to check if deprecation.json already exists
+// Function to check if deprecation_notice.json already exists
 function checkExistingDeprecation() {
     const projectRoot = path.resolve(__dirname, '..');
-    const deprecationPath = path.join(projectRoot, 'deprecation.json');
+    const deprecationPath = path.join(projectRoot, 'deprecation_notice.json');
 
     if (fs.existsSync(deprecationPath)) {
-        console.error('Error: deprecation.json already exists in the root directory.');
+        console.error('Error: deprecation_notice.json already exists in the root directory.');
         console.error("It's advised against updating the deprecation date within a given minor version.");
         process.exit(1);
     }
@@ -63,7 +63,7 @@ function promptForDate() {
 // Main function
 async function addDeprecation() {
     try {
-        // Check if deprecation.json already exists
+        // Check if deprecation_notice.json already exists
         checkExistingDeprecation();
 
         // Prompt user for date
@@ -86,12 +86,12 @@ async function addDeprecation() {
 
         // Create deprecation object
         const deprecation = {
-            deprecated_at: epochTime
+            end_of_life: epochTime
         };
 
         // Write to file
         const projectRoot = path.resolve(__dirname, '..');
-        const deprecationPath = path.join(projectRoot, 'deprecation.json');
+        const deprecationPath = path.join(projectRoot, 'deprecation_notice.json');
 
         fs.writeFileSync(deprecationPath, JSON.stringify(deprecation, null, 2) + '\n');
 

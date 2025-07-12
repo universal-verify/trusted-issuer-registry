@@ -13,7 +13,7 @@
     "lint-fix": "eslint ./scripts --ext .js --fix",
     "test": "node --test",
     "sign-issuers": "node scripts/sign-issuers.js",
-    "add-deprecation-warning": "node scripts/add-deprecation-warning.js",
+    "deprecate": "node scripts/add-deprecation-notice.js",
     "validate-json": "node scripts/schema-check.js",
     "prepublishOnly": "node scripts/publish-sanity-checks.js"
   },
