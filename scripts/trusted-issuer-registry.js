@@ -1,4 +1,4 @@
-import { REGISTRY_URL_BASE, ROOT_CA_CERTIFICATE, TEST_REGISTRY_URL_BASE } from './constants.js';
+import { REGISTRY_URL_BASE, ROOT_CA_CERTIFICATE, TEST_REGISTRY_URL_BASE, MINOR_VERSION } from './constants.js';
 import { verifySignatureWithPem } from './certificate-helper.js';
 import stringify from 'canonical-json';
 
@@ -10,7 +10,7 @@ class TrustedIssuerRegistry {
         this._cache = {};
     }
 
-    async getDeprecationDate() {
+    async getEndOfLifeDate() {
         const response = await fetch(`${this._urlBase}/deprecation_notice.json`);
         if (response.ok) {
             const deprecationNotice = await response.json();
@@ -59,6 +59,8 @@ class TrustedIssuerRegistry {
         }
         return verified;
     }
+
+    static minorVersion = MINOR_VERSION;
 }
 
 //For CommonJS compatibility... boo CommonJS people, get with the times
