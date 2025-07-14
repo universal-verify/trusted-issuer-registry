@@ -24836,7 +24836,7 @@ class TrustedIssuerRegistry {
         this._cache = {};
     }
 
-    async getDeprecationDate() {
+    async getEndOfLifeDate() {
         const response = await fetch(`${this._urlBase}/deprecation_notice.json`);
         if (response.ok) {
             const deprecationNotice = await response.json();
@@ -24885,6 +24885,8 @@ class TrustedIssuerRegistry {
         }
         return verified;
     }
+
+    static minorVersion = MINOR_VERSION;
 }
 
 //For CommonJS compatibility... boo CommonJS people, get with the times

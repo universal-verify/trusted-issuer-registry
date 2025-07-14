@@ -54,7 +54,7 @@ function promptForDate() {
         const ninetyDaysFromNow = new Date();
         ninetyDaysFromNow.setDate(ninetyDaysFromNow.getDate() + 90);
         const exampleDate = ninetyDaysFromNow.toISOString().split('T')[0];
-        
+
         console.log('\nPlease enter a date in YYYY-MM-DD format (e.g., ' + exampleDate + ')');
         console.log('Note: The date will be interpreted as UTC timezone. The example above is 90 days from now.');
 
