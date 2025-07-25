@@ -46,6 +46,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Run sign-issuers.js to update issuer files"
           branch: sign-issuers-files-0-0
+          base: ${{ github.ref_name }}
           title: "Update issuer files via sign-issuers.js"
           body: |
             This PR was created automatically by the GitHub Action that runs `scripts/sign-issuers.js`.
