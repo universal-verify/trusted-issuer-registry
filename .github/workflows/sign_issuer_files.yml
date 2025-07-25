@@ -34,18 +34,18 @@ jobs:
 
       - name: Create branch with changes
         run: |
-          git checkout -b sign-issuer-files-0-1
+          git checkout -b sign-issuer-files-0-0
           git add .
           git diff --quiet && echo "No changes detected, skipping commit and PR" && exit 0
           git commit -m "Run sign-issuers.js to update issuer files"
-          git push origin sign-issuers-update --force
+          git push origin sign-issuers-files-0-0 --force
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Run sign-issuers.js to update issuer files"
-          branch: sign-issuers-update
+          branch: sign-issuers-files-0-0
           title: "Update issuer files via sign-issuers.js"
           body: |
             This PR was created automatically by the GitHub Action that runs `scripts/sign-issuers.js`.
