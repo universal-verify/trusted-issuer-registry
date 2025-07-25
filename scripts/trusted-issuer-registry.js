@@ -1,4 +1,4 @@
-import { REGISTRY_URL_BASE, ROOT_CA_CERTIFICATE, TEST_REGISTRY_URL_BASE, MINOR_VERSION } from './constants.js';
+import { REGISTRY_URL_BASE, PUBLIC_SIGNING_KEY, TEST_REGISTRY_URL_BASE, MINOR_VERSION } from './constants.js';
 import { verifySignatureWithPem } from './certificate-helper.js';
 import stringify from 'canonical-json';
 
@@ -53,7 +53,7 @@ class TrustedIssuerRegistry {
         let verified = false;
         try {
             const issuerData = new TextEncoder().encode(issuerString).buffer;
-            verified = await verifySignatureWithPem(ROOT_CA_CERTIFICATE, signature, issuerData);
+            verified = await verifySignatureWithPem(PUBLIC_SIGNING_KEY, signature, issuerData);
         } catch (e) {
             console.error('Issuer signature verification failed', e);
         }

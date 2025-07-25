@@ -1,7 +1,7 @@
 export const MINOR_VERSION = '0.0';
 export const REGISTRY_URL_BASE = `https://cdn.jsdelivr.net/npm/trusted-issuer-registry@${MINOR_VERSION}`;
 export const TEST_REGISTRY_URL_BASE = `${REGISTRY_URL_BASE}/test`;
-export const ROOT_CA_CERTIFICATE = `-----BEGIN CERTIFICATE-----
+export const PUBLIC_SIGNING_KEY = `-----BEGIN CERTIFICATE-----
 MIIBnDCCAUGgAwIBAgIURT5mnI9WbENrqzrB0RYtXGuc0n8wCgYIKoZIzj0EAwIw
 IzEhMB8GA1UEAwwYVW5pdmVyc2FsIFZlcmlmeSBSb290IENBMB4XDTI1MDcwNDEz
 NTY0OVoXDTM1MDcwMjEzNTY0OVowIzEhMB8GA1UEAwwYVW5pdmVyc2FsIFZlcmlm

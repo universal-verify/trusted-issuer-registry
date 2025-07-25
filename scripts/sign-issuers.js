@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import stringify from 'canonical-json';
 import crypto from 'crypto';
+import { PUBLIC_SIGNING_KEY } from './constants.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,15 +31,19 @@ function findJsonFiles(dir) {
     return files;
 }
 
-// Function to read and parse private key
-function loadPrivateKey(keyPath) {
-    try {
-        const keyPem = fs.readFileSync(keyPath, 'utf8');
-        return keyPem;
-    } catch (error) {
-        console.error(`Error loading private key from ${keyPath}:`, error.message);
-        throw error;
+// Function to validate private key PEM format
+function validatePrivateKeyPem(privateKeyPem) {
+    if (!privateKeyPem || typeof privateKeyPem !== 'string') {
+        throw new Error('Private key PEM content must be provided as a string');
     }
+    
+    // Basic validation that it looks like an EC PEM private key
+    if (!privateKeyPem.includes('-----BEGIN EC PRIVATE KEY-----') || 
+        !privateKeyPem.includes('-----END EC PRIVATE KEY-----')) {
+        throw new Error('Invalid private key PEM format. Expected to contain BEGIN and END EC PRIVATE KEY markers.');
+    }
+    
+    return privateKeyPem;
 }
 
 // Function to sign data with private key
@@ -59,6 +64,27 @@ async function signData(privateKeyPem, data) {
     } catch (error) {
         console.error('Error signing data:', error.message);
         throw error;
+    }
+}
+
+// Function to verify signature with public key
+function verifySignature(publicKeyPem, data, signature) {
+    try {
+        // Convert data to Buffer if it's a string
+        const dataBuffer = typeof data === 'string' ? Buffer.from(data, 'utf8') : data;
+
+        // Create verify object
+        const verify = crypto.createVerify('SHA256');
+        verify.update(dataBuffer);
+        verify.end();
+
+        // Verify the signature
+        const isValid = verify.verify(publicKeyPem, signature, 'base64');
+
+        return isValid;
+    } catch (error) {
+        console.error('Error verifying signature:', error.message);
+        return false;
     }
 }
 
@@ -87,35 +113,35 @@ async function processIssuerFile(filePath, privateKeyPem) {
         // Sign the canonical JSON
         const signature = await signData(privateKeyPem, canonicalJson);
 
+        // Verify the signature with the public key
+        const isValid = verifySignature(PUBLIC_SIGNING_KEY, canonicalJson, signature);
+        
+        if (!isValid) {
+            throw new Error('Signature verification failed - the created signature is invalid');
+        }
+
         // Update the original issuer with the new signature
         issuer.signature = signature;
 
         // Write back to file
         fs.writeFileSync(filePath, JSON.stringify(issuer, null, 2) + '\n');
 
-        console.log(`✓ Signed: ${filePath}`);
+        console.log(`✓ Signed and verified: ${filePath}`);
 
     } catch (error) {
         console.error(`Error processing ${filePath}:`, error.message);
+        throw error;
     }
 }
 
 // Main function
-async function signIssuers() {
+async function signIssuers(privateKeyPem) {
     try {
+        // Validate the private key PEM content
+        const validatedPrivateKeyPem = validatePrivateKeyPem(privateKeyPem);
+        console.log('Private key validated successfully');
+
         const projectRoot = path.resolve(__dirname, '..');
-        const privateKeyPath = path.join(projectRoot, 'keys', 'uv_private.pem');
-
-        // Check if private key exists
-        if (!fs.existsSync(privateKeyPath)) {
-            console.error(`Private key not found at: ${privateKeyPath}`);
-            console.error('Please create the private key file first.');
-            process.exit(1);
-        }
-
-        // Load private key
-        const privateKeyPem = loadPrivateKey(privateKeyPath);
-        console.log('Private key loaded successfully');
 
         // Define directories to process
         const directories = [
@@ -134,7 +160,7 @@ async function signIssuers() {
                 totalFiles += jsonFiles.length;
 
                 for (const file of jsonFiles) {
-                    await processIssuerFile(file, privateKeyPem);
+                    await processIssuerFile(file, validatedPrivateKeyPem);
                     processedFiles++;
                 }
             } else {
@@ -152,7 +178,16 @@ async function signIssuers() {
 
 // Run the script if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
-    signIssuers();
+    // Check if private key PEM content is provided as command line argument
+    const privateKeyPem = process.argv[2];
+    
+    if (!privateKeyPem) {
+        console.error('Usage: node sign-issuers.js <private-key-pem-content>');
+        console.error('Please provide the private key PEM content as a command line argument.');
+        process.exit(1);
+    }
+    
+    signIssuers(privateKeyPem);
 }
 
 export { signIssuers };

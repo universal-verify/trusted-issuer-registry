@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { validateSchemaFiles } from './schema-check.js';
+import { validateSignatureFiles } from './signature-check.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -91,12 +92,18 @@ function checkFilesAgainstSchemas() {
     console.log(` ✅ Schema validation passed: ${validFiles} valid files checked.`);
 }
 
+function checkSignatures() {
+    const validFiles = validateSignatureFiles();
+    console.log(` ✅ Signature validation passed: ${validFiles} valid files checked.`);
+}
+
 try {
     checkWorkingDirectory();
     checkBranch();
     await checkPatchVersionDeprecation();
     checkVersionConsistency();
     checkFilesAgainstSchemas();
+    checkSignatures();
 
     console.log('✅ All pre-publish sanity checks passed.');
 } catch (e) {
