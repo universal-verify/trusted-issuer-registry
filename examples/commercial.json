@@ -11,7 +11,6 @@
     "logo": "https://acme.corp/assets/logo.png",
     "description": "Leading provider of digital identity verification solutions."
   },
-  "trust_frameworks": ["uv", "eidas"],
-  "expires_at": 4286822400,
+  "trust_lists": ["uv", "eidas"],
   "signature": "..."
 }

@@ -10,7 +10,6 @@
     "logo": "https://www.un.org/sites/un2.un.org/files/UN-emblem-blue.svg",
     "description": "An international organization founded in 1945 to promote peace and security worldwide."
   },
-  "trust_frameworks": ["uv"],
-  "expires_at": 4286822400,
+  "trust_lists": ["uv"],
   "signature": "..."
 }

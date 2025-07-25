@@ -13,7 +13,6 @@
     "logo": "https://university.example.edu/assets/logo.svg",
     "description": "An accredited research university issuing digital diplomas and transcripts."
   },
-  "trust_frameworks": ["uv"],
-  "expires_at": 4286822400,
+  "trust_lists": ["uv"],
   "signature": "..."
 }

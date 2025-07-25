@@ -10,7 +10,6 @@
     "name": "Miscellaneous Org",
     "description": "Issuer for various specialized credentials."
   },
-  "trust_frameworks": ["uv"],
-  "expires_at": 4286822400,
+  "trust_lists": ["uv"],
   "signature": "..."
 }

@@ -135,6 +135,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-playground/
 .DS_Store
-keys/uv_private.pem

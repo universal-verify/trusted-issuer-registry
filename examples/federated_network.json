@@ -10,7 +10,6 @@
     "logo": "https://federation.example.org/assets/logo.png",
     "description": "A federated network of healthcare providers sharing verified credentials."
   },
-  "trust_frameworks": ["uv"],
-  "expires_at": 4286822400,
+  "trust_lists": ["uv"],
   "signature": "..."
 }
