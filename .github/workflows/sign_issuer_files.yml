@@ -27,26 +27,13 @@ jobs:
         run: |
           node scripts/sign-issuers.js "$PRIVATE_KEY"
 
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Create branch with changes
-        run: |
-          git checkout -b sign-issuer-files-0-0
-          git add .
-          git diff --quiet && echo "No changes detected, skipping commit and PR" && exit 0
-          git commit -m "Run sign-issuers.js to update issuer files"
-          git push origin sign-issuers-files-0-0 --force
-
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Run sign-issuers.js to update issuer files"
           branch: sign-issuers-files-0-0
-          base: ${{ github.ref_name }}
+          delete-branch: true
           title: "Update issuer files via sign-issuers.js"
           body: |
             This PR was created automatically by the GitHub Action that runs `scripts/sign-issuers.js`.
