@@ -1,4 +1,4 @@
-name: Run sign-issuers.js and PR
+name: Sign issuer files
 
 on:
   workflow_dispatch:  # manual trigger
@@ -31,10 +31,10 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Run sign-issuers.js to update issuer files"
+          commit-message: "Update issuer file signatures"
           branch: sign-issuers-files-0-0
           delete-branch: true
-          title: "Update issuer files via sign-issuers.js"
+          title: "Update issuer file signatures"
           body: |
             This PR was created automatically by the GitHub Action that runs `scripts/sign-issuers.js`.
 
