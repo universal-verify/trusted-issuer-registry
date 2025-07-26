@@ -12,20 +12,20 @@ __Trust List Name:__ ...
 ### Initial Assessment
 
 __Public Legitimacy__
-Is the trust list is sponsored or recognized by a governmental, industry-standard, or widely trusted public authority?
+>Is the trust list is sponsored or recognized by a governmental, industry-standard, or widely trusted public authority?
 
 __Completeness__
-Is the trust list available publicly in a machine-readable format and contains all necessary information to verify digital credentials against their listed issuers?
+>Is the trust list available publicly in a machine-readable format and contains all necessary information to verify digital credentials against their listed issuers?
 
 __Organizational Accountability__
-Does the governing body of the trust list have a clear ownership structure and a published point of contact for trust policy inquiries.
+>Does the governing body of the trust list have a clear ownership structure and a published point of contact for trust policy inquiries.
 
 __Availability and Stability__
-Is the trust list accessible by a reliable endpoint, with reasonable uptime guarantees and long-term maintenance commitments.
+>Is the trust list accessible by a reliable endpoint, with reasonable uptime guarantees and long-term maintenance commitments.
 
 ### Documentation Review
 
-Please note any important information regarding the governance model of the trust list and how their information is sourced and validated.
+>Please note any important information regarding the governance model of the trust list and how their information is sourced and validated.
 
 ### Community Discussion
 
