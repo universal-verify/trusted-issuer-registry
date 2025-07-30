@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:Gjv4xc68io-nxd-htquQiI5OM9w",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "PR",
+    "government_level": "state",
+    "official_name": "PR Department of Transportation and Public Works"
+  },
+  "display": {
+    "name": "PR Department of Transportation and Public Works"
+  },
+  "certificates": [
+    {
+      "certificate": "-----BEGIN CERTIFICATE-----\nMIIDIDCCAsagAwIBAgIQG9W2OpTXyQJ0PrtCwfrFKDAKBggqhkjOPQQDAjCBiDEL\nMAkGA1UEBhMCVVMxOTA3BgNVBAoMMFBSIERlcGFydG1lbnQgb2YgVHJhbnNwb3J0\nYXRpb24gYW5kIFB1YmxpYyBXb3JrczEOMAwGA1UECAwFVVMtUFIxGzAZBgNVBAMM\nElBSRFRPUC1NREwtUFJPRC1DQTERMA8GA1UEBwwIU2FuIEp1YW4wHhcNMjQwNjAz\nMjAxMTM4WhcNMjkwNjAzMjExMTM4WjCBiDELMAkGA1UEBhMCVVMxOTA3BgNVBAoM\nMFBSIERlcGFydG1lbnQgb2YgVHJhbnNwb3J0YXRpb24gYW5kIFB1YmxpYyBXb3Jr\nczEOMAwGA1UECAwFVVMtUFIxGzAZBgNVBAMMElBSRFRPUC1NREwtUFJPRC1DQTER\nMA8GA1UEBwwIU2FuIEp1YW4wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATP6mVx\n4VpNQqr4b4bKe/D7EZqaUouYe2vyca/g/GblDp4HaR2TbEFxYBolDNfBFmCum1Dc\n2a58A/ZAppPJcu/7o4IBDjCCAQowEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4E\nFgQUGjv4xc68io+nxd+htquQiI5OM9wwDwYDVR0PAQH/BAUDAwcGADAvBgNVHRIE\nKDAmgQ9tZGxAZHRvcC5wci5nb3aGE2h0dHBzOi8vbWRsLnByLmdvdi8wcgYDVR0f\nBGswaTBnoGWgY4ZhaHR0cDovL21kbC1pYWNhLWNvbHdyLnMzLnVzLWdvdi1lYXN0\nLTEuYW1hem9uYXdzLmNvbS9jcmwvMDI4ZTFkYjAtNjFhZC00Yzg3LTg1OTItYTQ1\nMTQ0ZDU4Mzk4LmNybDAfBgNVHSMEGDAWgBQaO/jFzryKj6fF36G2q5CIjk4z3DAK\nBggqhkjOPQQDAgNIADBFAiEA3zWqrvBJJAtiowJaHMGczNu0t2nIxe7FFatBcQW5\nmGkCIGN4OCs8VZTY0/cgc+GWG8xfeW9lXwR68Sef9L5XYEva\n-----END CERTIFICATE-----",
+      "certificate_format": "pem",
+      "trust_lists": [
+        "uv"
+      ]
+    }
+  ]
+}

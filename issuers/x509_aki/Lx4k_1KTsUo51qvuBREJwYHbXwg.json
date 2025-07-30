@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:Lx4k_1KTsUo51qvuBREJwYHbXwg",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "OH",
+    "government_level": "state",
+    "official_name": "Ohio Department of Public Safety"
+  },
+  "display": {
+    "name": "Ohio Department of Public Safety"
+  },
+  "certificates": [
+    {
+      "certificate": "-----BEGIN CERTIFICATE-----\nMIIC1zCCAn2gAwIBAgIRANaPmlNgk2S+WiJCeTF1zhowCgYIKoZIzj0EAwIwgYkx\nCzAJBgNVBAYTAlVTMSkwJwYDVQQKDCBPaGlvIERlcGFydG1lbnQgb2YgUHVibGlj\nIFNhZmV0eTELMAkGA1UECwwCSVQxDjAMBgNVBAgMBVVTLU9IMR8wHQYDVQQDDBZP\naGlvIG1ETCBSb290IENBIEdlbiAxMREwDwYDVQQHDAhDb2x1bWJ1czAeFw0yNDAz\nMjExNTE0NDhaFw0zNDAzMTkxNjE0NDhaMIGJMQswCQYDVQQGEwJVUzEpMCcGA1UE\nCgwgT2hpbyBEZXBhcnRtZW50IG9mIFB1YmxpYyBTYWZldHkxCzAJBgNVBAsMAklU\nMQ4wDAYDVQQIDAVVUy1PSDEfMB0GA1UEAwwWT2hpbyBtREwgUm9vdCBDQSBHZW4g\nMTERMA8GA1UEBwwIQ29sdW1idXMwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARe\nxt/Ni9E/fWdcjHrhzlWbqkwKFHRw5CTPqQMiXMD+80E4EOiR92x542DOrbfKNKFb\nJt0QLUm4ZuSH9oz2iF8No4HDMIHAMBIGA1UdEwEB/wQIMAYBAf8CAQAwHQYDVR0O\nBBYEFC8eJP9Sk7FKOdar7gURCcGB218IMA8GA1UdDwEB/wQFAwMHBgAwHwYDVR0S\nBBgwFoEUTURMSUFDQUBkcHMub2hpby5nb3YwWQYDVR0fBFIwUDBOoEygSoZIaHR0\ncHM6Ly9tZGxjcmwuZHBzLm9oaW8uZ292L2NybC81ZmNiZmZmMi03YWMwLTQ4YzAt\nYWM5Ni1mZjI3NzVlZDJiNDQuY3JsMAoGCCqGSM49BAMCA0gAMEUCIC9zOsELjdul\nT21W0YSpE8jm4ec1r4wM0nonxXVkMKceAiEAszOHaGlCDE0zmugt/AMrHKqd0OlJ\nVlY708JBLhMGBwA=\n-----END CERTIFICATE-----",
+      "certificate_format": "pem",
+      "trust_lists": [
+        "uv"
+      ]
+    }
+  ]
+}

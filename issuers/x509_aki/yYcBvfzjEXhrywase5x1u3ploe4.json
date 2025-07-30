@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:yYcBvfzjEXhrywase5x1u3ploe4",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "NM",
+    "government_level": "state",
+    "official_name": "New Mexico Taxation and Revenue Department"
+  },
+  "display": {
+    "name": "New Mexico Taxation and Revenue Department"
+  },
+  "certificates": [
+    {
+      "certificate": "-----BEGIN CERTIFICATE-----\nMIIDazCCAxCgAwIBAgIUAL6HcNnhfBgU3axITbtnZchElWkwCgYIKoZIzj0EAwIw\ngcExDjAMBgNVBAgTBVVTLU5NMQswCQYDVQQGEwJVUzERMA8GA1UEBxMIU2FudGEg\nRmUxMzAxBgNVBAoTKk5ldyBNZXhpY28gVGF4YXRpb24gYW5kIFJldmVudWUgRGVw\nYXJ0bWVudDEqMCgGA1UECxMhTmV3IE1leGljbyBNb3RvciBWZWhpY2xlIERpdmlz\naW9uMS4wLAYDVQQDEyVOZXcgTWV4aWNvIFJvb3QgQ2VydGlmaWNhdGUgQXV0aG9y\naXR5MB4XDTI0MDcyNjA2MDAwMFoXDTI5MDcyNjA2MDAwMFowgcExDjAMBgNVBAgT\nBVVTLU5NMQswCQYDVQQGEwJVUzERMA8GA1UEBxMIU2FudGEgRmUxMzAxBgNVBAoT\nKk5ldyBNZXhpY28gVGF4YXRpb24gYW5kIFJldmVudWUgRGVwYXJ0bWVudDEqMCgG\nA1UECxMhTmV3IE1leGljbyBNb3RvciBWZWhpY2xlIERpdmlzaW9uMS4wLAYDVQQD\nEyVOZXcgTWV4aWNvIFJvb3QgQ2VydGlmaWNhdGUgQXV0aG9yaXR5MFkwEwYHKoZI\nzj0CAQYIKoZIzj0DAQcDQgAE4XmFaUvOxY1VPg9tUXmlMnkmR1XDLV0DFISZuO7r\nc0ibUtlTqQtm383ylWY7yDBJRZFbdRInUWwPXR1WPpFKs6OB4zCB4DAOBgNVHQ8B\nAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUyYcBvfzjEXhrywas\ne5x1u3ploe4wKQYDVR0SBCIwIIYeaHR0cHM6Ly93d3cubXZkLm5ld21leGljby5n\nb3YvMGEGA1UdHwRaMFgwVqBUoFKGUGh0dHBzOi8vc2VydmljZXMubXZkLm5ld21l\neGljby5nb3Yvc2VydmljZXMvZXh0ZXJuYWwvY3JsL2dldExpc3QvcmV2b2NhdGlv\nbnMuY3JsMBAGCSsGAQQBg8UhAQQDTlNQMAoGCCqGSM49BAMCA0kAMEYCIQCZ8a0r\nHAhopm7QruSPkrKIh8/bwyVOOtD6ogvFIXMh+AIhAIVj3b+tGjG2zIPrj7Z5doxl\nbbFqmO73V8wIs1rlFxkS\n-----END CERTIFICATE-----",
+      "certificate_format": "pem",
+      "trust_lists": [
+        "uv"
+      ]
+    }
+  ]
+}

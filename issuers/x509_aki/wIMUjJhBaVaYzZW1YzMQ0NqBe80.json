@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:wIMUjJhBaVaYzZW1YzMQ0NqBe80",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "HI",
+    "government_level": "state",
+    "official_name": "Department of Transportation"
+  },
+  "display": {
+    "name": "Department of Transportation"
+  },
+  "certificates": [
+    {
+      "certificate": "-----BEGIN CERTIFICATE-----\nMIIC3DCCAoKgAwIBAgIQO0MRI6jbr3YzWm0a/hWz7zAKBggqhkjOPQQDAjCBiDEL\nMAkGA1UEBhMCVVMxJTAjBgNVBAoMHERlcGFydG1lbnQgb2YgVHJhbnNwb3J0YXRp\nb24xGDAWBgNVBAsMD1N0YXRlIG9mIEhhd2FpaTEOMAwGA1UECAwFVVMtSEkxFTAT\nBgNVBAMMDEhJX0lBQ0FfUHJvZDERMA8GA1UEBwwISG9ub2x1bHUwHhcNMjQwNjA1\nMjEzNzI0WhcNMzQwNjAzMjIzNzI0WjCBiDELMAkGA1UEBhMCVVMxJTAjBgNVBAoM\nHERlcGFydG1lbnQgb2YgVHJhbnNwb3J0YXRpb24xGDAWBgNVBAsMD1N0YXRlIG9m\nIEhhd2FpaTEOMAwGA1UECAwFVVMtSEkxFTATBgNVBAMMDEhJX0lBQ0FfUHJvZDER\nMA8GA1UEBwwISG9ub2x1bHUwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARCcrrc\n8mVy8VHxjpV8ZfO8alQwpFRCT8kazy5f/iPEQPSsqc0pj6LdbLQdqXEaokUDKwcx\nfpdN0uaDk5MGWTFZo4HLMIHIMBIGA1UdEwEB/wQIMAYBAf8CAQAwHQYDVR0OBBYE\nFMCDFIyYQWlWmM2VtWMzENDagXvNMA4GA1UdDwEB/wQEAwIBBjAfBgNVHRIEGDAW\nhhRodHRwczovL21kbC5obmwuaW5mbzBiBgNVHR8EWzBZMFegVaBThlFodHRwOi8v\nZDE3NWdjZzB6YzI4dGkuY2xvdWRmcm9udC5uZXQvY3JsLzlkNTE3MmZmLWZhMDYt\nNDJiMy04Zjc0LTI2OTM4ZjdkYWI0Yy5jcmwwCgYIKoZIzj0EAwIDSAAwRQIhAOrQ\ne8YV+0FSVI8EoNZeQklQvzql0UfTs2/+VxB4DnJdAiAuhccsfdM5gsysRhtdTuSL\n+G1QKJa/XMMZxJFWh/ozjg==\n-----END CERTIFICATE-----",
+      "certificate_format": "pem",
+      "trust_lists": [
+        "uv"
+      ]
+    }
+  ]
+}

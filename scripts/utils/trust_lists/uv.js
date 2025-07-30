@@ -64,7 +64,7 @@ function addCert(obj, certInfo) {
             "entity_metadata": {
                 "country": certInfo.subject.country || "",
                 "region": (region) ? region : undefined,
-                "government_level": (region) ? "state" : "country",
+                "government_level": (region) ? "state" : "national",
                 "official_name": certInfo.subject.organization || certInfo.subject.commonName || ""
             },
             "display": {
