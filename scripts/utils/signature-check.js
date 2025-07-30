@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import stringify from 'canonical-json';
 import crypto from 'crypto';
-import { PUBLIC_SIGNING_KEY } from './constants.js';
+import { PUBLIC_SIGNING_KEY } from '../constants.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -92,7 +92,7 @@ function validateIssuerSignature(filePath) {
 
 // Main function to validate all issuer signatures
 function validateSignatureFiles() {
-    const projectRoot = path.resolve(__dirname, '..');
+    const projectRoot = path.resolve(__dirname, '../..');
     
     // Define directories to check
     const directories = [

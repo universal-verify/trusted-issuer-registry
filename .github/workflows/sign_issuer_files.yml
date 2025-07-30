@@ -25,7 +25,7 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY_0_0 }}
         run: |
-          node scripts/sign-issuers.js "$PRIVATE_KEY"
+          npm run sign-issuers -- "$PRIVATE_KEY"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
@@ -36,5 +36,5 @@ jobs:
           delete-branch: true
           title: "Update issuer file signatures"
           body: |
-            This PR was created automatically by the GitHub Action that runs `scripts/sign-issuers.js`.
+            This PR was created automatically by the GitHub Action that runs `scripts/utils/sign-issuers.js`.
 

@@ -95,7 +95,7 @@ async function addDeprecation() {
         };
 
         // Write to file
-        const projectRoot = path.resolve(__dirname, '..');
+        const projectRoot = path.resolve(__dirname, '../..');
         const deprecationPath = path.join(projectRoot, 'deprecation_notice.json');
 
         fs.writeFileSync(deprecationPath, JSON.stringify(deprecation, null, 2) + '\n');

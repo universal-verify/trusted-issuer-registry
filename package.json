@@ -12,10 +12,10 @@
     "lint": "eslint ./scripts --ext .js",
     "lint-fix": "eslint ./scripts --ext .js --fix",
     "test": "node --test",
-    "sign-issuers": "node scripts/sign-issuers.js",
-    "deprecate": "node scripts/add-deprecation-notice.js",
-    "validate-json": "node scripts/schema-check.js",
-    "prepublishOnly": "node scripts/publish-sanity-checks.js"
+    "deprecate": "node scripts/utils/add-deprecation-notice.js",
+    "sign-issuers": "node scripts/utils/sign-issuers.js",
+    "validate-json": "node scripts/utils/schema-check.js",
+    "prepublishOnly": "node scripts/utils/publish-sanity-checks.js"
   },
   "keywords": [
     "digital-credentials",

@@ -32,7 +32,7 @@ function findJsonFiles(dir) {
 
 // Main schema validation function
 function validateSchemaFiles() {
-    const projectRoot = path.resolve(__dirname, '..');
+    const projectRoot = path.resolve(__dirname, '../..');
     const schemaPath = path.join(projectRoot, 'trusted-issuer.schema.json');
 
     // Check if schema exists

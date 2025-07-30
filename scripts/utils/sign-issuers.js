@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import stringify from 'canonical-json';
 import crypto from 'crypto';
-import { PUBLIC_SIGNING_KEY } from './constants.js';
+import { PUBLIC_SIGNING_KEY } from '../constants.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -141,7 +141,7 @@ async function signIssuers(privateKeyPem) {
         const validatedPrivateKeyPem = validatePrivateKeyPem(privateKeyPem);
         console.log('Private key validated successfully');
 
-        const projectRoot = path.resolve(__dirname, '..');
+        const projectRoot = path.resolve(__dirname, '../..');
 
         // Define directories to process
         const directories = [
