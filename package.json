@@ -14,6 +14,7 @@
     "test": "node --test",
     "deprecate": "node scripts/utils/add-deprecation-notice.js",
     "sign-issuers": "node scripts/utils/sign-issuers.js",
+    "update-issuers": "node scripts/utils/update-issuers.js",
     "validate-json": "node scripts/utils/schema-check.js",
     "prepublishOnly": "node scripts/utils/publish-sanity-checks.js"
   },
