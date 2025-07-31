@@ -1,4 +1,5 @@
 import fetchFromUV from './trust_lists/uv.js';
+import fetchFromAAMVA from './trust_lists/aamva_dts.js';
 
 /**
  * Main function that orchestrates fetching from different sources
@@ -12,7 +13,7 @@ async function updateIssuers() {
         await fetchFromUV(allIssuers);
         
         // Fetch from AAMVA (placeholder)
-        //await fetchFromAAMVA(allIssuers);
+        await fetchFromAAMVA(allIssuers);
         
         console.log(`Total issuers collected from sources: ${Object.keys(allIssuers).length}`);
         

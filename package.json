@@ -39,6 +39,7 @@
   "dependencies": {
     "asn1js": "^3.0.6",
     "canonical-json": "^0.2.0",
+    "cbor2": "^2.0.1",
     "pkijs": "^3.2.5"
   },
   "devDependencies": {

@@ -1,52 +1,52 @@
 import getCertInfo from "../extract-pem-info.js";
+import * as cbor2 from 'cbor2';
 
 /**
  * Fetches issuer data from Universal Verify trust list
  * @returns {Promise<Object>} Object with AKI as keys and certificate info as values
  */
-export default async function fetchFromUV(obj = {}) {
+export default async function fetchFromAAMVA(obj = {}) {
     try {
-        console.log('Fetching issuer data from Universal Verify trust list...');
+        console.log('Fetching issuer data from AAMVA DTS trust list...');
         
-        const response = await fetch('https://cdn.jsdelivr.net/npm/@universal-verify/trust-list@0.0/trust-list.json');
+        const response = await fetch('https://vical.dts.aamva.org/vical/vc');
+        if (!response.ok) throw new Error(`Failed to fetch AAMVA DTS VICAL: ${response.status} ${response.statusText}`);
         
-        if (!response.ok) throw new Error(`Failed to fetch trust list: ${response.status} ${response.statusText}`);
-        
-        const trustList = await response.json();
-        
-        if (!Array.isArray(trustList)) throw new Error('Trust list is not an array');
-        
+        const cbor = await response.arrayBuffer();
+        if (!cbor) throw new Error('AAMVA DTS VICAL is empty');
+        const uint8Array = new Uint8Array(cbor);
+        const decoded = cbor2.decode(uint8Array);
+
+        const [protectedHeader, unprotectedHeader, payload, signature] = decoded;
+
+        //console.log('protectedHeader', protectedHeader);
+        //console.log('unprotectedHeader', unprotectedHeader);
+        //console.log('payload', payload);
+        //console.log('signature', signature);
+
+        const payloadDecoded = cbor2.decode(payload);
+        //console.log('payloadDecoded', payloadDecoded);
+
         let count = 0;
         let missingCRLCount = 0;
-        
-        for (const issuer of trustList) {
-            // Extract AKI from issuer_id (format: "x509_aki:AKI_VALUE")
-            const akiMatch = issuer.issuer_id?.match(/^x509_aki:(.+)$/);
-            if (!akiMatch) {
-                console.warn(`Skipping issuer with invalid issuer_id format: ${issuer.issuer_id}`);
-                continue;
-            }
-            
-            if (issuer.certificates && issuer.certificates.length > 0) {
-                for(const cert of issuer.certificates) {
-                    const certInfo = getCertInfo(cert.certificate);
-                    if(certInfo.crlMissing) {
-                        missingCRLCount++;
-                    } else {
-                        addCert(obj, certInfo);
-                        count++;
-                    }
-                }
+
+        for(const certificateInfo of payloadDecoded.certificateInfos) {
+            let certContent = Buffer.from(certificateInfo.certificate).toString('base64').match(/.{1,64}/g).join('\n');
+            let certInfo = getCertInfo(`-----BEGIN CERTIFICATE-----\n${certContent}\n-----END CERTIFICATE-----`);
+            //console.log('certInfo', certInfo);
+            if(certInfo.crlMissing) {
+                missingCRLCount++;
             } else {
-                console.warn(`Skipping issuer ${issuer.issuer_id} - no certificates array`);
+                addCert(obj, certInfo);
+                count++;
             }
         }
-        
+
         if(missingCRLCount > 0) console.warn(`${missingCRLCount} certificate(s) have missing CRLs`);
-        console.log(`Successfully ingested ${count} certificate(s) from UV trust list`);
+        console.log(`Successfully ingested ${count} certificate(s) from AAMVA DTS trust list`);
         return obj;
     } catch (error) {
-        console.error('Error fetching from Universal Verify:', error.message);
+        console.error('Error fetching from AAMVA DTS:', error.message);
         throw error;
     }
 }
@@ -70,14 +70,14 @@ function addCert(obj, certInfo) {
             "certificates": [{
                 "certificate": certInfo.pemContent,
                 "certificate_format": "pem",
-                "trust_lists": ["uv"]
+                "trust_lists": ["aamva_dts"]
             }]
         };
     } else {
         for(const cert of obj[certInfo.aki].certificates) {
             if(cert.certificate === certInfo.pemContent) {
-                if(!cert.trust_lists.includes("uv")) {
-                    cert.trust_lists.push("uv");
+                if(!cert.trust_lists.includes("aamva_dts")) {
+                    cert.trust_lists.push("aamva_dts");
                 }
                 return;
             }
@@ -85,14 +85,14 @@ function addCert(obj, certInfo) {
         obj[certInfo.aki].certificates.push({
             "certificate": certInfo.pemContent,
             "certificate_format": "pem",
-            "trust_lists": ["uv"]
+            "trust_lists": ["aamva_dts"]
         });
     }
 }
 
 // Run the script if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
-    fetchFromUV()
+    fetchFromAAMVA()
         .then(obj => {
             console.log(obj);
         })
