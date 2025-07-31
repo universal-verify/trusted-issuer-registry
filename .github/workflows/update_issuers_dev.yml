@@ -1,0 +1,48 @@
+name: Daily Issuers Update - Dev
+on:
+  schedule:
+    - cron: 0 9 * * *
+
+jobs:
+  run-script-and-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed to create PR branches properly
+          ref: dev  # checkout the dev branch
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '23'  # specify your Node version here
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run update-issuers script
+        run: npm run update-issuers
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Update issuers"
+          branch: update-issuers-daily-dev
+          delete-branch: true
+          title: "Daily issuers update"
+          body: |
+            This PR was created automatically by the GitHub Action that runs `npm run update-issuers`.
+          base: dev
