@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:nG_8jgGkyjyKsmmZHwRklS8YxNQ",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "AK",
+    "government_level": "state",
+    "official_name": "Alaska DMV"
+  },
+  "display": {
+    "name": "Alaska DMV"
+  },
+  "certificates": [
+    {
+      "certificate": "-----BEGIN CERTIFICATE-----\nMIIDcDCCAvagAwIBAgIUX9Ek9pKNP/yYUYu9pf6pyxFM2M4wCgYIKoZIzj0EAwMw\nSTEYMBYGA1UEAwwPQWxhc2thIERNViBJQUNBMRMwEQYDVQQKDApBbGFza2EgRE1W\nMQswCQYDVQQIDAJBSzELMAkGA1UEBhMCVVMwHhcNMjUwMjEyMjMyMjM4WhcNMzUw\nMjEwMjMyMjM3WjBJMRgwFgYDVQQDDA9BbGFza2EgRE1WIElBQ0ExEzARBgNVBAoM\nCkFsYXNrYSBETVYxCzAJBgNVBAgMAkFLMQswCQYDVQQGEwJVUzB2MBAGByqGSM49\nAgEGBSuBBAAiA2IABDMUuKt2Met/TjeB0klqsmfJyBiyc6liSk8s/R2FSwWJT10A\nzaWq3t77Fzl5xrUJfXrZOgmAad+R79nfCDKEw9nOUDyPxwnK+x1Tf56IyV9HEV9S\n5OweERm+HnOLqcYblqOCAZ0wggGZMBIGA1UdEwEB/wQIMAYBAf8CAQAwHwYDVR0j\nBBgwFoAUnG/8jgGkyjyKsmmZHwRklS8YxNQwMQYDVR0SBCowKIEmdXMuZGlzLm5v\ncmFtLml0LmFkbWluc0B0aGFsZXNncm91cC5jb20wMQYDVR0RBCowKIEmdXMuZGlz\nLm5vcmFtLml0LmFkbWluc0B0aGFsZXNncm91cC5jb20wgbAGA1UdHwSBqDCBpTCB\noqCBn6CBnIaBmWh0dHA6Ly9pc3N1aW5nLmFrbWRsLnVzLmFwcC5hei5rZXlmYWN0\nb3JzYWFzLmNvbS9lamJjYS9wdWJsaWN3ZWIvd2ViZGlzdC9jZXJ0ZGlzdD9jbWQ9\nY3JsJmlzc3Vlcj1DTiUzREFsYXNrYStETVYrSUFDQSUyQ08lM0RBbGFza2ErRE1W\nJTJDU1QlM0RBSyUyQ0MlM0RVUzAdBgNVHQ4EFgQUnG/8jgGkyjyKsmmZHwRklS8Y\nxNQwGgYDVR0QBBMwEYEPMjAzMzAyMTAyMzIyMzhaMA4GA1UdDwEB/wQEAwIBBjAK\nBggqhkjOPQQDAwNoADBlAjBo/GoIeq0E6ZJAxUtMfyj3IYsXu9Aucg28yTfDAR0J\n8sqH18j3H9YThID1rFWT3+ECMQDlUAUD4AOg8BdCV9MJoBEMQXXPwa/NxLpRSrps\nhflgNiPYiTEagDl2oH5AglotZmU=\n-----END CERTIFICATE-----",
+      "certificate_format": "pem",
+      "trust_lists": [
+        "aamva_dts"
+      ]
+    }
+  ]
+}

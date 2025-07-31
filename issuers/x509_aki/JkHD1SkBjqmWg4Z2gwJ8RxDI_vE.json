@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:JkHD1SkBjqmWg4Z2gwJ8RxDI_vE",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "AZ",
+    "government_level": "state",
+    "official_name": "Arizona Department of Transportation"
+  },
+  "display": {
+    "name": "Arizona Department of Transportation"
+  },
+  "certificates": [
+    {
+      "certificate": "-----BEGIN CERTIFICATE-----\nMIIDBzCCAqygAwIBAgIUO/uWVmabBSV9o4SeYj6ioDz+HSYwCgYIKoZIzj0EAwIw\nfzESMBAGA1UEAwwJTVZNUHJvZENBMS0wKwYDVQQKDCRBcml6b25hIERlcGFydG1l\nbnQgb2YgVHJhbnNwb3J0YXRpb24xCzAJBgNVBAsMAklUMQswCQYDVQQGEwJVUzEO\nMAwGA1UECAwFVVMtQVoxEDAOBgNVBAcMB1Bob2VuaXgwHhcNMjQwODE2MTc0MDE5\nWhcNMzQwODE2MTc0MDE5WjB/MRIwEAYDVQQDDAlNVk1Qcm9kQ0ExLTArBgNVBAoM\nJEFyaXpvbmEgRGVwYXJ0bWVudCBvZiBUcmFuc3BvcnRhdGlvbjELMAkGA1UECwwC\nSVQxCzAJBgNVBAYTAlVTMQ4wDAYDVQQIDAVVUy1BWjEQMA4GA1UEBwwHUGhvZW5p\neDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABFJpz6RkzZWqyVQ8CemsHjvLKY5J\nnInhby/1RHU6EErW04tvKjUSOpidfc1xcYG1pzJeCDGQPsju/LJue0vEKQKjggEE\nMIIBADAdBgNVHQ4EFgQUJkHD1SkBjqmWg4Z2gwJ8RxDI/vEwHwYDVR0jBBgwFoAU\nJkHD1SkBjqmWg4Z2gwJ8RxDI/vEwEgYDVR0TAQH/BAgwBgEB/wIBADAOBgNVHQ8B\nAf8EBAMCAQYwLAYDVR0SBCUwI4YhaHR0cHM6Ly9hemRvdC5nb3YvbXZkL2NvbnRh\nY3QtbXZkMGwGA1UdHwRlMGMwYaBfoF2GW2h0dHBzOi8vbXZtcHVibGljLmJsb2Iu\nY29yZS51c2dvdmNsb3VkYXBpLm5ldC9jZXJ0aWZpY2F0ZS1yZXZvY2F0aW9uLWxp\nc3QvTVZNUHJvZENBLmNybC5wZW0wCgYIKoZIzj0EAwIDSQAwRgIhAI1/E8XQ/v4S\nQ92sPRivZLWK9hUYz3ZCdMBvMqQX322JAiEA8Nta7T9167ux1weIgBy+66L7G5ji\nmCxjO1ECnai4Kl8=\n-----END CERTIFICATE-----",
+      "certificate_format": "pem",
+      "trust_lists": [
+        "aamva_dts"
+      ]
+    }
+  ]
+}
