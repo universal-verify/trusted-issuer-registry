@@ -6,8 +6,8 @@ A comprehensive registry of digital credential issuers sourced from authoritativ
 
 The Trusted Issuer Registry aggregates and validates issuer information from multiple authoritative trust lists, including:
 
-- **AAMVA DTS (Digital Trust Service)** - American Association of Motor Vehicle Administrators' trusted issuers
-- **UV (Universal Verify)** - Apple's recommended issuers for digital credential verification
+- **[AAMVA DTS](https://www.aamva.org/identity/mobile-driver-license-digital-trust-service)** - American Association of Motor Vehicle Administrators' Digital Trust Service
+- **[UV](https://github.com/universal-verify/trust-list)** - Universal Verify's compilation of Apple recommended issuers for digital credential verification
 
 All issuer data is cryptographically signed to ensure integrity and authenticity, providing a reliable foundation for digital credential verification systems.
 
