@@ -31,7 +31,18 @@ Patch releases are for issuer updates and bug fixes within the same minor versio
    - Update the version in `package.json`
    - Example: `"version": "0.0.7"`
 
-4. **Publish**
+4. **Update build files**
+   ```bash
+   npm run build
+   ```
+
+6. **Commit changes**
+   ```bash
+   git add ./
+   git commit 0.0.7
+   ```
+
+7. **Publish**
    ```bash
    npm publish
    ```
@@ -59,10 +70,10 @@ openssl ec -in gh_private_key.pem -pubout -out public_signing_key.pem
 
 #### 2. Add Private Key to Repository Secrets
 
-1. Go to GitHub repository → Settings → Secrets and variables → Actions
-2. Add new repository secret with name `PRIVATE_KEY_{major}_{minor}` (e.g., `PRIVATE_KEY_0_1`)
-3. Paste the private key content from `~/gh_private_key.pem`
-4. Delete the private key with `rm ~/gh_private_key.pem`
+- Go to GitHub repository → Settings → Secrets and variables → Actions
+- Add new repository secret with name `PRIVATE_KEY_{major}_{minor}` (e.g., `PRIVATE_KEY_0_1`)
+- Paste the private key content from `~/gh_private_key.pem`
+- Delete the private key with `rm ~/gh_private_key.pem`
 
 #### 3. Create Release Branch for Old Minor Version
 
@@ -97,37 +108,47 @@ git checkout dev
 # Replace the public signing key file
 mv ~/public_signing_key.pem public_signing_key.pem
 
+# Replace value of PUBLIC_SIGNING_KEY in `./scripts/constants.js` with
+# content of new public_signing_key.pem
+vim scripts/constants.js
+
 # Merge/commit schema changes and breaking updates
 git add .
 git commit -m "Breaking changes for upcoming version {major}.{minor}"
 ```
 
-#### 7. Update Version and Constants
+#### 7. Update Version and Workflow files
 
-1. **Update package.json version** (e.g., `"version": "0.1.0"`)
-2. **Update minor version in constants.js**:
-   ```javascript
-   export const MINOR_VERSION = '0.1';
-   ```
+- **Update package.json version** (e.g., `"version": "0.1.0"`)
+- **Update minor version in constants.js**:
+  ```javascript
+  export const MINOR_VERSION = '0.1';
+  ```
+- **Update build files**
+  ```bash
+  npm run build
+  ```
+- **Update to new major-minor version in sign_issuer_files.yml**:
+  - `PRIVATE_KEY_{major}_{minor}`
+  - `sign-issuers-files-{major}-{minor}`
+- **Create new workflow for old version** (stay in dev branch!):
+  ```bash
+  # Copy the dev workflow for the old minor version, not the new one!
+  cp .github/workflows/update_issuers_dev.yml .github/workflows/update_issuers_{old_major}_{old_minor}.yml
+  ```
 
-#### 8. Update GitHub Workflows
+  Edit `.github/workflows/update_issuers_{old_major}_{old_minor}.yml`:
+  - Change the last part of the title from "Dev" to "{old_major}.{old_minor}
+  - Change `ref: dev` to `ref: release/{old_major}.{old_minor}`
+  - Change `base: dev` to `base: release/{old_major}.{old_minor}`
+- **Commit changes**
+  ```bash
+  git add ./
+  git commit -m "0.1"
+  git push
+  ```
 
-1. **Update to new major-minor version in sign_issuer_files.yml**:
-   - `PRIVATE_KEY_{major}_{minor}`
-   - `sign-issuers-files-{major}-{minor}`
-
-2. **Create new workflow for old version** (stay in dev branch!):
-   ```bash
-   # Copy the dev workflow for the old minor version, not the new one!
-   cp .github/workflows/update_issuers_dev.yml .github/workflows/update_issuers_{old_major}_{old_minor}.yml
-   ```
-
-   Edit `.github/workflows/update_issuers_{old_major}_{old_minor}.yml`:
-   - Change the last part of the title from "Dev" to "{old_major}.{old_minor}
-   - Change `ref: dev` to `ref: release/{old_major}.{old_minor}`
-   - Change `base: dev` to `base: release/{old_major}.{old_minor}`
-
-#### 9. Create Issue for Workflow Cleanup
+#### 8. Create Issue for Workflow Cleanup
 
 Create a GitHub issue to delete the old workflow file once the end-of-life date is reached:
 
@@ -141,29 +162,21 @@ End-of-life date: [DATE]
 Workflow file: `.github/workflows/update_issuers_#_#.yml`
 ```
 
-#### 10. Push Changes and Sign Files
+#### 9. Sign Files and Publish New Minor Version
 
-```bash
-# Push all changes
-git push origin dev
+- Manually trigger "Sign issuer files" workflow on dev branch (wait for PR to be created and merge it)
+- Publish to npm
+  ```bash
+  # Pull latest changes
+  git pull origin dev
 
-# Manually trigger "Sign issuer files" workflow on dev branch
-# Wait for PR to be created and merge it
-```
-
-#### 11. Publish New Minor Version
-
-```bash
-# Pull latest changes
-git pull origin dev
-
-# Publish the new minor version
-npm publish
-```
+  # Publish the new minor version
+  npm publish
+  ```
 
 ## Deprecation Lifecycle
 
 ### Timeline
 
-1. **Day 0**: New minor version released and deprecation notice created for old version
-2. **Day 90**: Old version reaches end-of-life and old version workflow is deleted
+- **Day 0**: New minor version released and deprecation notice created for old version
+- **Day 90**: Old version reaches end-of-life and old version workflow is deleted
