@@ -77,10 +77,10 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["uv", "aamva_dts_vical"]
+        "enum": ["uv", "aamva_dts"]
       },
       "uniqueItems": true,
-      "description": "The trust lists under which this issuer is recognized (e.g., uv, aamva_dts_vical)"
+      "description": "The trust lists under which this issuer is recognized (e.g., uv, aamva_dts)"
     },
     "certificates": {
       "type": "array",
@@ -101,10 +101,10 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": ["uv", "aamva_dts_vical"]
+              "enum": ["uv", "aamva_dts"]
             },
             "uniqueItems": true,
-            "description": "The trust lists under which this certificate is recognized (e.g., uv, aamva_dts_vical)"
+            "description": "The trust lists under which this certificate is recognized (e.g., uv, aamva_dts)"
           }
         },
         "additionalProperties": false
