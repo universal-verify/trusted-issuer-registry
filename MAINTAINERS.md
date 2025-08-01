@@ -123,6 +123,7 @@ git commit -m "Breaking changes for upcoming version {major}.{minor}"
    ```
 
    Edit `.github/workflows/update_issuers_{old_major}_{old_minor}.yml`:
+   - Change the last part of the title from "Dev" to "{old_major}.{old_minor}
    - Change `ref: dev` to `ref: release/{old_major}.{old_minor}`
    - Change `base: dev` to `base: release/{old_major}.{old_minor}`
 
