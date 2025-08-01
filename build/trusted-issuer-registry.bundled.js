@@ -1,7 +1,7 @@
 const MINOR_VERSION = '0.0';
 const REGISTRY_URL_BASE = `https://cdn.jsdelivr.net/npm/trusted-issuer-registry@${MINOR_VERSION}`;
 const TEST_REGISTRY_URL_BASE = `${REGISTRY_URL_BASE}/test`;
-const ROOT_CA_CERTIFICATE = `-----BEGIN CERTIFICATE-----
+const PUBLIC_SIGNING_KEY = `-----BEGIN CERTIFICATE-----
 MIIBnDCCAUGgAwIBAgIURT5mnI9WbENrqzrB0RYtXGuc0n8wCgYIKoZIzj0EAwIw
 IzEhMB8GA1UEAwwYVW5pdmVyc2FsIFZlcmlmeSBSb290IENBMB4XDTI1MDcwNDEz
 NTY0OVoXDTM1MDcwMjEzNTY0OVowIzEhMB8GA1UEAwwYVW5pdmVyc2FsIFZlcmlm
@@ -24879,7 +24879,7 @@ class TrustedIssuerRegistry {
         let verified = false;
         try {
             const issuerData = new TextEncoder().encode(issuerString).buffer;
-            verified = await verifySignatureWithPem(ROOT_CA_CERTIFICATE, signature, issuerData);
+            verified = await verifySignatureWithPem(PUBLIC_SIGNING_KEY, signature, issuerData);
         } catch (e) {
             console.error('Issuer signature verification failed', e);
         }
