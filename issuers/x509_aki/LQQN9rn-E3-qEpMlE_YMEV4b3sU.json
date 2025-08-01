@@ -1,0 +1,21 @@
+{
+  "issuer_id": "x509_aki:LQQN9rn-E3-qEpMlE_YMEV4b3sU",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "",
+    "government_level": "national",
+    "official_name": ""
+  },
+  "display": {
+    "name": ""
+  },
+  "certificates": [
+    {
+      "certificate": "-----BEGIN CERTIFICATE-----\nMIICEDCCAbWgAwIBAgIUUhxrFDJvWXsEq8cE9Ubc56J3UHgwCgYIKoZIzj0EAwIw\nMzEUMBIGA1UEAwwLVkEgbUlEIElBQ0ExDjAMBgNVBAgMBVVTLVZBMQswCQYDVQQG\nEwJVUzAeFw0yNDAxMTExODIwNTVaFw0yNjAxMTAxODIwNTVaMDMxFDASBgNVBAMM\nC1ZBIG1JRCBJQUNBMQ4wDAYDVQQIDAVVUy1WQTELMAkGA1UEBhMCVVMwWTATBgcq\nhkjOPQIBBggqhkjOPQMBBwNCAARYlUGHKrbF8sp6Px+uEUIaolNpS1zsnzvUhQzF\n6dZMxyc5u0q8q+1JBLm4IfVgxz/z0mwylqJHvdqFx3HI2qS/o4GmMIGjMB0GA1Ud\nDgQWBBQtBA32uf4Tf6oSkyUT9gwRXhvexTAOBgNVHQ8BAf8EBAMCAQYwIwYDVR0S\nBBwwGoYYaHR0cHM6Ly9kbXYudmlyZ2luaWEuZ292MBIGA1UdEwEB/wQIMAYBAf8C\nAQAwOQYDVR0fBDIwMDAuoCygKoYoaHR0cHM6Ly93d3cubW9iaWxlZGwubmV0L21v\nYmlsZUlEL1ZBLmNybDAKBggqhkjOPQQDAgNJADBGAiEA8BTTtb6qI0PwJo1QLauM\n4IF5wUod/uBWzAUZfxzP2f4CIQCXw1m3h61zd73x+14QF2hHlfwbSy1G5kXMq/VY\nEdBdOQ==\n-----END CERTIFICATE-----",
+      "certificate_format": "pem",
+      "trust_lists": [
+        "aamva_dts"
+      ]
+    }
+  ]
+}
