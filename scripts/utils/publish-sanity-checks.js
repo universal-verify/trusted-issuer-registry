@@ -19,8 +19,8 @@ function checkWorkingDirectory() {
 
 function checkBranch() {
     const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-    if (branch !== 'main' && !/^\d+\.\d+\.\d+$/.test(branch)) {
-        console.error(`❌ You are on '${branch}' branch. Switch to 'main' or '#.#.#' before publishing.`);
+    if (branch !== 'main' && !/^release\/\d+\.\d+$/.test(branch)) {
+        console.error(`❌ You are on '${branch}' branch. Switch to 'main' or 'release/#.#' before publishing.`);
         process.exit(1);
     }
     console.log(' ✅ Branch check passed');
@@ -121,8 +121,8 @@ function checkSignatures() {
 }
 
 try {
-    //checkWorkingDirectory();
-    //checkBranch();
+    checkWorkingDirectory();
+    checkBranch();
     await checkPatchVersionDeprecation();
     checkVersionConsistency();
     checkFilesAgainstSchemas();
