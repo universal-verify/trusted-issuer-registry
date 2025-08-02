@@ -40,6 +40,9 @@ export default function extractCertificateInfo(pemContent) {
 
         // Parse subject components
         const subject = subjectMatch[1];
+        console.log(opensslOutput);
+        console.log(subjectMatch);
+        console.log(subject);
         const subjectParts = {};
 
         // Extract common fields from subject
