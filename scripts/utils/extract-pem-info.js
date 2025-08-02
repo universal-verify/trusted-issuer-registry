@@ -40,28 +40,25 @@ export default function extractCertificateInfo(pemContent) {
 
         // Parse subject components
         const subject = subjectMatch[1];
-        console.log(opensslOutput);
-        console.log(subjectMatch);
-        console.log(subject);
         const subjectParts = {};
 
         // Extract common fields from subject
-        const cMatch = subject.match(/C=([^,\/]+)/);
+        const cMatch = subject.match(/C\s*=\s*([^,\/]+)/);
         if (cMatch) subjectParts.country = cMatch[1];
 
-        const stMatch = subject.match(/ST=([^,\/]+)/);
+        const stMatch = subject.match(/ST\s*=\s*([^,\/]+)/);
         if (stMatch) subjectParts.state = stMatch[1];
 
-        const lMatch = subject.match(/L=([^,\/]+)/);
+        const lMatch = subject.match(/L\s*=\s*([^,\/]+)/);
         if (lMatch) subjectParts.locality = lMatch[1];
 
-        const oMatch = subject.match(/O=([^,\/]+)/);
+        const oMatch = subject.match(/O\s*=\s*([^,\/]+)/);
         if (oMatch) subjectParts.organization = oMatch[1];
 
-        const ouMatch = subject.match(/OU=([^,\/]+)/);
+        const ouMatch = subject.match(/OU\s*=\s*([^,\/]+)/);
         if (ouMatch) subjectParts.organizationalUnit = ouMatch[1];
 
-        const cnMatch = subject.match(/CN=([^,\/]+)/);
+        const cnMatch = subject.match(/CN\s*=\s*([^,\/]+)/);
         if (cnMatch) subjectParts.commonName = cnMatch[1];
 
         // Check for CRL Distribution Points
