@@ -82,23 +82,25 @@ Each issuer entry follows the schema defined in `trusted-issuer.schema.json`. He
 
 ```json
 {
-  "issuer_id": "x509_aki:TprRzaFBJ1SLjJsO01tlLCQ4YF0",
+  "issuer_id": "x509_aki:o6sbAJOdtI7_VxKIDCy1e7kIXaM",
   "entity_type": "government",
   "entity_metadata": {
-    "country": "",
-    "government_level": "",
-    "official_name": ""
+    "country": "US",
+    "region": "AZ",
+    "government_level": "state",
+    "official_name": "Arizona Department of Transportation"
   },
   "display": {
-    "name": ""
+    "name": "Arizona Department of Transportation"
   },
   "certificates": [
     {
-      "certificate": "-----BEGIN CERTIFICATE-----\n...",
-      "certificate_format": "pem",
+      "data": "-----BEGIN CERTIFICATE-----\n...",
+      "format": "pem",
       "trust_lists": ["uv", "aamva_dts"]
     }
-  ]
+  ],
+  "signature": "..."
 }
 ```
 
@@ -118,8 +120,8 @@ For the complete schema definition, see [trusted-issuer.schema.json](trusted-iss
 The registry uses semantic versioning with the following approach:
 
 - **Minor version updates** indicate schema changes or breaking updates
-- **Deprecation notices** are published 90 days in advance of breaking changes
-- **Old formats** continue to be supported until the end-of-life date
+- **Deprecation notices** are published for old minor versions 90 days in advance of its end-of-life date
+- **Old minor versions** will continue to receive issuer updates until the end-of-life date
 
 ### Checking for Deprecation
 
