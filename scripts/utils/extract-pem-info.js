@@ -31,42 +31,42 @@ export default function extractCertificateInfo(pemContent) {
             throw new Error('Subject Key Identifier not found in certificate');
         }
         const skiValue = skiMatch[1].trim();
-        
+
         // Find the Subject information
         const subjectMatch = opensslOutput.match(/Subject: ([^\n]+)/);
         if (!subjectMatch) {
             throw new Error('Subject information not found in certificate');
         }
-        
+
         // Parse subject components
         const subject = subjectMatch[1];
         const subjectParts = {};
-        
+
         // Extract common fields from subject
         const cMatch = subject.match(/C=([^,\/]+)/);
         if (cMatch) subjectParts.country = cMatch[1];
-        
+
         const stMatch = subject.match(/ST=([^,\/]+)/);
         if (stMatch) subjectParts.state = stMatch[1];
-        
+
         const lMatch = subject.match(/L=([^,\/]+)/);
         if (lMatch) subjectParts.locality = lMatch[1];
-        
+
         const oMatch = subject.match(/O=([^,\/]+)/);
         if (oMatch) subjectParts.organization = oMatch[1];
-        
+
         const ouMatch = subject.match(/OU=([^,\/]+)/);
         if (ouMatch) subjectParts.organizationalUnit = ouMatch[1];
-        
+
         const cnMatch = subject.match(/CN=([^,\/]+)/);
         if (cnMatch) subjectParts.commonName = cnMatch[1];
-        
+
         // Check for CRL Distribution Points
         const crlMatch = opensslOutput.match(/X509v3 CRL Distribution Points:\s*\n((?:\s+[^\n]+\n?)*)/i);
-        
+
         // Use the provided PEM content directly
         const certificateContent = pemContent;
-        
+
         return {
             aki: hexToUrlSafeBase64(skiValue),
             subject: subjectParts,

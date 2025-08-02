@@ -1,4 +1,4 @@
-import getCertInfo from "../extract-pem-info.js";
+import getCertInfo from '../extract-pem-info.js';
 import * as cbor2 from 'cbor2';
 
 /**
@@ -8,21 +8,21 @@ import * as cbor2 from 'cbor2';
 export default async function fetchFromAAMVA(obj = {}) {
     try {
         console.log('Fetching issuer data from AAMVA DTS trust list...');
-        
+
         const response = await fetch('https://vical.dts.aamva.org/vical/vc');
         if (!response.ok) throw new Error(`Failed to fetch AAMVA DTS VICAL: ${response.status} ${response.statusText}`);
-        
+
         const cbor = await response.arrayBuffer();
         if (!cbor) throw new Error('AAMVA DTS VICAL is empty');
         const uint8Array = new Uint8Array(cbor);
         const decoded = cbor2.decode(uint8Array);
 
-        const [protectedHeader, unprotectedHeader, payload, signature] = decoded;
+        const [_protectedHeader, _unprotectedHeader, payload, _signature] = decoded;
 
-        //console.log('protectedHeader', protectedHeader);
-        //console.log('unprotectedHeader', unprotectedHeader);
+        //console.log('protectedHeader', _protectedHeader);
+        //console.log('unprotectedHeader', _unprotectedHeader);
         //console.log('payload', payload);
-        //console.log('signature', signature);
+        //console.log('signature', _signature);
 
         const payloadDecoded = cbor2.decode(payload);
         //console.log('payloadDecoded', payloadDecoded);
@@ -31,8 +31,8 @@ export default async function fetchFromAAMVA(obj = {}) {
         let missingCRLCount = 0;
 
         for(const certificateInfo of payloadDecoded.certificateInfos) {
-            let certContent = Buffer.from(certificateInfo.certificate).toString('base64').match(/.{1,64}/g).join('\n');
-            let certInfo = getCertInfo(`-----BEGIN CERTIFICATE-----\n${certContent}\n-----END CERTIFICATE-----`);
+            const certContent = Buffer.from(certificateInfo.certificate).toString('base64').match(/.{1,64}/g).join('\n');
+            const certInfo = getCertInfo(`-----BEGIN CERTIFICATE-----\n${certContent}\n-----END CERTIFICATE-----`);
             //console.log('certInfo', certInfo);
             if(certInfo.crlMissing) {
                 missingCRLCount++;
@@ -52,40 +52,40 @@ export default async function fetchFromAAMVA(obj = {}) {
 }
 
 function addCert(obj, certInfo) {
-    let region = (certInfo.subject.state) ? certInfo.subject.state.replace('US-', '') : "";
-    
+    const region = (certInfo.subject.state) ? certInfo.subject.state.replace('US-', '') : '';
+
     if(!obj[certInfo.aki]) {
         obj[certInfo.aki] = {
-            "issuer_id": `x509_aki:${certInfo.aki}`,
-            "entity_type": "government",
-            "entity_metadata": {
-                "country": certInfo.subject.country || "",
-                "region": (region) ? region : undefined,
-                "government_level": (region) ? "state" : "national",
-                "official_name": certInfo.subject.organization || certInfo.subject.commonName || ""
+            'issuer_id': `x509_aki:${certInfo.aki}`,
+            'entity_type': 'government',
+            'entity_metadata': {
+                'country': certInfo.subject.country || '',
+                'region': (region) ? region : undefined,
+                'government_level': (region) ? 'state' : 'national',
+                'official_name': certInfo.subject.organization || certInfo.subject.commonName || ''
             },
-            "display": {
-                "name": certInfo.subject.organization || certInfo.subject.commonName || "",
+            'display': {
+                'name': certInfo.subject.organization || certInfo.subject.commonName || '',
             },
-            "certificates": [{
-                "certificate": certInfo.pemContent,
-                "certificate_format": "pem",
-                "trust_lists": ["aamva_dts"]
+            'certificates': [{
+                'certificate': certInfo.pemContent,
+                'certificate_format': 'pem',
+                'trust_lists': ['aamva_dts']
             }]
         };
     } else {
         for(const cert of obj[certInfo.aki].certificates) {
             if(cert.certificate === certInfo.pemContent) {
-                if(!cert.trust_lists.includes("aamva_dts")) {
-                    cert.trust_lists.push("aamva_dts");
+                if(!cert.trust_lists.includes('aamva_dts')) {
+                    cert.trust_lists.push('aamva_dts');
                 }
                 return;
             }
         }
         obj[certInfo.aki].certificates.push({
-            "certificate": certInfo.pemContent,
-            "certificate_format": "pem",
-            "trust_lists": ["aamva_dts"]
+            'certificate': certInfo.pemContent,
+            'certificate_format': 'pem',
+            'trust_lists': ['aamva_dts']
         });
     }
 }

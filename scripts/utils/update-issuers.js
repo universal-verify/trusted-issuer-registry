@@ -7,21 +7,21 @@ import fetchFromAAMVA from './trust_lists/aamva_dts.js';
 async function updateIssuers() {
     try {
         console.log('Starting issuer update process...');
-        
-        let allIssuers = {};
+
+        const allIssuers = {};
         // Fetch from Universal Verify
         await fetchFromUV(allIssuers);
-        
+
         // Fetch from AAMVA (placeholder)
         await fetchFromAAMVA(allIssuers);
-        
+
         console.log(`Total issuers collected from sources: ${Object.keys(allIssuers).length}`);
-        
+
         // Process and update issuer files
         updateIssuerFiles(allIssuers);
-        
+
         return allIssuers;
-        
+
     } catch (error) {
         console.error('Error in updateIssuers:', error.message);
         throw error;
@@ -40,17 +40,17 @@ function updateIssuerFiles(issuers) {
     let deletedCount = 0;
     let createdCount = 0;
     let updatedCount = 0;
-    
+
     // Ensure the directory exists
     if (!fs.existsSync(issuersDir)) {
         fs.mkdirSync(issuersDir, { recursive: true });
     }
-    
+
     // Get all existing files in the issuers/x509_aki directory
     const existingFiles = fs.readdirSync(issuersDir)
         .filter(file => file.endsWith('.json'))
         .map(file => file.replace('.json', ''));
-    
+
     // Delete files that don't have corresponding issuers
     existingFiles.forEach(filename => {
         if (!issuers[filename]) {
@@ -59,17 +59,17 @@ function updateIssuerFiles(issuers) {
             deletedCount++;
         }
     });
-    
+
     // Process each issuer
     Object.entries(issuers).forEach(([aki, issuerData]) => {
         const filePath = path.join(issuersDir, `${aki}.json`);
         const fileExists = fs.existsSync(filePath);
-        
+
         if (fileExists) {
             // Check if the certificates array has changed
             const existingData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
             const certificatesChanged = JSON.stringify(existingData.certificates) !== JSON.stringify(issuerData.certificates);
-            
+
             if (certificatesChanged) {
                 updatedCount++;
                 // Update existing file - only update the certificates array

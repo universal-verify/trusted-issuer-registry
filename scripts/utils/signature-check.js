@@ -93,22 +93,20 @@ function validateIssuerSignature(filePath) {
 // Main function to validate all issuer signatures
 function validateSignatureFiles() {
     const projectRoot = path.resolve(__dirname, '../..');
-    
+
     // Define directories to check
     const directories = [
         path.join(projectRoot, 'issuers'),
         path.join(projectRoot, 'test', 'issuers')
     ];
 
-    let totalFiles = 0;
     let validFiles = 0;
-    let invalidFiles = [];
+    const invalidFiles = [];
 
     // Process each directory
     for (const dir of directories) {
         if (fs.existsSync(dir)) {
             const jsonFiles = findJsonFiles(dir);
-            totalFiles += jsonFiles.length;
 
             for (const file of jsonFiles) {
                 const result = validateIssuerSignature(file);
@@ -139,4 +137,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     console.log(`✅ Signature validation passed: ${validFiles} valid files checked.`);
 }
 
-export { validateSignatureFiles }; 
+export { validateSignatureFiles };

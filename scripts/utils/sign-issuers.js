@@ -36,13 +36,13 @@ function validatePrivateKeyPem(privateKeyPem) {
     if (!privateKeyPem || typeof privateKeyPem !== 'string') {
         throw new Error('Private key PEM content must be provided as a string');
     }
-    
+
     // Basic validation that it looks like an EC PEM private key
-    if (!privateKeyPem.includes('-----BEGIN EC PRIVATE KEY-----') || 
+    if (!privateKeyPem.includes('-----BEGIN EC PRIVATE KEY-----') ||
         !privateKeyPem.includes('-----END EC PRIVATE KEY-----')) {
         throw new Error('Invalid private key PEM format. Expected to contain BEGIN and END EC PRIVATE KEY markers.');
     }
-    
+
     return privateKeyPem;
 }
 
@@ -115,7 +115,7 @@ async function processIssuerFile(filePath, privateKeyPem) {
 
         // Verify the signature with the public key
         const isValid = verifySignature(PUBLIC_SIGNING_KEY, canonicalJson, signature);
-        
+
         if (!isValid) {
             throw new Error('Signature verification failed - the created signature is invalid');
         }
@@ -180,13 +180,13 @@ async function signIssuers(privateKeyPem) {
 if (import.meta.url === `file://${process.argv[1]}`) {
     // Check if private key PEM content is provided as command line argument
     const privateKeyPem = process.argv[2];
-    
+
     if (!privateKeyPem) {
         console.error('Usage: node sign-issuers.js <private-key-pem-content>');
         console.error('Please provide the private key PEM content as a command line argument.');
         process.exit(1);
     }
-    
+
     signIssuers(privateKeyPem);
 }
 
