@@ -2,6 +2,7 @@ name: Daily Issuers Update - Dev
 on:
   schedule:
     - cron: 0 9 * * *
+  workflow_dispatch:  # manual trigger
 
 jobs:
   run-script-and-pr:
