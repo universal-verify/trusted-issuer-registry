@@ -29,7 +29,7 @@ export default async function fetchFromUV(obj = {}) {
 
             if (issuer.certificates && issuer.certificates.length > 0) {
                 for(const cert of issuer.certificates) {
-                    const certInfo = getCertInfo(cert.certificate);
+                    const certInfo = getCertInfo(cert.data);
                     if(certInfo.crlMissing) {
                         missingCRLCount++;
                     } else {
@@ -68,14 +68,14 @@ function addCert(obj, certInfo) {
                 'name': certInfo.subject.organization || certInfo.subject.commonName || '',
             },
             'certificates': [{
-                'certificate': certInfo.pemContent,
-                'certificate_format': 'pem',
+                'data': certInfo.pemContent,
+                'format': 'pem',
                 'trust_lists': ['uv']
             }]
         };
     } else {
         for(const cert of obj[certInfo.aki].certificates) {
-            if(cert.certificate === certInfo.pemContent) {
+            if(cert.data === certInfo.pemContent) {
                 if(!cert.trust_lists.includes('uv')) {
                     cert.trust_lists.push('uv');
                 }
@@ -83,8 +83,8 @@ function addCert(obj, certInfo) {
             }
         }
         obj[certInfo.aki].certificates.push({
-            'certificate': certInfo.pemContent,
-            'certificate_format': 'pem',
+            'data': certInfo.pemContent,
+            'format': 'pem',
             'trust_lists': ['uv']
         });
     }

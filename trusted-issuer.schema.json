@@ -86,13 +86,13 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["certificate", "certificate_format", "trust_lists"],
+        "required": ["data", "format", "trust_lists"],
         "properties": {
-          "certificate": {
+          "data": {
             "type": "string",
             "description": "PEM-encoded X.509 certificate used for document signing"
           },
-          "certificate_format": {
+          "format": {
             "type": "string",
             "enum": ["pem"],
             "description": "Format of the certificate (currently only PEM is supported)"

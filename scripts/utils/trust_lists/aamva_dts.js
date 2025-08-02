@@ -68,14 +68,14 @@ function addCert(obj, certInfo) {
                 'name': certInfo.subject.organization || certInfo.subject.commonName || '',
             },
             'certificates': [{
-                'certificate': certInfo.pemContent,
-                'certificate_format': 'pem',
+                'data': certInfo.pemContent,
+                'format': 'pem',
                 'trust_lists': ['aamva_dts']
             }]
         };
     } else {
         for(const cert of obj[certInfo.aki].certificates) {
-            if(cert.certificate === certInfo.pemContent) {
+            if(cert.data === certInfo.pemContent) {
                 if(!cert.trust_lists.includes('aamva_dts')) {
                     cert.trust_lists.push('aamva_dts');
                 }
@@ -83,8 +83,8 @@ function addCert(obj, certInfo) {
             }
         }
         obj[certInfo.aki].certificates.push({
-            'certificate': certInfo.pemContent,
-            'certificate_format': 'pem',
+            'data': certInfo.pemContent,
+            'format': 'pem',
             'trust_lists': ['aamva_dts']
         });
     }
