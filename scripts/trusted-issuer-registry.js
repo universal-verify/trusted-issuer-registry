@@ -20,7 +20,7 @@ class TrustedIssuerRegistry {
     }
 
     async getIssuerFromX509AKI(x509aki) {
-        if (this._cacheEnabled && x509aki in this._cache && this._cache[x509aki].expiresAt > Date.now()) return this._cache[x509aki].issuer;
+        if (this._cacheEnabled && x509aki in this._cache && this._cache[x509aki].expiresAt > Date.now()) return this._deepCopy(this._cache[x509aki].issuer);
 
         const response = await fetch(`${this._urlBase}/issuers/x509_aki/${x509aki}.json`);
         if (response.ok) {
@@ -33,7 +33,7 @@ class TrustedIssuerRegistry {
                     expiresAt: Date.now() + this._cacheTTL
                 };
             }
-            return issuer;
+            return this._deepCopy(issuer);
         } else if (this._cacheEnabled) {
             this._cache[x509aki] = {
                 issuer: null,
@@ -58,6 +58,10 @@ class TrustedIssuerRegistry {
             console.error('Issuer signature verification failed', e);
         }
         return verified;
+    }
+
+    _deepCopy(obj) {
+        return JSON.parse(JSON.stringify(obj));
     }
 
     static minorVersion = MINOR_VERSION;

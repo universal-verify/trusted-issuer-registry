@@ -1,6 +1,6 @@
 {
   "name": "trusted-issuer-registry",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Registry of trusted credential issuers",
   "homepage": "https://github.com/universal-verify/trusted-issuer-registry#readme",
   "license": "MPL-2.0",
