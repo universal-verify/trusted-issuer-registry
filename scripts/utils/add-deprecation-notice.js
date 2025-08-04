@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import readline from 'readline';
+import { MINOR_VERSION } from '../constants.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -91,7 +92,8 @@ async function addDeprecation() {
 
         // Create deprecation object
         const deprecation = {
-            end_of_life: epochTime
+            end_of_life: epochTime,
+            version: MINOR_VERSION,
         };
 
         // Write to file
