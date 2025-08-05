@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:lhS8613Z-7sCDp94X9MH5gn34U0",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "VA",
+    "government_level": "state",
+    "official_name": "VA mID IACA-A"
+  },
+  "display": {
+    "name": "VA mID IACA-A"
+  },
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIICWDCCAf+gAwIBAgIUSDXJYXPM1GzzndPu7U7uQQpoOU4wCgYIKoZIzj0EAwIw\nNTEWMBQGA1UEAwwNVkEgbUlEIElBQ0EtQTEOMAwGA1UECAwFVVMtVkExCzAJBgNV\nBAYTAlVTMB4XDTI1MDcyMjEzMjYwMloXDTI3MDcyMjEzMjYwMVowNTEWMBQGA1UE\nAwwNVkEgbUlEIElBQ0EtQTEOMAwGA1UECAwFVVMtVkExCzAJBgNVBAYTAlVTMFkw\nEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEZ96O6yAnVSQogBLxplgoWuEQbJGeNwki\nC1Hx2MEKM6Jnpq4Wls+GU9IWImlUWWTaY0fgf+51Wkq1dguB8cVme6OB7DCB6TAS\nBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQYMBaAFJYUvOtd2fu7Ag6feF/TB+YJ\n9+FNMCMGA1UdEgQcMBqGGGh0dHBzOi8vZG12LnZpcmdpbmlhLmdvdjAjBgNVHREE\nHDAahhhodHRwczovL2Rtdi52aXJnaW5pYS5nb3YwOQYDVR0fBDIwMDAuoCygKoYo\naHR0cHM6Ly93d3cubW9iaWxlZGwubmV0L21vYmlsZUlEL1ZBLmNybDAdBgNVHQ4E\nFgQUlhS8613Z+7sCDp94X9MH5gn34U0wDgYDVR0PAQH/BAQDAgEGMAoGCCqGSM49\nBAMCA0cAMEQCIAZyBOjZrupvH9PqbgZNZFtgwVs+fXZVqgJKckP6FAbrAiAQdjxr\n6xA4VRVp/yjS9CKGoMw7tPkUrcfofZTv2AvPCA==\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "aamva_dts"
+      ]
+    }
+  ]
+}

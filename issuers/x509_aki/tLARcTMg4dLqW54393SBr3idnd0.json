@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:tLARcTMg4dLqW54393SBr3idnd0",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "MD",
+    "government_level": "state",
+    "official_name": "Maryland MVA"
+  },
+  "display": {
+    "name": "Maryland MVA"
+  },
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIIC7jCCApWgAwIBAgIUAIlZVGm+MFztWeqnzmHC1Liq1DAwCgYIKoZIzj0EAwIw\nZjEOMAwGA1UECBMFVVMtTUQxCzAJBgNVBAYTAlVTMRQwEgYDVQQHEwtHbGVuIEJ1\ncm5pZTEVMBMGA1UEChMMTWFyeWxhbmQgTVZBMRowGAYDVQQDExFNRE9UIE1WQSBt\nREwgUm9vdDAeFw0yNTA2MTgwNjAwMDBaFw0zMDA2MTgwNjAwMDBaMGYxDjAMBgNV\nBAgTBVVTLU1EMQswCQYDVQQGEwJVUzEUMBIGA1UEBxMLR2xlbiBCdXJuaWUxFTAT\nBgNVBAoTDE1hcnlsYW5kIE1WQTEaMBgGA1UEAxMRTURPVCBNVkEgbURMIFJvb3Qw\nWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATSFdDeo2zV3GjlWdICLEyVygkyiM35\n79U/WAtsibXSWXpXeAkENed6fs8a4lPCm3ScBa/GHQsc/xPWG5brrf/vo4IBHzCC\nARswDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQAwHQYDVR0OBBYE\nFLSwEXEzIOHS6lueN/d0ga94nZ3dMFUGA1UdEgROMEyBHG12YXByaXZhY3lAbWRv\ndC5tYXJ5bGFuZC5nb3aGLGh0dHBzOi8vbXltdmEubWFyeWxhbmQuZ292L2dvL3dl\nYi9Db250YWN0TVZBMG0GA1UdHwRmMGQwYqBgoF6GXGh0dHBzOi8vbXltdmEubWFy\neWxhbmQuZ292OjU0NDMvTURQL1dlYlNlcnZpY2VzL0NSTC9tREwvNmVlMDdkMjE0\nMGYwNDJhMGE2ZTk5YTc4ZTQwNzlhYzAuY3JsMBAGCSsGAQQBg8UhAQQDTURQMAoG\nCCqGSM49BAMCA0cAMEQCIEOzO/2dCcx5yn8Hx6AdqCqgTNps18RrB0QGoHrwkFnx\nAiBApe5NXVdvg2yEhQylijYaUKTpJKNTiOx0CRPusfR5SQ==\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "aamva_dts"
+      ]
+    }
+  ]
+}
