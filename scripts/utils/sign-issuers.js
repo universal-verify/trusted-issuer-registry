@@ -105,10 +105,17 @@ async function processIssuerFile(filePath, privateKeyPem) {
 
         // Create a copy without the signature
         const issuerCopy = { ...issuer };
+        const existingSignature = issuerCopy.signature;
         delete issuerCopy.signature;
 
         // Create canonical JSON representation
         const canonicalJson = stringify(issuerCopy);
+
+        // Check if signature already exists and is valid
+        if (existingSignature) {
+            const isExistingSignatureValid = verifySignature(PUBLIC_SIGNING_KEY, canonicalJson, existingSignature);
+            if (isExistingSignatureValid) return;
+        }
 
         // Sign the canonical JSON
         const signature = await signData(privateKeyPem, canonicalJson);
