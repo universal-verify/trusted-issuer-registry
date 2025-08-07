@@ -8,7 +8,7 @@ export default async function fetchFromUV(obj = {}) {
     try {
         console.log('Fetching issuer data from Universal Verify trust list...');
 
-        const response = await fetch('https://cdn.jsdelivr.net/npm/@universal-verify/trust-list@0.0/trust-list.json');
+        const response = await fetch('https://cdn.jsdelivr.net/npm/@universal-verify/trust-list@0.1/trust-list.json');
 
         if (!response.ok) throw new Error(`Failed to fetch trust list: ${response.status} ${response.statusText}`);
 
