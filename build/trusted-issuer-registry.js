@@ -2,19 +2,19 @@ import * as asn1js from 'asn1js';
 import { Certificate } from 'pkijs';
 import stringify from 'canonical-json';
 
-const MINOR_VERSION = '0.0';
+const MINOR_VERSION = '0.1';
 const REGISTRY_URL_BASE = `https://cdn.jsdelivr.net/npm/trusted-issuer-registry@${MINOR_VERSION}`;
 const TEST_REGISTRY_URL_BASE = `${REGISTRY_URL_BASE}/test`;
-const PUBLIC_SIGNING_KEY = `-----BEGIN CERTIFICATE-----
-MIIBnDCCAUGgAwIBAgIURT5mnI9WbENrqzrB0RYtXGuc0n8wCgYIKoZIzj0EAwIw
-IzEhMB8GA1UEAwwYVW5pdmVyc2FsIFZlcmlmeSBSb290IENBMB4XDTI1MDcwNDEz
-NTY0OVoXDTM1MDcwMjEzNTY0OVowIzEhMB8GA1UEAwwYVW5pdmVyc2FsIFZlcmlm
-eSBSb290IENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEsOasxJHsq+tmAy5L
-Yz0KeT2UyGo1PqS0mr7Z5zn7Ai7vCEzea57QiQMQVYpiQGvkr3bS2T2l6xK7Oduj
-MhUWs6NTMFEwHQYDVR0OBBYEFPJpi7yR7+yf44xcCfHDypGmlDosMB8GA1UdIwQY
-MBaAFPJpi7yR7+yf44xcCfHDypGmlDosMA8GA1UdEwEB/wQFMAMBAf8wCgYIKoZI
-zj0EAwIDSQAwRgIhAJvh/bVs8EXtzYWZm4ijR9J0+BwtqzCXJE4dDML4JafpAiEA
-/7cvgi4SoK+Xn6WRfsgg9BNymAfJbejzDrQbLqHh4v8=
+const PUBLIC_SIGNING_CERT = `-----BEGIN CERTIFICATE-----
+MIIBnDCCAUGgAwIBAgIUekpHX8hoNIrffOfU7MBBNgLJQ2IwCgYIKoZIzj0EAwIw
+IzEhMB8GA1UEAwwYVW5pdmVyc2FsIFZlcmlmeSBSb290IENBMB4XDTI1MDgwNzE4
+MDMwOVoXDTM1MDgwNTE4MDMwOVowIzEhMB8GA1UEAwwYVW5pdmVyc2FsIFZlcmlm
+eSBSb290IENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/dMNQXfYuLMvGYfU
+z/j1jj0GsmT3ysLcxNbN/fJ9JPjgfRPrq3XxbbgT0evxBBp0s124xGQw3rohL9+B
+t6JahqNTMFEwHQYDVR0OBBYEFHPcZW9gI99hWaLBRZUgX+TbICyCMB8GA1UdIwQY
+MBaAFHPcZW9gI99hWaLBRZUgX+TbICyCMA8GA1UdEwEB/wQFMAMBAf8wCgYIKoZI
+zj0EAwIDSQAwRgIhAKVKMO3AAWQsCUSQUbhBipi9bTJCBBqF65I8BmfSyqGNAiEA
+7GWs56atbaun83KIokEG9xXhPXGkH6/XWk+eioyyoFo=
 -----END CERTIFICATE-----`;
 
 const verifySignatureWithPem = async (pemKey, signature, data) => {
@@ -229,7 +229,7 @@ class TrustedIssuerRegistry {
         let verified = false;
         try {
             const issuerData = new TextEncoder().encode(issuerString).buffer;
-            verified = await verifySignatureWithPem(PUBLIC_SIGNING_KEY, signature, issuerData);
+            verified = await verifySignatureWithPem(PUBLIC_SIGNING_CERT, signature, issuerData);
         } catch (e) {
             console.error('Issuer signature verification failed', e);
         }

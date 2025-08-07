@@ -141,6 +141,7 @@ git commit -m "Update public signing cert for upcoming minor version {major}.{mi
   - Change the last part of the title from "Dev" to "{old_major}.{old_minor}
   - Change `ref: dev` to `ref: release/{old_major}.{old_minor}`
   - Change `base: dev` to `base: release/{old_major}.{old_minor}`
+  - Change `branch: update-issuers-daily-dev` to `branch: update-issuers-daily-{old_major}-{old_minor}`
 - **Commit changes**
   ```bash
   git add ./
