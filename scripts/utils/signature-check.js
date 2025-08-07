@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import stringify from 'canonical-json';
 import crypto from 'crypto';
-import { PUBLIC_SIGNING_KEY } from '../constants.js';
+import { PUBLIC_SIGNING_CERT } from '../constants.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -77,7 +77,7 @@ function validateIssuerSignature(filePath) {
         const canonicalJson = stringify(issuerCopy);
 
         // Verify the signature
-        const isValid = verifySignature(PUBLIC_SIGNING_KEY, canonicalJson, issuer.signature);
+        const isValid = verifySignature(PUBLIC_SIGNING_CERT, canonicalJson, issuer.signature);
 
         if (!isValid) {
             return { valid: false, reason: 'Invalid signature' };

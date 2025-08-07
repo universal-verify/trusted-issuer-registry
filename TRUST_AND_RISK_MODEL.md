@@ -14,7 +14,7 @@ This document outlines the trust model, threat considerations, and mitigation st
 - All data is signed using a private EC key on the NIST P-256 (prime256v1) curve.
   - This private key is stored as a GitHub secret
   - Our key rotation policy is to update with each minor version release, or in the event of a compromised private key
-  - The public key is stored in the root of the repo as public_signing_key.pem
+  - The public key is stored as an X.509 certificate in the root of the repo as public_signing_cert.pem
 - Registry state is immutable and publicly auditable via GitHub's commit history and pull requests, enabling transparent review of issuer changes over time.
 - We do not issue credentials, we only aggregate and validate issuer metadata.
 

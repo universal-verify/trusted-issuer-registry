@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import stringify from 'canonical-json';
 import crypto from 'crypto';
-import { PUBLIC_SIGNING_KEY } from '../constants.js';
+import { PUBLIC_SIGNING_CERT } from '../constants.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -113,7 +113,7 @@ async function processIssuerFile(filePath, privateKeyPem) {
 
         // Check if signature already exists and is valid
         if (existingSignature) {
-            const isExistingSignatureValid = verifySignature(PUBLIC_SIGNING_KEY, canonicalJson, existingSignature);
+            const isExistingSignatureValid = verifySignature(PUBLIC_SIGNING_CERT, canonicalJson, existingSignature);
             if (isExistingSignatureValid) return;
         }
 
@@ -121,7 +121,7 @@ async function processIssuerFile(filePath, privateKeyPem) {
         const signature = await signData(privateKeyPem, canonicalJson);
 
         // Verify the signature with the public key
-        const isValid = verifySignature(PUBLIC_SIGNING_KEY, canonicalJson, signature);
+        const isValid = verifySignature(PUBLIC_SIGNING_CERT, canonicalJson, signature);
 
         if (!isValid) {
             throw new Error('Signature verification failed - the created signature is invalid');

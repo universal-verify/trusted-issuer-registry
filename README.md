@@ -157,7 +157,7 @@ Currently, the registry supports X.509 certificate-based issuers. Support for W3
 ## Security Considerations
 
 - All issuer data is cryptographically signed
-- [Public key](public_signing_key.pem) for verification is included in the package
+- [Signing certificate](public_signing_cert.pem) for verification is included in the package
 - Transparent change control via GitHub pull requests
 
 ## Contributing

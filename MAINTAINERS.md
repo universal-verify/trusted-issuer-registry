@@ -64,8 +64,8 @@ cd ~
 # Generate private key (prime256v1/P-256 curve)
 openssl ecparam -genkey -name prime256v1 -noout -out gh_private_key.pem
 
-# Generate public key from private key
-openssl ec -in gh_private_key.pem -pubout -out public_signing_key.pem
+# Generate public cert from private key
+openssl req -new -x509 -key gh_private_key.pem -out public_signing_cert.pem -days 3650 -subj "/CN=Universal Verify Root CA"
 ```
 
 #### 2. Add Private Key to Repository Secrets
@@ -105,16 +105,16 @@ _Make sure that there is no deprecation_notice.json in the dev branch!_
 # Checkout dev branch
 git checkout dev
 
-# Replace the public signing key file
-mv ~/public_signing_key.pem public_signing_key.pem
+# Replace the public signing cert file
+mv ~/public_signing_cert.pem public_signing_cert.pem
 
-# Replace value of PUBLIC_SIGNING_KEY in `./scripts/constants.js` with
-# content of new public_signing_key.pem
+# Replace value of PUBLIC_SIGNING_CERT in `./scripts/constants.js` with
+# content of new public_signing_cert.pem
 vim scripts/constants.js
 
 # Merge/commit schema changes and breaking updates
 git add .
-git commit -m "Breaking changes for upcoming version {major}.{minor}"
+git commit -m "Update public signing cert for upcoming minor version {major}.{minor}"
 ```
 
 #### 7. Update Version and Workflow files
