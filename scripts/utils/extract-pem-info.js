@@ -16,6 +16,52 @@ function hexToUrlSafeBase64(hexString) {
     return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
+function normalizePemContent(pemContent) {
+    // Split the PEM content into lines
+    const lines = pemContent.split('\n');
+
+    // Find the start and end markers
+    const startMarker = '-----BEGIN CERTIFICATE-----';
+    const endMarker = '-----END CERTIFICATE-----';
+
+    let startIndex = -1;
+    let endIndex = -1;
+
+    // Find the start and end marker indices
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].includes(startMarker)) {
+            startIndex = i;
+        }
+        if (lines[i].includes(endMarker)) {
+            endIndex = i;
+            break;
+        }
+    }
+
+    if (startIndex === -1 || endIndex === -1) {
+        throw new Error('Invalid PEM format: missing BEGIN or END markers');
+    }
+
+    // Extract the base64 content between markers
+    const base64Lines = lines.slice(startIndex + 1, endIndex);
+    const base64Content = base64Lines.join('').replace(/\s/g, ''); // Remove all whitespace
+
+    // Split into 64-character lines (standard PEM line length)
+    const normalizedLines = [];
+    for (let i = 0; i < base64Content.length; i += 64) {
+        normalizedLines.push(base64Content.slice(i, i + 64));
+    }
+
+    // Reconstruct the PEM with normalized lines
+    const normalizedPem = [
+        lines[startIndex], // BEGIN marker
+        ...normalizedLines,
+        lines[endIndex]    // END marker
+    ].join('\n');
+
+    return normalizedPem;
+}
+
 export default function extractCertificateInfo(pemContent) {
     try {
         // Use OpenSSL to extract certificate information from PEM content
@@ -64,8 +110,8 @@ export default function extractCertificateInfo(pemContent) {
         // Check for CRL Distribution Points
         const crlMatch = opensslOutput.match(/X509v3 CRL Distribution Points:\s*\n((?:\s+[^\n]+\n?)*)/i);
 
-        // Use the provided PEM content directly
-        const certificateContent = pemContent;
+        // Normalize certificate content to have standard width lines
+        const certificateContent = normalizePemContent(pemContent);
 
         return {
             aki: hexToUrlSafeBase64(skiValue),

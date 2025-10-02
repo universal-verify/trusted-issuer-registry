@@ -15,8 +15,8 @@ class TrustedIssuerRegistry {
         if (response.ok) {
             const deprecationNotice = await response.json();
             if(!deprecationNotice.version) return null;
-            let [major, minor] = deprecationNotice.version.split('.').map(Number);
-            let [currentMajor, currentMinor] = MINOR_VERSION.split('.').map(Number);
+            const [major, minor] = deprecationNotice.version.split('.').map(Number);
+            const [currentMajor, currentMinor] = MINOR_VERSION.split('.').map(Number);
             if(major < currentMajor || (major === currentMajor && minor < currentMinor)) return null;
             return new Date(deprecationNotice.end_of_life * 1000);
         }
