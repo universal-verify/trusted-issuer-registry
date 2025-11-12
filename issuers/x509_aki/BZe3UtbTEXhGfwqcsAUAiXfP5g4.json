@@ -1,0 +1,23 @@
+{
+  "issuer_id": "x509_aki:BZe3UtbTEXhGfwqcsAUAiXfP5g4",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "WV",
+    "government_level": "state",
+    "official_name": "WV"
+  },
+  "display": {
+    "name": "WV"
+  },
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIICOTCCAd+gAwIBAgIUUug/LrZd1Og3FACxL5tn3vvIZYowCgYIKoZIzj0EAwIw\nTTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLVdWMQswCQYDVQQKDAJXVjEhMB8G\nA1UEAwwYV1YgcHJvZCBJQUNBIGNlcnRpZmljYXRlMB4XDTI0MTIxMTIwMTQzNloX\nDTMzMTIwOTIwMTQzNlowTTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLVdWMQsw\nCQYDVQQKDAJXVjEhMB8GA1UEAwwYV1YgcHJvZCBJQUNBIGNlcnRpZmljYXRlMFkw\nEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENWgdDNLgfrrAFyzIlluaAJ7Meg6qcdVv\n8Pv421XMVDxoSTK0Zy/ezOP101ykhRhwccSDzsxX8YtdEOjHUVAoL6OBnDCBmTAd\nBgNVHQ4EFgQUBZe3UtbTEXhGfwqcsAUAiXfP5g4wEgYDVR0TAQH/BAgwBgEB/wIB\nADAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0SBBYwFIYSaHR0cHM6Ly9kbXYud3YuZ292\nMDUGA1UdHwQuMCwwKqAooCaGJGh0dHA6Ly9jcmwud3YubWlkLjQzMDA5OS5uZXQv\nY3JsLnBlbTAKBggqhkjOPQQDAgNIADBFAiADLiceQNoJyTivJMLKdHi0wbRiaEtI\nMqLJAqHoIfR2iAIhAOuTC/gN4Pu0AQ8T+qgyUVebnQ8xjtcEzlR0lAPO8bLA\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "uv"
+      ]
+    }
+  ],
+  "signature": "MEYCIQCdhHtM+bYkKLKvGgXBg/ag3CBUPRGJ4mE3GKsFADw9HAIhANxpqscLMnP9oUSDJVOn4NUohoTWuslEubbz3HVoXzRc"
+}
