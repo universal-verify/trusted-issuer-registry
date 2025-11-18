@@ -1,0 +1,21 @@
+{
+  "issuer_id": "x509_aki:taXH_AFcuSnQgLECaiofOquMVcQ",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "government_level": "national",
+    "official_name": "Apple Inc."
+  },
+  "display": {
+    "name": "Apple Inc."
+  },
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIIC+jCCAoCgAwIBAgIQbwZwl4rwPpc5UqpvfHlLUjAKBggqhkjOPQQDAzBVMQsw\nCQYDVQQGEwJVUzETMBEGA1UECgwKQXBwbGUgSW5jLjExMC8GA1UEAwwoQXBwbGUg\nSXNzdWluZyBBdXRob3JpdHkgRUNDIFJvb3QgQ0EgLSBHMTAeFw0yNTA0MjkyMTQ1\nMjdaFw00MDA0MjUyMTQ1MjZaMFIxCzAJBgNVBAYTAlVTMRMwEQYDVQQKDApBcHBs\nZSBJbmMuMS4wLAYDVQQDDCVBcHBsZSBJc3N1aW5nIEF1dGhvcml0eSBFQ0MgQ0Eg\nMSAtIEcxMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAETZHKqMvi7URBiwFpSHP/Qfoy\nODkSmRgEfy7ihe2uYgIhS4bgEyL5tbgy8nidlic59c4jLVj8vYz11upIeeb6LMFw\n8mG0Pd2tNoNdNDdxoakzobM9Ra9QwSyqKcE5H3nFo4IBFjCCARIwEgYDVR0TAQH/\nBAgwBgEB/wIBADAfBgNVHSMEGDAWgBRlD3BF4nVyw2Fnex+hZfLk7G/RpzBABgNV\nHREEOTA3hjVodHRwczovL3d3dy5hcHBsZS5jb20vY2VydGlmaWNhdGVhdXRob3Jp\ndHkvYXBraTIwMjUwNTAYBgNVHSAEETAPMA0GCyqGSIb3Y2QFFgEBMBsGA1UdJQQU\nMBIGByiBjF0FAQIGByiBtTQEAQIwMwYDVR0fBCwwKjAooCagJIYiaHR0cDovL2Ny\nbC5hcHBsZS5jb20vYWlhZXJjYWcxLmNybDAdBgNVHQ4EFgQUtaXH/AFcuSnQgLEC\naiofOquMVcQwDgYDVR0PAQH/BAQDAgEGMAoGCCqGSM49BAMDA2gAMGUCMQD6ximN\nM1vdv00QCB2/vz5dxEVTLCqinMnLMnlQT2xUFTL7YNE+qK5v6B7ttS/38sQCMDHU\npAhT+AhTJKFi8FNMvT06IKp/Lc4FZ8g/Rd3Sp5jde5oGJZQwnBs2NqDRrLndzQ==\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "uv"
+      ]
+    }
+  ]
+}
