@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:LW7v0Q6kS2iv-msrG43QcnPqqu8",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "IA",
+    "government_level": "state",
+    "official_name": "IowaDOT"
+  },
+  "display": {
+    "name": "IowaDOT"
+  },
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIICITCCAcagAwIBAgIJANq9MoAPiUuGMAoGCCqGSM49BAMCMEUxCzAJBgNVBAYT\nAlVTMQ4wDAYDVQQIDAVVUy1JQTEQMA4GA1UECgwHSW93YURPVDEUMBIGA1UEAwwL\naW93YWRvdC5nb3YwHhcNMjMwNDI4MTkwOTQ0WhcNMzIwNDI1MTkwOTQ0WjBFMQsw\nCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtSUExEDAOBgNVBAoMB0lvd2FET1QxFDAS\nBgNVBAMMC2lvd2Fkb3QuZ292MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE0NeV\ny78wjE049/P/Q/DVIKnEhQX+PsuL/fqGrKwPv5K1HILWGjFDlKEtt2G95uhDWrac\n+FYSlP7WG1MCQvRpcKOBnjCBmzAdBgNVHQ4EFgQULW7v0Q6kS2iv+msrG43QcnPq\nqu8wEgYDVR0TAQH/BAgwBgEB/wIBADAOBgNVHQ8BAf8EBAMCAQYwHwYDVR0SBBgw\nFoYUaHR0cHM6Ly9pb3dhZG90Lmdvdi8wNQYDVR0fBC4wLDAqoCigJoYkaHR0cDov\nL2NybC5pYS5taWQuNDMwMDk5Lm5ldC9jcmwucGVtMAoGCCqGSM49BAMCA0kAMEYC\nIQDaV8a8BQoxsUIAiO1YAtZkrL7XYH//dQ9UjP69xJflowIhAMRpV29gfKRytKLO\nHK4rjB1LDPgUEGbmkZ+kOYTZHMcs\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "uv"
+      ]
+    }
+  ]
+}
