@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:SqgOZF1zxrqZhx5mQIFHCDv2LcI",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "OK",
+    "government_level": "state",
+    "official_name": "Service Oklahoma"
+  },
+  "display": {
+    "name": "Service Oklahoma"
+  },
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIIDGzCCAsCgAwIBAgITCiTtZeBGqYyiDQO3VlhdCDBmwDAKBggqhkjOPQQDAjCB\njjEOMAwGA1UECBMFVVMtT0sxCzAJBgNVBAYTAlVTMRYwFAYDVQQHEw1Pa2xhaG9t\nYSBDaXR5MRkwFwYDVQQKExBTZXJ2aWNlIE9rbGFob21hMQ4wDAYDVQQLEwVCT09T\nVDEsMCoGA1UEAxMjT2tsYWhvbWEgUm9vdCBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkw\nHhcNMjYwNzAxMDYwMDAwWhcNMzEwNzAxMDYwMDAwWjCBjjEOMAwGA1UECBMFVVMt\nT0sxCzAJBgNVBAYTAlVTMRYwFAYDVQQHEw1Pa2xhaG9tYSBDaXR5MRkwFwYDVQQK\nExBTZXJ2aWNlIE9rbGFob21hMQ4wDAYDVQQLEwVCT09TVDEsMCoGA1UEAxMjT2ts\nYWhvbWEgUm9vdCBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkwWTATBgcqhkjOPQIBBggq\nhkjOPQMBBwNCAAQZ5/Br3WkOAOWUCc1gCKb44vhlo6JpAmeH7i8b95Ct6kggXW2P\ngdFAVlROGtGX3MohfKZgavry1S6vnH9jVFYJo4H6MIH3MA4GA1UdDwEB/wQEAwIB\nBjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQWBBRKqA5kXXPGupmHHmZAgUcI\nO/YtwjAsBgNVHRIEJTAjhiFodHRwczovL29rbGFob21hLmdvdi9zZXJ2aWNlLmh0\nbWwwcgYDVR0fBGswaTBnoGWgY4ZhaHR0cHM6Ly9ib29zdC1leHQuc2VydmljZS5v\nay5nb3YvT1ZQL1dlYlNlcnZpY2VzL0VYVC9tREwvQ1JML2QzMjdmMGVlMDQ2ZDRh\nNzliZTRjMzdhNDdjMWJjYWJkLmNybDAQBgkrBgEEAYPFIQEEA09WUDAKBggqhkjO\nPQQDAgNJADBGAiEA922vpPqjSQWCfJvrjbTTnZjX2hxnT91cZZTUBgUWkBYCIQDJ\nqgHITLklQJ85WQECZvlEHUP1EW9sK7apcTsz+eUCSA==\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "aamva_dts"
+      ]
+    }
+  ]
+}
