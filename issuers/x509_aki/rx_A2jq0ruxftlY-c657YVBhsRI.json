@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:rx_A2jq0ruxftlY-c657YVBhsRI",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "CO",
+    "government_level": "state",
+    "official_name": "Colorado Department of Revenue"
+  },
+  "display": {
+    "name": "Colorado Department of Revenue"
+  },
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIIDBTCCAqqgAwIBAgIUAOugsa1Q/HPTqJH2JzwqYc+xIiwwCgYIKoZIzj0EAwIw\ngY8xDjAMBgNVBAgTBVVTLUNPMQswCQYDVQQGEwJVUzEPMA0GA1UEBxMGRGVudmVy\nMScwJQYDVQQKEx5Db2xvcmFkbyBEZXBhcnRtZW50IG9mIFJldmVudWUxEjAQBgNV\nBAsTCUNPIERSSVZFUzEiMCAGA1UEAxMZQ29sb3JhZG8gUm9vdCBDZXJ0aWZpY2F0\nZTAeFw0yNjAxMTIwNzAwMDBaFw0zMTAxMTIwNzAwMDBaMIGPMQ4wDAYDVQQIEwVV\nUy1DTzELMAkGA1UEBhMCVVMxDzANBgNVBAcTBkRlbnZlcjEnMCUGA1UEChMeQ29s\nb3JhZG8gRGVwYXJ0bWVudCBvZiBSZXZlbnVlMRIwEAYDVQQLEwlDTyBEUklWRVMx\nIjAgBgNVBAMTGUNvbG9yYWRvIFJvb3QgQ2VydGlmaWNhdGUwWTATBgcqhkjOPQIB\nBggqhkjOPQMBBwNCAARpmJDBqJ1T2ymnCdge5BUvG9FH8+3LLXKZ1K/o0fiB2+g0\nZXitRtgi4krPZfCzB3DjHbXKzRIhvM/RTTZVuieSo4HhMIHeMA4GA1UdDwEB/wQE\nAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQWBBSvH8DaOrSu7F+2Vj5z\nrnthUGGxEjAkBgNVHRIEHTAbhhlodHRwczovL2R3cy5jb2xvcmFkby5nb3YvMGEG\nA1UdHwRaMFgwVqBUoFKGUGh0dHBzOi8vRFdTLkNvbG9yYWRvLkdvdi9Nb2JpbGUv\nUmV2b2NhdGlvbnMvNGQyZjFhZDQ2ODA3NDJkMTk2Njk2MmFkOGUzMjAxYWYuY3Js\nMBAGCSsGAQQBg8UhAQQDUkRTMAoGCCqGSM49BAMCA0kAMEYCIQD1pIzuOHob/oxO\nCzq3tywAbfROldmjAgj0J0r2s/WUGgIhALDx9lxbW62VEksSGKCszl/tviLxZApQ\nIBIOwwJGa0Lv\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "aamva_dts"
+      ]
+    }
+  ]
+}

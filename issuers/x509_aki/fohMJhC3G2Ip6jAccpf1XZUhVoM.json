@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:fohMJhC3G2Ip6jAccpf1XZUhVoM",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "NY",
+    "government_level": "state",
+    "official_name": "New York State Department of Motor Vehicles"
+  },
+  "display": {
+    "name": "New York State Department of Motor Vehicles"
+  },
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIICqTCCAk+gAwIBAgIJALxpHayEzEaVMAoGCCqGSM49BAMCMIGJMQswCQYDVQQG\nEwJVUzEOMAwGA1UECAwFVVMtTlkxNDAyBgNVBAoMK05ldyBZb3JrIFN0YXRlIERl\ncGFydG1lbnQgb2YgTW90b3IgVmVoaWNsZXMxNDAyBgNVBAMMK05ldyBZb3JrIFN0\nYXRlIERlcGFydG1lbnQgb2YgTW90b3IgVmVoaWNsZXMwHhcNMjMwNTAyMTczMzU1\nWhcNMzIwNDI5MTczMzU1WjCBiTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLU5Z\nMTQwMgYDVQQKDCtOZXcgWW9yayBTdGF0ZSBEZXBhcnRtZW50IG9mIE1vdG9yIFZl\naGljbGVzMTQwMgYDVQQDDCtOZXcgWW9yayBTdGF0ZSBEZXBhcnRtZW50IG9mIE1v\ndG9yIFZlaGljbGVzMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE42MYUmYNG5dN\nmmNDGLL7KqOrxC5ZmEoR5+5IeN2Mt29/rrBwHU8DDvVfB9juuBsDNPvFTXvzVX2M\nhSZQUgyx2KOBnTCBmjAdBgNVHQ4EFgQUfohMJhC3G2Ip6jAccpf1XZUhVoMwEgYD\nVR0TAQH/BAgwBgEB/wIBADAOBgNVHQ8BAf8EBAMCAQYwHgYDVR0SBBcwFYYTaHR0\ncHM6Ly9kbXYubnkuZ292LzA1BgNVHR8ELjAsMCqgKKAmhiRodHRwOi8vY3JsLm55\nLm1pZC40MzAwOTkubmV0L2NybC5wZW0wCgYIKoZIzj0EAwIDSAAwRQIgKnw9mSG6\n6Xs++voJyR8bp1FW+UTwjKNg0fQyg4M5KlsCIQCIHhKEg9eLpSYjIMYmSVN9+j+I\nZs6Zo4yxAMrX+0evbw==\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "aamva_dts"
+      ]
+    }
+  ]
+}

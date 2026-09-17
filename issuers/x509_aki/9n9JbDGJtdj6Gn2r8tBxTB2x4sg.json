@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:9n9JbDGJtdj6Gn2r8tBxTB2x4sg",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "UT",
+    "government_level": "state",
+    "official_name": "Utah DLD"
+  },
+  "display": {
+    "name": "Utah DLD"
+  },
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIICqzCCAjCgAwIBAgIQVDs0QLsZhMukS+BwIfFigzAKBggqhkjOPQQDAzBMMQsw\nCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtVVQxETAPBgNVBAoMCFV0YWggRExEMRow\nGAYDVQQDDBFJQUNBLVVUQUgtVVNBLTAwMjAeFw0yNTExMTgxODEwMTNaFw0zNDEx\nMTYxODEwMTNaMEwxCzAJBgNVBAYTAlVTMQ4wDAYDVQQIDAVVUy1VVDERMA8GA1UE\nCgwIVXRhaCBETEQxGjAYBgNVBAMMEUlBQ0EtVVRBSC1VU0EtMDAyMHYwEAYHKoZI\nzj0CAQYFK4EEACIDYgAES51HwAosCAGDoSaq4JnMBClPXRDcmkn83d5rO6yGb7az\nBkacOXlt67HkHcCEs1XwhYG2FbyhGoeBCzQ4XarUjT2oyD8RefvEqHGJzlZrKyZP\nxsoJmuS4TNvAwo6ORZKmo4HWMIHTMBIGA1UdEwEB/wQIMAYBAf8CAQAwHwYDVR0j\nBBgwFoAU9n9JbDGJtdj6Gn2r8tBxTB2x4sgwJgYDVR0SBB8wHYYbaHR0cHM6Ly9t\nb2JpbGVkbC51cy9pYWNhLXV0MEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly93d3cu\nbW9iaWxlZGwudXMvdXQtaWFjYS9tZGxEUy1VVEFILVVTQTAwMi5jcmwwHQYDVR0O\nBBYEFPZ/SWwxibXY+hp9q/LQcUwdseLIMA4GA1UdDwEB/wQEAwIBBjAKBggqhkjO\nPQQDAwNpADBmAjEA+a5OO6tzZueZpAfPKmRYb9nHCDVDRQY+KfM+SeAioUfTGV/a\nJnzt70DvofF3dPmqAjEAv6gcMWJjpTn80kPNilwut9CktSPSFgradc6mjEGJ4VuR\n6GcOsRh18Ipc3BOBJa7U\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "aamva_dts"
+      ]
+    }
+  ]
+}
