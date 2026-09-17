@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:b9DZ1a1rB5VI5dmeMrHSoB26bdU",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "KY",
+    "government_level": "state",
+    "official_name": "Kentucky Transportation Cabinet"
+  },
+  "display": {
+    "name": "Kentucky Transportation Cabinet"
+  },
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIIC7DCCAnKgAwIBAgIUeRPJKXD1/zfh4qF1e+yMmUj/0kAwCgYIKoZIzj0EAwMw\nczELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUtZMSgwJgYDVQQKDB9LZW50dWNr\neSBUcmFuc3BvcnRhdGlvbiBDYWJpbmV0MSowKAYDVQQDDCFVUy1LWSBQUk9EIElB\nQ0EgZm9yIElERU1JQSBXYWxsZXQwHhcNMjUxMDA5MTgxNzMxWhcNMzQxMDA4MTgx\nNzMxWjBzMQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtS1kxKDAmBgNVBAoMH0tl\nbnR1Y2t5IFRyYW5zcG9ydGF0aW9uIENhYmluZXQxKjAoBgNVBAMMIVVTLUtZIFBS\nT0QgSUFDQSBmb3IgSURFTUlBIFdhbGxldDB2MBAGByqGSM49AgEGBSuBBAAiA2IA\nBNZot0WFMZlxy2jbH25VvvdVyiPqk5v8ijgg4n5e1zFO8hFXKqPqi1PVUobZ8h4i\nQvfP8HTghxRMS3D46UDw5QOTIrLLnSMq9CZX/z06h+IVC5WBO4/ZjcOl8q5TBa+H\n96OBxjCBwzAdBgNVHQ4EFgQUb9DZ1a1rB5VI5dmeMrHSoB26bdUwDgYDVR0PAQH/\nBAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQAwKQYDVR0SBCIwIIYeaHR0cHM6Ly90\ncmFuc3BvcnRhdGlvbi5reS5nb3YvMFMGA1UdHwRMMEowSKBGoESGQmh0dHA6Ly9t\nZGwudHJhbnNwb3J0YXRpb24ua3kuZ292L3VzLWt5LXByb2QtaWFjYS1pZGVtaWEt\nd2FsbGV0LmNybDAKBggqhkjOPQQDAwNoADBlAjEA31f+/XCMpVN/z6kzBdzluQQ3\nAg0CCM/0DrJIVeGXeFAC5bmJgWBrkNe/h3VAyYywAjBdf6kN4WuRMUxWxULyQ0s5\nWNOYG9BCIVv36uJH6DuwCT8ZEsAGhUlX+pPT1ZFQSAA=\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "aamva_dts"
+      ]
+    }
+  ]
+}
