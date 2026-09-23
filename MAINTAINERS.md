@@ -39,7 +39,7 @@ Patch releases are for issuer updates and bug fixes within the same minor versio
 6. **Commit changes**
    ```bash
    git add ./
-   git commit 0.0.7
+   git commit -m "0.0.7"
    ```
 
 7. **Publish**
