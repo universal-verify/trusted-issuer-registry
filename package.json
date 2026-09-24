@@ -12,6 +12,7 @@
     "lint": "eslint ./scripts --ext .js",
     "lint-fix": "eslint ./scripts --ext .js --fix",
     "test": "node --test",
+    "decode-certificate": "node scripts/utils/decode-certificate.js",
     "deprecate": "node scripts/utils/add-deprecation-notice.js",
     "sign-issuers": "node scripts/utils/sign-issuers.js",
     "update-issuers": "node scripts/utils/update-issuers.js",

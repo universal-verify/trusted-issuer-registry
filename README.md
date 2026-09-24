@@ -115,6 +115,22 @@ Each issuer entry follows the schema defined in `trusted-issuer.schema.json`. He
 
 For the complete schema definition, see [trusted-issuer.schema.json](trusted-issuer.schema.json).
 
+### Inspecting Issuer Certificates
+
+To decode and print all X.509 certificates embedded in an issuer file:
+
+```bash
+npm run decode-certificate -- issuers/x509_aki/TprRzaFBJ1SLjJsO01tlLCQ4YF0.json
+```
+
+The command uses the local `openssl` binary to print decoded certificate details.
+
+To decode only one certificate from a multi-certificate issuer file, pass a 1-based index:
+
+```bash
+npm run decode-certificate -- issuers/x509_aki/TprRzaFBJ1SLjJsO01tlLCQ4YF0.json --index 1
+```
+
 ## Versioning and Deprecation
 
 The registry uses semantic versioning with the following approach:
