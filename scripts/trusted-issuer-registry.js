@@ -8,19 +8,34 @@ class TrustedIssuerRegistry {
         this._cacheTTL = options.cacheTTL ?? 1000 * 60 * 60 * 24; // 24 hours
         this._urlBase = options.useTestData ? TEST_REGISTRY_URL_BASE : REGISTRY_URL_BASE;
         this._cache = {};
+        this._deprecationCache = null;
     }
 
     async getEndOfLifeDate() {
+        if (this._cacheEnabled && this._deprecationCache && this._deprecationCache.expiresAt > Date.now()) return this._copyDate(this._deprecationCache.endOfLifeDate);
+
         const response = await fetch(`${this._urlBase}/deprecation_notice.json`);
+        let endOfLifeDate = null;
         if (response.ok) {
             const deprecationNotice = await response.json();
-            if(!deprecationNotice.version) return null;
-            const [major, minor] = deprecationNotice.version.split('.').map(Number);
-            const [currentMajor, currentMinor] = MINOR_VERSION.split('.').map(Number);
-            if(major < currentMajor || (major === currentMajor && minor < currentMinor)) return null;
-            return new Date(deprecationNotice.end_of_life * 1000);
+            if(deprecationNotice.version) {
+                const [major, minor] = deprecationNotice.version.split('.').map(Number);
+                const [currentMajor, currentMinor] = MINOR_VERSION.split('.').map(Number);
+                if(!(major < currentMajor || (major === currentMajor && minor < currentMinor))) endOfLifeDate = new Date(deprecationNotice.end_of_life * 1000);
+            }
+        } else if (response.status === 404) {
+            endOfLifeDate = null;
+        } else {
+            throw new Error(`Failed to fetch deprecation notice: ${response.status} ${response.statusText || ''}`.trim());
         }
-        return null;
+
+        if (this._cacheEnabled) {
+            this._deprecationCache = {
+                endOfLifeDate,
+                expiresAt: Date.now() + this._cacheTTL
+            };
+        }
+        return this._copyDate(endOfLifeDate);
     }
 
     async getIssuerFromX509AKI(x509aki) {
@@ -38,11 +53,15 @@ class TrustedIssuerRegistry {
                 };
             }
             return this._deepCopy(issuer);
-        } else if (this._cacheEnabled) {
-            this._cache[x509aki] = {
-                issuer: null,
-                expiresAt: Date.now() + this._cacheTTL
-            };
+        } else if (response.status === 404) {
+            if (this._cacheEnabled) {
+                this._cache[x509aki] = {
+                    issuer: null,
+                    expiresAt: Date.now() + this._cacheTTL
+                };
+            }
+        } else {
+            throw new Error(`Failed to fetch issuer ${x509aki}: ${response.status} ${response.statusText || ''}`.trim());
         }
 
         return null;
@@ -66,6 +85,10 @@ class TrustedIssuerRegistry {
 
     _deepCopy(obj) {
         return JSON.parse(JSON.stringify(obj));
+    }
+
+    _copyDate(date) {
+        return date ? new Date(date.getTime()) : null;
     }
 
     static minorVersion = MINOR_VERSION;

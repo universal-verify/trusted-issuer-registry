@@ -63,18 +63,18 @@ You can also access issuer data directly via HTTP requests to a CDN:
 
 ```bash
 # Get issuer by X.509 AKI
-curl https://cdn.jsdelivr.net/npm/trusted-issuer-registry@0.0/x509_aki/TprRzaFBJ1SLjJsO01tlLCQ4YF0.json
+curl https://cdn.jsdelivr.net/npm/trusted-issuer-registry@0.1/issuers/x509_aki/TprRzaFBJ1SLjJsO01tlLCQ4YF0.json
 
 # Check deprecation notice
-curl https://cdn.jsdelivr.net/npm/trusted-issuer-registry@0.0/deprecation_notice.json
+curl https://cdn.jsdelivr.net/npm/trusted-issuer-registry@0.1/deprecation_notice.json
 ```
 
 The URL format is:
 ```
-https://cdn.jsdelivr.net/npm/trusted-issuer-registry@{minor_version}/x509_aki/{x509aki}.json
+https://cdn.jsdelivr.net/npm/trusted-issuer-registry@{minor_version}/issuers/x509_aki/{x509aki}.json
 ```
 
-Replace `{minor_version}` with the current minor version (e.g., `0.0`) and `{x509aki}` with the X.509 Authority Key Identifier.
+Replace `{minor_version}` with the current minor version (e.g., `0.1`) and `{x509aki}` with the X.509 Authority Key Identifier.
 
 ## Issuer Data Format
 
@@ -153,18 +153,19 @@ if (endOfLifeDate && endOfLifeDate < new Date()) {
 Or check directly:
 
 ```bash
-curl https://cdn.jsdelivr.net/npm/trusted-issuer-registry@0.0/deprecation_notice.json
+curl https://cdn.jsdelivr.net/npm/trusted-issuer-registry@0.1/deprecation_notice.json
 ```
 
 The deprecation notice format is:
 
 ```json
 {
+  "version": "0.1",
   "end_of_life": 1761782400
 }
 ```
 
-Where `end_of_life` is a Unix timestamp in seconds indicating when the current version will be deprecated.
+Where `end_of_life` is a Unix timestamp in seconds indicating when that version will be deprecated.
 
 ## Future Support
 
