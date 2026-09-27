@@ -4,6 +4,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 export default [
     {
         input: 'scripts/trusted-issuer-registry.js',
+        external: ['asn1js', 'canonical-json', 'pkijs'],
         output: [{
             file: 'build/trusted-issuer-registry.js',
             format: 'es',
