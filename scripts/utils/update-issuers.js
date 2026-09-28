@@ -35,9 +35,9 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-function updateIssuerFiles(issuers) {
-    const issuersDir = path.resolve(__dirname, '../..', 'issuers', 'x509_aki');
-    let deletedCount = 0;
+function updateIssuerFiles(issuers, options = {}) {
+    const issuersDir = options.issuersDir || path.resolve(__dirname, '../..', 'issuers', 'x509_aki');
+    let retiredCount = 0;
     let createdCount = 0;
     let updatedCount = 0;
 
@@ -51,12 +51,20 @@ function updateIssuerFiles(issuers) {
         .filter(file => file.endsWith('.json'))
         .map(file => file.replace('.json', ''));
 
-    // Delete files that don't have corresponding issuers
+    // Retain issuer files that no longer have corresponding trust-list data,
+    // but remove their certificate entries. The reason we can't just delete the
+    // issuer file is because requesting issuers from CDNs based on minor
+    // version will resolve to the last patch version where the file existed,
+    // which would cause people to get outdated trust-list information
     existingFiles.forEach(filename => {
         if (!issuers[filename]) {
             const filePath = path.join(issuersDir, `${filename}.json`);
-            fs.unlinkSync(filePath);
-            deletedCount++;
+            const existingData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+            if (!Array.isArray(existingData.certificates) || existingData.certificates.length > 0) {
+                existingData.certificates = [];
+                fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
+                retiredCount++;
+            }
         }
     });
 
@@ -83,10 +91,12 @@ function updateIssuerFiles(issuers) {
         }
     });
 
-    if(deletedCount > 0) console.log(`Deleted ${deletedCount} issuer files`);
+    if(retiredCount > 0) console.log(`Retired ${retiredCount} issuer files to certificate-less tombstones`);
     if(createdCount > 0) console.log(`Created ${createdCount} issuer files`);
     if(updatedCount > 0) console.log(`Updated ${updatedCount} issuer files`);
-    if(!deletedCount && !createdCount && !updatedCount) console.log('No changes made to issuer files');
+    if(!retiredCount && !createdCount && !updatedCount) console.log('No changes made to issuer files');
+
+    return { retiredCount, createdCount, updatedCount };
 }
 
 // Run the script if called directly
@@ -98,4 +108,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
         });
 }
 
-export { updateIssuers };
+export { updateIssuers, updateIssuerFiles };
