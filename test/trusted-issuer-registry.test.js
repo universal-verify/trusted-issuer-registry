@@ -1,13 +1,40 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import TrustedIssuerRegistry from '../scripts/trusted-issuer-registry.js';
-import { MINOR_VERSION } from '../scripts/constants.js';
+import { MINOR_VERSION, REGISTRY_URL_BASE } from '../scripts/constants.js';
 
-const registry = new TrustedIssuerRegistry({ useTestData: true });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+function readIssuerFixture(aki) {
+    const issuerPath = path.resolve(__dirname, '..', 'issuers', 'x509_aki', `${aki}.json`);
+    return JSON.parse(fs.readFileSync(issuerPath, 'utf8'));
+}
 
 test('getIssuerFromX509AKI', async () => {
-    const issuer = await registry.getIssuerFromX509AKI('q2Ub4FbCkFPx3X9s5Ie-aN5gyfU');
-    assert.equal(issuer.issuer_id, 'x509_aki:q2Ub4FbCkFPx3X9s5Ie-aN5gyfU');
+    const originalFetch = globalThis.fetch;
+    const aki = 'taXH_AFcuSnQgLECaiofOquMVcQ';
+    const issuerFixture = readIssuerFixture(aki);
+    const issuerUrl = `${REGISTRY_URL_BASE}/issuers/x509_aki/${aki}.json`;
+
+    try {
+        globalThis.fetch = async url => {
+            assert.equal(url, issuerUrl);
+            return {
+                ok: true,
+                json: async () => JSON.parse(JSON.stringify(issuerFixture))
+            };
+        };
+
+        const registry = new TrustedIssuerRegistry({ cacheEnabled: false });
+        const issuer = await registry.getIssuerFromX509AKI(aki);
+        assert.equal(issuer.issuer_id, `x509_aki:${aki}`);
+    } finally {
+        globalThis.fetch = originalFetch;
+    }
 });
 
 test('minorVersion', () => {

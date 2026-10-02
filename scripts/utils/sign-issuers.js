@@ -152,8 +152,7 @@ async function signIssuers(privateKeyPem) {
 
         // Define directories to process
         const directories = [
-            path.join(projectRoot, 'issuers'),
-            path.join(projectRoot, 'test', 'issuers')
+            path.join(projectRoot, 'issuers')
         ];
 
         let totalFiles = 0;

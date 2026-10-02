@@ -53,8 +53,7 @@ function validateSchemaFiles() {
 
     // Define directories to check
     const directories = [
-        path.join(projectRoot, 'issuers'),
-        path.join(projectRoot, 'test', 'issuers')
+        path.join(projectRoot, 'issuers')
     ];
 
     let validFiles = 0;

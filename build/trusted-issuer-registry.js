@@ -4,7 +4,6 @@ import stringify from 'canonical-json';
 
 const MINOR_VERSION = '0.1';
 const REGISTRY_URL_BASE = `https://cdn.jsdelivr.net/npm/trusted-issuer-registry@${MINOR_VERSION}`;
-const TEST_REGISTRY_URL_BASE = `${REGISTRY_URL_BASE}/test`;
 const PUBLIC_SIGNING_CERT = `-----BEGIN CERTIFICATE-----
 MIIBnDCCAUGgAwIBAgIUekpHX8hoNIrffOfU7MBBNgLJQ2IwCgYIKoZIzj0EAwIw
 IzEhMB8GA1UEAwwYVW5pdmVyc2FsIFZlcmlmeSBSb290IENBMB4XDTI1MDgwNzE4
@@ -178,7 +177,7 @@ class TrustedIssuerRegistry {
     constructor(options = {}) {
         this._cacheEnabled = options.cacheEnabled ?? true;
         this._cacheTTL = options.cacheTTL ?? 1000 * 60 * 60 * 24; // 24 hours
-        this._urlBase = options.useTestData ? TEST_REGISTRY_URL_BASE : REGISTRY_URL_BASE;
+        this._urlBase = REGISTRY_URL_BASE;
         this._cache = {};
         this._deprecationCache = null;
     }

@@ -1,4 +1,4 @@
-import { REGISTRY_URL_BASE, PUBLIC_SIGNING_CERT, TEST_REGISTRY_URL_BASE, MINOR_VERSION } from './constants.js';
+import { REGISTRY_URL_BASE, PUBLIC_SIGNING_CERT, MINOR_VERSION } from './constants.js';
 import { verifySignatureWithPem } from './certificate-helper.js';
 import stringify from 'canonical-json';
 
@@ -6,7 +6,7 @@ class TrustedIssuerRegistry {
     constructor(options = {}) {
         this._cacheEnabled = options.cacheEnabled ?? true;
         this._cacheTTL = options.cacheTTL ?? 1000 * 60 * 60 * 24; // 24 hours
-        this._urlBase = options.useTestData ? TEST_REGISTRY_URL_BASE : REGISTRY_URL_BASE;
+        this._urlBase = REGISTRY_URL_BASE;
         this._cache = {};
         this._deprecationCache = null;
     }
