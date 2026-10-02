@@ -1,4 +1,4 @@
-export const MINOR_VERSION = '0.1';
+export const MINOR_VERSION = '0.2';
 export const REGISTRY_URL_BASE = `https://cdn.jsdelivr.net/npm/trusted-issuer-registry@${MINOR_VERSION}`;
 export const PUBLIC_SIGNING_CERT = `-----BEGIN CERTIFICATE-----
 MIIBmjCCAUGgAwIBAgIULVFa5+g4perqTRJKDErRMXThCmAwCgYIKoZIzj0EAwIw
