@@ -37,10 +37,9 @@ export default async function fetchFromAAMVA(obj = {}) {
             //console.log('certInfo', certInfo);
             if(certInfo.crlMissing) {
                 missingCRLCount++;
-            } else {
-                addCert(obj, certInfo);
-                count++;
             }
+            addCert(obj, certInfo);
+            count++;
         }
 
         if(missingCRLCount > 0) console.warn(`${missingCRLCount} certificate(s) have missing CRLs`);

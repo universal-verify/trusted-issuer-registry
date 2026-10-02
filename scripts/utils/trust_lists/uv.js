@@ -33,10 +33,9 @@ export default async function fetchFromUV(obj = {}) {
                     const certInfo = getCertInfo(cert.data);
                     if(certInfo.crlMissing) {
                         missingCRLCount++;
-                    } else {
-                        addCert(obj, certInfo);
-                        count++;
                     }
+                    addCert(obj, certInfo);
+                    count++;
                 }
             } else {
                 console.warn(`Skipping issuer ${issuer.issuer_id} - no certificates array`);
