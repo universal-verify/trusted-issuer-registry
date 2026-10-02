@@ -1,4 +1,5 @@
 import getCertInfo from '../extract-pem-info.js';
+import { createCertificateEntry, sortCertificateEntries } from '../certificate-ordering.js';
 import * as cbor2 from 'cbor2';
 
 /**
@@ -67,11 +68,7 @@ function addCert(obj, certInfo) {
             'display': {
                 'name': certInfo.subject.organization || certInfo.subject.commonName || '',
             },
-            'certificates': [{
-                'data': certInfo.pemContent,
-                'format': 'pem',
-                'trust_lists': ['aamva_dts']
-            }]
+            'certificates': [createCertificateEntry(certInfo, 'aamva_dts')]
         };
     } else {
         for(const cert of obj[certInfo.aki].certificates) {
@@ -82,11 +79,8 @@ function addCert(obj, certInfo) {
                 return;
             }
         }
-        obj[certInfo.aki].certificates.push({
-            'data': certInfo.pemContent,
-            'format': 'pem',
-            'trust_lists': ['aamva_dts']
-        });
+        obj[certInfo.aki].certificates.push(createCertificateEntry(certInfo, 'aamva_dts'));
+        sortCertificateEntries(obj[certInfo.aki].certificates);
     }
 }
 

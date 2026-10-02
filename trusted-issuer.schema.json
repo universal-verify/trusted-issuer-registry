@@ -109,7 +109,7 @@
         },
         "additionalProperties": false
       },
-      "description": "Array of certificates issued with the same subject key identifier with the most recent first. It is expected that only one certificate per subject is present, so if only updating the expiration date, the old certificate should be removed when adding the new one. This array may become empty when an issuer loses all current trust-list support due to how minor-version caching works."
+      "description": "Array of certificates issued with the same subject key identifier, ordered by X.509 notBefore descending, then notAfter descending, then PEM content as a deterministic tie-breaker. It is expected that only one certificate per subject is present, so if only updating the expiration date, the old certificate should be removed when adding the new one. This array may become empty when an issuer loses all current trust-list support due to how minor-version caching works."
     },
     "signature": {
       "type": "string",

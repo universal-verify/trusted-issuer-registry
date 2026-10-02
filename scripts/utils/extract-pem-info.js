@@ -84,6 +84,24 @@ export default function extractCertificateInfo(pemContent) {
             throw new Error('Subject information not found in certificate');
         }
 
+        const notBeforeMatch = opensslOutput.match(/Not Before:\s*([^\n]+)/);
+        if (!notBeforeMatch) {
+            throw new Error('Not Before date not found in certificate');
+        }
+        const notBeforeMs = Date.parse(notBeforeMatch[1].trim());
+        if (!Number.isFinite(notBeforeMs)) {
+            throw new Error(`Could not parse Not Before date: ${notBeforeMatch[1].trim()}`);
+        }
+
+        const notAfterMatch = opensslOutput.match(/Not After\s*:\s*([^\n]+)/);
+        if (!notAfterMatch) {
+            throw new Error('Not After date not found in certificate');
+        }
+        const notAfterMs = Date.parse(notAfterMatch[1].trim());
+        if (!Number.isFinite(notAfterMs)) {
+            throw new Error(`Could not parse Not After date: ${notAfterMatch[1].trim()}`);
+        }
+
         // Parse subject components
         const subject = subjectMatch[1];
         const subjectParts = {};
@@ -117,6 +135,8 @@ export default function extractCertificateInfo(pemContent) {
             aki: hexToUrlSafeBase64(skiValue),
             subject: subjectParts,
             pemContent: certificateContent,
+            notBeforeMs,
+            notAfterMs,
             crlMissing: crlMatch ? false : true
         };
     } catch (error) {

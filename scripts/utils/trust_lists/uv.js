@@ -1,4 +1,5 @@
 import getCertInfo from '../extract-pem-info.js';
+import { createCertificateEntry, sortCertificateEntries } from '../certificate-ordering.js';
 
 /**
  * Fetches issuer data from Universal Verify trust list
@@ -67,11 +68,7 @@ function addCert(obj, certInfo) {
             'display': {
                 'name': certInfo.subject.organization || certInfo.subject.commonName || '',
             },
-            'certificates': [{
-                'data': certInfo.pemContent,
-                'format': 'pem',
-                'trust_lists': ['uv']
-            }]
+            'certificates': [createCertificateEntry(certInfo, 'uv')]
         };
     } else {
         for(const cert of obj[certInfo.aki].certificates) {
@@ -82,11 +79,8 @@ function addCert(obj, certInfo) {
                 return;
             }
         }
-        obj[certInfo.aki].certificates.push({
-            'data': certInfo.pemContent,
-            'format': 'pem',
-            'trust_lists': ['uv']
-        });
+        obj[certInfo.aki].certificates.push(createCertificateEntry(certInfo, 'uv'));
+        sortCertificateEntries(obj[certInfo.aki].certificates);
     }
 }
 
