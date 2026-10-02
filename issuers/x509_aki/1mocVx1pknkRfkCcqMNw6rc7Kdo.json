@@ -1,0 +1,22 @@
+{
+  "issuer_id": "x509_aki:1mocVx1pknkRfkCcqMNw6rc7Kdo",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "IL",
+    "government_level": "state",
+    "official_name": "Illinois Secretary of State"
+  },
+  "display": {
+    "name": "Illinois Secretary of State"
+  },
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIIDEjCCArigAwIBAgISCHL1YIc7QrNbTZ7wVlsBd1H7MAoGCCqGSM49BAMCMIGI\nMQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtSUwxFDASBgNVBAcMC1NwcmluZ2Zp\nZWxkMSQwIgYDVQQKDBtJbGxpbm9pcyBTZWNyZXRhcnkgb2YgU3RhdGUxCzAJBgNV\nBAsMAklUMSAwHgYDVQQDDBdQcm9kIElBQ0EgUm9vdCAwNTAxMjAyNjAeFw0yNjA1\nMDExNTU2MzVaFw00NTA1MDExNTU2MzVaMIGIMQswCQYDVQQGEwJVUzEOMAwGA1UE\nCAwFVVMtSUwxFDASBgNVBAcMC1NwcmluZ2ZpZWxkMSQwIgYDVQQKDBtJbGxpbm9p\ncyBTZWNyZXRhcnkgb2YgU3RhdGUxCzAJBgNVBAsMAklUMSAwHgYDVQQDDBdQcm9k\nIElBQ0EgUm9vdCAwNTAxMjAyNjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABEgH\nmKbCu1sR5ewcxJAhjTKXpV9D/t1VlIJSRNTP8vNHAp2a/0TWV6lFiSbJOkdviiuy\n6k4W6AVs0E7fSZEuHUujgf8wgfwwHQYDVR0OBBYEFNZqHFcdaZJ5EX5AnKjDcOq3\nOynaMA4GA1UdDwEB/wQEAwIBBjASBgNVHSUECzAJBgcogYxdBQECMBgGA1UdEQQR\nMA+BDXBraUBpbHNvcy5nb3YwGAYDVR0SBBEwD4ENcGtpQGlsc29zLmdvdjBvBgNV\nHR8EaDBmMGSgYqBghl5odHRwOi8vY3JsLmlsc29zLm5ldC9kb2l0a2Nzc2FwY3Vz\nY3JsLzZlMTNlOWI1LWQxYWItNGJhYS04MjFkLTIyYzczNDBjMmQwYS9Qcm9kSUFD\nQVJvb3QwNTAuY3JsMBIGA1UdEwEB/wQIMAYBAf8CAQAwCgYIKoZIzj0EAwIDSAAw\nRQIhAM7ALtEXRfmqF9/x7fZq0fqR4EBYS6E8CEN0SwX4PtsxAiA/qLOcGs+YxGz+\nw2pprjHYcK1QArsq2BE/l9wcllnHAA==\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "uv"
+      ]
+    }
+  ]
+}
