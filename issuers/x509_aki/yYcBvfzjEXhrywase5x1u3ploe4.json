@@ -3,13 +3,14 @@
   "entity_type": "government",
   "entity_metadata": {
     "country": "US",
-    "region": "NM",
-    "government_level": "state",
-    "official_name": "New Mexico Taxation and Revenue Department"
+    "region": "NM"
   },
   "display": {
     "name": "New Mexico Taxation and Revenue Department"
   },
+  "trust_scopes": [
+    "government_issued_id"
+  ],
   "certificates": [],
   "signature": "MEUCIQCbSkymbYp9ZfOyKN5lZXVXOuaVURCiYcaODDWAJOXWgQIgeMdCM1OAK4U+6ZzB+bfZ7q3WF/URM90wKWGReZp0+k4="
 }

@@ -86,13 +86,12 @@ Each issuer entry follows the schema defined in `trusted-issuer.schema.json`. He
   "entity_type": "government",
   "entity_metadata": {
     "country": "US",
-    "region": "AZ",
-    "government_level": "state",
-    "official_name": "Arizona Department of Transportation"
+    "region": "AZ"
   },
   "display": {
     "name": "Arizona Department of Transportation"
   },
+  "trust_scopes": ["government_issued_id"],
   "certificates": [
     {
       "data": "-----BEGIN CERTIFICATE-----\n...",
@@ -110,8 +109,9 @@ Each issuer entry follows the schema defined in `trusted-issuer.schema.json`. He
 - **`entity_type`**: Type of organization (government, commercial, educational, etc.)
 - **`entity_metadata`**: Additional metadata about the entity
 - **`display`**: Human-readable display information
+- **`trust_scopes`**: Contexts where this issuer should be trusted, such as government-issued ID verification or document signing
 - **`certificates`**: Array of certificates using the given AKI
-- **`trust_lists`**: Source trust lists that vouch for this issuer
+- **Certificate `trust_lists`**: Source trust lists that vouch for each certificate
 
 For the complete schema definition, see [trusted-issuer.schema.json](trusted-issuer.schema.json).
 
@@ -166,10 +166,6 @@ The deprecation notice format is:
 ```
 
 Where `end_of_life` is a Unix timestamp in seconds indicating when that version will be deprecated.
-
-## Future Support
-
-Currently, the registry supports X.509 certificate-based issuers. Support for W3C Decentralized Identifiers (DIDs) will be added as trusted issuers begin adopting this standard.
 
 ## Security Considerations
 

@@ -3,13 +3,14 @@
   "entity_type": "government",
   "entity_metadata": {
     "country": "US",
-    "region": "AZ",
-    "government_level": "state",
-    "official_name": "Arizona Department of Transportation"
+    "region": "AZ"
   },
   "display": {
     "name": "Arizona Department of Transportation"
   },
+  "trust_scopes": [
+    "government_issued_id"
+  ],
   "certificates": [],
   "signature": "MEQCIAnwDkO7qwZq2yFfMMNc3w5uYyB5P3rOKcjCKTqURZQ8AiBsgUrYJ0NSW9xnO0G6sXk4Q9bz/yszI/ToRKMEUi50pQ=="
 }

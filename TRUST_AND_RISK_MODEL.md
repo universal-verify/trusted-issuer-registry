@@ -5,8 +5,7 @@ This document outlines the trust model, threat considerations, and mitigation st
 
 ## 1. Trust Model
 - We aggregate and validate trusted issuers recognized by authoritative trust lists (AAMVA DTS VICAL, Universal Verify, etc.).
-- Each issuer is associated with either a W3C Decentralized Identifier (DID) or X.509 certificates used to validate digital credentials
-  - Currently only issuers using certificates are available in the registry. Schema subject to change once issuers using DID are added
+- Each issuer is associated with X.509 certificates used to validate digital credentials.
 - Trust anchors (issuer certificates) are versioned and cryptographically verifiable.
 - Inclusion in the registry follows defined vetting criteria (see `TRUST_POLICY.md`).
 
@@ -84,4 +83,3 @@ This section outlines specific threat vectors relevant to the Trusted Issuer Reg
 
 ## 6. Contact and Reporting
 To report security concerns, please email kale@universalverify.com
-

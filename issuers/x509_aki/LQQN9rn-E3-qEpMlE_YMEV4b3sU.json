@@ -3,13 +3,14 @@
   "entity_type": "government",
   "entity_metadata": {
     "country": "US",
-    "region": "VA",
-    "government_level": "state",
-    "official_name": "VA mID IACA"
+    "region": "VA"
   },
   "display": {
     "name": "VA mID IACA"
   },
+  "trust_scopes": [
+    "government_issued_id"
+  ],
   "certificates": [],
   "signature": "MEUCIF3W7unudQ9J5D6EmsuTilWas54NMUVZ4qCQRqiAylOyAiEAxDS3Y4FHIkqeBx4aD2NIO9Yrbq7Sc6/REq0rMsPHQ64="
 }

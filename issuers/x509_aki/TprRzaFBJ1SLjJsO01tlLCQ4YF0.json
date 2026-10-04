@@ -3,13 +3,14 @@
   "entity_type": "government",
   "entity_metadata": {
     "country": "US",
-    "region": "MD",
-    "government_level": "state",
-    "official_name": "Maryland MVA"
+    "region": "MD"
   },
   "display": {
     "name": "Maryland MVA"
   },
+  "trust_scopes": [
+    "government_issued_id"
+  ],
   "certificates": [],
   "signature": "MEQCIEc5BHwuf8hb8B5kN8gZ/ZwL8j45CSJpetzghxQNZdUJAiBM6os8sFv6iOfenjrmNdZ9liMnpl4R0CSz0sycvnml7Q=="
 }

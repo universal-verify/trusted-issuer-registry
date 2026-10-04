@@ -17,12 +17,12 @@ function createIssuer(aki, certificates = [CERTIFICATE]) {
         entity_type: 'government',
         entity_metadata: {
             country: 'US',
-            government_level: 'state',
-            official_name: 'Example Issuer'
+            region: 'CA'
         },
         display: {
             name: 'Example Issuer'
         },
+        trust_scopes: ['government_issued_id'],
         certificates,
         signature: 'signature'
     };
@@ -87,4 +87,36 @@ test('updateIssuerFiles repopulates certificates for reactivated issuers', t => 
 
     assert.deepEqual(counts, { retiredCount: 0, createdCount: 0, updatedCount: 1 });
     assert.deepEqual(readIssuer(issuersDir, aki).certificates, [reactivatedCertificate]);
+});
+
+test('updateIssuerFiles preserves existing issuer metadata when certificates change', t => {
+    const issuersDir = createTempIssuersDir(t);
+    const aki = 'curated';
+    const updatedCertificate = {
+        data: '-----BEGIN CERTIFICATE-----\nUPDATED\n-----END CERTIFICATE-----',
+        format: 'pem',
+        trust_lists: ['uv']
+    };
+    const existingIssuer = createIssuer(aki);
+    existingIssuer.entity_type = 'commercial';
+    existingIssuer.entity_metadata = {
+        country: 'US',
+        region: 'NY'
+    };
+    existingIssuer.display = {
+        name: 'Curated Display Name'
+    };
+    existingIssuer.trust_scopes = ['document_signing'];
+
+    writeIssuer(issuersDir, existingIssuer);
+
+    const counts = updateIssuerFiles({ [aki]: createIssuer(aki, [updatedCertificate]) }, { issuersDir });
+    const updatedIssuer = readIssuer(issuersDir, aki);
+
+    assert.deepEqual(counts, { retiredCount: 0, createdCount: 0, updatedCount: 1 });
+    assert.equal(updatedIssuer.entity_type, 'commercial');
+    assert.deepEqual(updatedIssuer.entity_metadata, existingIssuer.entity_metadata);
+    assert.deepEqual(updatedIssuer.display, existingIssuer.display);
+    assert.deepEqual(updatedIssuer.trust_scopes, existingIssuer.trust_scopes);
+    assert.deepEqual(updatedIssuer.certificates, [updatedCertificate]);
 });

@@ -2,11 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Trusted Issuer Registry Entry",
   "type": "object",
-  "required": ["issuer_id", "entity_type", "entity_metadata", "display", "certificates", "signature"],
+  "required": ["issuer_id", "entity_type", "entity_metadata", "display", "trust_scopes", "certificates", "signature"],
   "properties": {
     "issuer_id": {
       "type": "string",
-      "description": "DID or unique identifier for the issuer"
+      "description": "Unique identifier for the issuer"
     },
     "entity_type": {
       "type": "string",
@@ -16,7 +16,6 @@
         "commercial",
         "non_profit",
         "international_body",
-        "federated_network",
         "other"
       ],
       "description": "The high-level category of the entity acting as the issuer"
@@ -32,36 +31,9 @@
         "region": {
           "type": "string",
           "description": "State/province/region if relevant"
-        },
-        "government_level": {
-          "type": "string",
-          "enum": ["national", "state", "local", "other"],
-          "description": "Applicable for entity_type=government"
-        },
-        "official_name": {
-          "type": "string",
-          "description": "Formal name of the government agency"
-        },
-        "institution_name": {
-          "type": "string",
-          "description": "Name of the educational institution"
-        },
-        "institution_type": {
-          "type": "string",
-          "enum": ["university", "college", "school", "training_provider", "other"],
-          "description": "Applicable for entity_type=educational_institution"
-        },
-        "accreditation_body": {
-          "type": "string",
-          "description": "Name or ID of the accrediting authority"
-        },
-        "public_registry_url": {
-          "type": "string",
-          "format": "uri",
-          "description": "URL to an official public registry or verification page for the entity"
         }
       },
-      "additionalProperties": true
+      "additionalProperties": false
     },
     "display": {
       "type": "object",
@@ -73,14 +45,15 @@
       },
       "additionalProperties": false
     },
-    "trust_lists": {
+    "trust_scopes": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["uv", "aamva_dts"]
+        "enum": ["government_issued_id", "document_signing"]
       },
+      "minItems": 0,
       "uniqueItems": true,
-      "description": "The trust lists under which this issuer is recognized (e.g., uv, aamva_dts)"
+      "description": "The trust contexts for which this issuer is recognized"
     },
     "certificates": {
       "type": "array",
@@ -116,46 +89,5 @@
       "description": "Signature over the canonicalized JSON, excluding this field"
     }
   },
-  "additionalProperties": false,
-  "allOf": [
-    {
-      "if": {
-        "properties": {
-          "issuer_id": {
-            "type": "string",
-            "pattern": "^x509_aki:"
-          }
-        }
-      },
-      "then": {
-        "required": ["certificates"]
-      }
-    },
-    {
-      "if": {
-        "properties": { "entity_type": { "const": "government" } }
-      },
-      "then": {
-        "properties": {
-          "entity_metadata": {
-            "type": "object",
-            "required": ["country", "official_name", "government_level"]
-          }
-        }
-      }
-    },
-    {
-      "if": {
-        "properties": { "entity_type": { "const": "educational_institution" } }
-      },
-      "then": {
-        "properties": {
-          "entity_metadata": {
-            "type": "object",
-            "required": ["country", "institution_name", "institution_type"]
-          }
-        }
-      }
-    }
-  ]
+  "additionalProperties": false
 }

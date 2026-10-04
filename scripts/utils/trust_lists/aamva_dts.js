@@ -60,13 +60,12 @@ function addCert(obj, certInfo) {
             'entity_type': 'government',
             'entity_metadata': {
                 'country': certInfo.subject.country || '',
-                'region': (region) ? region : undefined,
-                'government_level': (region) ? 'state' : 'national',
-                'official_name': certInfo.subject.organization || certInfo.subject.commonName || ''
+                'region': (region) ? region : undefined
             },
             'display': {
                 'name': certInfo.subject.organization || certInfo.subject.commonName || '',
             },
+            'trust_scopes': ['government_issued_id'],
             'certificates': [createCertificateEntry(certInfo, 'aamva_dts')]
         };
     } else {

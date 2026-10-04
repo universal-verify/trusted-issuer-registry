@@ -1,14 +1,15 @@
 {
   "issuer_id": "x509_aki:ZQ9wReJ1csNhZ3sfoWXy5Oxv0ac",
-  "entity_type": "government",
+  "entity_type": "commercial",
   "entity_metadata": {
-    "country": "US",
-    "government_level": "national",
-    "official_name": "Apple Inc."
+    "country": "US"
   },
   "display": {
     "name": "Apple Inc."
   },
+  "trust_scopes": [
+    "government_issued_id"
+  ],
   "certificates": [
     {
       "data": "-----BEGIN CERTIFICATE-----\nMIICazCCAfGgAwIBAgIQaoszpPsbgR517fbRv3ThWzAKBggqhkjOPQQDAzBVMQsw\nCQYDVQQGEwJVUzETMBEGA1UECgwKQXBwbGUgSW5jLjExMC8GA1UEAwwoQXBwbGUg\nSXNzdWluZyBBdXRob3JpdHkgRUNDIFJvb3QgQ0EgLSBHMTAeFw0yNTA0MjkyMTM2\nMzRaFw00NTA0MjQyMTM2MzNaMFUxCzAJBgNVBAYTAlVTMRMwEQYDVQQKDApBcHBs\nZSBJbmMuMTEwLwYDVQQDDChBcHBsZSBJc3N1aW5nIEF1dGhvcml0eSBFQ0MgUm9v\ndCBDQSAtIEcxMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE7BhFhUOAzjz0TB/8hOTL\neC3PmqdOjQ/k/ZYNx2l4+N6u9x1N7qXpLqgy2IygddjsyDydeuRW+oxoderlKKuz\nTJGEfw5B/MxGbRsq7ybzVpWaSLfdKFn/Wyg+0XA1wzN3o4GFMIGCMA8GA1UdEwEB\n/wQFMAMBAf8wQAYDVR0SBDkwN4Y1aHR0cHM6Ly93d3cuYXBwbGUuY29tL2NlcnRp\nZmljYXRlYXV0aG9yaXR5L2Fwa2kyMDI1MDUwHQYDVR0OBBYEFGUPcEXidXLDYWd7\nH6Fl8uTsb9GnMA4GA1UdDwEB/wQEAwIBBjAKBggqhkjOPQQDAwNoADBlAjEA93FE\nMcoJf8hVP080WdFFb1bAROvmiOW/GGfvg7IMGC2T0uS1guywZJ1kIoc5hHjoAjBT\nKjBXbunuxyMjUo07mXnfGDkCkW+ggIswW+mxcrKZvEy1EOciol+/N0ViI9jnBRw=\n-----END CERTIFICATE-----",

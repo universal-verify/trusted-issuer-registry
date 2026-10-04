@@ -34,7 +34,7 @@ export default async function fetchFromUV(obj = {}) {
                     if(certInfo.crlMissing) {
                         missingCRLCount++;
                     }
-                    addCert(obj, certInfo);
+                    addCert(obj, certInfo, issuer.entity_type || 'government');
                     count++;
                 }
             } else {
@@ -51,22 +51,21 @@ export default async function fetchFromUV(obj = {}) {
     }
 }
 
-function addCert(obj, certInfo) {
+function addCert(obj, certInfo, entityType = 'government') {
     const region = (certInfo.subject.state) ? certInfo.subject.state.replace('US-', '') : '';
 
     if(!obj[certInfo.aki]) {
         obj[certInfo.aki] = {
             'issuer_id': `x509_aki:${certInfo.aki}`,
-            'entity_type': 'government',
+            'entity_type': entityType,
             'entity_metadata': {
                 'country': certInfo.subject.country || '',
-                'region': (region) ? region : undefined,
-                'government_level': (region) ? 'state' : 'national',
-                'official_name': certInfo.subject.organization || certInfo.subject.commonName || ''
+                'region': (region) ? region : undefined
             },
             'display': {
                 'name': certInfo.subject.organization || certInfo.subject.commonName || '',
             },
+            'trust_scopes': ['government_issued_id'],
             'certificates': [createCertificateEntry(certInfo, 'uv')]
         };
     } else {

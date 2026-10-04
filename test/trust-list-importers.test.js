@@ -44,10 +44,12 @@ function captureWarnings(t) {
     return warnings;
 }
 
-function assertMissingCrlCertificateImported(issuers, trustList) {
+function assertMissingCrlCertificateImported(issuers, trustList, entityType = 'government') {
     const issuer = issuers[APPLE_ROOT_AKI];
 
     assert.equal(issuer.issuer_id, `x509_aki:${APPLE_ROOT_AKI}`);
+    assert.equal(issuer.entity_type, entityType);
+    assert.deepEqual(issuer.trust_scopes, ['government_issued_id']);
     assert.equal(issuer.display.name, 'Apple Inc.');
     assert.equal(issuer.certificates.length, 1);
     assert.deepEqual(issuer.certificates[0].trust_lists, [trustList]);
@@ -63,6 +65,7 @@ test('fetchFromUV imports certificates that do not advertise a CRL', async t => 
             json: async () => [
                 {
                     issuer_id: `x509_aki:${APPLE_ROOT_AKI}`,
+                    entity_type: 'commercial',
                     certificates: [
                         {
                             data: APPLE_ROOT_CERT_WITHOUT_CRL,
@@ -75,7 +78,7 @@ test('fetchFromUV imports certificates that do not advertise a CRL', async t => 
 
         const issuers = await fetchFromUV();
 
-        assertMissingCrlCertificateImported(issuers, 'uv');
+        assertMissingCrlCertificateImported(issuers, 'uv', 'commercial');
         assert.ok(warnings.includes('1 certificate(s) have missing CRLs'));
     } finally {
         globalThis.fetch = originalFetch;

@@ -3,13 +3,14 @@
   "entity_type": "government",
   "entity_metadata": {
     "country": "US",
-    "region": "CO",
-    "government_level": "state",
-    "official_name": "Colorado Department of Revenue"
+    "region": "CO"
   },
   "display": {
     "name": "Colorado Department of Revenue"
   },
+  "trust_scopes": [
+    "government_issued_id"
+  ],
   "certificates": [],
   "signature": "MEUCIAz8QvBlzmU104tRP6TD0SiAwKEk5tEAuFagad3AiLp9AiEA1N3hHPD3uymE/Qk/a7mRO8kRWppDWtG9PNk8AclEFTM="
 }

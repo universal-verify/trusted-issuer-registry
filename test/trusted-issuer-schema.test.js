@@ -17,18 +17,18 @@ function createValidator() {
     return ajv.compile(schema);
 }
 
-function createIssuer(certificates) {
+function createIssuer(certificates, trustScopes = ['government_issued_id']) {
     return {
         issuer_id: 'x509_aki:tombstone',
         entity_type: 'government',
         entity_metadata: {
             country: 'US',
-            government_level: 'state',
-            official_name: 'Example Issuer'
+            region: 'CA'
         },
         display: {
             name: 'Example Issuer'
         },
+        trust_scopes: trustScopes,
         certificates,
         signature: 'signature'
     };
@@ -39,6 +39,21 @@ test('trusted issuer schema accepts certificate-less issuer tombstones', () => {
     const issuer = createIssuer([]);
 
     assert.equal(validate(issuer), true, JSON.stringify(validate.errors, null, 2));
+});
+
+test('trusted issuer schema accepts empty trust scopes', () => {
+    const validate = createValidator();
+    const issuer = createIssuer([], []);
+
+    assert.equal(validate(issuer), true, JSON.stringify(validate.errors, null, 2));
+});
+
+test('trusted issuer schema rejects federated network entity type', () => {
+    const validate = createValidator();
+    const issuer = createIssuer([]);
+    issuer.entity_type = 'federated_network';
+
+    assert.equal(validate(issuer), false);
 });
 
 test('trusted issuer schema still accepts active issuer certificates', () => {
