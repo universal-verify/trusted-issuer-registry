@@ -1,5 +1,89 @@
 import * as asn1js from 'asn1js';
 import { Certificate } from 'pkijs';
+import {
+    base64ToUint8Array,
+    bufferToBase64Url,
+    padOrTrimUint8Array,
+    uint8ArrayToBase64,
+} from './utils.js';
+
+const SUBJECT_KEY_IDENTIFIER_OID = '2.5.29.14';
+const CRL_DISTRIBUTION_POINTS_OID = '2.5.29.31';
+const SUBJECT_ATTRIBUTE_NAMES = {
+    '2.5.4.3': 'commonName',
+    '2.5.4.6': 'country',
+    '2.5.4.7': 'locality',
+    '2.5.4.8': 'state',
+    '2.5.4.10': 'organization',
+    '2.5.4.11': 'organizationalUnit',
+};
+
+export const parsePemCertificate = (pemString) => {
+    if(typeof pemString !== 'string') {
+        throw new Error('PEM certificate must be a string');
+    }
+
+    const pemContent = pemString
+        .replace(/-----BEGIN CERTIFICATE-----/, '')
+        .replace(/-----END CERTIFICATE-----/, '')
+        .replace(/\s/g, '');
+
+    const bytes = base64ToUint8Array(pemContent);
+    const certBuffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+    const asn1 = asn1js.fromBER(certBuffer);
+    if(asn1.offset === -1) {
+        throw new Error('Unable to parse PEM certificate');
+    }
+    return new Certificate({ schema: asn1.result });
+};
+
+export const certificateToPem = (x509Cert) => {
+    const certBytes = new Uint8Array(x509Cert.toSchema().toBER());
+    const base64 = uint8ArrayToBase64(certBytes);
+    const pemLines = [];
+    for (let i = 0; i < base64.length; i += 64) {
+        pemLines.push(base64.slice(i, i + 64));
+    }
+
+    return `-----BEGIN CERTIFICATE-----\n${pemLines.join('\n')}\n-----END CERTIFICATE-----`;
+};
+
+export const getSubjectKeyIdentifier = (x509Cert) => {
+    if(!x509Cert) return null;
+    const subjectKeyId = x509Cert.extensions?.find(ext => ext.extnID === SUBJECT_KEY_IDENTIFIER_OID);
+    if (!subjectKeyId) return null;
+
+    try {
+        const skidValue = asn1js.fromBER(subjectKeyId.extnValue.valueBlock.valueHex);
+        if(skidValue.offset === -1) return null;
+        const valueHex = skidValue.result.valueBlock.valueHexView || skidValue.result.valueBlock.valueHex;
+        if (valueHex) return bufferToBase64Url(valueHex);
+    } catch (e) {
+        console.error('Could not parse SubjectKeyIdentifier value', e);
+    }
+    return null;
+};
+
+export const getCertificateSubject = (x509Cert) => {
+    const subject = {};
+    const attributes = x509Cert?.subject?.typesAndValues || [];
+    for (const attribute of attributes) {
+        const name = SUBJECT_ATTRIBUTE_NAMES[attribute.type];
+        if(!name) continue;
+        const value = getAttributeValue(attribute);
+        if(value) subject[name] = value;
+    }
+    return subject;
+};
+
+export const getCertificateDisplayName = (x509Cert) => {
+    const subject = getCertificateSubject(x509Cert);
+    return subject.organization || subject.commonName || null;
+};
+
+export const hasCRLDistributionPoints = (x509Cert) => {
+    return !!x509Cert?.extensions?.some(ext => ext.extnID === CRL_DISTRIBUTION_POINTS_OID);
+};
 
 export const verifySignatureWithPem = async (pemKey, signature, data) => {
     try {
@@ -52,27 +136,19 @@ export const verifySignatureWithPem = async (pemKey, signature, data) => {
     }
 };
 
-function base64ToUint8Array(base64) {
-    if(typeof Buffer == 'function') {
-        return new Uint8Array(Buffer.from(base64, 'base64'));
-    } else {
-        const raw = atob(base64);
-        const bytes = new Uint8Array(raw.length);
-        for (let i = 0; i < raw.length; i++) {
-            bytes[i] = raw.charCodeAt(i);
+function getAttributeValue(attribute) {
+    const valueBlock = attribute?.value?.valueBlock;
+    if(!valueBlock) return null;
+    if(typeof valueBlock.value === 'string') return valueBlock.value;
+    if(valueBlock.valueHexView || valueBlock.valueHex) {
+        const bytes = valueBlock.valueHexView || new Uint8Array(valueBlock.valueHex);
+        try {
+            return new TextDecoder().decode(bytes).replace(/\0/g, '');
+        } catch (error) {
+            return null;
         }
-        return bytes;
     }
-}
-
-// Helper to pad or trim a Uint8Array to a specific length
-function padOrTrimUint8Array(buf, length) {
-    if (buf.length === length) return buf;
-    if (buf.length > length) return buf.slice(buf.length - length);
-    // pad with zeros at the start
-    const out = new Uint8Array(length);
-    out.set(buf, length - buf.length);
-    return out;
+    return null;
 }
 
 // Function to convert DER signature to raw format for ECDSA

@@ -1,13 +1,17 @@
-import { REGISTRY_URL_BASE, PUBLIC_SIGNING_CERT, MINOR_VERSION } from './constants.js';
+import { REGISTRY_URL_BASE, PUBLIC_SIGNING_CERT, MINOR_VERSION, RevocationCheckMode, TrustList, TrustScope, UntrustedReason } from './constants.js';
 import { verifySignatureWithPem } from './certificate-helper.js';
+import { buildUserTrustedIssuers } from './local-issuer-helper.js';
 import stringify from 'canonical-json';
 
-class TrustedIssuerRegistry {
+class Registry {
     constructor(options = {}) {
         this._cacheEnabled = options.cacheEnabled ?? true;
         this._cacheTTL = options.cacheTTL ?? 1000 * 60 * 60 * 24; // 24 hours
+        this._crl = normalizeCRLConfig(options);
+        this._userTrustedIssuers = buildUserTrustedIssuers(options.trustedIssuerCertificates ?? []);
         this._urlBase = REGISTRY_URL_BASE;
-        this._cache = {};
+        this._cache = new Map();
+        this._crlCache = new Map();
         this._deprecationCache = null;
     }
 
@@ -39,7 +43,16 @@ class TrustedIssuerRegistry {
     }
 
     async getIssuerFromX509AKI(x509aki) {
-        if (this._cacheEnabled && x509aki in this._cache && this._cache[x509aki].expiresAt > Date.now()) return this._deepCopy(this._cache[x509aki].issuer);
+        const userTrustedIssuer = this._userTrustedIssuers[x509aki];
+        if(userTrustedIssuer) return this._deepCopy(userTrustedIssuer);
+
+        if (this._cacheEnabled) {
+            const cachedIssuer = this._cache.get(x509aki);
+            if(cachedIssuer) {
+                if(cachedIssuer.expiresAt > Date.now()) return this._deepCopy(cachedIssuer.issuer);
+                this._cache.delete(x509aki);
+            }
+        }
 
         const response = await fetch(`${this._urlBase}/issuers/x509_aki/${x509aki}.json`);
         if (response.ok) {
@@ -47,24 +60,29 @@ class TrustedIssuerRegistry {
             const verified = await this._verifyIssuer(issuer);
             if (!verified) return null;
             if (this._cacheEnabled) {
-                this._cache[x509aki] = {
+                this._cache.set(x509aki, {
                     issuer,
                     expiresAt: Date.now() + this._cacheTTL
-                };
+                });
             }
             return this._deepCopy(issuer);
         } else if (response.status === 404) {
             if (this._cacheEnabled) {
-                this._cache[x509aki] = {
+                this._cache.set(x509aki, {
                     issuer: null,
                     expiresAt: Date.now() + this._cacheTTL
-                };
+                });
             }
         } else {
             throw new Error(`Failed to fetch issuer ${x509aki}: ${response.status} ${response.statusText || ''}`.trim());
         }
 
         return null;
+    }
+
+    async resolveCertificateTrust(_certificate) {
+        void _certificate;
+        throw new Error('resolveCertificateTrust is not implemented yet');
     }
 
     async _verifyIssuer(issuer) {
@@ -94,8 +112,17 @@ class TrustedIssuerRegistry {
     static minorVersion = MINOR_VERSION;
 }
 
-//For CommonJS compatibility... boo CommonJS people, get with the times
-TrustedIssuerRegistry.verifySignatureWithPem = verifySignatureWithPem;
+const normalizeCRLConfig = (options = {}) => {
+    const crl = options.crl || {};
+    const mode = crl.mode ?? RevocationCheckMode.SKIP;
+    if(!Object.values(RevocationCheckMode).includes(mode)) {
+        throw new Error(`Unsupported CRL check mode: ${mode}`);
+    }
 
-export { verifySignatureWithPem };
-export default TrustedIssuerRegistry;
+    return {
+        mode: mode,
+        timeout: crl.timeout ?? 5000,
+    };
+};
+
+export { Registry, RevocationCheckMode, TrustList, TrustScope, UntrustedReason, verifySignatureWithPem };

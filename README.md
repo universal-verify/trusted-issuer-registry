@@ -37,9 +37,9 @@ npm install trusted-issuer-registry
 Use the JavaScript SDK:
 
 ```javascript
-import TrustedIssuerRegistry from 'trusted-issuer-registry';
+import { Registry } from 'trusted-issuer-registry';
 
-const registry = new TrustedIssuerRegistry();
+const registry = new Registry();
 
 // Get issuer by X.509 AKI
 const issuer = await registry.getIssuerFromX509AKI('TprRzaFBJ1SLjJsO01tlLCQ4YF0');
@@ -142,7 +142,7 @@ The registry uses semantic versioning with the following approach:
 ### Checking for Deprecation
 
 ```javascript
-const registry = new TrustedIssuerRegistry();
+const registry = new Registry();
 const endOfLifeDate = await registry.getEndOfLifeDate();
 
 if (endOfLifeDate && endOfLifeDate < new Date()) {
