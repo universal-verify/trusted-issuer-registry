@@ -56,6 +56,8 @@ if (result.trusted) {
 }
 ```
 
+TypeScript declarations are included for the package and all build variants, with support for strict NodeNext and browser/bundler projects. No separate `@types` package is needed.
+
 ## API Reference
 
 ### Constants
