@@ -1,5 +1,5 @@
 import * as asn1js from 'asn1js';
-import { Certificate } from 'pkijs';
+import { AuthorityKeyIdentifier, Certificate, CryptoEngine, getCrypto, setEngine } from 'pkijs';
 import {
     base64ToUint8Array,
     bufferToBase64Url,
@@ -8,6 +8,7 @@ import {
 } from './utils.js';
 
 const SUBJECT_KEY_IDENTIFIER_OID = '2.5.29.14';
+const AUTHORITY_KEY_IDENTIFIER_OID = '2.5.29.35';
 const CRL_DISTRIBUTION_POINTS_OID = '2.5.29.31';
 const SUBJECT_ATTRIBUTE_NAMES = {
     '2.5.4.3': 'commonName',
@@ -37,6 +38,12 @@ export const parsePemCertificate = (pemString) => {
     return new Certificate({ schema: asn1.result });
 };
 
+export const normalizeCertificate = (certificate) => {
+    if(certificate instanceof Certificate) return certificate;
+    // Bundled consumers may have a separate copy of PKIjs with different class identities.
+    return parsePemCertificate(typeof certificate === 'string' ? certificate : certificateToPem(certificate));
+};
+
 export const certificateToPem = (x509Cert) => {
     const certBytes = new Uint8Array(x509Cert.toSchema().toBER());
     const base64 = uint8ArrayToBase64(certBytes);
@@ -62,6 +69,46 @@ export const getSubjectKeyIdentifier = (x509Cert) => {
         console.error('Could not parse SubjectKeyIdentifier value', e);
     }
     return null;
+};
+
+export const getAuthorityKeyIdentifier = (x509Cert) => {
+    const extension = x509Cert.extensions?.find(ext => ext.extnID === AUTHORITY_KEY_IDENTIFIER_OID);
+    if(!extension) return null;
+
+    try {
+        const authorityKeyIdentifier = extension.parsedValue || new AuthorityKeyIdentifier({
+            schema: asn1js.fromBER(extension.extnValue.valueBlock.valueHex).result,
+        });
+        const bytes = authorityKeyIdentifier.keyIdentifier?.valueBlock.valueHexView;
+        return bytes?.byteLength ? bufferToBase64Url(bytes) : null;
+    } catch(error) {
+        return null;
+    }
+};
+
+export const isCertificateNotYetValid = (certificate, now = new Date()) => certificate.notBefore.value > now;
+
+export const isCertificateExpired = (certificate, now = new Date()) => certificate.notAfter.value < now;
+
+export const ensurePKIjsCryptoEngine = () => {
+    try {
+        getCrypto(true);
+    } catch(error) {
+        if(!globalThis.crypto?.subtle) throw error;
+        setEngine('webcrypto', new CryptoEngine({ name: 'webcrypto', crypto: globalThis.crypto }));
+    }
+};
+
+export const verifyCertificateSignature = async (certificate, issuerCertificate) => {
+    certificate = normalizeCertificate(certificate);
+    issuerCertificate = normalizeCertificate(issuerCertificate);
+    if(!certificate.issuer.isEqual(issuerCertificate.subject)) return false;
+    ensurePKIjsCryptoEngine();
+    try {
+        return await certificate.verify(issuerCertificate);
+    } catch(error) {
+        return false;
+    }
 };
 
 export const getCertificateSubject = (x509Cert) => {

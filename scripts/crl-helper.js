@@ -4,27 +4,22 @@ import {
     Certificate,
     CertificateRevocationList,
     CRLDistributionPoints,
-    CryptoEngine,
-    getCrypto,
     IssuingDistributionPoint,
-    setEngine,
 } from 'pkijs';
-import { parsePemCertificate } from './certificate-helper.js';
+import { ensurePKIjsCryptoEngine, parsePemCertificate } from './certificate-helper.js';
 import { base64ToUint8Array } from './utils.js';
 
 const BASIC_CONSTRAINTS_OID = '2.5.29.19';
 const KEY_USAGE_OID = '2.5.29.15';
+const CRL_REASON_OID = '2.5.29.21';
 const DELTA_CRL_INDICATOR_OID = '2.5.29.27';
 const ISSUING_DISTRIBUTION_POINT_OID = '2.5.29.28';
 const CRL_DISTRIBUTION_POINTS_OID = '2.5.29.31';
 const CRL_PEM_BEGIN = '-----BEGIN X509 CRL-----';
 const CRL_PEM_END = '-----END X509 CRL-----';
-const DEFAULT_CRL_TIMEOUT = 5000;
-const DEFAULT_CACHE_TTL = 1000 * 60 * 60 * 24;
-const HTTP_NOT_FOUND = 404;
 const ALL_REASONS_MASK = 0x1FE;
 const CRL_SIGN_KEY_USAGE_MASK = 0x02;
-const defaultCache = new Map();
+const REMOVE_FROM_CRL_REASON = 8;
 
 const getCRLDistributionPoints = (certificate) => {
     const extension = certificate?.extensions?.find(ext => ext.extnID === CRL_DISTRIBUTION_POINTS_OID);
@@ -44,14 +39,7 @@ const getCRLDistributionPoints = (certificate) => {
         .filter(distributionPoint => distributionPoint.urls.length > 0);
 };
 
-export const checkCertificateRevocation = async (certificate, issuerCertificate, options = {}) => {
-    const {
-        timeout = DEFAULT_CRL_TIMEOUT,
-        cacheEnabled = true,
-        cacheTTL = DEFAULT_CACHE_TTL,
-        cache = defaultCache,
-    } = options;
-
+export const checkCertificateRevocation = async (certificate, issuerCertificate, { cachedFetcher }) => {
     let distributionPoints;
     try {
         distributionPoints = getCRLDistributionPoints(certificate);
@@ -96,40 +84,16 @@ export const checkCertificateRevocation = async (certificate, issuerCertificate,
         return result;
     }
 
-    const crlSources = getCachedCRLResultsByUrl(supportedUrls, {
-        cacheEnabled: cacheEnabled,
-        cache: cache,
-    });
-
     const evaluationState = {
         coveredReasonsMask: 0,
         errors: errors,
     };
-    const crlEvaluationOptions = {
-        cacheEnabled: cacheEnabled,
-        cache: cache,
-        cacheTTL: cacheTTL,
-    };
-
-    for(const crlResult of crlSources.cachedResults) {
-        const revocationResult = await evaluateCRLResult(crlResult, supportedDistributionPoints, certificate, crlIssuerCertificate, crlEvaluationOptions, evaluationState);
-        if(revocationResult) {
-            return revocationResult;
-        }
-    }
-
-    const pendingResultsByUrl = getPendingCRLResultsByUrl(crlSources.uncachedUrls, {
-        timeout: timeout,
-        cacheEnabled: cacheEnabled,
-        cache: cache,
-        cacheTTL: cacheTTL,
-    });
+    const pendingResultsByUrl = getPendingCRLResultsByUrl(supportedUrls, cachedFetcher);
 
     while(pendingResultsByUrl.size > 0) {
         const crlResult = await getNextCRLResult(pendingResultsByUrl);
-        const revocationResult = await evaluateCRLResult(crlResult, supportedDistributionPoints, certificate, crlIssuerCertificate, crlEvaluationOptions, evaluationState);
+        const revocationResult = await evaluateCRLResult(crlResult, supportedDistributionPoints, certificate, crlIssuerCertificate, evaluationState);
         if(revocationResult) {
-            cachePendingCRLResults(pendingResultsByUrl, supportedDistributionPoints, certificate, crlIssuerCertificate, crlEvaluationOptions);
             return revocationResult;
         }
     }
@@ -142,68 +106,16 @@ export const checkCertificateRevocation = async (certificate, issuerCertificate,
     return result;
 };
 
-const getCachedCRLResultsByUrl = (urls, options) => {
-    const {
-        cacheEnabled,
-        cache,
-    } = options;
-    const cachedResults = [];
-    const uncachedUrls = [];
-
-    for(const url of urls) {
-        const cached = cacheEnabled ? getCachedCRL(cache, url) : null;
-        if(cached?.error) {
-            cachedResults.push({
-                url: url,
-                error: new Error(cached.error),
-            });
-            continue;
-        }
-        if(cached?.crl) {
-            cachedResults.push({
-                url: url,
-                crl: cached.crl,
-                fromCache: true,
-            });
-            continue;
-        }
-
-        uncachedUrls.push(url);
-    }
-
-    return {
-        cachedResults: cachedResults,
-        uncachedUrls: uncachedUrls,
-    };
-};
-
-const getPendingCRLResultsByUrl = (urls, options) => {
-    const {
-        timeout,
-        cacheEnabled,
-        cache,
-        cacheTTL,
-    } = options;
+const getPendingCRLResultsByUrl = (urls, cachedFetcher) => {
     const pendingResultsByUrl = new Map();
 
     for(const url of urls) {
-        if(typeof fetch !== 'function') continue;
-
-        pendingResultsByUrl.set(url, fetchAndParseCRL(url, timeout)
+        pendingResultsByUrl.set(url, fetchCRL(url, cachedFetcher)
             .then(crl => ({
                 url: url,
                 crl: crl,
-                fromCache: false,
             }))
-            .catch(error => {
-                if(error.status === HTTP_NOT_FOUND && cacheEnabled) {
-                    cacheCRLError(cache, url, error, cacheTTL);
-                }
-                return {
-                    url: url,
-                    error: error,
-                };
-            }));
+            .catch(error => ({ url: url, error: error })));
     }
 
     return pendingResultsByUrl;
@@ -215,36 +127,10 @@ const getNextCRLResult = async (pendingResultsByUrl) => {
     return result;
 };
 
-const cachePendingCRLResults = (pendingResultsByUrl, distributionPoints, certificate, crlIssuerCertificate, options) => {
-    if(!options.cacheEnabled) return;
-
-    const pendingResults = [...pendingResultsByUrl.values()];
-    if(pendingResults.length === 0) return;
-
-    for(const pendingResult of pendingResults) {
-        pendingResult
-            .then(crlResult => evaluateCRLResult(
-                crlResult,
-                distributionPoints,
-                certificate,
-                crlIssuerCertificate,
-                options,
-                { coveredReasonsMask: 0, errors: [] }
-            ))
-            .catch(() => {});
-    }
-};
-
-const evaluateCRLResult = async (crlResult, distributionPoints, certificate, crlIssuerCertificate, options, state) => {
-    const {
-        cacheEnabled,
-        cache,
-        cacheTTL,
-    } = options;
+const evaluateCRLResult = async (crlResult, distributionPoints, certificate, crlIssuerCertificate, state) => {
     const {
         url,
         crl,
-        fromCache = false,
         error,
     } = crlResult;
 
@@ -277,13 +163,19 @@ const evaluateCRLResult = async (crlResult, distributionPoints, certificate, crl
             }
 
             const stale = isCRLStale(crl);
-            if(!fromCache && cacheEnabled) cacheCRL(cache, url, crl, cacheTTL);
 
-            if(crl.isCertificateRevoked(certificate)) {
-                return {
-                    checked: true,
-                    revoked: true,
-                };
+            const revokedCertificate = crl.revokedCertificates?.find(entry => entry.userCertificate.isEqual(certificate.serialNumber));
+            if(revokedCertificate) {
+                if(getCRLEntryReason(revokedCertificate) !== REMOVE_FROM_CRL_REASON) {
+                    return {
+                        checked: true,
+                        revoked: true,
+                    };
+                }
+                if(!isDeltaCRL(crl)) {
+                    state.errors.push(`removeFromCRL is only valid in a delta CRL for ${url}`);
+                    continue;
+                }
             }
 
             if(isDeltaCRL(crl)) {
@@ -309,6 +201,17 @@ const evaluateCRLResult = async (crlResult, distributionPoints, certificate, crl
     }
 
     return null;
+};
+
+const getCRLEntryReason = (entry) => {
+    const extension = entry.crlEntryExtensions?.extensions.find(ext => ext.extnID === CRL_REASON_OID);
+    if(!extension) return null;
+
+    const asn1 = asn1js.fromBER(extension.extnValue.valueBlock.valueHex);
+    if(asn1.offset === -1 || !(asn1.result instanceof asn1js.Enumerated)) {
+        throw new Error('Unable to parse CRL reason code');
+    }
+    return asn1.result.valueBlock.valueDec;
 };
 
 const getDistributionPointUrls = (distributionPoint) => {
@@ -355,15 +258,6 @@ const validateCRLIssuerCertificate = (issuerCertificate) => {
     const keyUsageBytes = new Uint8Array(keyUsageValue.result.valueBlock.valueHexView || keyUsageValue.result.valueBlock.valueHex || []);
     if(!(keyUsageBytes[0] & CRL_SIGN_KEY_USAGE_MASK)) {
         throw new Error('CRL issuer certificate key usage does not allow CRL signing');
-    }
-};
-
-const ensurePKIjsCryptoEngine = () => {
-    try {
-        getCrypto(true);
-    } catch(error) {
-        if(!globalThis.crypto?.subtle) throw error;
-        setEngine('webcrypto', new CryptoEngine({ name: 'webcrypto', crypto: globalThis.crypto }));
     }
 };
 
@@ -542,44 +436,6 @@ const parseExtensionValue = (extension, ExtensionValue, errorMessage) => {
     return new ExtensionValue({ schema: asn1.result });
 };
 
-const getCachedCRL = (cache, url) => {
-    const cached = cache.get(url);
-    if(!cached) return null;
-    if(cached.expiresAt <= Date.now()) {
-        cache.delete(url);
-        return null;
-    }
-    return cached;
-};
-
-const cacheCRL = (cache, url, crl, ttl) => {
-    const expiresAt = getCRLCacheExpiration(crl, ttl);
-    if(expiresAt <= Date.now()) return;
-    cache.set(url, {
-        crl: crl,
-        expiresAt: expiresAt,
-    });
-};
-
-const cacheCRLError = (cache, url, error, ttl) => {
-    const expiresAt = Date.now() + ttl;
-    if(expiresAt <= Date.now()) return;
-    cache.set(url, {
-        error: error.message,
-        expiresAt: expiresAt,
-    });
-};
-
-const getCRLCacheExpiration = (crl, ttl) => {
-    const ttlExpiration = Date.now() + ttl;
-    const nextUpdate = crl.nextUpdate?.value;
-    if(nextUpdate instanceof Date) {
-        const nextUpdateTime = nextUpdate.getTime();
-        if(nextUpdateTime > Date.now() && nextUpdateTime < ttlExpiration) return nextUpdateTime;
-    }
-    return ttlExpiration;
-};
-
 const isCRLNotYetValid = (crl) => {
     return crl.thisUpdate.value > new Date();
 };
@@ -592,36 +448,16 @@ const isDeltaCRL = (crl) => {
     return !!crl.crlExtensions?.extensions?.some(ext => ext.extnID === DELTA_CRL_INDICATOR_OID);
 };
 
-const fetchAndParseCRL = async (url, timeout) => {
-    const crlBytes = await fetchCRL(url, timeout);
-    return parseCRL(crlBytes);
-};
-
-const fetchCRL = async (url, timeout) => {
-    const controller = typeof AbortController === 'function' ? new AbortController() : null;
-    const timeoutId = controller ? setTimeout(() => controller.abort(), timeout) : null;
-
-    try {
-        const response = await fetch(url, {
-            signal: controller?.signal,
-        });
-        if(!response.ok) {
-            const error = new Error(`CRL request failed with HTTP ${response.status}`);
-            error.status = response.status;
-            throw error;
-        }
-        return new Uint8Array(await response.arrayBuffer());
-    } catch(error) {
-        if(error?.name === 'AbortError') {
-            throw new Error(`CRL request timed out after ${timeout}ms`);
-        }
-        throw error;
-    } finally {
-        if(timeoutId) clearTimeout(timeoutId);
+const fetchCRL = async (url, cachedFetcher) => {
+    const response = await cachedFetcher.fetch(url, 'crl');
+    if(!response.ok) {
+        throw new Error(`CRL request failed with HTTP ${response.status}`);
     }
+    if(response.error) throw new Error(response.error);
+    return response.crl;
 };
 
-const parseCRL = (bytes) => {
+export const parseCRL = (bytes) => {
     const textPrefix = new TextDecoder().decode(bytes.slice(0, CRL_PEM_BEGIN.length + 20));
     const crlBytes = textPrefix.trimStart().startsWith(CRL_PEM_BEGIN)
         ? pemCRLToBytes(new TextDecoder().decode(bytes))

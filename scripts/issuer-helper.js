@@ -4,7 +4,61 @@ import {
     getCertificateSubject,
     getSubjectKeyIdentifier,
     parsePemCertificate,
+    verifySignatureWithPem,
 } from './certificate-helper.js';
+import { PUBLIC_SIGNING_CERT, REGISTRY_URL_BASE } from './constants.js';
+import { deepCopy } from './utils.js';
+import stringify from 'canonical-json';
+
+export const getIssuerFromX509AKI = async (x509aki, options) => {
+    const userTrustedIssuer = options.userTrustedIssuers[x509aki];
+    const registryIssuer = await getRegistryIssuerFromX509AKI(x509aki, options);
+    return userTrustedIssuer
+        ? mergeIssuers(userTrustedIssuer, registryIssuer)
+        : registryIssuer;
+};
+
+export const getRegistryIssuerFromX509AKI = async (x509aki, options) => {
+    const { cachedFetcher } = options;
+    const url = `${REGISTRY_URL_BASE}/issuers/x509_aki/${x509aki}.json`;
+    const response = await cachedFetcher.fetch(url, 'issuer');
+    if(!response.ok && response.status !== 404) {
+        throw new Error(`Failed to fetch issuer ${x509aki}: ${response.status} ${response.statusText || ''}`.trim());
+    }
+    return deepCopy(response.issuer);
+};
+
+export const mergeIssuers = (userTrustedIssuer, registryIssuer) => {
+    if(!userTrustedIssuer && !registryIssuer) return null;
+
+    const issuer = {
+        ...deepCopy(registryIssuer || {}),
+        ...deepCopy(userTrustedIssuer || {}),
+        entity_metadata: { ...registryIssuer?.entity_metadata, ...userTrustedIssuer?.entity_metadata },
+        display: { ...registryIssuer?.display, ...userTrustedIssuer?.display },
+        trust_scopes: [...new Set([
+            ...userTrustedIssuer?.trust_scopes || [],
+            ...registryIssuer?.trust_scopes || [],
+        ])],
+        certificates: [],
+    };
+    // Merged metadata and trust results are not covered by the registry signature.
+    delete issuer.signature;
+
+    const certificatesByPem = new Map();
+    for(const certificate of [...userTrustedIssuer?.certificates || [], ...registryIssuer?.certificates || []]) {
+        const existingCertificate = certificatesByPem.get(certificate.data);
+        if(existingCertificate) {
+            existingCertificate.trust_lists = [...new Set([...existingCertificate.trust_lists, ...certificate.trust_lists])];
+        } else {
+            const copy = deepCopy(certificate);
+            copy.trust_lists = [...new Set(copy.trust_lists)];
+            certificatesByPem.set(copy.data, copy);
+            issuer.certificates.push(copy);
+        }
+    }
+    return issuer;
+};
 
 export const buildUserTrustedIssuers = (trustedIssuerCertificates = []) => {
     if(!Array.isArray(trustedIssuerCertificates)) {
@@ -16,7 +70,7 @@ export const buildUserTrustedIssuers = (trustedIssuerCertificates = []) => {
         const { subjectKeyIdentifier, issuer } = normalizeTrustedIssuerCertificate(trustedIssuerCertificate);
         const existingIssuer = userTrustedIssuers[subjectKeyIdentifier];
         if(existingIssuer) {
-            existingIssuer.certificates.push(...issuer.certificates);
+            userTrustedIssuers[subjectKeyIdentifier] = mergeIssuers(existingIssuer, issuer);
         } else {
             userTrustedIssuers[subjectKeyIdentifier] = issuer;
         }
@@ -85,4 +139,15 @@ const mergeDefined = (...objects) => {
         }
     }
     return merged;
+};
+
+export const verifyIssuer = async (issuer) => {
+    const { signature, ...issuerData } = issuer;
+    try {
+        const data = new TextEncoder().encode(stringify(issuerData)).buffer;
+        return await verifySignatureWithPem(PUBLIC_SIGNING_CERT, signature, data);
+    } catch(error) {
+        console.error('Issuer signature verification failed', error);
+        return false;
+    }
 };

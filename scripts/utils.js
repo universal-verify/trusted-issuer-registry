@@ -1,3 +1,5 @@
+export const deepCopy = (value) => JSON.parse(JSON.stringify(value));
+
 export const base64ToUint8Array = (base64) => {
     if(typeof Buffer === 'function') {
         return new Uint8Array(Buffer.from(base64, 'base64'));

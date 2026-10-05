@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { checkCertificateRevocation } from '../scripts/crl-helper.js';
+import { checkCertificateRevocation, parseCRL } from '../scripts/crl-helper.js';
 import { parsePemCertificate } from '../scripts/certificate-helper.js';
+import { CachedFetcher } from '../scripts/cached-fetcher.js';
 
 const CRL_URL = 'https://example.test/test.crl';
 const TEST_IACA_CERT = `-----BEGIN CERTIFICATE-----
@@ -43,8 +44,10 @@ O13gcBzpEjbiYrc3V1XQcUUn1eo88MCLGeSpPXy2tA==
 const issuerCertificate = { data: TEST_IACA_CERT };
 const documentSignerCertificate = parsePemCertificate(TEST_DOCUMENT_SIGNER_CERT);
 
-test('checkCertificateRevocation caches stale CRLs using normal cache TTL', async () => {
-    const cache = new Map();
+test('checkCertificateRevocation caches stale CRLs using normal cache TTL', async t => {
+    const cachedFetcher = new CachedFetcher({ cacheTTL: 1000 });
+    let now = Date.now();
+    t.mock.method(Date, 'now', () => now);
     let fetchCount = 0;
 
     await withMockedFetch(async (url) => {
@@ -52,8 +55,8 @@ test('checkCertificateRevocation caches stale CRLs using normal cache TTL', asyn
         assert.equal(url, CRL_URL);
         return crlResponse(textBytes(fetchCount === 1 ? STALE_EMPTY_CRL : CURRENT_EMPTY_CRL));
     }, async () => {
-        const first = await checkCertificateRevocation(documentSignerCertificate, issuerCertificate, { cache: cache });
-        const second = await checkCertificateRevocation(documentSignerCertificate, issuerCertificate, { cache: cache });
+        const first = await checkCertificateRevocation(documentSignerCertificate, issuerCertificate, { cachedFetcher });
+        const second = await checkCertificateRevocation(documentSignerCertificate, issuerCertificate, { cachedFetcher });
 
         assert.equal(fetchCount, 1);
         assert.deepEqual(Object.keys(first).sort(), ['checked', 'error', 'revoked']);
@@ -64,28 +67,69 @@ test('checkCertificateRevocation caches stale CRLs using normal cache TTL', asyn
         assert.equal(second.checked, false);
         assert.equal(second.revoked, false);
         assert.match(second.error, /CRL is stale/);
-        assert.ok(cache.get(CRL_URL).expiresAt > Date.now());
+        now += 1000;
+        const refreshed = await checkCertificateRevocation(documentSignerCertificate, issuerCertificate, { cachedFetcher });
+        assert.equal(fetchCount, 2);
+        assert.equal(refreshed.checked, true);
     });
 });
 
-test('checkCertificateRevocation caps CRL cache expiration at future nextUpdate when it is sooner than TTL', async () => {
-    const cache = new Map();
+test('checkCertificateRevocation caps CRL cache expiration at future nextUpdate when it is sooner than TTL', async t => {
     const longTTL = 1000 * 60 * 60 * 24 * 365 * 20;
+    const cachedFetcher = new CachedFetcher({ cacheTTL: longTTL });
+    let now = Date.now();
+    let fetchCount = 0;
+    t.mock.method(Date, 'now', () => now);
 
     await withMockedFetch(async (url) => {
+        fetchCount++;
         assert.equal(url, CRL_URL);
         return crlResponse(textBytes(CURRENT_EMPTY_CRL));
     }, async () => {
         const result = await checkCertificateRevocation(documentSignerCertificate, issuerCertificate, {
-            cache: cache,
-            cacheTTL: longTTL,
+            cachedFetcher,
         });
 
         assert.deepEqual(Object.keys(result).sort(), ['checked', 'revoked']);
         assert.equal(result.checked, true);
         assert.equal(result.revoked, false);
-        assert.equal(cache.get(CRL_URL).expiresAt, Date.parse('2036-01-01T00:00:00Z'));
+        now = Date.parse('2036-01-01T00:00:00Z') - 1;
+        await checkCertificateRevocation(documentSignerCertificate, issuerCertificate, { cachedFetcher });
+        assert.equal(fetchCount, 1);
+        now++;
+        await checkCertificateRevocation(documentSignerCertificate, issuerCertificate, { cachedFetcher });
+        assert.equal(fetchCount, 2);
     });
+});
+
+test('later or absent CRL nextUpdate dates use the normal cache TTL', async t => {
+    const withoutNextUpdate = parseCRL(textBytes(CURRENT_EMPTY_CRL));
+    delete withoutNextUpdate.nextUpdate;
+    const withoutNextUpdateBytes = new Uint8Array(withoutNextUpdate.toSchema(true).toBER());
+    assert.equal(parseCRL(withoutNextUpdateBytes).nextUpdate, undefined);
+    let now = Date.now();
+    t.mock.method(Date, 'now', () => now);
+
+    for(const bytes of [textBytes(CURRENT_EMPTY_CRL), withoutNextUpdateBytes]) {
+        let calls = 0;
+        const cachedFetcher = new CachedFetcher({ cacheTTL: 1000 });
+        await withMockedFetch(async () => {
+            calls++;
+            return crlResponse(bytes);
+        }, async () => {
+            const first = await cachedFetcher.fetch(CRL_URL, 'crl');
+            assert.ok(first.crl);
+            assert.equal('bytes' in first, false);
+            now += 999;
+            const cached = await cachedFetcher.fetch(CRL_URL, 'crl');
+            assert.equal(cached.crl, first.crl);
+            assert.equal('bytes' in cached, false);
+            assert.equal(calls, 1);
+            now++;
+            await cachedFetcher.fetch(CRL_URL, 'crl');
+            assert.equal(calls, 2);
+        });
+    }
 });
 
 test('checkCertificateRevocation normalizes CRL fetch timeouts', async () => {
@@ -99,13 +143,13 @@ test('checkCertificateRevocation normalizes CRL fetch timeouts', async () => {
         });
     }, async () => {
         const result = await checkCertificateRevocation(documentSignerCertificate, issuerCertificate, {
-            timeout: 1,
+            cachedFetcher: new CachedFetcher({ timeout: 1 }),
         });
 
         assert.deepEqual(Object.keys(result).sort(), ['checked', 'error', 'revoked']);
         assert.equal(result.checked, false);
         assert.equal(result.revoked, false);
-        assert.match(result.error, /CRL request timed out after 1ms/);
+        assert.match(result.error, /Request timed out after 1ms/);
     });
 });
 
