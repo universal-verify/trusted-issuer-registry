@@ -446,6 +446,20 @@ test('ordinary revocation reasons are recognized in complete and delta CRLs', as
     }
 });
 
+test('malformed CRL reason codes leave revocation status undetermined', async t => {
+    const crl = await createCRL({ revoked: true, revocationReason: new asn1js.Integer({ value: 1 }) });
+    mockFetch(t, async () => new Response(crl));
+    for(const mode of [RevocationCheckMode.BEST_EFFORT, RevocationCheckMode.REQUIRED]) {
+        const registry = new Registry({ trustedIssuerCertificates: [issuer.pem], revocationCheckMode: mode });
+        const result = await registry.resolveCertificateTrust(leaf);
+        assert.equal(result.trusted, mode === RevocationCheckMode.BEST_EFFORT);
+        assert.equal(result.issuer.certificates[0].revocationStatus, 'not_checked');
+        assert.deepEqual(result.untrustedReasons, mode === RevocationCheckMode.REQUIRED
+            ? [UntrustedReason.REVOCATION_STATUS_UNDETERMINED]
+            : undefined);
+    }
+});
+
 test('delta CRLs without a matching entry cannot establish non-revoked status', async t => {
     const crl = await createCRL({ delta: true });
     mockFetch(t, async () => new Response(crl));
@@ -764,7 +778,9 @@ async function createCRL(options = {}) {
             userCertificate: leaf.serialNumber,
             revocationDate: new Time({ type: 1, value: VALID_FROM }),
             ...(options.revocationReason !== undefined && { crlEntryExtensions: new Extensions({ extensions: [
-                extension('2.5.29.21', new asn1js.Enumerated({ value: options.revocationReason })),
+                extension('2.5.29.21', typeof options.revocationReason === 'number'
+                    ? new asn1js.Enumerated({ value: options.revocationReason })
+                    : options.revocationReason),
             ] }) }),
         })] : [],
     });

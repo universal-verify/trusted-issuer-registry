@@ -377,7 +377,7 @@ import { verifyCertificateSignature } from 'trusted-issuer-registry';
 const verified = await verifyCertificateSignature(certificatePem, issuerPem);
 ```
 
-#### `verifySignatureWithPem(pemKey, signature, data)`
+#### `verifySignatureWithPem(pemKey, signature, data, options?)`
 
 Verifies a signature over supplied data using the public key from a PEM-encoded signing certificate. This verifies a data signature, not the signature on the certificate itself.
 
@@ -386,6 +386,17 @@ Verifies a signature over supplied data using the public key from a PEM-encoded 
 - `pemKey` (string): PEM-encoded X.509 signing certificate.
 - `signature` (string): Base64-encoded signature. ECDSA signatures must be DER-encoded before Base64 encoding.
 - `data` (ArrayBuffer|TypedArray|DataView): The exact bytes that were signed.
+- `options` (SignatureVerificationOptions, optional): Signature algorithm parameters. The EC curve is read from the certificate.
+
+| Option | Description |
+|--------|-------------|
+| `name` | `ECDSA`, `RSASSA-PKCS1-v1_5`, or `RSA-PSS`. Required for RSA; defaults to `ECDSA` for EC certificates. |
+| `hash` | Hash algorithm, such as `SHA-256` or `{ name: 'SHA-256' }`. Required for RSA. ECDSA defaults to SHA-256 for P-256, SHA-384 for P-384, and SHA-512 for P-521. |
+| `saltLength` | Non-negative integer salt length in bytes. Required for RSA-PSS, including when the salt length is zero. |
+
+RSA has no implicit defaults. Use the parameters specified by the signed data's format; they cannot generally be inferred from the certificate. ECDSA's default hash can also be overridden. Verification uses only the selected parameters without retrying other combinations.
+
+PSS-only public keys are supported, with any declared hash and minimum salt-length restrictions enforced. RSA-PSS requires MGF1 with the same hash as the signature and the standard trailer field.
 
 **Returns:** `Promise<boolean>` - Whether the signature verifies.
 
@@ -400,6 +411,13 @@ const verified = await verifySignatureWithPem(
     signingCertificatePem,
     signatureBase64,
     new TextEncoder().encode(signedText)
+);
+
+const rsaPssVerified = await verifySignatureWithPem(
+    rsaSigningCertificatePem,
+    rsaSignatureBase64,
+    signedBytes,
+    { name: 'RSA-PSS', hash: 'SHA-256', saltLength: 32 }
 );
 ```
 

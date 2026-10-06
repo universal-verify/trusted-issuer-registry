@@ -22,6 +22,7 @@ import type {
     ResolvedIssuer,
     ResolvedIssuerCertificate,
     RevocationStatus,
+    SignatureVerificationOptions,
     UserTrustedIssuerCertificate,
 } from 'trusted-issuer-registry';
 import { Certificate } from 'pkijs';
@@ -139,6 +140,19 @@ export async function exerciseAPI(certificatePem: string, issuerPem: string, sig
     expectType<boolean>(await verifySignatureWithPem(issuerPem, signature, new ArrayBuffer(1)));
     expectType<boolean>(await verifySignatureWithPem(issuerPem, signature, new Uint8Array(1)));
     expectType<boolean>(await verifySignatureWithPem(issuerPem, signature, new DataView(new ArrayBuffer(1))));
+    expectType<boolean>(await verifySignatureWithPem(issuerPem, signature, new Uint8Array(1), undefined));
+    expectType<boolean>(await verifySignatureWithPem(issuerPem, signature, new Uint8Array(1), {
+        name: undefined, hash: undefined,
+    }));
+    expectType<boolean>(await verifySignatureWithPem(issuerPem, signature, new Uint8Array(1), { hash: 'SHA-384' }));
+    expectType<boolean>(await verifySignatureWithPem(issuerPem, signature, new Uint8Array(1), {
+        name: 'ECDSA', hash: { name: 'SHA-512' },
+    }));
+    expectType<boolean>(await verifySignatureWithPem(issuerPem, signature, new Uint8Array(1), {
+        name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256',
+    }));
+    const pssOptions = { name: 'RSA-PSS', hash: 'SHA-256', saltLength: 32 } as const satisfies SignatureVerificationOptions;
+    expectType<boolean>(await verifySignatureWithPem(issuerPem, signature, new Uint8Array(1), pssOptions));
 
     const issuer: Issuer = {
         issuer_id: 'x509_aki:example',
@@ -183,6 +197,14 @@ export async function exerciseAPI(certificatePem: string, issuerPem: string, sig
     certificateToPem(certificatePem);
     // @ts-expect-error Data signatures are checked against bytes, not text.
     verifySignatureWithPem(issuerPem, signature, 'signed text');
+    // @ts-expect-error RSA signatures require an explicit hash.
+    verifySignatureWithPem(issuerPem, signature, new Uint8Array(1), { name: 'RSASSA-PKCS1-v1_5' });
+    // @ts-expect-error RSA-PSS signatures require an explicit salt length.
+    verifySignatureWithPem(issuerPem, signature, new Uint8Array(1), { name: 'RSA-PSS', hash: 'SHA-256' });
+    // @ts-expect-error Web Crypto uses RSA-PSS rather than RSASSA-PSS.
+    verifySignatureWithPem(issuerPem, signature, new Uint8Array(1), { name: 'RSASSA-PSS', hash: 'SHA-256', saltLength: 32 });
+    // @ts-expect-error Salt lengths are numbers of bytes, not strings.
+    verifySignatureWithPem(issuerPem, signature, new Uint8Array(1), { name: 'RSA-PSS', hash: 'SHA-256', saltLength: '32' });
     // @ts-expect-error A trusted result always includes its issuer.
     expectType<CertificateTrustResult>({ trusted: true });
     // @ts-expect-error An untrusted result always includes failure reasons.

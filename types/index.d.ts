@@ -92,6 +92,23 @@ export interface ResolveCertificateTrustOptions {
     trustScope?: TrustScope | null | undefined;
 }
 
+export type SignatureVerificationOptions =
+    | {
+        name?: 'ECDSA' | undefined;
+        /** Defaults to SHA-256, SHA-384, or SHA-512 for P-256, P-384, or P-521 respectively. */
+        hash?: HashAlgorithmIdentifier | undefined;
+    }
+    | {
+        name: 'RSASSA-PKCS1-v1_5';
+        hash: HashAlgorithmIdentifier;
+    }
+    | {
+        name: 'RSA-PSS';
+        hash: HashAlgorithmIdentifier;
+        /** Salt length in bytes. Must be a non-negative integer. */
+        saltLength: number;
+    };
+
 export interface IssuerCertificate {
     data: string;
     format: 'pem';
@@ -152,4 +169,5 @@ export function verifySignatureWithPem(
     pemKey: string,
     signature: string,
     data: ArrayBuffer | ArrayBufferView,
+    options?: SignatureVerificationOptions,
 ): Promise<boolean>;

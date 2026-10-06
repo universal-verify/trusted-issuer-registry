@@ -24680,17 +24680,10 @@ const bufferToBase64Url = (bufferSource) => {
         .replace(/=+$/, '');
 };
 
-const padOrTrimUint8Array = (bytes, length) => {
-    if (bytes.length === length) return bytes;
-    if (bytes.length > length) return bytes.slice(bytes.length - length);
-
-    const padded = new Uint8Array(length);
-    padded.set(bytes, length - bytes.length);
-    return padded;
-};
-
 const SUBJECT_KEY_IDENTIFIER_OID = '2.5.29.14';
 const AUTHORITY_KEY_IDENTIFIER_OID = '2.5.29.35';
+const RSA_PSS_OID = '1.2.840.113549.1.1.10';
+const MGF1_OID = '1.2.840.113549.1.1.8';
 const SUBJECT_ATTRIBUTE_NAMES = {
     '2.5.4.3': 'commonName',
     '2.5.4.6': 'country',
@@ -24711,12 +24704,7 @@ const parsePemCertificate = (pemString) => {
         .replace(/\s/g, '');
 
     const bytes = base64ToUint8Array(pemContent);
-    const certBuffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
-    const asn1 = fromBER(certBuffer);
-    if(asn1.offset === -1) {
-        throw new Error('Unable to parse PEM certificate');
-    }
-    return new Certificate({ schema: asn1.result });
+    return Certificate.fromBER(bytes);
 };
 
 const normalizeCertificate = (certificate) => {
@@ -24736,16 +24724,25 @@ const certificateToPem = (x509Cert) => {
     return `-----BEGIN CERTIFICATE-----\n${pemLines.join('\n')}\n-----END CERTIFICATE-----`;
 };
 
+const parseExtensionValue = (extension, ExtensionValue, errorMessage) => {
+    const value = extension.parsedValue;
+    const tag = ExtensionValue.prototype instanceof BaseBlock ? new ExtensionValue().idBlock : null;
+    const valid = tag
+        ? value?.idBlock?.tagClass === tag.tagClass && value.idBlock.tagNumber === tag.tagNumber && !value.idBlock.isConstructed
+        : value instanceof ExtensionValue;
+    if(!valid || value.parsingError || value.error) throw new Error(errorMessage);
+    return value;
+};
+
 const getSubjectKeyIdentifier = (x509Cert) => {
     if(!x509Cert) return null;
     const subjectKeyId = x509Cert.extensions?.find(ext => ext.extnID === SUBJECT_KEY_IDENTIFIER_OID);
     if (!subjectKeyId) return null;
 
     try {
-        const skidValue = fromBER(subjectKeyId.extnValue.valueBlock.valueHex);
-        if(skidValue.offset === -1) return null;
-        const valueHex = skidValue.result.valueBlock.valueHexView || skidValue.result.valueBlock.valueHex;
-        if (valueHex) return bufferToBase64Url(valueHex);
+        const value = parseExtensionValue(subjectKeyId, OctetString, 'Unable to parse Subject Key Identifier');
+        const bytes = value.valueBlock.valueHexView;
+        return bytes.byteLength ? bufferToBase64Url(bytes) : null;
     } catch (e) {
         console.error('Could not parse SubjectKeyIdentifier value', e);
     }
@@ -24757,9 +24754,7 @@ const getAuthorityKeyIdentifier = (x509Cert) => {
     if(!extension) return null;
 
     try {
-        const authorityKeyIdentifier = extension.parsedValue || new AuthorityKeyIdentifier({
-            schema: fromBER(extension.extnValue.valueBlock.valueHex).result,
-        });
+        const authorityKeyIdentifier = parseExtensionValue(extension, AuthorityKeyIdentifier, 'Unable to parse Authority Key Identifier');
         const bytes = authorityKeyIdentifier.keyIdentifier?.valueBlock.valueHexView;
         return bytes?.byteLength ? bufferToBase64Url(bytes) : null;
     } catch(error) {
@@ -24784,9 +24779,8 @@ const verifyCertificateSignature = async (certificate, issuerCertificate) => {
     certificate = normalizeCertificate(certificate);
     issuerCertificate = normalizeCertificate(issuerCertificate);
     if(!certificate.issuer.isEqual(issuerCertificate.subject)) return false;
-    ensurePKIjsCryptoEngine();
     try {
-        return await certificate.verify(issuerCertificate);
+        return await certificate.verify(issuerCertificate, { verifyWithPublicKey: verifySignedData });
     } catch(error) {
         return false;
     }
@@ -24809,55 +24803,61 @@ const getCertificateDisplayName = (x509Cert) => {
     return subject.organization || subject.commonName || null;
 };
 
-const verifySignatureWithPem = async (pemKey, signature, data) => {
+const verifySignatureWithPem = async (pemKey, signature, data, options = {}) => {
     try {
-        const pemContent = pemKey
-            .replace(/-----BEGIN [^-]+-----/, '')
-            .replace(/-----END [^-]+-----/, '')
-            .replace(/\s+/g, '');
-
-        // Convert base64 to binary
-        const bytes = base64ToUint8Array(pemContent);
-
-        const asn1 = fromBER(bytes.buffer);
-        const cert = new Certificate({ schema: asn1.result });
+        const cert = parsePemCertificate(pemKey);
         const publicKeyInfo = cert.subjectPublicKeyInfo;
         if (!publicKeyInfo || !publicKeyInfo.algorithm || !publicKeyInfo.algorithm.algorithmId) {
             console.error('Parsed publicKeyInfo:', publicKeyInfo);
             throw new Error('Could not extract algorithm information from public key');
         }
 
-        const webCryptoAlg = getWebCryptoAlgorithmFromOid(publicKeyInfo);
-
-        // Convert to SPKI format for Web Crypto
-        const spkiBytes = publicKeyInfo.toSchema().toBER();
-        const spkiKey = await crypto.subtle.importKey(
-            'spki',
-            spkiBytes,
-            webCryptoAlg,
-            false,
-            ['verify']
-        );
-
-        // Convert signature from base64 to ArrayBuffer
-        let signatureBuffer;
-        if (webCryptoAlg.name === 'ECDSA') {
-            let rsLen = 32; // Default P-256
-            if (webCryptoAlg.namedCurve === 'P-384') rsLen = 48;
-            if (webCryptoAlg.namedCurve === 'P-521') rsLen = 66;
-            // For ECDSA, convert DER signature to raw format
-            signatureBuffer = convertDerSignatureToRaw(signature, rsLen);
-        } else {
-            // For RSA, use as-is
-            signatureBuffer = base64ToUint8Array(signature).buffer;
+        const webCryptoAlg = getWebCryptoAlgorithmFromOid(publicKeyInfo, options);
+        ensurePKIjsCryptoEngine();
+        const hash = typeof webCryptoAlg.hash === 'string' ? webCryptoAlg.hash : webCryptoAlg.hash.name;
+        const cryptoEngine = getCrypto(true);
+        const signatureAlgorithm = new AlgorithmIdentifier({
+            algorithmId: cryptoEngine.getOIDByAlgorithm({ ...webCryptoAlg, hash: { name: hash } }, true),
+        });
+        if(webCryptoAlg.name === 'RSA-PSS') {
+            const hashAlgorithm = new AlgorithmIdentifier({
+                algorithmId: cryptoEngine.getOIDByAlgorithm({ name: hash }, true),
+            });
+            signatureAlgorithm.algorithmParams = new RSASSAPSSParams({
+                hashAlgorithm,
+                maskGenAlgorithm: new AlgorithmIdentifier({ algorithmId: MGF1_OID, algorithmParams: hashAlgorithm.toSchema() }),
+                saltLength: webCryptoAlg.saltLength,
+            }).toSchema();
         }
-
-        const verified = await crypto.subtle.verify(webCryptoAlg, spkiKey, signatureBuffer, data);
-        return verified;
+        return await verifySignedData(data, new BitString({ valueHex: base64ToUint8Array(signature) }), publicKeyInfo, signatureAlgorithm);
     } catch (error) {
-        console.error('Error converting PEM to SPKI key:', error);
+        console.error('Error verifying signature:', error);
         throw error;
     }
+};
+
+const verifySignedData = async (data, signature, publicKeyInfo, signatureAlgorithm) => {
+    ensurePKIjsCryptoEngine();
+    const cryptoEngine = getCrypto(true);
+    const algorithm = cryptoEngine.getAlgorithmByOID(signatureAlgorithm.algorithmId, true);
+    if(algorithm.name === 'ECDSA') validateECDSASignature(signature.valueBlock.valueHexView);
+    const pss = signatureAlgorithm.algorithmId === RSA_PSS_OID ? parsePSSParameters(signatureAlgorithm) : null;
+    if(publicKeyInfo.algorithm.algorithmId === RSA_PSS_OID) {
+        if(!pss) throw new Error('RSA-PSS certificates require the RSA-PSS signature algorithm');
+        if(publicKeyInfo.algorithm.algorithmParams) {
+            const restrictions = parsePSSParameters(publicKeyInfo.algorithm);
+            if(pss.hashAlgorithm.algorithmId !== restrictions.hashAlgorithm.algorithmId || pss.saltLength < restrictions.saltLength) {
+                throw new Error('Signature parameters do not satisfy RSA-PSS public key restrictions');
+            }
+        }
+        // JWK import supports PSS-only keys without changing the original certificate.
+        const rsa = RSAPublicKey.fromBER(publicKeyInfo.subjectPublicKey.valueBlock.valueHexView);
+        const key = await cryptoEngine.importKey('jwk', { kty: 'RSA', ...rsa.toJSON() }, {
+            name: 'RSA-PSS', hash: cryptoEngine.getHashAlgorithm(signatureAlgorithm),
+        }, false, ['verify']);
+        return cryptoEngine.verify({ name: 'RSA-PSS', saltLength: pss.saltLength }, key, signature.valueBlock.valueHexView, data);
+    }
+    return cryptoEngine.verifyWithPublicKey(data, signature, publicKeyInfo, signatureAlgorithm);
 };
 
 function getAttributeValue(attribute) {
@@ -24875,44 +24875,30 @@ function getAttributeValue(attribute) {
     return null;
 }
 
-// Function to convert DER signature to raw format for ECDSA
-function convertDerSignatureToRaw(base64Signature, rsLen) {
-    try {
-        // Decode base64 to binary
-        const derBytes = base64ToUint8Array(base64Signature);
-
-        // Parse DER structure
-        const asn1 = fromBER(derBytes.buffer);
-
-        // DER signature should be SEQUENCE { INTEGER r, INTEGER s }
-        if (asn1.result.valueBlock.value.length !== 2) {
-            throw new Error('Invalid DER signature structure');
-        }
-
-        const r = asn1.result.valueBlock.value[0];
-        const s = asn1.result.valueBlock.value[1];
-
-        // Extract r and s values as byte arrays
-        const rBytes = new Uint8Array(r.valueBlock.valueHex);
-        const sBytes = new Uint8Array(s.valueBlock.valueHex);
-
-        // For P-256, each value should be 32 bytes
-        const rPadded = padOrTrimUint8Array(rBytes, rsLen);
-        const sPadded = padOrTrimUint8Array(sBytes, rsLen);
-
-        // Concatenate r and s
-        const rawSignature = new Uint8Array(rsLen * 2);
-        rawSignature.set(rPadded, 0);
-        rawSignature.set(sPadded, rsLen);
-
-        return rawSignature.buffer;
-    } catch (error) {
-        console.error('Error converting DER signature to raw:', error);
-        throw error;
+function validateECDSASignature(bytes) {
+    const asn1 = fromBER(bytes);
+    if(asn1.offset === -1 || asn1.offset !== bytes.byteLength || !(asn1.result instanceof Sequence)
+        || asn1.result.valueBlock.value.length !== 2 || !asn1.result.valueBlock.value.every(value => value instanceof Integer)) {
+        throw new Error('Invalid DER signature structure');
     }
 }
 
-function getWebCryptoAlgorithmFromOid(publicKeyInfo) {
+function parsePSSParameters(algorithm) {
+    if(!algorithm.algorithmParams) throw new Error('RSA-PSS signature parameters are required');
+    const parameters = new RSASSAPSSParams({ schema: algorithm.algorithmParams });
+    const mgf = parameters.maskGenAlgorithm;
+    if(mgf.algorithmId !== MGF1_OID || !mgf.algorithmParams || parameters.trailerField !== 1
+        || !Number.isInteger(parameters.saltLength) || parameters.saltLength < 0) {
+        throw new Error('Unsupported RSA-PSS parameters');
+    }
+    const mgfHash = new AlgorithmIdentifier({ schema: mgf.algorithmParams });
+    if(mgfHash.algorithmId !== parameters.hashAlgorithm.algorithmId) {
+        throw new Error('RSA-PSS MGF1 hash must match the signature hash');
+    }
+    return parameters;
+}
+
+function getWebCryptoAlgorithmFromOid(publicKeyInfo, options) {
     const algorithmOid = publicKeyInfo.algorithm.algorithmId;
     const algorithmParams = publicKeyInfo.algorithm.algorithmParams;
 
@@ -24927,6 +24913,9 @@ function getWebCryptoAlgorithmFromOid(publicKeyInfo) {
 
     switch (oidString) {
         case '1.2.840.10045.2.1': // ecPublicKey
+            if(options.name !== undefined && options.name !== 'ECDSA') {
+                throw new Error('EC certificates require the ECDSA signature algorithm');
+            }
             // Parse the curve parameters to determine the specific curve
             let curveOid;
             if (algorithmParams && typeof algorithmParams === 'object' && algorithmParams.valueBlock && typeof algorithmParams.valueBlock.toString === 'function') {
@@ -24938,21 +24927,32 @@ function getWebCryptoAlgorithmFromOid(publicKeyInfo) {
             }
             switch (curveOid) {
                 case '1.2.840.10045.3.1.7': // P-256
-                    return { name: 'ECDSA', namedCurve: 'P-256', hash: { name: 'SHA-256' } };
+                    return { name: 'ECDSA', namedCurve: 'P-256', hash: options.hash ?? { name: 'SHA-256' } };
                 case '1.3.132.0.34': // P-384
-                    return { name: 'ECDSA', namedCurve: 'P-384', hash: { name: 'SHA-384' } };
+                    return { name: 'ECDSA', namedCurve: 'P-384', hash: options.hash ?? { name: 'SHA-384' } };
                 case '1.3.132.0.35': // P-521
-                    return { name: 'ECDSA', namedCurve: 'P-521', hash: { name: 'SHA-512' } };
+                    return { name: 'ECDSA', namedCurve: 'P-521', hash: options.hash ?? { name: 'SHA-512' } };
                 case undefined:
                     // Default to P-256 if no parameters provided
-                    return { name: 'ECDSA', namedCurve: 'P-256', hash: { name: 'SHA-256' } };
+                    return { name: 'ECDSA', namedCurve: 'P-256', hash: options.hash ?? { name: 'SHA-256' } };
                 default:
                     throw new Error(`Unsupported EC curve: ${curveOid}`);
             }
         case '1.2.840.113549.1.1.1': // rsaEncryption
-            return { name: 'RSASSA-PKCS1-v1_5' };
         case '1.2.840.113549.1.1.10': // rsassaPss
-            return { name: 'RSA-PSS' };
+            if(!['RSASSA-PKCS1-v1_5', 'RSA-PSS'].includes(options.name) || !options.hash) {
+                throw new Error('RSA signatures require explicit name and hash options');
+            }
+            if(oidString === '1.2.840.113549.1.1.10' && options.name !== 'RSA-PSS') {
+                throw new Error('RSA-PSS certificates require the RSA-PSS signature algorithm');
+            }
+            if(options.name === 'RSA-PSS') {
+                if(!Number.isInteger(options.saltLength) || options.saltLength < 0) {
+                    throw new Error('RSA-PSS signatures require a non-negative integer saltLength');
+                }
+                return { name: options.name, hash: options.hash, saltLength: options.saltLength };
+            }
+            return { name: options.name, hash: options.hash };
         default:
             throw new Error(`Unsupported algorithm OID: ${oidString}`);
     }
@@ -25303,10 +25303,9 @@ const evaluateCRLResult = async (crlResult, distributionPoints, certificate, crl
     }
 
     try {
-        ensurePKIjsCryptoEngine();
         const signatureValid = await crl.verify({
             issuerCertificate: crlIssuerCertificate,
-        });
+        }, { verifyWithPublicKey: verifySignedData });
         if(!signatureValid) {
             state.errors.push(`Invalid CRL signature for ${url}`);
             return null;
@@ -25370,11 +25369,8 @@ const getCRLEntryReason = (entry) => {
     const extension = entry.crlEntryExtensions?.extensions.find(ext => ext.extnID === CRL_REASON_OID);
     if(!extension) return null;
 
-    const asn1 = fromBER(extension.extnValue.valueBlock.valueHex);
-    if(asn1.offset === -1 || !(asn1.result instanceof Enumerated)) {
-        throw new Error('Unable to parse CRL reason code');
-    }
-    return asn1.result.valueBlock.valueDec;
+    const reason = parseExtensionValue(extension, Enumerated, 'Unable to parse CRL reason code');
+    return reason.valueBlock.valueDec;
 };
 
 const getDistributionPointUrls = (distributionPoint) => {
@@ -25415,10 +25411,8 @@ const validateCRLIssuerCertificate = (issuerCertificate) => {
     const keyUsage = issuerCertificate.extensions?.find(ext => ext.extnID === KEY_USAGE_OID);
     if(!keyUsage) throw new Error('CRL issuer certificate key usage does not allow CRL signing');
 
-    const keyUsageValue = fromBER(keyUsage.extnValue.valueBlock.valueHex);
-    if(keyUsageValue.offset === -1) throw new Error('Unable to parse CRL issuer certificate key usage');
-
-    const keyUsageBytes = new Uint8Array(keyUsageValue.result.valueBlock.valueHexView || keyUsageValue.result.valueBlock.valueHex || []);
+    const keyUsageValue = parseExtensionValue(keyUsage, BitString, 'Unable to parse CRL issuer certificate key usage');
+    const keyUsageBytes = keyUsageValue.valueBlock.valueHexView;
     if(!(keyUsageBytes[0] & CRL_SIGN_KEY_USAGE_MASK)) {
         throw new Error('CRL issuer certificate key usage does not allow CRL signing');
     }
@@ -25591,14 +25585,6 @@ const bufferToHex = (buffer) => {
     return Array.from(new Uint8Array(buffer), byte => byte.toString(16).padStart(2, '0')).join('');
 };
 
-const parseExtensionValue = (extension, ExtensionValue, errorMessage) => {
-    if(extension.parsedValue instanceof ExtensionValue) return extension.parsedValue;
-
-    const asn1 = fromBER(extension.extnValue.valueBlock.valueHex);
-    if(asn1.offset === -1) throw new Error(errorMessage);
-    return new ExtensionValue({ schema: asn1.result });
-};
-
 const isCRLNotYetValid = (crl) => {
     return crl.thisUpdate.value > new Date();
 };
@@ -25625,10 +25611,7 @@ const parseCRL = (bytes) => {
     const crlBytes = textPrefix.trimStart().startsWith(CRL_PEM_BEGIN)
         ? pemCRLToBytes(new TextDecoder().decode(bytes))
         : bytes;
-    const arrayBuffer = crlBytes.buffer.slice(crlBytes.byteOffset, crlBytes.byteOffset + crlBytes.byteLength);
-    const asn1 = fromBER(arrayBuffer);
-    if(asn1.offset === -1) throw new Error('Unable to parse CRL');
-    return new CertificateRevocationList({ schema: asn1.result });
+    return CertificateRevocationList.fromBER(crlBytes);
 };
 
 const pemCRLToBytes = (pem) => {

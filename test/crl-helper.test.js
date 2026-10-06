@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import * as asn1js from 'asn1js';
+import { CertificateRevocationList, Extension } from 'pkijs';
 import { checkCertificateRevocation, parseCRL } from '../scripts/crl-helper.js';
 import { parsePemCertificate } from '../scripts/certificate-helper.js';
 import { CachedFetcher } from '../scripts/cached-fetcher.js';
@@ -43,6 +45,34 @@ O13gcBzpEjbiYrc3V1XQcUUn1eo88MCLGeSpPXy2tA==
 
 const issuerCertificate = { data: TEST_IACA_CERT };
 const documentSignerCertificate = parsePemCertificate(TEST_DOCUMENT_SIGNER_CERT);
+
+test('CRL parsing delegates to PKIjs and preserves PEM, DER and byte view inputs', t => {
+    const fromBER = t.mock.method(CertificateRevocationList, 'fromBER');
+    const crl = parseCRL(textBytes(CURRENT_EMPTY_CRL));
+    const bytes = new Uint8Array(crl.toSchema().toBER());
+    const framed = new Uint8Array(bytes.length + 8);
+    framed.set(bytes, 3);
+    assert.deepEqual(parseCRL(framed.subarray(3, 3 + bytes.length)).toJSON(), crl.toJSON());
+    assert.deepEqual(parseCRL(bytes).toJSON(), crl.toJSON());
+    assert.equal(fromBER.mock.callCount(), 3);
+    for(const invalid of [new Uint8Array([0xff]), textBytes('not a CRL'), new Uint8Array(new asn1js.Integer({ value: 1 }).toBER())]) {
+        assert.throws(() => parseCRL(invalid));
+    }
+});
+
+test('malformed CRL signing key usage is rejected before fetching a CRL', async () => {
+    for(const bytes of [new asn1js.OctetString({ valueHex: new Uint8Array([0x02]) }).toBER(), new Uint8Array([0xff])]) {
+        const certificate = parsePemCertificate(TEST_IACA_CERT);
+        certificate.extensions = certificate.extensions.filter(extension => extension.extnID !== '2.5.29.15');
+        certificate.extensions.push(new Extension({ extnID: '2.5.29.15', extnValue: bytes }));
+        const result = await checkCertificateRevocation(documentSignerCertificate, certificate, {
+            cachedFetcher: { fetch: async () => assert.fail('Malformed key usage must not trigger a CRL request') },
+        });
+        assert.equal(result.checked, false);
+        assert.equal(result.revoked, false);
+        assert.match(result.error, /Unable to parse CRL issuer certificate key usage/);
+    }
+});
 
 test('checkCertificateRevocation caches stale CRLs using normal cache TTL', async t => {
     const cachedFetcher = new CachedFetcher({ cacheTTL: 1000 });

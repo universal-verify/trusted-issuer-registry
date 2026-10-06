@@ -6,7 +6,7 @@ import {
     CRLDistributionPoints,
     IssuingDistributionPoint,
 } from 'pkijs';
-import { ensurePKIjsCryptoEngine, parsePemCertificate } from './certificate-helper.js';
+import { parseExtensionValue, parsePemCertificate, verifySignedData } from './certificate-helper.js';
 import { base64ToUint8Array } from './utils.js';
 
 const BASIC_CONSTRAINTS_OID = '2.5.29.19';
@@ -140,10 +140,9 @@ const evaluateCRLResult = async (crlResult, distributionPoints, certificate, crl
     }
 
     try {
-        ensurePKIjsCryptoEngine();
         const signatureValid = await crl.verify({
             issuerCertificate: crlIssuerCertificate,
-        });
+        }, { verifyWithPublicKey: verifySignedData });
         if(!signatureValid) {
             state.errors.push(`Invalid CRL signature for ${url}`);
             return null;
@@ -207,11 +206,8 @@ const getCRLEntryReason = (entry) => {
     const extension = entry.crlEntryExtensions?.extensions.find(ext => ext.extnID === CRL_REASON_OID);
     if(!extension) return null;
 
-    const asn1 = asn1js.fromBER(extension.extnValue.valueBlock.valueHex);
-    if(asn1.offset === -1 || !(asn1.result instanceof asn1js.Enumerated)) {
-        throw new Error('Unable to parse CRL reason code');
-    }
-    return asn1.result.valueBlock.valueDec;
+    const reason = parseExtensionValue(extension, asn1js.Enumerated, 'Unable to parse CRL reason code');
+    return reason.valueBlock.valueDec;
 };
 
 const getDistributionPointUrls = (distributionPoint) => {
@@ -252,10 +248,8 @@ const validateCRLIssuerCertificate = (issuerCertificate) => {
     const keyUsage = issuerCertificate.extensions?.find(ext => ext.extnID === KEY_USAGE_OID);
     if(!keyUsage) throw new Error('CRL issuer certificate key usage does not allow CRL signing');
 
-    const keyUsageValue = asn1js.fromBER(keyUsage.extnValue.valueBlock.valueHex);
-    if(keyUsageValue.offset === -1) throw new Error('Unable to parse CRL issuer certificate key usage');
-
-    const keyUsageBytes = new Uint8Array(keyUsageValue.result.valueBlock.valueHexView || keyUsageValue.result.valueBlock.valueHex || []);
+    const keyUsageValue = parseExtensionValue(keyUsage, asn1js.BitString, 'Unable to parse CRL issuer certificate key usage');
+    const keyUsageBytes = keyUsageValue.valueBlock.valueHexView;
     if(!(keyUsageBytes[0] & CRL_SIGN_KEY_USAGE_MASK)) {
         throw new Error('CRL issuer certificate key usage does not allow CRL signing');
     }
@@ -428,14 +422,6 @@ const bufferToHex = (buffer) => {
     return Array.from(new Uint8Array(buffer), byte => byte.toString(16).padStart(2, '0')).join('');
 };
 
-const parseExtensionValue = (extension, ExtensionValue, errorMessage) => {
-    if(extension.parsedValue instanceof ExtensionValue) return extension.parsedValue;
-
-    const asn1 = asn1js.fromBER(extension.extnValue.valueBlock.valueHex);
-    if(asn1.offset === -1) throw new Error(errorMessage);
-    return new ExtensionValue({ schema: asn1.result });
-};
-
 const isCRLNotYetValid = (crl) => {
     return crl.thisUpdate.value > new Date();
 };
@@ -462,10 +448,7 @@ export const parseCRL = (bytes) => {
     const crlBytes = textPrefix.trimStart().startsWith(CRL_PEM_BEGIN)
         ? pemCRLToBytes(new TextDecoder().decode(bytes))
         : bytes;
-    const arrayBuffer = crlBytes.buffer.slice(crlBytes.byteOffset, crlBytes.byteOffset + crlBytes.byteLength);
-    const asn1 = asn1js.fromBER(arrayBuffer);
-    if(asn1.offset === -1) throw new Error('Unable to parse CRL');
-    return new CertificateRevocationList({ schema: asn1.result });
+    return CertificateRevocationList.fromBER(crlBytes);
 };
 
 const pemCRLToBytes = (pem) => {

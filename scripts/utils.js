@@ -45,12 +45,3 @@ export const bufferToBase64Url = (bufferSource) => {
         .replace(/\//g, '_')
         .replace(/=+$/, '');
 };
-
-export const padOrTrimUint8Array = (bytes, length) => {
-    if (bytes.length === length) return bytes;
-    if (bytes.length > length) return bytes.slice(bytes.length - length);
-
-    const padded = new Uint8Array(length);
-    padded.set(bytes, length - bytes.length);
-    return padded;
-};
