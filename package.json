@@ -1,6 +1,6 @@
 {
   "name": "trusted-issuer-registry",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Registry of trusted credential issuers",
   "homepage": "https://github.com/universal-verify/trusted-issuer-registry#readme",
   "license": "MPL-2.0",
@@ -42,7 +42,6 @@
   "dependencies": {
     "asn1js": "^3.0.6",
     "canonical-json": "^0.2.0",
-    "cbor2": "^2.0.1",
     "pkijs": "^3.2.5"
   },
   "devDependencies": {
@@ -52,6 +51,7 @@
     "@types/node": "^22.20.5",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
+    "cbor2": "2.3.0",
     "eslint": "^9.31.0",
     "globals": "^16.3.0",
     "rollup": "^4.44.2",
