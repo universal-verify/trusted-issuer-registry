@@ -36,6 +36,10 @@ Patch releases are for issuer updates and bug fixes within the same minor versio
    npm run build
    ```
 
+5. **Update changelog**
+   - Move applicable notes from `Unreleased` in [CHANGELOG.md](CHANGELOG.md) into an entry for the new version, using its publication date.
+   - Document library, schema, and significant trust changes. For issuer-only releases, add a brief registry-data summary and a link to the release diff.
+
 6. **Commit changes**
    ```bash
    git add ./
@@ -120,6 +124,7 @@ git commit -m "Update public signing cert for upcoming minor version {major}.{mi
 #### 7. Update Version and Workflow files
 
 - **Update package.json version** (e.g., `"version": "0.1.0"`)
+- **Update [CHANGELOG.md](CHANGELOG.md)** with the new version, publication date, schema changes, and API migration notes.
 - **Update minor version in constants.js**:
   ```javascript
   export const MINOR_VERSION = '0.1';

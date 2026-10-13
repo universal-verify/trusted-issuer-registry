@@ -503,6 +503,8 @@ The registry uses semantic versioning with the following approach:
 - **Deprecation notices** are published for old minor versions 90 days in advance of its end-of-life date
 - **Old minor versions** will continue to receive issuer updates until the end-of-life date
 
+See the [changelog](CHANGELOG.md) for release history and migration notes.
+
 ### Checking for Deprecation
 
 ```javascript
