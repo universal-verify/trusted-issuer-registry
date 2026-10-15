@@ -9,6 +9,17 @@ backfilled.
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-10-15
+
+Registry and tooling update; no library API or schema changes.
+
+### Added
+
+- Added four Arkansas Department of Finance and Administration issuer entries
+  from the UV trust list, with normalized display names.
+- Added this changelog with 0.2.x release history and migration notes, and
+  changelog guidance in the maintainers guide.
+
 ### Changed
 
 - Daily UV issuer imports now follow the latest 0.2.x trust-list release instead
@@ -99,7 +110,8 @@ First supported release of the 0.2.x schema and expanded JavaScript library.
 - Accidentally published before the breaking changes for the 0.2.x release line
   were complete. Deprecated on npm; use 0.2.1 or later.
 
-[Unreleased]: https://github.com/universal-verify/trusted-issuer-registry/compare/0.2.2...dev
+[Unreleased]: https://github.com/universal-verify/trusted-issuer-registry/compare/bfba24b371e8de7820d1229ed4e5e715d1946f2b...dev
+[0.2.3]: https://github.com/universal-verify/trusted-issuer-registry/compare/0.2.2...bfba24b371e8de7820d1229ed4e5e715d1946f2b
 [0.2.2]: https://github.com/universal-verify/trusted-issuer-registry/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/universal-verify/trusted-issuer-registry/compare/0.1.9...0.2.1
 [0.2.0]: https://www.npmjs.com/package/trusted-issuer-registry/v/0.2.0
