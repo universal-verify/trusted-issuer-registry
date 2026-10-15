@@ -1,0 +1,23 @@
+{
+  "issuer_id": "x509_aki:89iQW85m0Cp-j-KwkyzezjpTYhs",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "AR"
+  },
+  "display": {
+    "name": "Department of Finance and Administration"
+  },
+  "trust_scopes": [
+    "government_issued_id"
+  ],
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIIDBTCCAougAwIBAgIUTd8+XDzYqfjdQJEIfOvF25McIP8wCgYIKoZIzj0EAwMw\nfTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUFSMTEwLwYDVQQKDChEZXBhcnRt\nZW50IG9mIEZpbmFuY2UgYW5kIEFkbWluaXN0cmF0aW9uMSswKQYDVQQDDCJVUy1B\nUiBQUk9EIElBQ0EgZm9yIFNBTVNVTkcgV2FsbGV0MB4XDTI1MDQyMzIwMDUyNVoX\nDTM0MDQyMjIwMDUyNVowfTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUFSMTEw\nLwYDVQQKDChEZXBhcnRtZW50IG9mIEZpbmFuY2UgYW5kIEFkbWluaXN0cmF0aW9u\nMSswKQYDVQQDDCJVUy1BUiBQUk9EIElBQ0EgZm9yIFNBTVNVTkcgV2FsbGV0MHYw\nEAYHKoZIzj0CAQYFK4EEACIDYgAEYSF1iQuAnVkz/Ckuz3Uo1gEQyigKhHu2jv5N\nbCpsWx5zS8/hwPebcFSZHOWPp+o/9gWeSw4njr94GgPVSBijIrsueoPLYNoU+paO\naRo1Ni53Hq5+EQBCxn0gMknpjfDPo4HLMIHIMB0GA1UdDgQWBBTz2JBbzmbQKn6P\n4rCTLN7OOlNiGzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBADAy\nBgNVHRIEKzAphidodHRwczovL3d3dy5kZmEuYXJrYW5zYXMuZ292L21vYmlsZS1p\nZC8wTwYDVR0fBEgwRjBEoEKgQIY+aHR0cDovL21kbC5kZmEuYXJrYW5zYXMuZ292\nL3VzLWFyLXByb2QtaWFjYS1zYW1zdW5nLXdhbGxldC5jcmwwCgYIKoZIzj0EAwMD\naAAwZQIwAu/WSlPnsgJSfCFYcaSuWNEQScSN0s11KflsHMheQS4E1JuS1sUVq5xz\nD3gi2xWrAjEA8tqSDef9M42gKxioN7Zs2WXHbe1qo5vY/Xdxgrdv5lxQfAnmbQI0\nkyHzYRvGOHe/\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "uv"
+      ]
+    }
+  ]
+}
