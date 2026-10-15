@@ -9,6 +9,11 @@ backfilled.
 
 ## [Unreleased]
 
+### Changed
+
+- Daily UV issuer imports now follow the latest 0.2.x trust-list release instead
+  of 0.1.x.
+
 ### Removed
 
 - Retired the daily issuer-update workflow for the 0.1.x registry after its
