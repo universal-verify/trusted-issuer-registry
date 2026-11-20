@@ -1,0 +1,23 @@
+{
+  "issuer_id": "x509_aki:ha2w6kpJ7GofsERhWO8B65n1TXY",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "GA"
+  },
+  "display": {
+    "name": "Georgia Department of Driver Services"
+  },
+  "trust_scopes": [
+    "government_issued_id"
+  ],
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIIDWTCCAv+gAwIBAgITI/09piTOWTZfOKSyWlyAGq7vojAKBggqhkjOPQQDAjCB\nnTEOMAwGA1UECBMFVVMtR0ExCzAJBgNVBAYTAlVTMRAwDgYDVQQHEwdDb255ZXJz\nMS4wLAYDVQQKEyVHZW9yZ2lhIERlcGFydG1lbnQgb2YgRHJpdmVyIFNlcnZpY2Vz\nMQ8wDQYDVQQLEwZEUklWRVMxKzApBgNVBAMTIkdlb3JnaWEgUm9vdCBDZXJ0aWZp\nY2F0ZSBBdXRob3JpdHkwHhcNMjYwOTAyMDYwMDAwWhcNMzEwOTAyMDYwMDAwWjCB\nnTEOMAwGA1UECBMFVVMtR0ExCzAJBgNVBAYTAlVTMRAwDgYDVQQHEwdDb255ZXJz\nMS4wLAYDVQQKEyVHZW9yZ2lhIERlcGFydG1lbnQgb2YgRHJpdmVyIFNlcnZpY2Vz\nMQ8wDQYDVQQLEwZEUklWRVMxKzApBgNVBAMTIkdlb3JnaWEgUm9vdCBDZXJ0aWZp\nY2F0ZSBBdXRob3JpdHkwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQhGuMMGXoI\ns8b2OyeMka4sSxbTFnxAbVRYLYph8ReKlH0Yh2NwYGd8b+tj7uyPh6nYHzJGNt9k\nlg/8IiqNTuago4IBGjCCARYwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYB\nAf8CAQAwHQYDVR0OBBYEFIWtsOpKSexqH7BEYVjvAeuZ9U12MEgGA1UdEgRBMD+B\nI2dyb3VwaXRwcm9kdWN0aW9uc3VwcG9ydEBkZHMuZ2EuZ292hhhodHRwczovL2Rk\ncy5nZW9yZ2lhLmdvdi8wdQYDVR0fBG4wbDBqoGigZoZkaHR0cHM6Ly93cy5kcml2\nZXMuZ2EuZ292L1dlYlNlcnZpY2VzL05BL0dTcC9jcmwvY3JsL3Jldm9jYXRpb25z\nLzkxYzVlOGQ1NWVmNzQ1MzY5MDFjNjZmOTVkNzNlMTA3LmNybDAQBgkrBgEEAYPF\nIQEEA0dTUDAKBggqhkjOPQQDAgNIADBFAiARhefLqPDEssaqxEIjKaay5lst0RRx\nVSJXt7npXv5FZQIhAKQn+MOAM7JCEtciqla+Wa2r30xRmEm7P25DCPgsVtGZ\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "aamva_dts"
+      ]
+    }
+  ]
+}
