@@ -99,6 +99,8 @@ This will create a `deprecation_notice.json` file.
 
 ```bash
 # Update patch version in package.json (e.g., 0.0.7)
+# Rebuild and commit the updated build files and registry snapshot
+npm run build
 # Publish the patch
 npm publish
 ```

@@ -1,6 +1,6 @@
 import { REGISTRY_URL_BASE, MINOR_VERSION, RevocationCheckMode, TrustList, TrustScope, UntrustedReason } from './constants.js';
 import { certificateToPem, parsePemCertificate, verifyCertificateSignature, verifySignatureWithPem } from './certificate-helper.js';
-import { buildUserTrustedIssuers, getIssuerFromX509AKI } from './issuer-helper.js';
+import { buildRegistrySnapshotIssuers, buildUserTrustedIssuers, getIssuerFromX509AKI } from './issuer-helper.js';
 import { resolveCertificateTrust } from './trust-helper.js';
 import { CachedFetcher } from './cached-fetcher.js';
 
@@ -9,9 +9,11 @@ class Registry {
         this._cachedFetcher = new CachedFetcher(options);
         this._revocationCheckMode = normalizeRevocationCheckMode(options.revocationCheckMode);
         this._userTrustedIssuers = buildUserTrustedIssuers(options.trustedIssuerCertificates ?? []);
+        this._registrySnapshotIssuers = buildRegistrySnapshotIssuers(options.registrySnapshot);
     }
 
     async getEndOfLifeDate() {
+        if(this._registrySnapshotIssuers) return null;
         const url = `${REGISTRY_URL_BASE}/deprecation_notice.json`;
         const response = await this._cachedFetcher.fetch(url, 'deprecation');
         let endOfLifeDate = null;
@@ -36,6 +38,7 @@ class Registry {
         return getIssuerFromX509AKI(x509aki, {
             userTrustedIssuers: this._userTrustedIssuers,
             cachedFetcher: this._cachedFetcher,
+            registrySnapshotIssuers: this._registrySnapshotIssuers,
         });
     }
 
@@ -44,6 +47,7 @@ class Registry {
             ...options,
             userTrustedIssuers: this._userTrustedIssuers,
             cachedFetcher: this._cachedFetcher,
+            registrySnapshotIssuers: this._registrySnapshotIssuers,
             revocationCheckMode: this._revocationCheckMode,
         });
     }

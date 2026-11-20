@@ -17,7 +17,7 @@ export const resolveCertificateTrust = async (certificate, options) => {
     const x509aki = getAuthorityKeyIdentifier(certificate);
     if(!x509aki) return { trusted: false, untrustedReasons: [UntrustedReason.CERTIFICATE_AKI_MISSING] };
 
-    const { trustLists = [], trustScope, userTrustedIssuers, cachedFetcher, revocationCheckMode } = options;
+    const { trustLists = [], trustScope, userTrustedIssuers, cachedFetcher, registrySnapshotIssuers, revocationCheckMode } = options;
     const untrustedReasons = [];
     const now = new Date();
     if(isCertificateNotYetValid(certificate, now)) untrustedReasons.push(UntrustedReason.CERTIFICATE_NOT_YET_VALID);
@@ -27,7 +27,7 @@ export const resolveCertificateTrust = async (certificate, options) => {
     let registryFetchFailed = false;
     if(trustLists.length > 0) {
         try {
-            registryIssuer = await getRegistryIssuerFromX509AKI(x509aki, { cachedFetcher });
+            registryIssuer = await getRegistryIssuerFromX509AKI(x509aki, { cachedFetcher, registrySnapshotIssuers });
         } catch(error) {
             registryFetchFailed = true;
         }

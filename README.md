@@ -13,7 +13,7 @@ The Trusted Issuer Registry aggregates and validates issuer information from mul
 
 All issuer data is cryptographically signed to ensure integrity and authenticity, providing a reliable foundation for digital credential verification systems.
 
-Registry lookups target the latest published patch in the library's minor version, so issuer updates don't require a library upgrade (subject to library and [CDN caching](https://github.com/jsdelivr/jsdelivr#caching)).
+By default, registry lookups target the latest published patch in the library's minor version, so issuer updates don't require a library upgrade (subject to library and [CDN caching](https://github.com/jsdelivr/jsdelivr#caching)). Supply a `registrySnapshot` to use a fixed set of registry issuers offline instead.
 
 ## Trust Model
 
@@ -116,12 +116,13 @@ Stable codes for root and certificate-level `untrustedReasons`. Values are lower
 
 #### `new Registry(options = {})`
 
-Creates a registry client with optional user-provided issuers, revocation checking, and request caching.
+Creates a registry client with optional registry snapshot, user-provided issuers, revocation checking, and request caching.
 
 **Constructor options:**
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
+| `registrySnapshot` | `RegistrySnapshot` | `undefined` | Parsed snapshot containing signed registry issuers; replaces live registry lookups |
 | `trustedIssuerCertificates` | `Array<string\|Object>` | `[]` | User-provided PEM-encoded issuer certificates, optionally with issuer metadata |
 | `revocationCheckMode` | `string` | `RevocationCheckMode.SKIP` | CRL checking mode from `RevocationCheckMode` |
 | `timeout` | `number` | `10000` | Timeout in milliseconds for each network request, including reading its response body |
@@ -172,6 +173,22 @@ const registry = new Registry({
 **Caching:**
 
 Successful downloads and HTTP 404s are cached for up to `cacheTTL` when caching is enabled; issuers require valid registry signatures. Network errors, timeouts, and other HTTP errors aren't cached. Each instance retains at most 1,024 responses using LRU eviction, with activity-triggered expiry sweeps at most once per minute. Concurrent downloads are shared even with caching disabled. Cached CRLs are validated per certificate, and `nextUpdate` shortens their TTL only when in the future and sooner than normal expiry.
+
+**Offline registry snapshots:**
+
+The npm package includes a registry snapshot at `build/registry.json`, which can be imported separately. It contains the package version and all signed issuer records, including issuers with no current certificates:
+
+Providing `registrySnapshot` disables live registry and deprecation checks, while CRL checks are still configurable.
+
+```javascript
+import { Registry, TrustList } from 'trusted-issuer-registry';
+import registrySnapshot from 'trusted-issuer-registry/build/registry.json' with { type: 'json' };
+
+const registry = new Registry({ registrySnapshot });
+const result = await registry.resolveCertificateTrust(certificatePem, {
+    trustLists: [TrustList.UV, TrustList.AAMVA_DTS],
+});
+```
 
 #### `Registry.minorVersion`
 
@@ -277,7 +294,7 @@ Malformed certificate input rejects the promise with a parsing error.
 
 #### `registry.getIssuerFromX509AKI(x509aki)`
 
-Retrieves and merges issuer information without evaluating certificate trust. The registry is always checked, using cached data when available, even when a user-provided issuer exists.
+Retrieves and merges issuer information without evaluating certificate trust. The configured registry source (snapshot or live registry) is always checked, even when a user-provided issuer exists. Live lookups use cached data when available.
 
 **Parameters:**
 
@@ -285,7 +302,7 @@ Retrieves and merges issuer information without evaluating certificate trust. Th
 
 **Returns:** `Promise<Object|null>` - Merged issuer data, or `null` when no issuer is found.
 
-User metadata takes precedence, scopes and certificates are combined, and user-provided certificates appear first. A registry 404 still allows a user-provided issuer to be returned. Registry request failures reject the lookup even when a user-provided issuer exists.
+User metadata takes precedence, scopes and certificates are combined, and user-provided certificates appear first. A registry 404 or an issuer missing from the snapshot still allows a user-provided issuer to be returned. Registry request failures and invalid snapshot signatures reject the lookup even when a user-provided issuer exists.
 
 Merged results omit `signature`. When no user-provided issuer matches, the original signed registry data is returned with its signature. This method does not add certificate trust results.
 
@@ -428,6 +445,9 @@ You can also access issuer data directly via HTTP requests to a CDN:
 ```bash
 # Get Apple issuer by X.509 AKI
 curl https://cdn.jsdelivr.net/npm/trusted-issuer-registry@0.2/issuers/x509_aki/ZQ9wReJ1csNhZ3sfoWXy5Oxv0ac.json
+
+# Get all signed issuers as a registry snapshot
+curl https://cdn.jsdelivr.net/npm/trusted-issuer-registry@0.2/build/registry.json
 
 # Check deprecation notice
 curl https://cdn.jsdelivr.net/npm/trusted-issuer-registry@0.2/deprecation_notice.json

@@ -18,6 +18,8 @@ import type {
     IssuerCertificate,
     IssuerDisplay,
     RegistryOptions,
+    RegistrySnapshot,
+    RegistrySnapshotIssuer,
     ResolveCertificateTrustOptions,
     ResolvedIssuer,
     ResolvedIssuerCertificate,
@@ -26,6 +28,7 @@ import type {
     UserTrustedIssuerCertificate,
 } from 'trusted-issuer-registry';
 import { Certificate } from 'pkijs';
+import registrySnapshot from 'trusted-issuer-registry/build/registry.json' with { type: 'json' };
 import { Registry as UnbundledRegistry } from 'trusted-issuer-registry/build/trusted-issuer-registry.js';
 import { Registry as MinifiedRegistry } from 'trusted-issuer-registry/build/trusted-issuer-registry.min.js';
 import { Registry as BundledRegistry } from 'trusted-issuer-registry/build/trusted-issuer-registry.bundled.js';
@@ -42,6 +45,7 @@ export async function exerciseOptionalInputs(
     timeout: number | undefined,
 ): Promise<void> {
     const registry = new Registry({
+        registrySnapshot: undefined,
         trustedIssuerCertificates: undefined,
         revocationCheckMode: undefined,
         timeout,
@@ -69,6 +73,17 @@ export async function exerciseOptionalInputs(
 }
 
 export async function exerciseAPI(certificatePem: string, issuerPem: string, signature: string): Promise<void> {
+    expectType<RegistrySnapshot>(registrySnapshot);
+    expectType<string>(registrySnapshot.version);
+    new Registry({ registrySnapshot });
+    const filteredSnapshot = {
+        version: registrySnapshot.version,
+        issuers: registrySnapshot.issuers.filter(issuer => issuer.certificates.length > 0),
+    } satisfies RegistrySnapshot;
+    new Registry({ registrySnapshot: filteredSnapshot });
+    new Registry({ registrySnapshot: { issuers: [] } as const });
+    new Registry({ registrySnapshot: { version: undefined, issuers: [] } });
+    for(const issuer of registrySnapshot.issuers) expectType<RegistrySnapshotIssuer>(issuer);
     expectType<'uv'>(TrustList.UV);
     expectType<'aamva_dts'>(TrustList.AAMVA_DTS);
     expectType<'government_issued_id'>(TrustScope.GOVERNMENT_ISSUED_ID);
@@ -175,6 +190,14 @@ export async function exerciseAPI(certificatePem: string, issuerPem: string, sig
 
     // @ts-expect-error Certificate objects need PEM data.
     new Registry({ trustedIssuerCertificates: [{}] });
+    // @ts-expect-error Snapshot input must be a parsed object, not a filename.
+    new Registry({ registrySnapshot: 'registry.json' });
+    // @ts-expect-error Null snapshots must not silently enable live requests.
+    new Registry({ registrySnapshot: null });
+    // @ts-expect-error Snapshot entries require a registry signature.
+    new Registry({ registrySnapshot: { issuers: [issuer] } });
+    // @ts-expect-error Snapshot entries preserve registry trust lists rather than user-provided trust.
+    expectType<RegistrySnapshotIssuer>({ ...issuer, signature: 'signature', certificates: [{ data: issuerPem, format: 'pem', trust_lists: ['user_provided'] }] });
     // @ts-expect-error DER is not a supported issuer certificate format.
     new Registry({ trustedIssuerCertificates: [{ data: issuerPem, format: 'der' }] });
     // @ts-expect-error Revocation modes are limited to the exported values.

@@ -44,6 +44,8 @@ test('published declarations support strict NodeNext and browser/bundler consume
     ], { cwd: ROOT, encoding: 'utf8' }));
     const shippedFiles = new Set(packed.files.map(file => file.path));
     assert.ok(shippedFiles.has('types/index.d.ts'));
+    assert.ok(shippedFiles.has('types/registry-snapshot.d.ts'));
+    assert.ok(shippedFiles.has('build/registry.json'));
     for(const variant of ['', '.min', '.bundled', '.bundled.min']) {
         assert.ok(shippedFiles.has(`build/trusted-issuer-registry${variant}.d.ts`));
         assert.ok(shippedFiles.has(`build/trusted-issuer-registry${variant}.js`));

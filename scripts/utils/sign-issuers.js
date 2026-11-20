@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import stringify from 'canonical-json';
 import crypto from 'crypto';
 import { PUBLIC_SIGNING_CERT } from '../constants.js';
+import { buildRegistrySnapshot } from './registry-snapshot.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -174,7 +175,8 @@ async function signIssuers(privateKeyPem) {
             }
         }
 
-        console.log(`\nSigning complete! Processed ${processedFiles} of ${totalFiles} files.`);
+        buildRegistrySnapshot(projectRoot);
+        console.log(`\nSigning complete! Processed ${processedFiles} of ${totalFiles} files. Updated build/registry.json.`);
 
     } catch (error) {
         console.error('Error during signing process:', error.message);

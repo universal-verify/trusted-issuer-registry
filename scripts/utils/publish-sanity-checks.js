@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { validateSchemaFiles } from './schema-check.js';
 import { validateSignatureFiles } from './signature-check.js';
+import { validateRegistrySnapshot } from './registry-snapshot.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,31 +33,31 @@ async function checkPatchVersionDeprecation() {
     const version = packageJson.version;
     const patchVersion = parseInt(version.split('.')[2]);
 
-    const deprecationPath = path.resolve(__dirname, '../..', 'deprecation.json');
+    const deprecationPath = path.resolve(__dirname, '../..', 'deprecation_notice.json');
     const deprecationExists = fs.existsSync(deprecationPath);
 
     if (patchVersion === 0 && deprecationExists) {
-        console.error('❌ Patch version is 0 but deprecation.json exists. Remove deprecation.json before publishing a new minor version.');
+        console.error('❌ Patch version is 0 but deprecation_notice.json exists. Remove deprecation_notice.json before publishing a new minor version.');
         process.exit(1);
     }
 
-    // Check if patch version is not 0, deprecation.json doesn't exist, but it existed in the previous patch version
+    // Check if patch version is not 0, deprecation_notice.json doesn't exist, but it existed in the previous patch version
     if (patchVersion !== 0 && !deprecationExists) {
         const majorMinorVersion = version.split('.').slice(0, 2).join('.');
         const previousPatchVersion = patchVersion - 1;
         const previousVersion = `${majorMinorVersion}.${previousPatchVersion}`;
 
         try {
-            // Check if deprecation.json existed in the previous published version via jsdelivr
-            const jsdelivrUrl = `https://cdn.jsdelivr.net/npm/trusted-issuer-registry@${previousVersion}/deprecation.json`;
+            // Check if deprecation_notice.json existed in the previous published version via jsdelivr
+            const jsdelivrUrl = `https://cdn.jsdelivr.net/npm/trusted-issuer-registry@${previousVersion}/deprecation_notice.json`;
             const response = await fetch(jsdelivrUrl);
 
             if (response.ok) {
-                console.error(`❌ Patch version ${patchVersion} but deprecation.json was removed. The deprecation.json file existed in published version ${previousVersion} and should not be removed in a new patch version.`);
+                console.error(`❌ Patch version ${patchVersion} but deprecation_notice.json was removed. The deprecation_notice.json file existed in published version ${previousVersion} and should not be removed in a new patch version.`);
                 process.exit(1);
             }
         } catch (error) {
-            console.error(`❌ Could not verify if deprecation.json existed or not in previous version ${previousVersion} (network error)`);
+            console.error(`❌ Could not verify if deprecation_notice.json existed or not in previous version ${previousVersion} (network error)`);
             process.exit(1);
         }
     }
@@ -125,6 +126,8 @@ try {
     checkBranch();
     await checkPatchVersionDeprecation();
     checkVersionConsistency();
+    const snapshotIssuers = validateRegistrySnapshot();
+    console.log(` ✅ Registry snapshot validation passed: ${snapshotIssuers} matching issuers.`);
     checkFilesAgainstSchemas();
     checkSignatures();
 

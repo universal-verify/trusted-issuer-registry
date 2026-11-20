@@ -1,0 +1,949 @@
+{
+  "version": "0.2.3",
+  "issuers": [
+    {
+      "issuer_id": "x509_aki:1mocVx1pknkRfkCcqMNw6rc7Kdo",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "IL"
+      },
+      "display": {
+        "name": "Illinois Secretary of State"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDEjCCArigAwIBAgISCHL1YIc7QrNbTZ7wVlsBd1H7MAoGCCqGSM49BAMCMIGI\nMQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtSUwxFDASBgNVBAcMC1NwcmluZ2Zp\nZWxkMSQwIgYDVQQKDBtJbGxpbm9pcyBTZWNyZXRhcnkgb2YgU3RhdGUxCzAJBgNV\nBAsMAklUMSAwHgYDVQQDDBdQcm9kIElBQ0EgUm9vdCAwNTAxMjAyNjAeFw0yNjA1\nMDExNTU2MzVaFw00NTA1MDExNTU2MzVaMIGIMQswCQYDVQQGEwJVUzEOMAwGA1UE\nCAwFVVMtSUwxFDASBgNVBAcMC1NwcmluZ2ZpZWxkMSQwIgYDVQQKDBtJbGxpbm9p\ncyBTZWNyZXRhcnkgb2YgU3RhdGUxCzAJBgNVBAsMAklUMSAwHgYDVQQDDBdQcm9k\nIElBQ0EgUm9vdCAwNTAxMjAyNjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABEgH\nmKbCu1sR5ewcxJAhjTKXpV9D/t1VlIJSRNTP8vNHAp2a/0TWV6lFiSbJOkdviiuy\n6k4W6AVs0E7fSZEuHUujgf8wgfwwHQYDVR0OBBYEFNZqHFcdaZJ5EX5AnKjDcOq3\nOynaMA4GA1UdDwEB/wQEAwIBBjASBgNVHSUECzAJBgcogYxdBQECMBgGA1UdEQQR\nMA+BDXBraUBpbHNvcy5nb3YwGAYDVR0SBBEwD4ENcGtpQGlsc29zLmdvdjBvBgNV\nHR8EaDBmMGSgYqBghl5odHRwOi8vY3JsLmlsc29zLm5ldC9kb2l0a2Nzc2FwY3Vz\nY3JsLzZlMTNlOWI1LWQxYWItNGJhYS04MjFkLTIyYzczNDBjMmQwYS9Qcm9kSUFD\nQVJvb3QwNTAuY3JsMBIGA1UdEwEB/wQIMAYBAf8CAQAwCgYIKoZIzj0EAwIDSAAw\nRQIhAM7ALtEXRfmqF9/x7fZq0fqR4EBYS6E8CEN0SwX4PtsxAiA/qLOcGs+YxGz+\nw2pprjHYcK1QArsq2BE/l9wcllnHAA==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEYCIQDywVnDtt0P2j89MOV9cOxJujUqRl3NfeUOgfIj41P++gIhAIsRP0MhCBNOcRPbZUVjywYc64uIecTNkFFY4YI1xvfp"
+    },
+    {
+      "issuer_id": "x509_aki:3-BJ8g1-X200DZEo-i9MFTtNh0U",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AZ"
+      },
+      "display": {
+        "name": "Arizona Department of Transportation"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDETCCAragAwIBAgIUSNAJ0bZiqfgXuhhD4AIJlZjs66UwCgYIKoZIzj0EAwIw\ngYIxFTATBgNVBAMMDEF6V2FsbGV0SUFDQTEtMCsGA1UECgwkQXJpem9uYSBEZXBh\ncnRtZW50IG9mIFRyYW5zcG9ydGF0aW9uMQswCQYDVQQLDAJJVDELMAkGA1UEBhMC\nVVMxDjAMBgNVBAgMBVVTLUFaMRAwDgYDVQQHDAdQaG9lbml4MB4XDTI1MTIxNTE4\nMjEyMloXDTM1MTIxNTE4MjEyMlowgYIxFTATBgNVBAMMDEF6V2FsbGV0SUFDQTEt\nMCsGA1UECgwkQXJpem9uYSBEZXBhcnRtZW50IG9mIFRyYW5zcG9ydGF0aW9uMQsw\nCQYDVQQLDAJJVDELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUFaMRAwDgYDVQQH\nDAdQaG9lbml4MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE4sYOLSdMehpJnRu\nGOaHJGtjXbNFaPdakUDXM5/VOq6eNoONgLXILnywZXHb5QNoK+imK99Yv6bsEqFO\nLtF3EaOCAQYwggECMB0GA1UdDgQWBBTf4EnyDX5fbTQNkSj6L0wVO02HRTAfBgNV\nHSMEGDAWgBTf4EnyDX5fbTQNkSj6L0wVO02HRTASBgNVHRMBAf8ECDAGAQH/AgEA\nMA4GA1UdDwEB/wQEAwIBBjAsBgNVHRIEJTAjhiFodHRwczovL2F6ZG90Lmdvdi9t\ndmQvY29udGFjdC1tdmQwbgYDVR0fBGcwZTBjoGGgX4ZdaHR0cHM6Ly9tdm1wdWJs\naWMuYmxvYi5jb3JlLnVzZ292Y2xvdWRhcGkubmV0L2NlcnRpZmljYXRlLXJldm9j\nYXRpb24tbGlzdC80L01WTVByb2RDQS5jcmwucGVtMAoGCCqGSM49BAMCA0kAMEYC\nIQDN42PoINqCgCe/dmvnSDpPQ/xvzC2B9P2LEoUY1OVrrwIhAMMJyZSVB9d6sgou\nSx7Ix8bnMCe9sMNEH88Z8eGK35n9\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv",
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEUCIQDpKuRFawxUXxdJ8HoXpVLkplFjdfLJf50JBQINuZ2OsQIgYcEOMzB14dgiGxIz++AimTKIqE5PPrUxHnOyyiFfaJw="
+    },
+    {
+      "issuer_id": "x509_aki:6TUKCCDc7eWtyioiOjoDMSChidw",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "CO"
+      },
+      "display": {
+        "name": "Colorado Department of Revenue"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [],
+      "signature": "MEUCIQDl9NOPU0HS7X3uhgCrnw3r5kPkn9O4t0Efu8qJAcU1TAIgEKhyIpHn6rtV9IO8rUdakFKg/RVs+1MUQc1WXr70cNM="
+    },
+    {
+      "issuer_id": "x509_aki:89iQW85m0Cp-j-KwkyzezjpTYhs",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AR"
+      },
+      "display": {
+        "name": "Arkansas Department of Finance and Administration"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDBTCCAougAwIBAgIUTd8+XDzYqfjdQJEIfOvF25McIP8wCgYIKoZIzj0EAwMw\nfTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUFSMTEwLwYDVQQKDChEZXBhcnRt\nZW50IG9mIEZpbmFuY2UgYW5kIEFkbWluaXN0cmF0aW9uMSswKQYDVQQDDCJVUy1B\nUiBQUk9EIElBQ0EgZm9yIFNBTVNVTkcgV2FsbGV0MB4XDTI1MDQyMzIwMDUyNVoX\nDTM0MDQyMjIwMDUyNVowfTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUFSMTEw\nLwYDVQQKDChEZXBhcnRtZW50IG9mIEZpbmFuY2UgYW5kIEFkbWluaXN0cmF0aW9u\nMSswKQYDVQQDDCJVUy1BUiBQUk9EIElBQ0EgZm9yIFNBTVNVTkcgV2FsbGV0MHYw\nEAYHKoZIzj0CAQYFK4EEACIDYgAEYSF1iQuAnVkz/Ckuz3Uo1gEQyigKhHu2jv5N\nbCpsWx5zS8/hwPebcFSZHOWPp+o/9gWeSw4njr94GgPVSBijIrsueoPLYNoU+paO\naRo1Ni53Hq5+EQBCxn0gMknpjfDPo4HLMIHIMB0GA1UdDgQWBBTz2JBbzmbQKn6P\n4rCTLN7OOlNiGzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBADAy\nBgNVHRIEKzAphidodHRwczovL3d3dy5kZmEuYXJrYW5zYXMuZ292L21vYmlsZS1p\nZC8wTwYDVR0fBEgwRjBEoEKgQIY+aHR0cDovL21kbC5kZmEuYXJrYW5zYXMuZ292\nL3VzLWFyLXByb2QtaWFjYS1zYW1zdW5nLXdhbGxldC5jcmwwCgYIKoZIzj0EAwMD\naAAwZQIwAu/WSlPnsgJSfCFYcaSuWNEQScSN0s11KflsHMheQS4E1JuS1sUVq5xz\nD3gi2xWrAjEA8tqSDef9M42gKxioN7Zs2WXHbe1qo5vY/Xdxgrdv5lxQfAnmbQI0\nkyHzYRvGOHe/\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEYCIQC5+Hszz3L9kWDVT2XQN41CeeBufe9U7YmPk+XBrQ/UEQIhAIW4BcKQyuik0A3UAE/AV8lCAUuXb0yN/vb/FZBQpbnM"
+    },
+    {
+      "issuer_id": "x509_aki:9fO8k74o6oy6krKPTdxANHz6HOQ",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "IL"
+      },
+      "display": {
+        "name": "Illinois Secretary of State"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDETCCArigAwIBAgITALbJtbNSF44XF4jwh5Hu4WVzbzAKBggqhkjOPQQDAjB/\nMQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtSUwxFDASBgNVBAcMC1NwcmluZ2Zp\nZWxkMSQwIgYDVQQKDBtJbGxpbm9pcyBTZWNyZXRhcnkgb2YgU3RhdGUxCzAJBgNV\nBAsMAklUMRcwFQYDVQQDDA5Qcm9kIElBQ0EgUm9vdDAeFw0yNTA5MTgxOTQ2NDZa\nFw00NDA5MTgxOTQ2NDZaMH8xCzAJBgNVBAYTAlVTMQ4wDAYDVQQIDAVVUy1JTDEU\nMBIGA1UEBwwLU3ByaW5nZmllbGQxJDAiBgNVBAoMG0lsbGlub2lzIFNlY3JldGFy\neSBvZiBTdGF0ZTELMAkGA1UECwwCSVQxFzAVBgNVBAMMDlByb2QgSUFDQSBSb290\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEAxgmbxoF1QKsStQfKR5rZp+d3Es2\nBcuslyGNaDDg+MGyM43A25E6V+faSmgz5vxu8P13k8tAX6cmV2YuXOge/aOCAREw\nggENMB0GA1UdDgQWBBT187yTvijqjLqSso9N3EA0fPoc5DAOBgNVHQ8BAf8EBAMC\nAQYwJgYDVR0lBB8wHQYIKwYBBQUHAwIGCCsGAQUFBwMBBgcogYxdBQECMBgGA1Ud\nEQQRMA+BDXBraUBpbHNvcy5nb3YwGAYDVR0SBBEwD4ENcGtpQGlsc29zLmdvdjBs\nBgNVHR8EZTBjMGGgX6BdhltodHRwOi8vY3JsLmlsc29zLm5ldC9kb2l0a2Nzc2Fw\nY3VzY3JsL2Y2Mjk3YTdmLTE3NDUtNDYzYy05ODM1LTUzMDFiY2M0MGNiMC9Qcm9k\nSUFDQVJvb3QuY3JsMBIGA1UdEwEB/wQIMAYBAf8CAQAwCgYIKoZIzj0EAwIDRwAw\nRAIgVCQ2uqxVJQeXADbA575VMJyhgSrav40QlOQ8vux7aO4CICLWYhj6gPS0XNJp\nLhg4rb35oNHkDj9v25TU31FtwPl6\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEYCIQCN+MUq63nU/ZCc8grf1KMD4xYCM8SqCUc7ntRI3PmwXwIhAM2eSgzHdd4DN3o0KNKUZHvBb+83A7seQ4H9vkyv5L0i"
+    },
+    {
+      "issuer_id": "x509_aki:9n9JbDGJtdj6Gn2r8tBxTB2x4sg",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "UT"
+      },
+      "display": {
+        "name": "Utah DLD"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIICqzCCAjCgAwIBAgIQVDs0QLsZhMukS+BwIfFigzAKBggqhkjOPQQDAzBMMQsw\nCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtVVQxETAPBgNVBAoMCFV0YWggRExEMRow\nGAYDVQQDDBFJQUNBLVVUQUgtVVNBLTAwMjAeFw0yNTExMTgxODEwMTNaFw0zNDEx\nMTYxODEwMTNaMEwxCzAJBgNVBAYTAlVTMQ4wDAYDVQQIDAVVUy1VVDERMA8GA1UE\nCgwIVXRhaCBETEQxGjAYBgNVBAMMEUlBQ0EtVVRBSC1VU0EtMDAyMHYwEAYHKoZI\nzj0CAQYFK4EEACIDYgAES51HwAosCAGDoSaq4JnMBClPXRDcmkn83d5rO6yGb7az\nBkacOXlt67HkHcCEs1XwhYG2FbyhGoeBCzQ4XarUjT2oyD8RefvEqHGJzlZrKyZP\nxsoJmuS4TNvAwo6ORZKmo4HWMIHTMBIGA1UdEwEB/wQIMAYBAf8CAQAwHwYDVR0j\nBBgwFoAU9n9JbDGJtdj6Gn2r8tBxTB2x4sgwJgYDVR0SBB8wHYYbaHR0cHM6Ly9t\nb2JpbGVkbC51cy9pYWNhLXV0MEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly93d3cu\nbW9iaWxlZGwudXMvdXQtaWFjYS9tZGxEUy1VVEFILVVTQTAwMi5jcmwwHQYDVR0O\nBBYEFPZ/SWwxibXY+hp9q/LQcUwdseLIMA4GA1UdDwEB/wQEAwIBBjAKBggqhkjO\nPQQDAwNpADBmAjEA+a5OO6tzZueZpAfPKmRYb9nHCDVDRQY+KfM+SeAioUfTGV/a\nJnzt70DvofF3dPmqAjEAv6gcMWJjpTn80kPNilwut9CktSPSFgradc6mjEGJ4VuR\n6GcOsRh18Ipc3BOBJa7U\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEUCIBKD31gLK9H+2I5L6HjCvN740iML27eWlZho4BqBpE4wAiEAmgJrTxjFZ1kJMGnFl7Z04J16BO3xqjIKV8CZj8wpM4M="
+    },
+    {
+      "issuer_id": "x509_aki:BZe3UtbTEXhGfwqcsAUAiXfP5g4",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "WV"
+      },
+      "display": {
+        "name": "WV"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIICOTCCAd+gAwIBAgIUUug/LrZd1Og3FACxL5tn3vvIZYowCgYIKoZIzj0EAwIw\nTTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLVdWMQswCQYDVQQKDAJXVjEhMB8G\nA1UEAwwYV1YgcHJvZCBJQUNBIGNlcnRpZmljYXRlMB4XDTI0MTIxMTIwMTQzNloX\nDTMzMTIwOTIwMTQzNlowTTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLVdWMQsw\nCQYDVQQKDAJXVjEhMB8GA1UEAwwYV1YgcHJvZCBJQUNBIGNlcnRpZmljYXRlMFkw\nEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENWgdDNLgfrrAFyzIlluaAJ7Meg6qcdVv\n8Pv421XMVDxoSTK0Zy/ezOP101ykhRhwccSDzsxX8YtdEOjHUVAoL6OBnDCBmTAd\nBgNVHQ4EFgQUBZe3UtbTEXhGfwqcsAUAiXfP5g4wEgYDVR0TAQH/BAgwBgEB/wIB\nADAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0SBBYwFIYSaHR0cHM6Ly9kbXYud3YuZ292\nMDUGA1UdHwQuMCwwKqAooCaGJGh0dHA6Ly9jcmwud3YubWlkLjQzMDA5OS5uZXQv\nY3JsLnBlbTAKBggqhkjOPQQDAgNIADBFAiADLiceQNoJyTivJMLKdHi0wbRiaEtI\nMqLJAqHoIfR2iAIhAOuTC/gN4Pu0AQ8T+qgyUVebnQ8xjtcEzlR0lAPO8bLA\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEYCIQC59eEADbQGcjRiBZdVjYvXxTSFjvOOq6YQbFkBgBV3HgIhANkg2CNHRHHECMaPx/5cVFLqxm/UrjpJpN4RwmCyYw1l"
+    },
+    {
+      "issuer_id": "x509_aki:Gjv4xc68io-nxd-htquQiI5OM9w",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "PR"
+      },
+      "display": {
+        "name": "PR Department of Transportation and Public Works"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDIDCCAsagAwIBAgIQG9W2OpTXyQJ0PrtCwfrFKDAKBggqhkjOPQQDAjCBiDEL\nMAkGA1UEBhMCVVMxOTA3BgNVBAoMMFBSIERlcGFydG1lbnQgb2YgVHJhbnNwb3J0\nYXRpb24gYW5kIFB1YmxpYyBXb3JrczEOMAwGA1UECAwFVVMtUFIxGzAZBgNVBAMM\nElBSRFRPUC1NREwtUFJPRC1DQTERMA8GA1UEBwwIU2FuIEp1YW4wHhcNMjQwNjAz\nMjAxMTM4WhcNMjkwNjAzMjExMTM4WjCBiDELMAkGA1UEBhMCVVMxOTA3BgNVBAoM\nMFBSIERlcGFydG1lbnQgb2YgVHJhbnNwb3J0YXRpb24gYW5kIFB1YmxpYyBXb3Jr\nczEOMAwGA1UECAwFVVMtUFIxGzAZBgNVBAMMElBSRFRPUC1NREwtUFJPRC1DQTER\nMA8GA1UEBwwIU2FuIEp1YW4wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATP6mVx\n4VpNQqr4b4bKe/D7EZqaUouYe2vyca/g/GblDp4HaR2TbEFxYBolDNfBFmCum1Dc\n2a58A/ZAppPJcu/7o4IBDjCCAQowEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4E\nFgQUGjv4xc68io+nxd+htquQiI5OM9wwDwYDVR0PAQH/BAUDAwcGADAvBgNVHRIE\nKDAmgQ9tZGxAZHRvcC5wci5nb3aGE2h0dHBzOi8vbWRsLnByLmdvdi8wcgYDVR0f\nBGswaTBnoGWgY4ZhaHR0cDovL21kbC1pYWNhLWNvbHdyLnMzLnVzLWdvdi1lYXN0\nLTEuYW1hem9uYXdzLmNvbS9jcmwvMDI4ZTFkYjAtNjFhZC00Yzg3LTg1OTItYTQ1\nMTQ0ZDU4Mzk4LmNybDAfBgNVHSMEGDAWgBQaO/jFzryKj6fF36G2q5CIjk4z3DAK\nBggqhkjOPQQDAgNIADBFAiEA3zWqrvBJJAtiowJaHMGczNu0t2nIxe7FFatBcQW5\nmGkCIGN4OCs8VZTY0/cgc+GWG8xfeW9lXwR68Sef9L5XYEva\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEYCIQCsaKLKGpHAW9bAwgeDGi4kxO7pu6Y0X+yATIvot3EbAwIhAMPE5Lly9kiCMGPqilHx7gxTFtZdPDlHRBKAPIr8Ivy5"
+    },
+    {
+      "issuer_id": "x509_aki:H0O-WYleyh4Az3FAvgtbM55qhkg",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AR"
+      },
+      "display": {
+        "name": "Arkansas Department of Finance and Administration"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDAjCCAoigAwIBAgIUEpo6E+FQHFnPtAlKcm1hJaAmxOowCgYIKoZIzj0EAwMw\nfDELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUFSMTEwLwYDVQQKDChEZXBhcnRt\nZW50IG9mIEZpbmFuY2UgYW5kIEFkbWluaXN0cmF0aW9uMSowKAYDVQQDDCFVUy1B\nUiBQUk9EIElBQ0EgZm9yIElERU1JQSBXYWxsZXQwHhcNMjUwNDIzMjAwMTA1WhcN\nMzQwNDIyMjAwMTA1WjB8MQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtQVIxMTAv\nBgNVBAoMKERlcGFydG1lbnQgb2YgRmluYW5jZSBhbmQgQWRtaW5pc3RyYXRpb24x\nKjAoBgNVBAMMIVVTLUFSIFBST0QgSUFDQSBmb3IgSURFTUlBIFdhbGxldDB2MBAG\nByqGSM49AgEGBSuBBAAiA2IABDKeA6Rnw+72kClWBnEf+R4aQ8tHooGuxs7e0uL1\nwuZ/bwGJcRAsjy2bkc4BVvDbdBQD1iw4IAVVv/iZtyGCBCDod8vq/6ATQQxAcC/w\nmdOTLyCvS5lpdSQEj38ZGaEmCaOByjCBxzAdBgNVHQ4EFgQUH0O+WYleyh4Az3FA\nvgtbM55qhkgwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQAwMgYD\nVR0SBCswKYYnaHR0cHM6Ly93d3cuZGZhLmFya2Fuc2FzLmdvdi9tb2JpbGUtaWQv\nME4GA1UdHwRHMEUwQ6BBoD+GPWh0dHA6Ly9tZGwuZGZhLmFya2Fuc2FzLmdvdi91\ncy1hci1wcm9kLWlhY2EtaWRlbWlhLXdhbGxldC5jcmwwCgYIKoZIzj0EAwMDaAAw\nZQIxALWB6meNuAMdxMZVaxXI5zg+kbeUukS3Jg3SCCTgj+Tk01Ej+wEgZgAt9FwA\n/gYfdwIwI4ZPVaQo3NBaLVHVQnMtdnpPNKBb0xVU+zBRroyozoKm3YJD3xJ9PLYY\nfvzCiePP\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEUCIQDDv752Yr5sJNu8pGqiZilpww2KSv26qQWXtmzP9xRSHQIgQvMRTW/r1PxCr034FXewebRP1+3XAcHaAa4gcGEMJao="
+    },
+    {
+      "issuer_id": "x509_aki:I0-hpnnb-Y53pVjpRENxe7Xvdc8",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "MT"
+      },
+      "display": {
+        "name": "Montana Department of Justice"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDTzCCAvagAwIBAgIUALz9VunJbM8WsRyc10+waZ7TncgwCgYIKoZIzj0EAwIw\ngZwxDjAMBgNVBAgTBVVTLU1UMQswCQYDVQQGEwJVUzEPMA0GA1UEBxMGSGVsZW5h\nMSYwJAYDVQQKEx1Nb250YW5hIERlcGFydG1lbnQgb2YgSnVzdGljZTEnMCUGA1UE\nCxMeTW9udGFuYSBNb3RvciBWZWhpY2xlIERpdmlzaW9uMRswGQYDVQQDExJjYXJz\nd3NucC5kb2ptdC5nb3YwHhcNMjUwNTAyMDYwMDAwWhcNMzAwNTAyMDYwMDAwWjCB\nnDEOMAwGA1UECBMFVVMtTVQxCzAJBgNVBAYTAlVTMQ8wDQYDVQQHEwZIZWxlbmEx\nJjAkBgNVBAoTHU1vbnRhbmEgRGVwYXJ0bWVudCBvZiBKdXN0aWNlMScwJQYDVQQL\nEx5Nb250YW5hIE1vdG9yIFZlaGljbGUgRGl2aXNpb24xGzAZBgNVBAMTEmNhcnN3\nc25wLmRvam10LmdvdjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABBdxLVV8czFF\nucq2cRy7ZLkvMScwfq4SgtTu2vhilCFy8BsjSt1QbefFoV+KpPqpCZJLQSWrhSop\ncS7GkDAgYe6jggESMIIBDjAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB\n/wIBADAdBgNVHQ4EFgQUI0+hpnnb+Y53pVjpRENxe7Xvdc8wOQYDVR0SBDIwMIEa\nY2Fyc2ludGVyZmFjZXRpY2tldEBtdC5nb3aGEmh0dHBzOi8vbXZkbXQuZ292LzB8\nBgNVHR8EdTBzMHGgb6BthmtodHRwczovL2NhcnMuZG9qbXQuZ292L2d3cHViL01v\nYmlsZUNyZWRlbnRpYWwvQ2VydGlmaWNhdGVzL1Jldm9jYXRpb25zLzMyNTk2ZGQy\nZDIwZjQ4M2M5NzRhMzhjYTEwN2Q1NDNlLmNybDAQBgkrBgEEAYPFIQEEA01KUDAK\nBggqhkjOPQQDAgNHADBEAiBzw8qDQXADtdQz8KZopvLZZ15G9CD64accLrUYYehk\nXAIgQiCPWmy2wdDP22dNUnbFRqblP+1K2TYlEV2A789ZOBI=\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv",
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEUCIEGetEH6As1B5Lr0SiDveLwkcdykUxN59Z08n4ey9g19AiEAomS+SS7HQ5hsBQFmN3jv9xG3WYz0Am7SrTx6PTM0xfs="
+    },
+    {
+      "issuer_id": "x509_aki:JkHD1SkBjqmWg4Z2gwJ8RxDI_vE",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AZ"
+      },
+      "display": {
+        "name": "Arizona Department of Transportation"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [],
+      "signature": "MEUCIQCDhTEAK/yNYYfeM9j1COA9AS3Np4qiMjDMJ01B+F2krgIgedzFMbVlAenr6IRDL9sthw968Y1waSXxYFq3qHLW4ws="
+    },
+    {
+      "issuer_id": "x509_aki:LQQN9rn-E3-qEpMlE_YMEV4b3sU",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "VA"
+      },
+      "display": {
+        "name": "VA mID IACA"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [],
+      "signature": "MEQCIHTaxniJZ0lpd53BVef0iXYlkM1rKfFsKJquOa6pnXoyAiBDt/5zp5d9jA2PojpAnD+tttWhVUgC2wqOYyfV719XAg=="
+    },
+    {
+      "issuer_id": "x509_aki:LW7v0Q6kS2iv-msrG43QcnPqqu8",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "IA"
+      },
+      "display": {
+        "name": "IowaDOT"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIICITCCAcagAwIBAgIJANq9MoAPiUuGMAoGCCqGSM49BAMCMEUxCzAJBgNVBAYT\nAlVTMQ4wDAYDVQQIDAVVUy1JQTEQMA4GA1UECgwHSW93YURPVDEUMBIGA1UEAwwL\naW93YWRvdC5nb3YwHhcNMjMwNDI4MTkwOTQ0WhcNMzIwNDI1MTkwOTQ0WjBFMQsw\nCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtSUExEDAOBgNVBAoMB0lvd2FET1QxFDAS\nBgNVBAMMC2lvd2Fkb3QuZ292MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE0NeV\ny78wjE049/P/Q/DVIKnEhQX+PsuL/fqGrKwPv5K1HILWGjFDlKEtt2G95uhDWrac\n+FYSlP7WG1MCQvRpcKOBnjCBmzAdBgNVHQ4EFgQULW7v0Q6kS2iv+msrG43QcnPq\nqu8wEgYDVR0TAQH/BAgwBgEB/wIBADAOBgNVHQ8BAf8EBAMCAQYwHwYDVR0SBBgw\nFoYUaHR0cHM6Ly9pb3dhZG90Lmdvdi8wNQYDVR0fBC4wLDAqoCigJoYkaHR0cDov\nL2NybC5pYS5taWQuNDMwMDk5Lm5ldC9jcmwucGVtMAoGCCqGSM49BAMCA0kAMEYC\nIQDaV8a8BQoxsUIAiO1YAtZkrL7XYH//dQ9UjP69xJflowIhAMRpV29gfKRytKLO\nHK4rjB1LDPgUEGbmkZ+kOYTZHMcs\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv",
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEUCIQCbn79NBo73NxqQLUnMb01yPSOhBcaWriSPl75fv1ggSwIgdpP1+m29Qu6H0Ndse+zWPeVLN3sdPRYe/oxqe4YL98I="
+    },
+    {
+      "issuer_id": "x509_aki:Lx4k_1KTsUo51qvuBREJwYHbXwg",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "OH"
+      },
+      "display": {
+        "name": "Ohio Department of Public Safety"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIC1zCCAn2gAwIBAgIRANaPmlNgk2S+WiJCeTF1zhowCgYIKoZIzj0EAwIwgYkx\nCzAJBgNVBAYTAlVTMSkwJwYDVQQKDCBPaGlvIERlcGFydG1lbnQgb2YgUHVibGlj\nIFNhZmV0eTELMAkGA1UECwwCSVQxDjAMBgNVBAgMBVVTLU9IMR8wHQYDVQQDDBZP\naGlvIG1ETCBSb290IENBIEdlbiAxMREwDwYDVQQHDAhDb2x1bWJ1czAeFw0yNDAz\nMjExNTE0NDhaFw0zNDAzMTkxNjE0NDhaMIGJMQswCQYDVQQGEwJVUzEpMCcGA1UE\nCgwgT2hpbyBEZXBhcnRtZW50IG9mIFB1YmxpYyBTYWZldHkxCzAJBgNVBAsMAklU\nMQ4wDAYDVQQIDAVVUy1PSDEfMB0GA1UEAwwWT2hpbyBtREwgUm9vdCBDQSBHZW4g\nMTERMA8GA1UEBwwIQ29sdW1idXMwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARe\nxt/Ni9E/fWdcjHrhzlWbqkwKFHRw5CTPqQMiXMD+80E4EOiR92x542DOrbfKNKFb\nJt0QLUm4ZuSH9oz2iF8No4HDMIHAMBIGA1UdEwEB/wQIMAYBAf8CAQAwHQYDVR0O\nBBYEFC8eJP9Sk7FKOdar7gURCcGB218IMA8GA1UdDwEB/wQFAwMHBgAwHwYDVR0S\nBBgwFoEUTURMSUFDQUBkcHMub2hpby5nb3YwWQYDVR0fBFIwUDBOoEygSoZIaHR0\ncHM6Ly9tZGxjcmwuZHBzLm9oaW8uZ292L2NybC81ZmNiZmZmMi03YWMwLTQ4YzAt\nYWM5Ni1mZjI3NzVlZDJiNDQuY3JsMAoGCCqGSM49BAMCA0gAMEUCIC9zOsELjdul\nT21W0YSpE8jm4ec1r4wM0nonxXVkMKceAiEAszOHaGlCDE0zmugt/AMrHKqd0OlJ\nVlY708JBLhMGBwA=\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEUCIBvWX50A5hCIXMlpYTOqIoKLwklcc+Q4PmC1lYqcvKqOAiEA/kk923CK0NqxRU8907nvqbgRQChwP4Ag06vD6ypVLjk="
+    },
+    {
+      "issuer_id": "x509_aki:M0IsGLh_yqQ73mhM6h25_AsFp30",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AZ"
+      },
+      "display": {
+        "name": "Arizona Department of Transportation"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [],
+      "signature": "MEYCIQCmRPXmeECYulPNohm1V3iW5TwyeVuy6gI0FpSA0zYYnAIhAMzji8VM21V2kehX7GOn3NYas5KUJSn3XTCsI8P9MwEx"
+    },
+    {
+      "issuer_id": "x509_aki:PExs3-eCNC7hFObOrRIKOf0INGs",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "UT"
+      },
+      "display": {
+        "name": "Utah DLD"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIICeDCCAh+gAwIBAgIQWluwShGaNXltKtR32ToazDAKBggqhkjOPQQDAjBIMRYw\nFAYDVQQDDA1JQUNBLVVUQUgtVVNBMREwDwYDVQQKDAhVdGFoIERMRDEOMAwGA1UE\nCAwFVVMtVVQxCzAJBgNVBAYTAlVTMB4XDTIzMTIxODEyMjU0N1oXDTMyMTIxNTEy\nMjU0NlowSDEWMBQGA1UEAwwNSUFDQS1VVEFILVVTQTERMA8GA1UECgwIVXRhaCBE\nTEQxDjAMBgNVBAgMBVVTLVVUMQswCQYDVQQGEwJVUzBZMBMGByqGSM49AgEGCCqG\nSM49AwEHA0IABGHwBQyjlOERffLUFurAF9F0gyRuD34FkPK8RfVuySJrooUnBi86\njfKAEIFGzhAiR48EUe6YK2YcqfUqrEOX3uajgeowgecwEgYDVR0TAQH/BAgwBgEB\n/wIBADAfBgNVHSMEGDAWgBQ8TGzf54I0LuEU5s6tEgo5/Qg0azAnBgNVHRIEIDAe\nhhxodHRwczovL21vYmlsZWRsLnVzL2lhY2EtdXQvMBEGA1UdIAQKMAgwBgYEVR0g\nADBFBgNVHR8EPjA8MDqgOKA2hjRodHRwOi8vd3d3Lm1vYmlsZWRsLnVzL3V0LWlh\nY2EvbWRsRFMtVVRBSC1VU0EwMDIuY3JsMB0GA1UdDgQWBBQ8TGzf54I0LuEU5s6t\nEgo5/Qg0azAOBgNVHQ8BAf8EBAMCAQYwCgYIKoZIzj0EAwIDRwAwRAIgdzrANru5\nrEm8T4qsYoPEo5YqJ6wyZstAfMfkp9/BtjcCIEez933eeyubFUfqjd3hXIoRcl1E\n0UTdnk/UOBLQCG10\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEUCIEfg393a0vDYpfspGin/SJba3mhg4eoXpnLmMhjQJIPTAiEArQnEj+1lbZ/d2GyntEfpzYcJ4z9MMfJohlc47lVcf+8="
+    },
+    {
+      "issuer_id": "x509_aki:SqgOZF1zxrqZhx5mQIFHCDv2LcI",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "OK"
+      },
+      "display": {
+        "name": "Service Oklahoma"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDGzCCAsCgAwIBAgITCiTtZeBGqYyiDQO3VlhdCDBmwDAKBggqhkjOPQQDAjCB\njjEOMAwGA1UECBMFVVMtT0sxCzAJBgNVBAYTAlVTMRYwFAYDVQQHEw1Pa2xhaG9t\nYSBDaXR5MRkwFwYDVQQKExBTZXJ2aWNlIE9rbGFob21hMQ4wDAYDVQQLEwVCT09T\nVDEsMCoGA1UEAxMjT2tsYWhvbWEgUm9vdCBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkw\nHhcNMjYwNzAxMDYwMDAwWhcNMzEwNzAxMDYwMDAwWjCBjjEOMAwGA1UECBMFVVMt\nT0sxCzAJBgNVBAYTAlVTMRYwFAYDVQQHEw1Pa2xhaG9tYSBDaXR5MRkwFwYDVQQK\nExBTZXJ2aWNlIE9rbGFob21hMQ4wDAYDVQQLEwVCT09TVDEsMCoGA1UEAxMjT2ts\nYWhvbWEgUm9vdCBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkwWTATBgcqhkjOPQIBBggq\nhkjOPQMBBwNCAAQZ5/Br3WkOAOWUCc1gCKb44vhlo6JpAmeH7i8b95Ct6kggXW2P\ngdFAVlROGtGX3MohfKZgavry1S6vnH9jVFYJo4H6MIH3MA4GA1UdDwEB/wQEAwIB\nBjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQWBBRKqA5kXXPGupmHHmZAgUcI\nO/YtwjAsBgNVHRIEJTAjhiFodHRwczovL29rbGFob21hLmdvdi9zZXJ2aWNlLmh0\nbWwwcgYDVR0fBGswaTBnoGWgY4ZhaHR0cHM6Ly9ib29zdC1leHQuc2VydmljZS5v\nay5nb3YvT1ZQL1dlYlNlcnZpY2VzL0VYVC9tREwvQ1JML2QzMjdmMGVlMDQ2ZDRh\nNzliZTRjMzdhNDdjMWJjYWJkLmNybDAQBgkrBgEEAYPFIQEEA09WUDAKBggqhkjO\nPQQDAgNJADBGAiEA922vpPqjSQWCfJvrjbTTnZjX2hxnT91cZZTUBgUWkBYCIQDJ\nqgHITLklQJ85WQECZvlEHUP1EW9sK7apcTsz+eUCSA==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv",
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEQCIEWpI8vaUkleN3EBYBQugyXmegfPgQrFG4yFCmG4KtI8AiAGlWPo43a4l3Sa3CtxZdIt6Jj5h0Iw9q5ZVCn9wp3K2Q=="
+    },
+    {
+      "issuer_id": "x509_aki:TprRzaFBJ1SLjJsO01tlLCQ4YF0",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "MD"
+      },
+      "display": {
+        "name": "Maryland MVA"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [],
+      "signature": "MEYCIQCESzESmJYkD8gFx0ZlTEZ4t1bEMJcmoomsy3muYdE2owIhAK56gTfbAbVw2wqRyjujjaVWo+8tSJju2KW4+qQ7n29s"
+    },
+    {
+      "issuer_id": "x509_aki:Ts6wLm4T2AZV0Eeq3mR9ZwyoafI",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AR"
+      },
+      "display": {
+        "name": "Arkansas Department of Finance and Administration"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIC/jCCAoWgAwIBAgIUFQrShkR49fol2YHvZwSjdNuK1f8wCgYIKoZIzj0EAwMw\nezELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUFSMTEwLwYDVQQKDChEZXBhcnRt\nZW50IG9mIEZpbmFuY2UgYW5kIEFkbWluaXN0cmF0aW9uMSkwJwYDVQQDDCBVUy1B\nUiBQUk9EIElBQ0EgZm9yIEFQUExFIFdhbGxldDAeFw0yNTA0MjMyMDAzMjVaFw0z\nNDA0MjIyMDAzMjVaMHsxCzAJBgNVBAYTAlVTMQ4wDAYDVQQIDAVVUy1BUjExMC8G\nA1UECgwoRGVwYXJ0bWVudCBvZiBGaW5hbmNlIGFuZCBBZG1pbmlzdHJhdGlvbjEp\nMCcGA1UEAwwgVVMtQVIgUFJPRCBJQUNBIGZvciBBUFBMRSBXYWxsZXQwdjAQBgcq\nhkjOPQIBBgUrgQQAIgNiAAS6r3rSOdTiXbynCHQQHI/04ontah3j7c9YHyUIVEIY\nVtnaHbZhTf7gOTPCGHm+EHbEUJIxd+GcTJLdSsUBhjPz5eLEmdbESHWuTA/jivAf\nGdl1brVu/m/x9ZpwTjByuFujgckwgcYwHQYDVR0OBBYEFE7OsC5uE9gGVdBHqt5k\nfWcMqGnyMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEAMDIGA1Ud\nEgQrMCmGJ2h0dHBzOi8vd3d3LmRmYS5hcmthbnNhcy5nb3YvbW9iaWxlLWlkLzBN\nBgNVHR8ERjBEMEKgQKA+hjxodHRwOi8vbWRsLmRmYS5hcmthbnNhcy5nb3YvdXMt\nYXItcHJvZC1pYWNhLWFwcGxlLXdhbGxldC5jcmwwCgYIKoZIzj0EAwMDZwAwZAIw\ncU+3Fg2W0XjgF97t1dPrtqrllVgRQNwkxCMYBZy+zKhktv6/da2yyh31vLgeud9N\nAjAfr5PGWbxhjeqE+g7+TFOejGSxbkgfaRCmm8133kV+7Cdgwpi5EFDEIYJJDYOq\n+2Q=\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEYCIQD8tnXtRAJKIPR/uIAdOnYCtGeqT76f+93yKKZUSn4oewIhAN8C6SOimk/s6heCeJjxuLeMQE5nTdpEHIDSH4atsdxu"
+    },
+    {
+      "issuer_id": "x509_aki:ZQ9wReJ1csNhZ3sfoWXy5Oxv0ac",
+      "entity_type": "commercial",
+      "entity_metadata": {
+        "country": "US"
+      },
+      "display": {
+        "name": "Apple Inc."
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIICazCCAfGgAwIBAgIQaoszpPsbgR517fbRv3ThWzAKBggqhkjOPQQDAzBVMQsw\nCQYDVQQGEwJVUzETMBEGA1UECgwKQXBwbGUgSW5jLjExMC8GA1UEAwwoQXBwbGUg\nSXNzdWluZyBBdXRob3JpdHkgRUNDIFJvb3QgQ0EgLSBHMTAeFw0yNTA0MjkyMTM2\nMzRaFw00NTA0MjQyMTM2MzNaMFUxCzAJBgNVBAYTAlVTMRMwEQYDVQQKDApBcHBs\nZSBJbmMuMTEwLwYDVQQDDChBcHBsZSBJc3N1aW5nIEF1dGhvcml0eSBFQ0MgUm9v\ndCBDQSAtIEcxMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE7BhFhUOAzjz0TB/8hOTL\neC3PmqdOjQ/k/ZYNx2l4+N6u9x1N7qXpLqgy2IygddjsyDydeuRW+oxoderlKKuz\nTJGEfw5B/MxGbRsq7ybzVpWaSLfdKFn/Wyg+0XA1wzN3o4GFMIGCMA8GA1UdEwEB\n/wQFMAMBAf8wQAYDVR0SBDkwN4Y1aHR0cHM6Ly93d3cuYXBwbGUuY29tL2NlcnRp\nZmljYXRlYXV0aG9yaXR5L2Fwa2kyMDI1MDUwHQYDVR0OBBYEFGUPcEXidXLDYWd7\nH6Fl8uTsb9GnMA4GA1UdDwEB/wQEAwIBBjAKBggqhkjOPQQDAwNoADBlAjEA93FE\nMcoJf8hVP080WdFFb1bAROvmiOW/GGfvg7IMGC2T0uS1guywZJ1kIoc5hHjoAjBT\nKjBXbunuxyMjUo07mXnfGDkCkW+ggIswW+mxcrKZvEy1EOciol+/N0ViI9jnBRw=\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEYCIQDJk0n97vSDBHS1jCMZK9VTpMbSp9TiEKkW0IUYs11mGgIhANJxQjpCjIEQrdLCOEHH5orBkCajhvmU3A6+qKuCTkNj"
+    },
+    {
+      "issuer_id": "x509_aki:aCiEqjg5J9-4dYEPnM_7VGMwIQY",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "ND"
+      },
+      "display": {
+        "name": "North Dakota Department of Transportation"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDQjCCAuegAwIBAgIUALj0FeW5Es6+r08rWsHsIA1igMAwCgYIKoZIzj0EAwIw\ngZ8xDjAMBgNVBAgTBVVTLU5EMQswCQYDVQQGEwJVUzERMA8GA1UEBxMIQmlzbWFy\nY2sxMjAwBgNVBAoTKU5vcnRoIERha290YSBEZXBhcnRtZW50IG9mIFRyYW5zcG9y\ndGF0aW9uMQ8wDQYDVQQLEwZMRUdFTkQxKDAmBgNVBAMTH2h0dHBzOi8vcGFydG5l\nci5tZGwuZG90Lm5kLmdvdi8wHhcNMjUwNjEwMDYwMDAwWhcNMzAwNjEwMDYwMDAw\nWjCBnzEOMAwGA1UECBMFVVMtTkQxCzAJBgNVBAYTAlVTMREwDwYDVQQHEwhCaXNt\nYXJjazEyMDAGA1UEChMpTm9ydGggRGFrb3RhIERlcGFydG1lbnQgb2YgVHJhbnNw\nb3J0YXRpb24xDzANBgNVBAsTBkxFR0VORDEoMCYGA1UEAxMfaHR0cHM6Ly9wYXJ0\nbmVyLm1kbC5kb3QubmQuZ292LzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABH7E\ntk/9zy7wqAwn8Qb1vzhMsx7H7JOYuTUbirPu26Q766Bndw8yyjZTRJp3pZeWWs4T\nbS668mcI1IUB+0e3gnqjgf4wgfswDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQI\nMAYBAf8CAQAwHQYDVR0OBBYEFGgohKo4OSffuHWBD5zP+1RjMCEGMDAGA1UdEgQp\nMCeBEGRvdG12dGVjaEBuZC5nb3aGE2h0dHBzOi8vZG90Lm5kLmdvdi8wcgYDVR0f\nBGswaTBnoGWgY4ZhaHR0cHM6Ly9kb3QubmQuZ292L0xFR0VOREVYVC9ETVAvRFNW\nUy9XZWJTZXJ2aWNlcy9tZGwvdjEvY3JsLzQ5ZDNmOTliMGQwNDQyMDY4ZDVlNzY0\nNWM0Njc5ZTk4LmNybDAQBgkrBgEEAYPFIQEEA0RNUDAKBggqhkjOPQQDAgNJADBG\nAiEA8ieW8neYho+hsu4hB2c9rekEh1+GopZ7r8Sz4JU1ctECIQDUGD/4QFHseFdQ\nb/lLDjD6/xUfLfvrPD5my+wMSy8AIA==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv",
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEQCIHyAxY2zerAqpHT6w5vgS3rFSHBXpG14cQ1FgZRIkZbkAiAprkTmvqvStCA6XeNFpx/E8Jf3oP+SwOEa7fZXgDTaNQ=="
+    },
+    {
+      "issuer_id": "x509_aki:b9DZ1a1rB5VI5dmeMrHSoB26bdU",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "KY"
+      },
+      "display": {
+        "name": "Kentucky Transportation Cabinet"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIC7DCCAnKgAwIBAgIUeRPJKXD1/zfh4qF1e+yMmUj/0kAwCgYIKoZIzj0EAwMw\nczELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUtZMSgwJgYDVQQKDB9LZW50dWNr\neSBUcmFuc3BvcnRhdGlvbiBDYWJpbmV0MSowKAYDVQQDDCFVUy1LWSBQUk9EIElB\nQ0EgZm9yIElERU1JQSBXYWxsZXQwHhcNMjUxMDA5MTgxNzMxWhcNMzQxMDA4MTgx\nNzMxWjBzMQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtS1kxKDAmBgNVBAoMH0tl\nbnR1Y2t5IFRyYW5zcG9ydGF0aW9uIENhYmluZXQxKjAoBgNVBAMMIVVTLUtZIFBS\nT0QgSUFDQSBmb3IgSURFTUlBIFdhbGxldDB2MBAGByqGSM49AgEGBSuBBAAiA2IA\nBNZot0WFMZlxy2jbH25VvvdVyiPqk5v8ijgg4n5e1zFO8hFXKqPqi1PVUobZ8h4i\nQvfP8HTghxRMS3D46UDw5QOTIrLLnSMq9CZX/z06h+IVC5WBO4/ZjcOl8q5TBa+H\n96OBxjCBwzAdBgNVHQ4EFgQUb9DZ1a1rB5VI5dmeMrHSoB26bdUwDgYDVR0PAQH/\nBAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQAwKQYDVR0SBCIwIIYeaHR0cHM6Ly90\ncmFuc3BvcnRhdGlvbi5reS5nb3YvMFMGA1UdHwRMMEowSKBGoESGQmh0dHA6Ly9t\nZGwudHJhbnNwb3J0YXRpb24ua3kuZ292L3VzLWt5LXByb2QtaWFjYS1pZGVtaWEt\nd2FsbGV0LmNybDAKBggqhkjOPQQDAwNoADBlAjEA31f+/XCMpVN/z6kzBdzluQQ3\nAg0CCM/0DrJIVeGXeFAC5bmJgWBrkNe/h3VAyYywAjBdf6kN4WuRMUxWxULyQ0s5\nWNOYG9BCIVv36uJH6DuwCT8ZEsAGhUlX+pPT1ZFQSAA=\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEYCIQCtxKHOsw7P1evAY9nNzcrUq7qnH/wZQOHXPCocKevqdgIhANhXidXf7JAy07kpODNHQxtFO8NSZF+HrW2z/VTg6wm4"
+    },
+    {
+      "issuer_id": "x509_aki:bh41ZxlE6-rSOZxJH5yv9xBcj9g",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "CO"
+      },
+      "display": {
+        "name": "Colorado Department of Revenue"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [],
+      "signature": "MEUCIQD9B2e+Usz0A0HArq+btoXIJdQHb89FdJ1vNmk226zdMwIgdvwyT1aRiq8iPr1wtHoCP81/oiB4aYCuSMqTJHGLnlU="
+    },
+    {
+      "issuer_id": "x509_aki:fQZJZvhS-irakDXil3bDpBFDYN0",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "UT"
+      },
+      "display": {
+        "name": "Utah DLD"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIICejCCAh+gAwIBAgIQP1fWX6bK5IWafQpOzL3JyjAKBggqhkjOPQQDAjBIMRYw\nFAYDVQQDDA1JQUNBLVVUQUgtVVNBMREwDwYDVQQKDAhVdGFoIERMRDEOMAwGA1UE\nCAwFVVMtVVQxCzAJBgNVBAYTAlVTMB4XDTI1MDMxMTEyNDkyNVoXDTM0MDYwNzEy\nNDkyNFowSDEWMBQGA1UEAwwNSUFDQS1VVEFILVVTQTERMA8GA1UECgwIVXRhaCBE\nTEQxDjAMBgNVBAgMBVVTLVVUMQswCQYDVQQGEwJVUzBZMBMGByqGSM49AgEGCCqG\nSM49AwEHA0IABA9gsjBB4V6FtUGvCF/ZuQu65dfWIK87Yr1r4KzBM6LFvwxTB5Mo\nWuS/JjyTZO3fENEFm3TtG+Js7KxIZMDClKyjgeowgecwEgYDVR0TAQH/BAgwBgEB\n/wIBADAfBgNVHSMEGDAWgBR9Bklm+FL6KtqQNeKXdsOkEUNg3TAnBgNVHRIEIDAe\nhhxodHRwczovL21vYmlsZWRsLnVzL2lhY2EtdXQvMBEGA1UdIAQKMAgwBgYEVR0g\nADBFBgNVHR8EPjA8MDqgOKA2hjRodHRwOi8vd3d3Lm1vYmlsZWRsLnVzL3V0LWlh\nY2EvbWRsRFMtVVRBSC1VU0EwMDMuY3JsMB0GA1UdDgQWBBR9Bklm+FL6KtqQNeKX\ndsOkEUNg3TAOBgNVHQ8BAf8EBAMCAQYwCgYIKoZIzj0EAwIDSQAwRgIhAP2roq3h\nwjl7IQ9j52KMANKn9L9ornH31k42AAUjYALYAiEAhla2itEIdVuVipPO2JorLhEg\nkF1FzMIw0ggETTzLmGo=\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEYCIQCRgDFlIKQwPzpEuqoDPlnS87kMY/8yAWYCrr3lGKaYmgIhAL3RfDnG23Byj/TUvQ6hJDn6ElMUgMDPyFvpzK0cD2tp"
+    },
+    {
+      "issuer_id": "x509_aki:fohMJhC3G2Ip6jAccpf1XZUhVoM",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "NY"
+      },
+      "display": {
+        "name": "New York State Department of Motor Vehicles"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIICqTCCAk+gAwIBAgIJALxpHayEzEaVMAoGCCqGSM49BAMCMIGJMQswCQYDVQQG\nEwJVUzEOMAwGA1UECAwFVVMtTlkxNDAyBgNVBAoMK05ldyBZb3JrIFN0YXRlIERl\ncGFydG1lbnQgb2YgTW90b3IgVmVoaWNsZXMxNDAyBgNVBAMMK05ldyBZb3JrIFN0\nYXRlIERlcGFydG1lbnQgb2YgTW90b3IgVmVoaWNsZXMwHhcNMjMwNTAyMTczMzU1\nWhcNMzIwNDI5MTczMzU1WjCBiTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLU5Z\nMTQwMgYDVQQKDCtOZXcgWW9yayBTdGF0ZSBEZXBhcnRtZW50IG9mIE1vdG9yIFZl\naGljbGVzMTQwMgYDVQQDDCtOZXcgWW9yayBTdGF0ZSBEZXBhcnRtZW50IG9mIE1v\ndG9yIFZlaGljbGVzMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE42MYUmYNG5dN\nmmNDGLL7KqOrxC5ZmEoR5+5IeN2Mt29/rrBwHU8DDvVfB9juuBsDNPvFTXvzVX2M\nhSZQUgyx2KOBnTCBmjAdBgNVHQ4EFgQUfohMJhC3G2Ip6jAccpf1XZUhVoMwEgYD\nVR0TAQH/BAgwBgEB/wIBADAOBgNVHQ8BAf8EBAMCAQYwHgYDVR0SBBcwFYYTaHR0\ncHM6Ly9kbXYubnkuZ292LzA1BgNVHR8ELjAsMCqgKKAmhiRodHRwOi8vY3JsLm55\nLm1pZC40MzAwOTkubmV0L2NybC5wZW0wCgYIKoZIzj0EAwIDSAAwRQIgKnw9mSG6\n6Xs++voJyR8bp1FW+UTwjKNg0fQyg4M5KlsCIQCIHhKEg9eLpSYjIMYmSVN9+j+I\nZs6Zo4yxAMrX+0evbw==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEYCIQDCAYWsFDe7jiRsvz3Xkh0kIvy34lW8J6bQV5PtoVyk0AIhALMjCoYHHQeMDwE3dsb/OMBzNJgB65RJDOclO1+aY3vM"
+    },
+    {
+      "issuer_id": "x509_aki:gjm1W-nMX-qmnht1rGifb-oRRDg",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AZ"
+      },
+      "display": {
+        "name": "Arizona Department of Transportation"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDDDCCArKgAwIBAgIUZsrctHYnbX11Hba7eSabGGo1mUwwCgYIKoZIzj0EAwIw\ngYAxEzARBgNVBAMMCkF2b2NldElBQ0ExLTArBgNVBAoMJEFyaXpvbmEgRGVwYXJ0\nbWVudCBvZiBUcmFuc3BvcnRhdGlvbjELMAkGA1UECwwCSVQxCzAJBgNVBAYTAlVT\nMQ4wDAYDVQQIDAVVUy1BWjEQMA4GA1UEBwwHUGhvZW5peDAeFw0yNTEyMTUxODIz\nNThaFw0zNTEyMTUxODIzNThaMIGAMRMwEQYDVQQDDApBdm9jZXRJQUNBMS0wKwYD\nVQQKDCRBcml6b25hIERlcGFydG1lbnQgb2YgVHJhbnNwb3J0YXRpb24xCzAJBgNV\nBAsMAklUMQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtQVoxEDAOBgNVBAcMB1Bo\nb2VuaXgwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAS8JnTTjt2sd2lOhldGkLYk\ntiaf5BeAR5IDWvNhNtZaWNee5EuKeSb7zKFMo7cOJ6Mf1jaEeNh3KncQKd2O4/Px\no4IBBjCCAQIwHQYDVR0OBBYEFII5tVvpzF/qpp4bdaxon2/qEUQ4MB8GA1UdIwQY\nMBaAFII5tVvpzF/qpp4bdaxon2/qEUQ4MBIGA1UdEwEB/wQIMAYBAf8CAQAwDgYD\nVR0PAQH/BAQDAgEGMCwGA1UdEgQlMCOGIWh0dHBzOi8vYXpkb3QuZ292L212ZC9j\nb250YWN0LW12ZDBuBgNVHR8EZzBlMGOgYaBfhl1odHRwczovL212bXB1YmxpYy5i\nbG9iLmNvcmUudXNnb3ZjbG91ZGFwaS5uZXQvY2VydGlmaWNhdGUtcmV2b2NhdGlv\nbi1saXN0LzEvTVZNUHJvZENBLmNybC5wZW0wCgYIKoZIzj0EAwIDSAAwRQIhAPNT\naHC5OEKZHwu/FIBYPJ9LmnmBUs7U7N/KTQ1ZI0cGAiAsE8kqyIpXVRfczTEgHxK4\nhw//tT4AAgN6x37GgUmbKQ==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv",
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEYCIQCLq6N9jdXVpV35wPVr64v//Q7DySjSyS1/RkHGaOTyowIhAOc5qBjcgxiKyD8RJFv5zgL4HhXEpYnyCoo7YJthI7jC"
+    },
+    {
+      "issuer_id": "x509_aki:jkUgxsSokwmuQNihv5PDD06f6jU",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AZ"
+      },
+      "display": {
+        "name": "Arizona Department of Transportation"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDDTCCArKgAwIBAgIUbh0WpHxXGCJJnLQ4CNAfO4xOetUwCgYIKoZIzj0EAwIw\ngYAxEzARBgNVBAMMCkdvb2dsZUlBQ0ExLTArBgNVBAoMJEFyaXpvbmEgRGVwYXJ0\nbWVudCBvZiBUcmFuc3BvcnRhdGlvbjELMAkGA1UECwwCSVQxCzAJBgNVBAYTAlVT\nMQ4wDAYDVQQIDAVVUy1BWjEQMA4GA1UEBwwHUGhvZW5peDAeFw0yNTEyMTUxODI1\nMzdaFw0zNTEyMTUxODI1MzdaMIGAMRMwEQYDVQQDDApHb29nbGVJQUNBMS0wKwYD\nVQQKDCRBcml6b25hIERlcGFydG1lbnQgb2YgVHJhbnNwb3J0YXRpb24xCzAJBgNV\nBAsMAklUMQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtQVoxEDAOBgNVBAcMB1Bo\nb2VuaXgwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQpPSXjZG/enrGvVGkdG5OU\nuw0MKbv83S5YGUG6T8E6nWxSHVBv/WZuT7d9zcQ7+P+A0QsUO9NcF1rkeZwlIiAo\no4IBBjCCAQIwHQYDVR0OBBYEFI5FIMbEqJMJrkDYob+Tww9On+o1MB8GA1UdIwQY\nMBaAFI5FIMbEqJMJrkDYob+Tww9On+o1MBIGA1UdEwEB/wQIMAYBAf8CAQAwDgYD\nVR0PAQH/BAQDAgEGMCwGA1UdEgQlMCOGIWh0dHBzOi8vYXpkb3QuZ292L212ZC9j\nb250YWN0LW12ZDBuBgNVHR8EZzBlMGOgYaBfhl1odHRwczovL212bXB1YmxpYy5i\nbG9iLmNvcmUudXNnb3ZjbG91ZGFwaS5uZXQvY2VydGlmaWNhdGUtcmV2b2NhdGlv\nbi1saXN0LzIvTVZNUHJvZENBLmNybC5wZW0wCgYIKoZIzj0EAwIDSQAwRgIhAKML\ntbOTIDtPupTiIk3+4mqA0UNTWHKQZnuluQQwF7tkAiEAogYKBobaThxeZDOXQCWS\nEEF43za4oQMD3+jmvTD6c3M=\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv",
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEYCIQC0WFdgBVS2iPfHO0HtyuAIosjLqIaKqYXqHw8di4MtKwIhAN2osz1Y8K7IdP/jEpQewPVjqrxcJghdFkvJi+6G9Sr4"
+    },
+    {
+      "issuer_id": "x509_aki:kxl5Ob5ci3mNRHKJueLs9LsUkCE",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AR"
+      },
+      "display": {
+        "name": "Arkansas Department of Finance and Administration"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDATCCAoigAwIBAgIUE/H/bUuB4oVZD65I4wBDR35PKkkwCgYIKoZIzj0EAwMw\nfDELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUFSMTEwLwYDVQQKDChEZXBhcnRt\nZW50IG9mIEZpbmFuY2UgYW5kIEFkbWluaXN0cmF0aW9uMSowKAYDVQQDDCFVUy1B\nUiBQUk9EIElBQ0EgZm9yIEdPT0dMRSBXYWxsZXQwHhcNMjUwNDIzMjAwNDM0WhcN\nMzQwNDIyMjAwNDM0WjB8MQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtQVIxMTAv\nBgNVBAoMKERlcGFydG1lbnQgb2YgRmluYW5jZSBhbmQgQWRtaW5pc3RyYXRpb24x\nKjAoBgNVBAMMIVVTLUFSIFBST0QgSUFDQSBmb3IgR09PR0xFIFdhbGxldDB2MBAG\nByqGSM49AgEGBSuBBAAiA2IABEwjws36bmiJjdbmz/805+G+8oiVURnZRdws7KOC\nqyRGT2Ix9u9xG8V08Y07x0+fOmS9OnZcafhfqKAUOee+AMv+/PDgINOdvIlRavz6\nk+QIVrirpspKsjKEKZ8r4TXQVKOByjCBxzAdBgNVHQ4EFgQUkxl5Ob5ci3mNRHKJ\nueLs9LsUkCEwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQAwMgYD\nVR0SBCswKYYnaHR0cHM6Ly93d3cuZGZhLmFya2Fuc2FzLmdvdi9tb2JpbGUtaWQv\nME4GA1UdHwRHMEUwQ6BBoD+GPWh0dHA6Ly9tZGwuZGZhLmFya2Fuc2FzLmdvdi91\ncy1hci1wcm9kLWlhY2EtZ29vZ2xlLXdhbGxldC5jcmwwCgYIKoZIzj0EAwMDZwAw\nZAIwNBdYTCAZxNb2LAl2OlyQVcXB8sLKvOP49O4DJ7R/IG1b6WAN5CshkZd0BCPI\nmV6EAjBEsJdZnAmWV0cIGxELPnCtl/npPYBFkx5MnKO7UYF7O44XZsqVIMIWmna2\n+Hy3a9I=\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEUCIHRjRHyoxZfnTT/yyMCn4HKG1hdcBDM1FkbG7DttfiRwAiEAn/ZNb+9XfaGHvlrbnHHkFtf8xCnsHwys5KOUvUoseow="
+    },
+    {
+      "issuer_id": "x509_aki:lhS8613Z-7sCDp94X9MH5gn34U0",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "VA"
+      },
+      "display": {
+        "name": "VA mID IACA-A"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIICWDCCAf+gAwIBAgIUSDXJYXPM1GzzndPu7U7uQQpoOU4wCgYIKoZIzj0EAwIw\nNTEWMBQGA1UEAwwNVkEgbUlEIElBQ0EtQTEOMAwGA1UECAwFVVMtVkExCzAJBgNV\nBAYTAlVTMB4XDTI1MDcyMjEzMjYwMloXDTI3MDcyMjEzMjYwMVowNTEWMBQGA1UE\nAwwNVkEgbUlEIElBQ0EtQTEOMAwGA1UECAwFVVMtVkExCzAJBgNVBAYTAlVTMFkw\nEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEZ96O6yAnVSQogBLxplgoWuEQbJGeNwki\nC1Hx2MEKM6Jnpq4Wls+GU9IWImlUWWTaY0fgf+51Wkq1dguB8cVme6OB7DCB6TAS\nBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQYMBaAFJYUvOtd2fu7Ag6feF/TB+YJ\n9+FNMCMGA1UdEgQcMBqGGGh0dHBzOi8vZG12LnZpcmdpbmlhLmdvdjAjBgNVHREE\nHDAahhhodHRwczovL2Rtdi52aXJnaW5pYS5nb3YwOQYDVR0fBDIwMDAuoCygKoYo\naHR0cHM6Ly93d3cubW9iaWxlZGwubmV0L21vYmlsZUlEL1ZBLmNybDAdBgNVHQ4E\nFgQUlhS8613Z+7sCDp94X9MH5gn34U0wDgYDVR0PAQH/BAQDAgEGMAoGCCqGSM49\nBAMCA0cAMEQCIAZyBOjZrupvH9PqbgZNZFtgwVs+fXZVqgJKckP6FAbrAiAQdjxr\n6xA4VRVp/yjS9CKGoMw7tPkUrcfofZTv2AvPCA==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv",
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEQCID/HSada/Ny6tC8I+rw28AgV4/nZZuTyYCqU5mkBGq8dAiB0I993NijTZZoaAROwBJjO/ISzLwa9+OZ1AErSYfYaZg=="
+    },
+    {
+      "issuer_id": "x509_aki:lqF-v0cL-HjSp_mVDWPmvHC7j5Y",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AZ"
+      },
+      "display": {
+        "name": "Arizona Department of Transportation"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDDjCCArSgAwIBAgIUbS0DYiTGz1IeMDHWoLivaokxT4wwCgYIKoZIzj0EAwIw\ngYExFDASBgNVBAMMC1NhbXN1bmdJQUNBMS0wKwYDVQQKDCRBcml6b25hIERlcGFy\ndG1lbnQgb2YgVHJhbnNwb3J0YXRpb24xCzAJBgNVBAsMAklUMQswCQYDVQQGEwJV\nUzEOMAwGA1UECAwFVVMtQVoxEDAOBgNVBAcMB1Bob2VuaXgwHhcNMjUxMjE1MTgy\nNzExWhcNMzUxMjE1MTgyNzExWjCBgTEUMBIGA1UEAwwLU2Ftc3VuZ0lBQ0ExLTAr\nBgNVBAoMJEFyaXpvbmEgRGVwYXJ0bWVudCBvZiBUcmFuc3BvcnRhdGlvbjELMAkG\nA1UECwwCSVQxCzAJBgNVBAYTAlVTMQ4wDAYDVQQIDAVVUy1BWjEQMA4GA1UEBwwH\nUGhvZW5peDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABKi2u7sSRIIQ5YoltS+a\nt5Wls9VtEwG9dRxcAEvMZ1YKMug445cCikpFE61SCQ3jIcMJDxElPjhfra5B5xBB\n2OOjggEGMIIBAjAdBgNVHQ4EFgQUlqF+v0cL+HjSp/mVDWPmvHC7j5YwHwYDVR0j\nBBgwFoAUlqF+v0cL+HjSp/mVDWPmvHC7j5YwEgYDVR0TAQH/BAgwBgEB/wIBADAO\nBgNVHQ8BAf8EBAMCAQYwLAYDVR0SBCUwI4YhaHR0cHM6Ly9hemRvdC5nb3YvbXZk\nL2NvbnRhY3QtbXZkMG4GA1UdHwRnMGUwY6BhoF+GXWh0dHBzOi8vbXZtcHVibGlj\nLmJsb2IuY29yZS51c2dvdmNsb3VkYXBpLm5ldC9jZXJ0aWZpY2F0ZS1yZXZvY2F0\naW9uLWxpc3QvMy9NVk1Qcm9kQ0EuY3JsLnBlbTAKBggqhkjOPQQDAgNIADBFAiAY\n+OLsMj5NHFFRrAy43grEAitSvuoA+tMgY2y12bWA9AIhALFLgHY+1Hie1360C0gf\nrLh/tIsPU3eedMQUAssm6Dhe\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv",
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEYCIQCWjksc1hbI++LcjnZ+gmxtrX+DNog5nZUKu3CfPoPYSgIhAPJRhkWimIfK5c0gYrt9BPbAk26UOXYlxSnOjvUBBzlS"
+    },
+    {
+      "issuer_id": "x509_aki:nG_8jgGkyjyKsmmZHwRklS8YxNQ",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AK"
+      },
+      "display": {
+        "name": "Alaska DMV"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDcDCCAvagAwIBAgIUX9Ek9pKNP/yYUYu9pf6pyxFM2M4wCgYIKoZIzj0EAwMw\nSTEYMBYGA1UEAwwPQWxhc2thIERNViBJQUNBMRMwEQYDVQQKDApBbGFza2EgRE1W\nMQswCQYDVQQIDAJBSzELMAkGA1UEBhMCVVMwHhcNMjUwMjEyMjMyMjM4WhcNMzUw\nMjEwMjMyMjM3WjBJMRgwFgYDVQQDDA9BbGFza2EgRE1WIElBQ0ExEzARBgNVBAoM\nCkFsYXNrYSBETVYxCzAJBgNVBAgMAkFLMQswCQYDVQQGEwJVUzB2MBAGByqGSM49\nAgEGBSuBBAAiA2IABDMUuKt2Met/TjeB0klqsmfJyBiyc6liSk8s/R2FSwWJT10A\nzaWq3t77Fzl5xrUJfXrZOgmAad+R79nfCDKEw9nOUDyPxwnK+x1Tf56IyV9HEV9S\n5OweERm+HnOLqcYblqOCAZ0wggGZMBIGA1UdEwEB/wQIMAYBAf8CAQAwHwYDVR0j\nBBgwFoAUnG/8jgGkyjyKsmmZHwRklS8YxNQwMQYDVR0SBCowKIEmdXMuZGlzLm5v\ncmFtLml0LmFkbWluc0B0aGFsZXNncm91cC5jb20wMQYDVR0RBCowKIEmdXMuZGlz\nLm5vcmFtLml0LmFkbWluc0B0aGFsZXNncm91cC5jb20wgbAGA1UdHwSBqDCBpTCB\noqCBn6CBnIaBmWh0dHA6Ly9pc3N1aW5nLmFrbWRsLnVzLmFwcC5hei5rZXlmYWN0\nb3JzYWFzLmNvbS9lamJjYS9wdWJsaWN3ZWIvd2ViZGlzdC9jZXJ0ZGlzdD9jbWQ9\nY3JsJmlzc3Vlcj1DTiUzREFsYXNrYStETVYrSUFDQSUyQ08lM0RBbGFza2ErRE1W\nJTJDU1QlM0RBSyUyQ0MlM0RVUzAdBgNVHQ4EFgQUnG/8jgGkyjyKsmmZHwRklS8Y\nxNQwGgYDVR0QBBMwEYEPMjAzMzAyMTAyMzIyMzhaMA4GA1UdDwEB/wQEAwIBBjAK\nBggqhkjOPQQDAwNoADBlAjBo/GoIeq0E6ZJAxUtMfyj3IYsXu9Aucg28yTfDAR0J\n8sqH18j3H9YThID1rFWT3+ECMQDlUAUD4AOg8BdCV9MJoBEMQXXPwa/NxLpRSrps\nhflgNiPYiTEagDl2oH5AglotZmU=\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEUCIQC3JFUysOBdjWLT0zJ/KEZHhIViXXZ2lTteHjor+gr0kAIgANQCGlA2LbxdB//wdXToBZSpOTA869QxikEaINqzVNQ="
+    },
+    {
+      "issuer_id": "x509_aki:o6sbAJOdtI7_VxKIDCy1e7kIXaM",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AZ"
+      },
+      "display": {
+        "name": "Arizona Department of Transportation"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [],
+      "signature": "MEUCIQCzqtv6D1K0zectk7GZVPJTXSNfWFAAnGbVbXYk6MXP7wIgdDSVd6j3ZpnyGUXC4ye6wybNRoM8KgX1qVyh56wKsOE="
+    },
+    {
+      "issuer_id": "x509_aki:r80lNkIAOQqsAzYOPCWKL5QE-TU",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "GA"
+      },
+      "display": {
+        "name": "Georgia Department of Driver Services"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDRzCCAu2gAwIBAgITVgO3G2afw4UBNWRnxbpYWrG5uTAKBggqhkjOPQQDAjCB\nnTEOMAwGA1UECBMFVVMtR0ExCzAJBgNVBAYTAlVTMRAwDgYDVQQHEwdDb255ZXJz\nMS4wLAYDVQQKEyVHZW9yZ2lhIERlcGFydG1lbnQgb2YgRHJpdmVyIFNlcnZpY2Vz\nMQ8wDQYDVQQLEwZEUklWRVMxKzApBgNVBAMTIkdlb3JnaWEgUm9vdCBDZXJ0aWZp\nY2F0ZSBBdXRob3JpdHkwHhcNMjQwMzIwMDQwMDAwWhcNMjkwMzIwMDQwMDAwWjCB\nnTEOMAwGA1UECBMFVVMtR0ExCzAJBgNVBAYTAlVTMRAwDgYDVQQHEwdDb255ZXJz\nMS4wLAYDVQQKEyVHZW9yZ2lhIERlcGFydG1lbnQgb2YgRHJpdmVyIFNlcnZpY2Vz\nMQ8wDQYDVQQLEwZEUklWRVMxKzApBgNVBAMTIkdlb3JnaWEgUm9vdCBDZXJ0aWZp\nY2F0ZSBBdXRob3JpdHkwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASsRp10nCFK\ntW6sJL0xMPMKDCkeKFccLdRGKl2gN9tnzGi9aEee3z9S+vOH2EKTxFVmiqEmCS1u\n5LXCKkLIq+D+o4IBCDCCAQQwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYB\nAf8CAQAwHQYDVR0OBBYEFK/NJTZCADkKrAM2Djwlii+UBPk1MEgGA1UdEgRBMD+B\nI2dyb3VwaXRwcm9kdWN0aW9uc3VwcG9ydEBkZHMuZ2EuZ292hhhodHRwczovL2Rk\ncy5nZW9yZ2lhLmdvdi8wYwYDVR0fBFwwWjBYoFagVIZSaHR0cHM6Ly93cy5kcml2\nZXMuZ2EuZ292L1dlYlNlcnZpY2VzL05BL0dTUC9jZXJ0aWZpY2F0ZS9yZXZvY2F0\naW9uL3Jldm9jYXRpb25zLmNybDAQBgkrBgEEAYPFIQEEA0dTUDAKBggqhkjOPQQD\nAgNIADBFAiBsNDY02UQq8xatSFHgcdQY64lL0EaaYKsDQ3AvZGjPgAIhAJtOn2wk\num9vlccuEFL8XIgL6XHl2jEQSNKadqLoOk+T\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv",
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEUCIQDw6TuVaFoaiEs8wI8WiigRawUlSoljXw3soEq5esQXywIgJtTF729byGapBoQYzE9ZOcoeJ2a1wG0KRCLqIuxNqIs="
+    },
+    {
+      "issuer_id": "x509_aki:rFA-KDiO-qv3pK27Wn8IQWsmzxU",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "AZ"
+      },
+      "display": {
+        "name": "Arizona Department of Transportation"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [],
+      "signature": "MEUCIDXheJDrd4y45DqtOf2fW3BsVXBrvkdxGCjWoioiPKPPAiEAu0ImdmuI8Jy7BtPZSZ9QoGpbu34q9KndXmAi0EzFihc="
+    },
+    {
+      "issuer_id": "x509_aki:rX7vmMbQz-Qkb83hZ7xXO4PRJKA",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "JP"
+      },
+      "display": {
+        "name": "Japan Agency for Local Authority Information Systems"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDCjCCApGgAwIBAgIUT7ewHKPNZzGl5ElpnnFlquqtE58wCgYIKoZIzj0EAwMw\nZDEWMBQGA1UEAwwNbW5jbWRvY1Jvb3RDQTE9MDsGA1UECgw0SmFwYW4gQWdlbmN5\nIGZvciBMb2NhbCBBdXRob3JpdHkgSW5mb3JtYXRpb24gU3lzdGVtczELMAkGA1UE\nBhMCSlAwHhcNMjUwMTI5MDIyMzA0WhcNMzAwNTI4MDIyMzAzWjBkMRYwFAYDVQQD\nDA1tbmNtZG9jUm9vdENBMT0wOwYDVQQKDDRKYXBhbiBBZ2VuY3kgZm9yIExvY2Fs\nIEF1dGhvcml0eSBJbmZvcm1hdGlvbiBTeXN0ZW1zMQswCQYDVQQGEwJKUDB2MBAG\nByqGSM49AgEGBSuBBAAiA2IABPs5eNtlqJyCoVQwJao/duWq/kKCD1gqK4jtKUrB\nmnwHQTHjZrIcmTajXjQEsNutsCtZ/ojqeXm/8yCJiCN9OiR2WfqGbnPtQzE2+Ytf\njmxSoPicmEu9dQdXv21VNBlBSaOCAQIwgf8wEgYDVR0TAQH/BAgwBgEB/wIBADAf\nBgNVHSMEGDAWgBStfu+YxtDP5CRvzeFnvFc7g9EkoDAjBgNVHRIEHDAahhhodHRw\nczovL3d3dy5qLWxpcy5nby5qcC8wIwYDVR0RBBwwGoYYaHR0cHM6Ly93d3cuai1s\naXMuZ28uanAvME8GA1UdHwRIMEYwRKBCoECGPmh0dHBzOi8vZHRzLm1kb2MtaWFj\nYS5kaWdpdGFsLmdvLmpwL2NlcnRpZmljYXRlL2xhdGVzdC9tbmMuY3JsMB0GA1Ud\nDgQWBBStfu+YxtDP5CRvzeFnvFc7g9EkoDAOBgNVHQ8BAf8EBAMCAQYwCgYIKoZI\nzj0EAwMDZwAwZAIwfvAoBLAvEguWEqdFOiDsLo40FLIKjOQS1V6/6vo5vI8qd/aa\nF8ATsq7kz5v3D6qUAjATlIU/74tGYia0+aBIQ8+LOvAD9J7C51R64uvi6kf5lgdy\n09mop3x9Wxf+Ofy3nrE=\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEUCIDIFDlQ5+jUJ7hb+3WflW5kDojbio/l0sa42Y4WA49HgAiEAhABgH40pWoA0RpdWKed5pFPjguhXore9lPw5Xmn62p8="
+    },
+    {
+      "issuer_id": "x509_aki:rx_A2jq0ruxftlY-c657YVBhsRI",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "CO"
+      },
+      "display": {
+        "name": "Colorado Department of Revenue"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDBTCCAqqgAwIBAgIUAOugsa1Q/HPTqJH2JzwqYc+xIiwwCgYIKoZIzj0EAwIw\ngY8xDjAMBgNVBAgTBVVTLUNPMQswCQYDVQQGEwJVUzEPMA0GA1UEBxMGRGVudmVy\nMScwJQYDVQQKEx5Db2xvcmFkbyBEZXBhcnRtZW50IG9mIFJldmVudWUxEjAQBgNV\nBAsTCUNPIERSSVZFUzEiMCAGA1UEAxMZQ29sb3JhZG8gUm9vdCBDZXJ0aWZpY2F0\nZTAeFw0yNjAxMTIwNzAwMDBaFw0zMTAxMTIwNzAwMDBaMIGPMQ4wDAYDVQQIEwVV\nUy1DTzELMAkGA1UEBhMCVVMxDzANBgNVBAcTBkRlbnZlcjEnMCUGA1UEChMeQ29s\nb3JhZG8gRGVwYXJ0bWVudCBvZiBSZXZlbnVlMRIwEAYDVQQLEwlDTyBEUklWRVMx\nIjAgBgNVBAMTGUNvbG9yYWRvIFJvb3QgQ2VydGlmaWNhdGUwWTATBgcqhkjOPQIB\nBggqhkjOPQMBBwNCAARpmJDBqJ1T2ymnCdge5BUvG9FH8+3LLXKZ1K/o0fiB2+g0\nZXitRtgi4krPZfCzB3DjHbXKzRIhvM/RTTZVuieSo4HhMIHeMA4GA1UdDwEB/wQE\nAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQWBBSvH8DaOrSu7F+2Vj5z\nrnthUGGxEjAkBgNVHRIEHTAbhhlodHRwczovL2R3cy5jb2xvcmFkby5nb3YvMGEG\nA1UdHwRaMFgwVqBUoFKGUGh0dHBzOi8vRFdTLkNvbG9yYWRvLkdvdi9Nb2JpbGUv\nUmV2b2NhdGlvbnMvNGQyZjFhZDQ2ODA3NDJkMTk2Njk2MmFkOGUzMjAxYWYuY3Js\nMBAGCSsGAQQBg8UhAQQDUkRTMAoGCCqGSM49BAMCA0kAMEYCIQD1pIzuOHob/oxO\nCzq3tywAbfROldmjAgj0J0r2s/WUGgIhALDx9lxbW62VEksSGKCszl/tviLxZApQ\nIBIOwwJGa0Lv\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv",
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEYCIQCK1pXioV5u+sIU1bNGTAbOeQNBbpA6cMkrM103E9TNmAIhALBKorjpL22FlsymXCgzPJP9Z0hoHxSyF1RJonePoVD3"
+    },
+    {
+      "issuer_id": "x509_aki:tLARcTMg4dLqW54393SBr3idnd0",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "MD"
+      },
+      "display": {
+        "name": "Maryland MVA"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIC7jCCApWgAwIBAgIUAIlZVGm+MFztWeqnzmHC1Liq1DAwCgYIKoZIzj0EAwIw\nZjEOMAwGA1UECBMFVVMtTUQxCzAJBgNVBAYTAlVTMRQwEgYDVQQHEwtHbGVuIEJ1\ncm5pZTEVMBMGA1UEChMMTWFyeWxhbmQgTVZBMRowGAYDVQQDExFNRE9UIE1WQSBt\nREwgUm9vdDAeFw0yNTA2MTgwNjAwMDBaFw0zMDA2MTgwNjAwMDBaMGYxDjAMBgNV\nBAgTBVVTLU1EMQswCQYDVQQGEwJVUzEUMBIGA1UEBxMLR2xlbiBCdXJuaWUxFTAT\nBgNVBAoTDE1hcnlsYW5kIE1WQTEaMBgGA1UEAxMRTURPVCBNVkEgbURMIFJvb3Qw\nWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATSFdDeo2zV3GjlWdICLEyVygkyiM35\n79U/WAtsibXSWXpXeAkENed6fs8a4lPCm3ScBa/GHQsc/xPWG5brrf/vo4IBHzCC\nARswDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQAwHQYDVR0OBBYE\nFLSwEXEzIOHS6lueN/d0ga94nZ3dMFUGA1UdEgROMEyBHG12YXByaXZhY3lAbWRv\ndC5tYXJ5bGFuZC5nb3aGLGh0dHBzOi8vbXltdmEubWFyeWxhbmQuZ292L2dvL3dl\nYi9Db250YWN0TVZBMG0GA1UdHwRmMGQwYqBgoF6GXGh0dHBzOi8vbXltdmEubWFy\neWxhbmQuZ292OjU0NDMvTURQL1dlYlNlcnZpY2VzL0NSTC9tREwvNmVlMDdkMjE0\nMGYwNDJhMGE2ZTk5YTc4ZTQwNzlhYzAuY3JsMBAGCSsGAQQBg8UhAQQDTURQMAoG\nCCqGSM49BAMCA0cAMEQCIEOzO/2dCcx5yn8Hx6AdqCqgTNps18RrB0QGoHrwkFnx\nAiBApe5NXVdvg2yEhQylijYaUKTpJKNTiOx0CRPusfR5SQ==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEUCIFmT63ruhJ2evAMpTI+UrI7EHELCVvB+dFEdnEI18e/+AiEA+9Jqqt3zpDzYWoEB6cyc0JfaWqR35a4BR3I+cVyl06w="
+    },
+    {
+      "issuer_id": "x509_aki:taXH_AFcuSnQgLECaiofOquMVcQ",
+      "entity_type": "commercial",
+      "entity_metadata": {
+        "country": "US"
+      },
+      "display": {
+        "name": "Apple Inc."
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIC+jCCAoCgAwIBAgIQbwZwl4rwPpc5UqpvfHlLUjAKBggqhkjOPQQDAzBVMQsw\nCQYDVQQGEwJVUzETMBEGA1UECgwKQXBwbGUgSW5jLjExMC8GA1UEAwwoQXBwbGUg\nSXNzdWluZyBBdXRob3JpdHkgRUNDIFJvb3QgQ0EgLSBHMTAeFw0yNTA0MjkyMTQ1\nMjdaFw00MDA0MjUyMTQ1MjZaMFIxCzAJBgNVBAYTAlVTMRMwEQYDVQQKDApBcHBs\nZSBJbmMuMS4wLAYDVQQDDCVBcHBsZSBJc3N1aW5nIEF1dGhvcml0eSBFQ0MgQ0Eg\nMSAtIEcxMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAETZHKqMvi7URBiwFpSHP/Qfoy\nODkSmRgEfy7ihe2uYgIhS4bgEyL5tbgy8nidlic59c4jLVj8vYz11upIeeb6LMFw\n8mG0Pd2tNoNdNDdxoakzobM9Ra9QwSyqKcE5H3nFo4IBFjCCARIwEgYDVR0TAQH/\nBAgwBgEB/wIBADAfBgNVHSMEGDAWgBRlD3BF4nVyw2Fnex+hZfLk7G/RpzBABgNV\nHREEOTA3hjVodHRwczovL3d3dy5hcHBsZS5jb20vY2VydGlmaWNhdGVhdXRob3Jp\ndHkvYXBraTIwMjUwNTAYBgNVHSAEETAPMA0GCyqGSIb3Y2QFFgEBMBsGA1UdJQQU\nMBIGByiBjF0FAQIGByiBtTQEAQIwMwYDVR0fBCwwKjAooCagJIYiaHR0cDovL2Ny\nbC5hcHBsZS5jb20vYWlhZXJjYWcxLmNybDAdBgNVHQ4EFgQUtaXH/AFcuSnQgLEC\naiofOquMVcQwDgYDVR0PAQH/BAQDAgEGMAoGCCqGSM49BAMDA2gAMGUCMQD6ximN\nM1vdv00QCB2/vz5dxEVTLCqinMnLMnlQT2xUFTL7YNE+qK5v6B7ttS/38sQCMDHU\npAhT+AhTJKFi8FNMvT06IKp/Lc4FZ8g/Rd3Sp5jde5oGJZQwnBs2NqDRrLndzQ==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEQCIGJNNIZo3xCofqhju7ysFcm5KCbKSUKoFtxoNh6omtnDAiBeyducuBb1hPd0a4qMqggDvFL6bxMCpTTti8oxkHILOw=="
+    },
+    {
+      "issuer_id": "x509_aki:u311Z5J6b8-fcnu4Cvc3L5wMUDY",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "CA"
+      },
+      "display": {
+        "name": "CA-DMV"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIICPzCCAeWgAwIBAgIUXd0okOOM5cylFwc2WNK7D2O+ArAwCgYIKoZIzj0EAwIw\nUTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUNBMQ8wDQYDVQQKDAZDQS1ETVYx\nITAfBgNVBAMMGENhbGlmb3JuaWEgRE1WIElBQ0EgUm9vdDAeFw0yMzAzMDExNzE3\nMzlaFw0zMzAxMDcxNzE3MzlaMFExCzAJBgNVBAYTAlVTMQ4wDAYDVQQIDAVVUy1D\nQTEPMA0GA1UECgwGQ0EtRE1WMSEwHwYDVQQDDBhDYWxpZm9ybmlhIERNViBJQUNB\nIFJvb3QwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARgzKB5QsRXYGxmIapA3ilL\noXCDxgTMI2JArA72VQ9gL2DIKkBAclKYtix7vQwUbhbH76mnmbOFSxYlCJtilfl1\no4GaMIGXMB0GA1UdDgQWBBS7fXVnknpvz59ye7gK9zcvnAxQNjASBgNVHRMBAf8E\nCDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBBjAfBgNVHRIEGDAWgRRpYWNhLXJvb3RA\nZG12LmNhLmdvdjAxBgNVHR8EKjAoMCagJKAihiBodHRwczovL2NybC5kbXYuY2Eu\nZ292L2lhY2Evcm9vdDAKBggqhkjOPQQDAgNIADBFAiAJriK4wEUzgDCK++tIIW+g\nXASUIIcG/XhBNxuk2uHd7QIhAKWC8LFaM8qFsvlujtZZf647zD8BBc6kicj1Imw/\nwujS\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEQCIAxYOZh1Hy6wODaZaDo+voKJCtg38dKFSeNwyxxZpyXeAiA5Two83mhnRvNdY7lAuh/nj6EZeP0SoA3Og9acgRpM0Q=="
+    },
+    {
+      "issuer_id": "x509_aki:wDtVKIe7jBPw2n78JqJgSuf1wno",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "NM"
+      },
+      "display": {
+        "name": "New Mexico Taxation and Revenue Department"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDgjCCAyigAwIBAgIUAIJ4VcLJGUNElxQUSUy6mDxpJrYwCgYIKoZIzj0EAwIw\ngcExDjAMBgNVBAgTBVVTLU5NMQswCQYDVQQGEwJVUzERMA8GA1UEBxMIU2FudGEg\nRmUxMzAxBgNVBAoTKk5ldyBNZXhpY28gVGF4YXRpb24gYW5kIFJldmVudWUgRGVw\nYXJ0bWVudDEqMCgGA1UECxMhTmV3IE1leGljbyBNb3RvciBWZWhpY2xlIERpdmlz\naW9uMS4wLAYDVQQDEyVOZXcgTWV4aWNvIFJvb3QgQ2VydGlmaWNhdGUgQXV0aG9y\naXR5MB4XDTI1MTAwMTA2MDAwMFoXDTMwMTAwMTA2MDAwMFowgcExDjAMBgNVBAgT\nBVVTLU5NMQswCQYDVQQGEwJVUzERMA8GA1UEBxMIU2FudGEgRmUxMzAxBgNVBAoT\nKk5ldyBNZXhpY28gVGF4YXRpb24gYW5kIFJldmVudWUgRGVwYXJ0bWVudDEqMCgG\nA1UECxMhTmV3IE1leGljbyBNb3RvciBWZWhpY2xlIERpdmlzaW9uMS4wLAYDVQQD\nEyVOZXcgTWV4aWNvIFJvb3QgQ2VydGlmaWNhdGUgQXV0aG9yaXR5MFkwEwYHKoZI\nzj0CAQYIKoZIzj0DAQcDQgAEmPrlwEZA1mW8d+ekzFViC/4bxmmWa1IQcbmpGxNw\nCv1h2A2z4BX2N7CSO1sh5Kgeh/JTfT2e7t/VJUC+TE6psqOB+zCB+DAOBgNVHQ8B\nAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQUwDtVKIe7jBPw\n2n78JqJgSuf1wnowKQYDVR0SBCIwIIYeaHR0cHM6Ly93d3cubXZkLm5ld21leGlj\nby5nb3YvMHYGA1UdHwRvMG0wa6BpoGeGZWh0dHBzOi8vc2VydmljZXMubXZkLm5l\nd21leGljby5nb3Yvc2VydmljZXMvZXh0ZXJuYWwvY3JsL2dldExpc3QvZGFlMWE3\nYWQxMmZmNGI0YWIwMDg4MDI0NDg3NmQ5MGYuY3JsMBAGCSsGAQQBg8UhAQQDTlNQ\nMAoGCCqGSM49BAMCA0gAMEUCIQDKU91VZtiRtzly+WaK1ah2fYOTBxuIfIqKzZQk\njInviwIgdV2QIumonPVhepHrdrccIxgbu/pJi/P83PlUAoOW5kY=\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEYCIQCmHFLdz6Ec2i2HOtCZe4P2Y7QW8fI5Ga5xs/O6rcY5swIhAKlobZhtnoJx4lnnErR6eXsTCybr4U5Q1WkxIzVgzKr5"
+    },
+    {
+      "issuer_id": "x509_aki:wIMUjJhBaVaYzZW1YzMQ0NqBe80",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "HI"
+      },
+      "display": {
+        "name": "Department of Transportation"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIC3DCCAoKgAwIBAgIQO0MRI6jbr3YzWm0a/hWz7zAKBggqhkjOPQQDAjCBiDEL\nMAkGA1UEBhMCVVMxJTAjBgNVBAoMHERlcGFydG1lbnQgb2YgVHJhbnNwb3J0YXRp\nb24xGDAWBgNVBAsMD1N0YXRlIG9mIEhhd2FpaTEOMAwGA1UECAwFVVMtSEkxFTAT\nBgNVBAMMDEhJX0lBQ0FfUHJvZDERMA8GA1UEBwwISG9ub2x1bHUwHhcNMjQwNjA1\nMjEzNzI0WhcNMzQwNjAzMjIzNzI0WjCBiDELMAkGA1UEBhMCVVMxJTAjBgNVBAoM\nHERlcGFydG1lbnQgb2YgVHJhbnNwb3J0YXRpb24xGDAWBgNVBAsMD1N0YXRlIG9m\nIEhhd2FpaTEOMAwGA1UECAwFVVMtSEkxFTATBgNVBAMMDEhJX0lBQ0FfUHJvZDER\nMA8GA1UEBwwISG9ub2x1bHUwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARCcrrc\n8mVy8VHxjpV8ZfO8alQwpFRCT8kazy5f/iPEQPSsqc0pj6LdbLQdqXEaokUDKwcx\nfpdN0uaDk5MGWTFZo4HLMIHIMBIGA1UdEwEB/wQIMAYBAf8CAQAwHQYDVR0OBBYE\nFMCDFIyYQWlWmM2VtWMzENDagXvNMA4GA1UdDwEB/wQEAwIBBjAfBgNVHRIEGDAW\nhhRodHRwczovL21kbC5obmwuaW5mbzBiBgNVHR8EWzBZMFegVaBThlFodHRwOi8v\nZDE3NWdjZzB6YzI4dGkuY2xvdWRmcm9udC5uZXQvY3JsLzlkNTE3MmZmLWZhMDYt\nNDJiMy04Zjc0LTI2OTM4ZjdkYWI0Yy5jcmwwCgYIKoZIzj0EAwIDSAAwRQIhAOrQ\ne8YV+0FSVI8EoNZeQklQvzql0UfTs2/+VxB4DnJdAiAuhccsfdM5gsysRhtdTuSL\n+G1QKJa/XMMZxJFWh/ozjg==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "uv"
+          ]
+        }
+      ],
+      "signature": "MEUCIEnrxRbQUWsCOzsVljmDxF/WUl6JqJeqqXIkAufsWpBuAiEAuVR9lt8OWAi48PUhiaJZoHzxeFhFjDMkhjKrevrTVtY="
+    },
+    {
+      "issuer_id": "x509_aki:yYcBvfzjEXhrywase5x1u3ploe4",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "NM"
+      },
+      "display": {
+        "name": "New Mexico Taxation and Revenue Department"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [],
+      "signature": "MEUCIQCxy1NS+aXvN/f5B9I58JWA+Y11cp8h/PPuUd2kKPmctQIgL+sl0UgQYKnUGT+8lXE1yUqP1Lt4iYHzYTUQS4hIjK4="
+    }
+  ]
+}

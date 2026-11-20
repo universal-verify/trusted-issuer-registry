@@ -19,13 +19,38 @@ export const getIssuerFromX509AKI = async (x509aki, options) => {
 };
 
 export const getRegistryIssuerFromX509AKI = async (x509aki, options) => {
-    const { cachedFetcher } = options;
+    const { cachedFetcher, registrySnapshotIssuers } = options;
+    if(registrySnapshotIssuers) {
+        const entry = registrySnapshotIssuers[x509aki];
+        if(!entry) return null;
+        entry.verification ??= verifyIssuer(entry.issuer);
+        if(!await entry.verification) throw new Error(`Invalid registry snapshot signature for ${entry.issuer.issuer_id}`);
+        return deepCopy(entry.issuer);
+    }
     const url = `${REGISTRY_URL_BASE}/issuers/x509_aki/${x509aki}.json`;
     const response = await cachedFetcher.fetch(url, 'issuer');
     if(!response.ok && response.status !== 404) {
         throw new Error(`Failed to fetch issuer ${x509aki}: ${response.status} ${response.statusText || ''}`.trim());
     }
     return deepCopy(response.issuer);
+};
+
+export const buildRegistrySnapshotIssuers = (snapshot) => {
+    if(snapshot === undefined) return null;
+    if(!snapshot || !Array.isArray(snapshot.issuers) || (snapshot.version !== undefined && typeof snapshot.version !== 'string')) {
+        throw new Error('registrySnapshot must contain an issuers array and an optional version string');
+    }
+
+    const issuers = Object.create(null);
+    for(const issuer of snapshot.issuers) {
+        const match = typeof issuer?.issuer_id === 'string' && issuer.issuer_id.match(/^x509_aki:([A-Za-z0-9_-]+)$/);
+        if(!match || !Array.isArray(issuer.certificates) || typeof issuer.signature !== 'string' || !issuer.signature) {
+            throw new Error('registrySnapshot entries must be signed X.509 issuer records with a certificates array');
+        }
+        if(issuers[match[1]]) throw new Error(`Duplicate registry snapshot issuer: ${issuer.issuer_id}`);
+        issuers[match[1]] = { issuer: deepCopy(issuer), verification: null };
+    }
+    return issuers;
 };
 
 export const mergeIssuers = (userTrustedIssuer, registryIssuer) => {

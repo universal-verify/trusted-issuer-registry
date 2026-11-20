@@ -74,6 +74,8 @@ export interface UserTrustedIssuerCertificate {
 }
 
 export interface RegistryOptions {
+    /** Uses only these registry issuers and disables registry/deprecation requests. */
+    registrySnapshot?: RegistrySnapshot | undefined;
     trustedIssuerCertificates?: readonly (string | UserTrustedIssuerCertificate)[] | undefined;
     /** @default 'skip' */
     revocationCheckMode?: RevocationCheckMode | undefined;
@@ -124,6 +126,22 @@ export interface Issuer {
     certificates: IssuerCertificate[];
     /** Present only on an unmerged registry issuer. */
     signature?: string;
+}
+
+export interface RegistrySnapshotIssuer extends Omit<Issuer, 'trust_scopes' | 'certificates' | 'signature'> {
+    trust_scopes: readonly TrustScope[];
+    certificates: readonly {
+        data: string;
+        format: 'pem';
+        trust_lists: readonly TrustList[];
+    }[];
+    signature: string;
+}
+
+export interface RegistrySnapshot {
+    /** Informational source registry version; optional for caller-constructed snapshots. */
+    version?: string | undefined;
+    issuers: readonly RegistrySnapshotIssuer[];
 }
 
 export interface ResolvedIssuerCertificate extends IssuerCertificate {

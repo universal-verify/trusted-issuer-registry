@@ -8,8 +8,14 @@
   "type": "module",
   "main": "build/trusted-issuer-registry.js",
   "types": "types/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "build/registry.json": ["types/registry-snapshot.d.ts"]
+    }
+  },
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs",
+    "postbuild": "node scripts/utils/registry-snapshot.js",
     "lint": "eslint ./scripts --ext .js",
     "lint-fix": "eslint ./scripts --ext .js --fix",
     "test": "node --test",
