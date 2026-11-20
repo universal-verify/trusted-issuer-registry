@@ -1,0 +1,23 @@
+{
+  "issuer_id": "x509_aki:T6HvWg8JGYhKREpEK809lTCtRLs",
+  "entity_type": "government",
+  "entity_metadata": {
+    "country": "US",
+    "region": "CT"
+  },
+  "display": {
+    "name": "Connecticut Department of Motor Vehicles"
+  },
+  "trust_scopes": [
+    "government_issued_id"
+  ],
+  "certificates": [
+    {
+      "data": "-----BEGIN CERTIFICATE-----\nMIIC6DCCAm6gAwIBAgIUCRNkE7sduzOnAhyRGGClnFtJkiQwCgYIKoZIzj0EAwMw\nfDELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUNUMTEwLwYDVQQKDChDb25uZWN0\naWN1dCBEZXBhcnRtZW50IG9mIE1vdG9yIFZlaGljbGVzMSowKAYDVQQDDCFVUy1D\nVCBQUk9EIElBQ0EgZm9yIEdPT0dMRSBXYWxsZXQwHhcNMjYwNjIzMTU0MDIxWhcN\nMzUwNjIyMTU0MDIxWjB8MQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtQ1QxMTAv\nBgNVBAoMKENvbm5lY3RpY3V0IERlcGFydG1lbnQgb2YgTW90b3IgVmVoaWNsZXMx\nKjAoBgNVBAMMIVVTLUNUIFBST0QgSUFDQSBmb3IgR09PR0xFIFdhbGxldDB2MBAG\nByqGSM49AgEGBSuBBAAiA2IABPE2P/EoB/rBK1LgPgPtns/WJ5eR2BUvacPa7Dxi\nqkapFPEjDOa3n3t0ZPBYdrWAVlMoLgq8gDe5r83nFTu7z5zvHIVxIUkamCnKcn0e\nQYj1mitP5Rti8FkP8jULnNYoCKOBsDCBrTAdBgNVHQ4EFgQUT6HvWg8JGYhKREpE\nK809lTCtRLswDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQAwHgYD\nVR0SBBcwFYYTaHR0cHM6Ly9kbXYuY3QuZ292LzBIBgNVHR8EQTA/MD2gO6A5hjdo\ndHRwOi8vbWRsLmRtdi5jdC5nb3YvdXMtY3QtcHJvZC1pYWNhLWdvb2dsZS13YWxs\nZXQuY3JsMAoGCCqGSM49BAMDA2gAMGUCMDOIe7ZUj4AgOqqL3E7QVPxj0R1uP4vQ\nu0GuvHXL1ktKh/9jFyf6/zkIEmc26JdBUAIxAMgQkYUn7lVY2nC48jdxApevtf5N\nNriGhCQWxgxvwlSOUWme/UBuhxJ3h1bBn7NPgg==\n-----END CERTIFICATE-----",
+      "format": "pem",
+      "trust_lists": [
+        "aamva_dts"
+      ]
+    }
+  ]
+}
