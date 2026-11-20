@@ -9,6 +9,8 @@ backfilled.
 
 ## [Unreleased]
 
+## [0.2.4] - 2026-11-20
+
 ### Added
 
 - Optional `registrySnapshot` constructor input for offline registry lookups,
@@ -23,10 +25,18 @@ backfilled.
   contents to match every issuer file, including metadata, certificates, and
   signatures.
 
+### Changed
+
+- Refreshed AAMVA DTS issuer data, adding Connecticut and Georgia issuer entries,
+  updating Illinois and Ohio trust-list membership, and retiring an older
+  Illinois certificate. Updated issuer signatures and the registry snapshot.
+
 ### Fixed
 
 - Publish guard now checks `deprecation_notice.json` locally and on the CDN,
   preventing deprecation notices from being missed during release checks.
+- Updated development-only transitive dependencies `fast-uri` to 3.1.9 and
+  `serialize-javascript` to 7.1.4 to address reported security vulnerabilities.
 
 ## [0.2.3] - 2026-10-15
 
@@ -129,7 +139,8 @@ First supported release of the 0.2.x schema and expanded JavaScript library.
 - Accidentally published before the breaking changes for the 0.2.x release line
   were complete. Deprecated on npm; use 0.2.1 or later.
 
-[Unreleased]: https://github.com/universal-verify/trusted-issuer-registry/compare/bfba24b371e8de7820d1229ed4e5e715d1946f2b...dev
+[Unreleased]: https://github.com/universal-verify/trusted-issuer-registry/compare/0.2.4...dev
+[0.2.4]: https://github.com/universal-verify/trusted-issuer-registry/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/universal-verify/trusted-issuer-registry/compare/0.2.2...bfba24b371e8de7820d1229ed4e5e715d1946f2b
 [0.2.2]: https://github.com/universal-verify/trusted-issuer-registry/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/universal-verify/trusted-issuer-registry/compare/0.1.9...0.2.1
