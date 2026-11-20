@@ -19,11 +19,12 @@
           "data": "-----BEGIN CERTIFICATE-----\nMIIDEjCCArigAwIBAgISCHL1YIc7QrNbTZ7wVlsBd1H7MAoGCCqGSM49BAMCMIGI\nMQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtSUwxFDASBgNVBAcMC1NwcmluZ2Zp\nZWxkMSQwIgYDVQQKDBtJbGxpbm9pcyBTZWNyZXRhcnkgb2YgU3RhdGUxCzAJBgNV\nBAsMAklUMSAwHgYDVQQDDBdQcm9kIElBQ0EgUm9vdCAwNTAxMjAyNjAeFw0yNjA1\nMDExNTU2MzVaFw00NTA1MDExNTU2MzVaMIGIMQswCQYDVQQGEwJVUzEOMAwGA1UE\nCAwFVVMtSUwxFDASBgNVBAcMC1NwcmluZ2ZpZWxkMSQwIgYDVQQKDBtJbGxpbm9p\ncyBTZWNyZXRhcnkgb2YgU3RhdGUxCzAJBgNVBAsMAklUMSAwHgYDVQQDDBdQcm9k\nIElBQ0EgUm9vdCAwNTAxMjAyNjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABEgH\nmKbCu1sR5ewcxJAhjTKXpV9D/t1VlIJSRNTP8vNHAp2a/0TWV6lFiSbJOkdviiuy\n6k4W6AVs0E7fSZEuHUujgf8wgfwwHQYDVR0OBBYEFNZqHFcdaZJ5EX5AnKjDcOq3\nOynaMA4GA1UdDwEB/wQEAwIBBjASBgNVHSUECzAJBgcogYxdBQECMBgGA1UdEQQR\nMA+BDXBraUBpbHNvcy5nb3YwGAYDVR0SBBEwD4ENcGtpQGlsc29zLmdvdjBvBgNV\nHR8EaDBmMGSgYqBghl5odHRwOi8vY3JsLmlsc29zLm5ldC9kb2l0a2Nzc2FwY3Vz\nY3JsLzZlMTNlOWI1LWQxYWItNGJhYS04MjFkLTIyYzczNDBjMmQwYS9Qcm9kSUFD\nQVJvb3QwNTAuY3JsMBIGA1UdEwEB/wQIMAYBAf8CAQAwCgYIKoZIzj0EAwIDSAAw\nRQIhAM7ALtEXRfmqF9/x7fZq0fqR4EBYS6E8CEN0SwX4PtsxAiA/qLOcGs+YxGz+\nw2pprjHYcK1QArsq2BE/l9wcllnHAA==\n-----END CERTIFICATE-----",
           "format": "pem",
           "trust_lists": [
-            "uv"
+            "uv",
+            "aamva_dts"
           ]
         }
       ],
-      "signature": "MEYCIQDywVnDtt0P2j89MOV9cOxJujUqRl3NfeUOgfIj41P++gIhAIsRP0MhCBNOcRPbZUVjywYc64uIecTNkFFY4YI1xvfp"
+      "signature": "MEUCIQD9uzGzOsFMWqxKSTlIJyxC7c12nzug/srwM/9D/S0v7AIgHL4gYmpOJjtV95BFlprQQVnRR2Ycstylh29Fx+xdQgk="
     },
     {
       "issuer_id": "x509_aki:3-BJ8g1-X200DZEo-i9MFTtNh0U",
@@ -49,6 +50,30 @@
         }
       ],
       "signature": "MEUCIQDpKuRFawxUXxdJ8HoXpVLkplFjdfLJf50JBQINuZ2OsQIgYcEOMzB14dgiGxIz++AimTKIqE5PPrUxHnOyyiFfaJw="
+    },
+    {
+      "issuer_id": "x509_aki:52d8TQi5UkeNorJUaVyokD45TH8",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "CT"
+      },
+      "display": {
+        "name": "Connecticut Department of Motor Vehicles"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIC6zCCAnGgAwIBAgIUYjPCQ5zx75E+KVqycLJgwhcy4o4wCgYIKoZIzj0EAwMw\nfTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUNUMTEwLwYDVQQKDChDb25uZWN0\naWN1dCBEZXBhcnRtZW50IG9mIE1vdG9yIFZlaGljbGVzMSswKQYDVQQDDCJVUy1D\nVCBQUk9EIElBQ0EgZm9yIFNBTVNVTkcgV2FsbGV0MB4XDTI2MDYyMzE1NDAzOVoX\nDTM1MDYyMjE1NDAzOVowfTELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUNUMTEw\nLwYDVQQKDChDb25uZWN0aWN1dCBEZXBhcnRtZW50IG9mIE1vdG9yIFZlaGljbGVz\nMSswKQYDVQQDDCJVUy1DVCBQUk9EIElBQ0EgZm9yIFNBTVNVTkcgV2FsbGV0MHYw\nEAYHKoZIzj0CAQYFK4EEACIDYgAESXAe6GQOvMk3oICt50rbTCmHTm/fBSp5ENEM\naWP/oa7pWdI+Bj/A/AlnNrnWjoNZKwTWne2PDc3aAWkyrLOOKGko5RL7ZLVUnj0c\n8yAWppzrdA0B6hukEdfcJ5PaceTgo4GxMIGuMB0GA1UdDgQWBBTnZ3xNCLlSR42i\nslRpXKiQPjlMfzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBADAe\nBgNVHRIEFzAVhhNodHRwczovL2Rtdi5jdC5nb3YvMEkGA1UdHwRCMEAwPqA8oDqG\nOGh0dHA6Ly9tZGwuZG12LmN0Lmdvdi91cy1jdC1wcm9kLWlhY2Etc2Ftc3VuZy13\nYWxsZXQuY3JsMAoGCCqGSM49BAMDA2gAMGUCMQDz1Cj68/uKWgfRosboi+O0SL+4\nbGgzxP3+LpVtvgl+vnmjpokASECH3sb9dKQY6ggCMAJAvWEbJausIZFKV2JC3J4A\n+LJ1CyT60A3hcV4HNLeyFn45gsGFfUN4PIEvaNoT6g==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEYCIQDVZb7OoH1w+Jp3kErWdDMMX6ARFmnQmRpgcECVcFWpOwIhAN+mAeOPBWssTaK996Xs3zaclxkIIvG1oQT/NE6DGxi8"
     },
     {
       "issuer_id": "x509_aki:6TUKCCDc7eWtyioiOjoDMSChidw",
@@ -91,6 +116,30 @@
       "signature": "MEYCIQC5+Hszz3L9kWDVT2XQN41CeeBufe9U7YmPk+XBrQ/UEQIhAIW4BcKQyuik0A3UAE/AV8lCAUuXb0yN/vb/FZBQpbnM"
     },
     {
+      "issuer_id": "x509_aki:9cedbHp8b4fwFwfrgD8GPxt3DuM",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "CT"
+      },
+      "display": {
+        "name": "Connecticut Department of Motor Vehicles"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIC5TCCAmugAwIBAgIUAilgvRfo7S1sDd/aDoGi1VclVZswCgYIKoZIzj0EAwMw\nezELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUNUMTEwLwYDVQQKDChDb25uZWN0\naWN1dCBEZXBhcnRtZW50IG9mIE1vdG9yIFZlaGljbGVzMSkwJwYDVQQDDCBVUy1D\nVCBQUk9EIElBQ0EgZm9yIEFQUExFIFdhbGxldDAeFw0yNjA2MjMxNTQwMDNaFw0z\nNTA2MjIxNTQwMDNaMHsxCzAJBgNVBAYTAlVTMQ4wDAYDVQQIDAVVUy1DVDExMC8G\nA1UECgwoQ29ubmVjdGljdXQgRGVwYXJ0bWVudCBvZiBNb3RvciBWZWhpY2xlczEp\nMCcGA1UEAwwgVVMtQ1QgUFJPRCBJQUNBIGZvciBBUFBMRSBXYWxsZXQwdjAQBgcq\nhkjOPQIBBgUrgQQAIgNiAATSK+Zlfk9xFJ66sVw5X3QQ2kK+kSSi8wsrBTa8hecx\nJP87YMmjbujYcHj000Nqc8sXIyyvWxkZfQoTYI/W0DhGnkVcqsQniR+FzU7XH4PC\n8y3k6fkOx7crb3XqE9RHF/ajga8wgawwHQYDVR0OBBYEFPXHnWx6fG+H8BcH64A/\nBj8bdw7jMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEAMB4GA1Ud\nEgQXMBWGE2h0dHBzOi8vZG12LmN0Lmdvdi8wRwYDVR0fBEAwPjA8oDqgOIY2aHR0\ncDovL21kbC5kbXYuY3QuZ292L3VzLWN0LXByb2QtaWFjYS1hcHBsZS13YWxsZXQu\nY3JsMAoGCCqGSM49BAMDA2gAMGUCME42NE2D28VEyVY0UoE07yGbOf1o66IjjNoM\n1d9aEj+y6zjHIjoRmGksuag6nl2d+gIxAPcLBvVXlRYb8gVvz1J3ONEdKxeBXtNB\nHIdLAZrnQTPlf4kL9dQfXapLYMPxz62G0A==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEQCIGseV/rJCJGpcrFm85CNMADn7zRCWHTCiaXpII+D3ONOAiBbmQbCbLltcGebe7SMXgjHFWwrSaClrQXorRJE/j5VHg=="
+    },
+    {
       "issuer_id": "x509_aki:9fO8k74o6oy6krKPTdxANHz6HOQ",
       "entity_type": "government",
       "entity_metadata": {
@@ -103,16 +152,8 @@
       "trust_scopes": [
         "government_issued_id"
       ],
-      "certificates": [
-        {
-          "data": "-----BEGIN CERTIFICATE-----\nMIIDETCCArigAwIBAgITALbJtbNSF44XF4jwh5Hu4WVzbzAKBggqhkjOPQQDAjB/\nMQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtSUwxFDASBgNVBAcMC1NwcmluZ2Zp\nZWxkMSQwIgYDVQQKDBtJbGxpbm9pcyBTZWNyZXRhcnkgb2YgU3RhdGUxCzAJBgNV\nBAsMAklUMRcwFQYDVQQDDA5Qcm9kIElBQ0EgUm9vdDAeFw0yNTA5MTgxOTQ2NDZa\nFw00NDA5MTgxOTQ2NDZaMH8xCzAJBgNVBAYTAlVTMQ4wDAYDVQQIDAVVUy1JTDEU\nMBIGA1UEBwwLU3ByaW5nZmllbGQxJDAiBgNVBAoMG0lsbGlub2lzIFNlY3JldGFy\neSBvZiBTdGF0ZTELMAkGA1UECwwCSVQxFzAVBgNVBAMMDlByb2QgSUFDQSBSb290\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEAxgmbxoF1QKsStQfKR5rZp+d3Es2\nBcuslyGNaDDg+MGyM43A25E6V+faSmgz5vxu8P13k8tAX6cmV2YuXOge/aOCAREw\nggENMB0GA1UdDgQWBBT187yTvijqjLqSso9N3EA0fPoc5DAOBgNVHQ8BAf8EBAMC\nAQYwJgYDVR0lBB8wHQYIKwYBBQUHAwIGCCsGAQUFBwMBBgcogYxdBQECMBgGA1Ud\nEQQRMA+BDXBraUBpbHNvcy5nb3YwGAYDVR0SBBEwD4ENcGtpQGlsc29zLmdvdjBs\nBgNVHR8EZTBjMGGgX6BdhltodHRwOi8vY3JsLmlsc29zLm5ldC9kb2l0a2Nzc2Fw\nY3VzY3JsL2Y2Mjk3YTdmLTE3NDUtNDYzYy05ODM1LTUzMDFiY2M0MGNiMC9Qcm9k\nSUFDQVJvb3QuY3JsMBIGA1UdEwEB/wQIMAYBAf8CAQAwCgYIKoZIzj0EAwIDRwAw\nRAIgVCQ2uqxVJQeXADbA575VMJyhgSrav40QlOQ8vux7aO4CICLWYhj6gPS0XNJp\nLhg4rb35oNHkDj9v25TU31FtwPl6\n-----END CERTIFICATE-----",
-          "format": "pem",
-          "trust_lists": [
-            "aamva_dts"
-          ]
-        }
-      ],
-      "signature": "MEYCIQCN+MUq63nU/ZCc8grf1KMD4xYCM8SqCUc7ntRI3PmwXwIhAM2eSgzHdd4DN3o0KNKUZHvBb+83A7seQ4H9vkyv5L0i"
+      "certificates": [],
+      "signature": "MEYCIQDltHNhWMOSTT8q8LuSrVOgysRLeXYJSXPtuZ09ew4pKwIhANSCDhIb6e1nECe5mRgFcd+MGTpOiBCj0ELwmqs9wwlr"
     },
     {
       "issuer_id": "x509_aki:9n9JbDGJtdj6Gn2r8tBxTB2x4sg",
@@ -310,11 +351,12 @@
           "data": "-----BEGIN CERTIFICATE-----\nMIIC1zCCAn2gAwIBAgIRANaPmlNgk2S+WiJCeTF1zhowCgYIKoZIzj0EAwIwgYkx\nCzAJBgNVBAYTAlVTMSkwJwYDVQQKDCBPaGlvIERlcGFydG1lbnQgb2YgUHVibGlj\nIFNhZmV0eTELMAkGA1UECwwCSVQxDjAMBgNVBAgMBVVTLU9IMR8wHQYDVQQDDBZP\naGlvIG1ETCBSb290IENBIEdlbiAxMREwDwYDVQQHDAhDb2x1bWJ1czAeFw0yNDAz\nMjExNTE0NDhaFw0zNDAzMTkxNjE0NDhaMIGJMQswCQYDVQQGEwJVUzEpMCcGA1UE\nCgwgT2hpbyBEZXBhcnRtZW50IG9mIFB1YmxpYyBTYWZldHkxCzAJBgNVBAsMAklU\nMQ4wDAYDVQQIDAVVUy1PSDEfMB0GA1UEAwwWT2hpbyBtREwgUm9vdCBDQSBHZW4g\nMTERMA8GA1UEBwwIQ29sdW1idXMwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARe\nxt/Ni9E/fWdcjHrhzlWbqkwKFHRw5CTPqQMiXMD+80E4EOiR92x542DOrbfKNKFb\nJt0QLUm4ZuSH9oz2iF8No4HDMIHAMBIGA1UdEwEB/wQIMAYBAf8CAQAwHQYDVR0O\nBBYEFC8eJP9Sk7FKOdar7gURCcGB218IMA8GA1UdDwEB/wQFAwMHBgAwHwYDVR0S\nBBgwFoEUTURMSUFDQUBkcHMub2hpby5nb3YwWQYDVR0fBFIwUDBOoEygSoZIaHR0\ncHM6Ly9tZGxjcmwuZHBzLm9oaW8uZ292L2NybC81ZmNiZmZmMi03YWMwLTQ4YzAt\nYWM5Ni1mZjI3NzVlZDJiNDQuY3JsMAoGCCqGSM49BAMCA0gAMEUCIC9zOsELjdul\nT21W0YSpE8jm4ec1r4wM0nonxXVkMKceAiEAszOHaGlCDE0zmugt/AMrHKqd0OlJ\nVlY708JBLhMGBwA=\n-----END CERTIFICATE-----",
           "format": "pem",
           "trust_lists": [
-            "uv"
+            "uv",
+            "aamva_dts"
           ]
         }
       ],
-      "signature": "MEUCIBvWX50A5hCIXMlpYTOqIoKLwklcc+Q4PmC1lYqcvKqOAiEA/kk923CK0NqxRU8907nvqbgRQChwP4Ag06vD6ypVLjk="
+      "signature": "MEQCIGMQu7Wn6ZI07QVQ9bIEiUaUgykkLjiMwgmmwlzUlXlSAiA6JBgrCf54OWzv4kuj+TtezpuVWdUjeszuomzEF2naEA=="
     },
     {
       "issuer_id": "x509_aki:M0IsGLh_yqQ73mhM6h25_AsFp30",
@@ -382,6 +424,30 @@
       "signature": "MEQCIEWpI8vaUkleN3EBYBQugyXmegfPgQrFG4yFCmG4KtI8AiAGlWPo43a4l3Sa3CtxZdIt6Jj5h0Iw9q5ZVCn9wp3K2Q=="
     },
     {
+      "issuer_id": "x509_aki:T6HvWg8JGYhKREpEK809lTCtRLs",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "CT"
+      },
+      "display": {
+        "name": "Connecticut Department of Motor Vehicles"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIC6DCCAm6gAwIBAgIUCRNkE7sduzOnAhyRGGClnFtJkiQwCgYIKoZIzj0EAwMw\nfDELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUNUMTEwLwYDVQQKDChDb25uZWN0\naWN1dCBEZXBhcnRtZW50IG9mIE1vdG9yIFZlaGljbGVzMSowKAYDVQQDDCFVUy1D\nVCBQUk9EIElBQ0EgZm9yIEdPT0dMRSBXYWxsZXQwHhcNMjYwNjIzMTU0MDIxWhcN\nMzUwNjIyMTU0MDIxWjB8MQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtQ1QxMTAv\nBgNVBAoMKENvbm5lY3RpY3V0IERlcGFydG1lbnQgb2YgTW90b3IgVmVoaWNsZXMx\nKjAoBgNVBAMMIVVTLUNUIFBST0QgSUFDQSBmb3IgR09PR0xFIFdhbGxldDB2MBAG\nByqGSM49AgEGBSuBBAAiA2IABPE2P/EoB/rBK1LgPgPtns/WJ5eR2BUvacPa7Dxi\nqkapFPEjDOa3n3t0ZPBYdrWAVlMoLgq8gDe5r83nFTu7z5zvHIVxIUkamCnKcn0e\nQYj1mitP5Rti8FkP8jULnNYoCKOBsDCBrTAdBgNVHQ4EFgQUT6HvWg8JGYhKREpE\nK809lTCtRLswDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQAwHgYD\nVR0SBBcwFYYTaHR0cHM6Ly9kbXYuY3QuZ292LzBIBgNVHR8EQTA/MD2gO6A5hjdo\ndHRwOi8vbWRsLmRtdi5jdC5nb3YvdXMtY3QtcHJvZC1pYWNhLWdvb2dsZS13YWxs\nZXQuY3JsMAoGCCqGSM49BAMDA2gAMGUCMDOIe7ZUj4AgOqqL3E7QVPxj0R1uP4vQ\nu0GuvHXL1ktKh/9jFyf6/zkIEmc26JdBUAIxAMgQkYUn7lVY2nC48jdxApevtf5N\nNriGhCQWxgxvwlSOUWme/UBuhxJ3h1bBn7NPgg==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEUCIQCiMDsCT0Acj7hZD9Bta3tVvNFyAWNQOy4mHXvJPUUWMwIgOt78VNilN6CqYQy8boT4FnidWNxCbens4/kYzoGo230="
+    },
+    {
       "issuer_id": "x509_aki:TprRzaFBJ1SLjJsO01tlLCQ4YF0",
       "entity_type": "government",
       "entity_metadata": {
@@ -420,6 +486,30 @@
         }
       ],
       "signature": "MEYCIQD8tnXtRAJKIPR/uIAdOnYCtGeqT76f+93yKKZUSn4oewIhAN8C6SOimk/s6heCeJjxuLeMQE5nTdpEHIDSH4atsdxu"
+    },
+    {
+      "issuer_id": "x509_aki:VIrKSyI10Jko1k57Vq3hkmi_KFM",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "CT"
+      },
+      "display": {
+        "name": "Connecticut Department of Motor Vehicles"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIC6DCCAm6gAwIBAgIUH94hJT6tN1i57XjCQEUhQlYl9DEwCgYIKoZIzj0EAwMw\nfDELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVTLUNUMTEwLwYDVQQKDChDb25uZWN0\naWN1dCBEZXBhcnRtZW50IG9mIE1vdG9yIFZlaGljbGVzMSowKAYDVQQDDCFVUy1D\nVCBQUk9EIElBQ0EgZm9yIElERU1JQSBXYWxsZXQwHhcNMjYwNjIzMTUzOTMzWhcN\nMzUwNjIyMTUzOTMzWjB8MQswCQYDVQQGEwJVUzEOMAwGA1UECAwFVVMtQ1QxMTAv\nBgNVBAoMKENvbm5lY3RpY3V0IERlcGFydG1lbnQgb2YgTW90b3IgVmVoaWNsZXMx\nKjAoBgNVBAMMIVVTLUNUIFBST0QgSUFDQSBmb3IgSURFTUlBIFdhbGxldDB2MBAG\nByqGSM49AgEGBSuBBAAiA2IABBGxesyN1aomWrFqWVQZ0kYddQDXYGKtT9/P5sWU\nOJ9otK7q60CRg174xNPf5vhpWcDmgqL8/HNzA58AVeAqLffnA+ylfrwh1p2VvdUI\nuRFoshQXoU5+4KFPbzgzz7NPIaOBsDCBrTAdBgNVHQ4EFgQUVIrKSyI10Jko1k57\nVq3hkmi/KFMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQAwHgYD\nVR0SBBcwFYYTaHR0cHM6Ly9kbXYuY3QuZ292LzBIBgNVHR8EQTA/MD2gO6A5hjdo\ndHRwOi8vbWRsLmRtdi5jdC5nb3YvdXMtY3QtcHJvZC1pYWNhLWlkZW1pYS13YWxs\nZXQuY3JsMAoGCCqGSM49BAMDA2gAMGUCMQCTNkQCraA7lJDu5doP/JPAu+ELJMfu\nCJLxm1Bp4cNP51NV+IR+gisdVDaJoJDmyUgCME2j9rgXofpA8Yuprm4sUglDM58q\nNSw/YrScIOok7g2vuCzvx23ApQ9f1t0lzQxMnw==\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEQCIDTSADMTUdb04H/lGLuEpUuOqZtSD2tITEcPe6CWVjeBAiAKD6kHnfeoqjKUosM3EuUbP8VrUmI+QMkhTwvqKSSUfA=="
     },
     {
       "issuer_id": "x509_aki:ZQ9wReJ1csNhZ3sfoWXy5Oxv0ac",
@@ -581,6 +671,30 @@
         }
       ],
       "signature": "MEYCIQCLq6N9jdXVpV35wPVr64v//Q7DySjSyS1/RkHGaOTyowIhAOc5qBjcgxiKyD8RJFv5zgL4HhXEpYnyCoo7YJthI7jC"
+    },
+    {
+      "issuer_id": "x509_aki:ha2w6kpJ7GofsERhWO8B65n1TXY",
+      "entity_type": "government",
+      "entity_metadata": {
+        "country": "US",
+        "region": "GA"
+      },
+      "display": {
+        "name": "Georgia Department of Driver Services"
+      },
+      "trust_scopes": [
+        "government_issued_id"
+      ],
+      "certificates": [
+        {
+          "data": "-----BEGIN CERTIFICATE-----\nMIIDWTCCAv+gAwIBAgITI/09piTOWTZfOKSyWlyAGq7vojAKBggqhkjOPQQDAjCB\nnTEOMAwGA1UECBMFVVMtR0ExCzAJBgNVBAYTAlVTMRAwDgYDVQQHEwdDb255ZXJz\nMS4wLAYDVQQKEyVHZW9yZ2lhIERlcGFydG1lbnQgb2YgRHJpdmVyIFNlcnZpY2Vz\nMQ8wDQYDVQQLEwZEUklWRVMxKzApBgNVBAMTIkdlb3JnaWEgUm9vdCBDZXJ0aWZp\nY2F0ZSBBdXRob3JpdHkwHhcNMjYwOTAyMDYwMDAwWhcNMzEwOTAyMDYwMDAwWjCB\nnTEOMAwGA1UECBMFVVMtR0ExCzAJBgNVBAYTAlVTMRAwDgYDVQQHEwdDb255ZXJz\nMS4wLAYDVQQKEyVHZW9yZ2lhIERlcGFydG1lbnQgb2YgRHJpdmVyIFNlcnZpY2Vz\nMQ8wDQYDVQQLEwZEUklWRVMxKzApBgNVBAMTIkdlb3JnaWEgUm9vdCBDZXJ0aWZp\nY2F0ZSBBdXRob3JpdHkwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQhGuMMGXoI\ns8b2OyeMka4sSxbTFnxAbVRYLYph8ReKlH0Yh2NwYGd8b+tj7uyPh6nYHzJGNt9k\nlg/8IiqNTuago4IBGjCCARYwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYB\nAf8CAQAwHQYDVR0OBBYEFIWtsOpKSexqH7BEYVjvAeuZ9U12MEgGA1UdEgRBMD+B\nI2dyb3VwaXRwcm9kdWN0aW9uc3VwcG9ydEBkZHMuZ2EuZ292hhhodHRwczovL2Rk\ncy5nZW9yZ2lhLmdvdi8wdQYDVR0fBG4wbDBqoGigZoZkaHR0cHM6Ly93cy5kcml2\nZXMuZ2EuZ292L1dlYlNlcnZpY2VzL05BL0dTcC9jcmwvY3JsL3Jldm9jYXRpb25z\nLzkxYzVlOGQ1NWVmNzQ1MzY5MDFjNjZmOTVkNzNlMTA3LmNybDAQBgkrBgEEAYPF\nIQEEA0dTUDAKBggqhkjOPQQDAgNIADBFAiARhefLqPDEssaqxEIjKaay5lst0RRx\nVSJXt7npXv5FZQIhAKQn+MOAM7JCEtciqla+Wa2r30xRmEm7P25DCPgsVtGZ\n-----END CERTIFICATE-----",
+          "format": "pem",
+          "trust_lists": [
+            "aamva_dts"
+          ]
+        }
+      ],
+      "signature": "MEQCIAH/Wptl2Pb8WgJmHjLTq7zYkeF6M+fgMXvFbF+5lXQ/AiBY25C3McXbaOpGk7fAFaCsHLGdDe689zhE4hjKSXPTsA=="
     },
     {
       "issuer_id": "x509_aki:jkUgxsSokwmuQNihv5PDD06f6jU",
